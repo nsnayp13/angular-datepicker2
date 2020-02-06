@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+  font-size: 12px;
+}
+
+body {
+  background: #c3c3c3;
+}
+
+app-calendar {
+  width: 100%;
+  display: block;
+  float: left;
+}
+
+.isDisabled {
+  color: #a7a7a7;
+}
+
+.isSelected {
+  background: #285eb7;
+  color: #fff;
+}
+
+.day {
+  padding: 4px 8px;
+  display: block;
+}
+
+.dayWrap {
+}
+
+.calendarWrap {
+  float: left;
+  width: auto;
+  display: block;
+  padding: 16px;
+  background: #fff;
+  margin: 10px 0;
+}
+
+.monthWrap {
+  padding: 0 8px;
+}
+
+.monthHeader {
+  text-align: center;
+}

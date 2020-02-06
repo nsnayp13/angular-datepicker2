@@ -1,0 +1,8 @@
+<div class="monthWrap" style="display:block; float:left; ">
+    <div class="monthHeader">
+        {{month.date | date: "MMMM yyyy"}}
+    </div>
+    <div *ngFor="let week of month.weeks">
+        <app-day-view *ngFor="let day of week.days" [day]="day" [isSelected]="day.isSelected"></app-day-view>
+    </div>
+</div>

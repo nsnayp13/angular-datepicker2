@@ -1,0 +1,8 @@
+<div class="dayWrap" style="display:block; float:left; ">
+    <span (click)="onClick()" class="day" [ngClass]="{
+        isDisabled : day.isDisabled,
+        isSelected: isSelected
+    }">
+        {{day.date | date: "dd"}}
+    </span>
+</div>
