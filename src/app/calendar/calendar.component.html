@@ -1,7 +1,7 @@
 <div class="calendarWrap">
 
     <div style="display:block; float:left" (click)="goPrev()">
-        <</div> <app-month-view *ngFor="let month of calendar.months" [month]="month">
+        <</div> <app-month-view *ngFor="let date of calendar" [date]="date">
             </app-month-view>
             <div style="display:block; float:left" (click)="goNext()">></div>
 

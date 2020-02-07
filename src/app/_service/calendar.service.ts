@@ -61,19 +61,35 @@ export interface Calendar {
   providedIn: "root"
 })
 export class CalendarService {
-  calendar: BehaviorSubject<Calendar> = new BehaviorSubject({});
-  selectedDates: Date[];
+  calendar: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  selectedDates: BehaviorSubject<Date[]> = new BehaviorSubject([]);
   shownDate: Date;
   countMonths: number;
 
   constructor() {}
 
   setSelectedDates(selectedDates: Date[]) {
-    this.selectedDates = selectedDates;
+    this.selectedDates.next(selectedDates); //= selectedDates ? selectedDates : [];
   }
 
   setShownDate(date: Date) {
     this.shownDate = date;
+  }
+
+  /*findInSelected(date: Date) {
+    for (let k in this.selectedDates) {
+      const item = this.selectedDates[k];
+      if (date.getYmd() === item.getYmd()) {
+        return true;
+      }
+    }
+    return false;
+  }*/
+
+  addSelected(date: Date) {
+    let selectedDates = this.selectedDates.value;
+    selectedDates.push(date);
+    this.selectedDates.next(selectedDates);
   }
 
   private getCountMonths(viewMode: string | number): number {
@@ -92,8 +108,8 @@ export class CalendarService {
   private getLastDate(viewMode: string | number): Date {
     let lastDate = this.shownDate
       ? new Date(this.shownDate)
-      : this.selectedDates
-      ? new Date(this.selectedDates[this.selectedDates.length - 1])
+      : this.selectedDates.value
+      ? new Date(this.selectedDates[this.selectedDates.value.length - 1])
       : new Date();
 
     if (typeof viewMode === "string") {
@@ -129,47 +145,42 @@ export class CalendarService {
     this.countMonths = countMonths;
 
     for (let i = countMonths - 1; i >= 0; i--) {
-      months.push(this.getMonth(new Date(lastDate).adjustMonth(-i)));
+      months.push(new Date(lastDate).adjustMonth(-i));
     }
 
-    this.calendar.next({
-      id: 1,
-      months
-    });
+    this.calendar.next(months);
+    console.log(this.calendar.value);
   }
 
   goPrev(firstDate: Date) {
     let prevDate = new Date(firstDate);
     prevDate.setMonth(firstDate.getMonth() - 1);
-    let month = this.getMonth(prevDate);
-    let months = [...this.calendar.value.months];
-    months.splice(months.length - 1, 1);
-    months.unshift(month);
-    this.calendar.next({
-      id: 1,
-      months
-    });
+    let dates = [...this.calendar.value];
+    dates.splice(dates.length - 1, 1);
+    dates.unshift(prevDate);
+    this.calendar.next(dates);
   }
 
   goNext(lastDate: Date) {
     let nextDate = new Date(lastDate);
     nextDate.setMonth(lastDate.getMonth() + 1);
-    let month = this.getMonth(nextDate);
-    let months = [...this.calendar.value.months];
-    months.splice(0, 1);
-    months.push(month);
-    this.calendar.next({
-      id: 1,
-      months
-    });
+    let dates = [...this.calendar.value];
+    dates.splice(0, 1);
+    dates.push(nextDate);
+    this.calendar.next(dates);
+  }
+
+  reRenderCalendar() {
+    /*this.calendar.next({
+      months: { ...this.calendar.value.months }
+    });*/
   }
 
   onClickDay(dayClicked: Day) {
-    this.selectedDates.push(dayClicked.date);
-
-    this.calendar.next({
-      months: [...this.calendar.value.months]
-    });
+    //this.selectedDates.push(dayClicked.date);
+    /*let c = { ...this.calendar.value };
+    this.calendar.next(c);*/
+    //this.reRenderCalendar();
     /*for (let k_month in months) {
       for (let k_week in months[k_month].weeks) {
         for (let k_day in months[k_month].weeks[k_week].days) {
@@ -193,64 +204,64 @@ export class CalendarService {
     }*/
   }
 
-  getMonth(date: Date) {
-    const daysInMonth = new Date(
-      date.getFullYear(),
-      date.getMonth() + 1,
-      0
-    ).getDate();
+  // getMonth(date: Date) {
+  //   const daysInMonth = new Date(
+  //     date.getFullYear(),
+  //     date.getMonth() + 1,
+  //     0
+  //   ).getDate();
 
-    const countWeek = Math.ceil((daysInMonth + date.getFirstDateDay()) / 7);
-    const month: Month = {
-      id: 1,
-      date: date,
-      weeks: []
-    };
-    for (let i = 0; i < countWeek; i++) {
-      const startweekDate = new Date(date);
-      startweekDate.setDate(date.getDate() + i * 7 - date.getDay());
-      month.weeks.push(this.getWeek(startweekDate, date));
-    }
-    return month;
-  }
+  //   const countWeek = Math.ceil((daysInMonth + date.getFirstDateDay()) / 7);
+  //   const month = {
+  //     id: 1,
+  //     date: date,
+  //     weeks: []
+  //   };
+  //   /*for (let i = 0; i < countWeek; i++) {
+  //     const startweekDate = new Date(date);
+  //     startweekDate.setDate(date.getDate() + i * 7 - date.getDay());
+  //     month.weeks.push(this.getWeek(startweekDate, date));
+  //   }*/
+  //   return month;
+  // }
 
-  getWeek(date: Date /** first date in week */, monthFirstDate: Date) {
-    const dayInWeek = 7;
-    const dayInDate = date.getDay();
-    const week: Week = {
-      id: 1,
-      days: []
-    };
+  // getWeek(date: Date /** first date in week */, monthFirstDate: Date) {
+  //   const dayInWeek = 7;
+  //   const dayInDate = date.getDay();
+  //   const week: Week = {
+  //     id: 1,
+  //     days: []
+  //   };
 
-    for (let i = 0; i < dayInWeek; i++) {
-      const curDate = new Date(date);
-      curDate.setDate(curDate.getDate() + i);
-      let isSelected = false;
+  //   for (let i = 0; i < dayInWeek; i++) {
+  //     const curDate = new Date(date);
+  //     curDate.setDate(curDate.getDate() + i);
+  //     let isSelected = false;
 
-      if (this.selectedDates) {
-        for (let dateSelected of this.selectedDates) {
-          if (dateSelected.getYmd() === curDate.getYmd()) {
-            isSelected = true;
-          }
-        }
-      }
+  //     if (this.selectedDates) {
+  //       for (let dateSelected of this.selectedDates) {
+  //         if (dateSelected.getYmd() === curDate.getYmd()) {
+  //           isSelected = true;
+  //         }
+  //       }
+  //     }
 
-      const day: Day = {
-        id: 1,
-        title: "",
-        isDisabled:
-          monthFirstDate.getMonth() === curDate.getMonth() &&
-          monthFirstDate.getFullYear() === curDate.getFullYear()
-            ? false
-            : true,
-        isWeekEnd: false,
-        isSelected: isSelected,
-        isHovered: false,
-        template: "",
-        date: curDate
-      };
-      week.days.push(day);
-    }
-    return week;
-  }
+  //     const day: Day = {
+  //       id: 1,
+  //       title: "",
+  //       isDisabled:
+  //         monthFirstDate.getMonth() === curDate.getMonth() &&
+  //         monthFirstDate.getFullYear() === curDate.getFullYear()
+  //           ? false
+  //           : true,
+  //       isWeekEnd: false,
+  //       isSelected: isSelected,
+  //       isHovered: false,
+  //       template: "",
+  //       date: curDate
+  //     };
+  //     week.days.push(day);
+  //   }
+  //   return week;
+  // }
 }

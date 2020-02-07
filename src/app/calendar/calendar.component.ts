@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from "@angular/core";
 import { registerLocaleData } from "@angular/common";
 import localeRu from "@angular/common/locales/ru";
-import { CalendarService, Day, Calendar } from "../calendar.service";
+import { CalendarService, Day, Calendar } from "../_service/calendar.service";
 
 interface Suggest {
   title: string;
@@ -16,7 +16,7 @@ interface Suggest {
 })
 export class CalendarComponent implements OnInit, OnChanges {
   /** Init array of selected dates */
-  @Input() selectedDates: [];
+  @Input() selectedDates: [] = [];
   @Input() shownDate: Date;
 
   /** year, quarter, semester or qty months (max 12) */
@@ -40,7 +40,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   nowDate: Date;
   showMonthQty: number;
 
-  calendar: Calendar;
+  calendar: any[];
 
   constructor(private calendarService: CalendarService) {
     registerLocaleData(localeRu, "ru");
@@ -51,16 +51,14 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     //this.nowDate = new Date();
 
+    this.goToDate();
+    this.setSelectedDates();
     this.calendarService.calendar.subscribe(data => {
       this.calendar = data;
     });
-
-    this.goToDate();
-    this.setSelectedDates();
   }
 
   ngOnChanges() {
-    console.log("ngOnChanges");
     this.goToDate();
   }
 
@@ -79,11 +77,11 @@ export class CalendarComponent implements OnInit, OnChanges {
   setDays(days: Day[]) {}
 
   goNext() {
-    let lastDate = this.calendar.months[this.calendar.months.length - 1].date;
+    let lastDate = this.calendar[this.calendar.length - 1];
     this.calendarService.goNext(lastDate);
   }
   goPrev() {
-    let firstDate = this.calendar.months[0].date;
+    let firstDate = this.calendar[0];
     this.calendarService.goPrev(firstDate);
   }
 }

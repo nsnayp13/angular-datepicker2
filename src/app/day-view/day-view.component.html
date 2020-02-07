@@ -1,8 +1,9 @@
 <div class="dayWrap" style="display:block; float:left; ">
-    <span (click)="onClick()" class="day" [ngClass]="{
+    <span *ngIf="thisMonth" (click)="onClick()" class="day" [ngClass]="{
         isDisabled : day.isDisabled,
-        isSelected: isSelected
+        isSelected: day.isSelected
     }">
         {{day.date | date: "dd"}}
     </span>
+    <span *ngIf="!thisMonth" class="day"></span>
 </div>

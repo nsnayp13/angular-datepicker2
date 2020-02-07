@@ -1,0 +1,6 @@
+<div *ngFor="let day of days" style="display: block;float:left">
+
+    <app-day-view [date]="day" [thisMonth]="day.getMonth()===firstMonthDate.getMonth()"></app-day-view>
+
+
+</div>

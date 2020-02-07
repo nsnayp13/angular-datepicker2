@@ -14,6 +14,17 @@ app-calendar {
   float: left;
 }
 
+app-weel-view {
+  width: 100%;
+  display: block;
+  float: left;
+}
+
+app-day-view {
+  display: block;
+  float: left;
+}
+
 .isDisabled {
   color: #a7a7a7;
 }
