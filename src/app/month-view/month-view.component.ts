@@ -1,5 +1,14 @@
-import { Component, OnInit, Input, OnChanges } from "@angular/core";
-import { Month } from "../_service/calendar.service";
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  HostBinding,
+  Output,
+  ViewChild,
+  ElementRef
+} from "@angular/core";
+import { Month, CalendarService } from "../_service/calendar.service";
 import { MonthService } from "../_service/month.service";
 
 @Component({
@@ -12,17 +21,33 @@ export class MonthViewComponent implements OnInit, OnChanges {
   @Input() date: Date;
   weeks: Date[] | null[];
 
-  constructor(private monthService: MonthService) {}
+  @Input() updateDate;
+  @Input() vertical: boolean;
+  animationStep;
+
+  @Output() @HostBinding("style") elWidth: number;
+  @ViewChild("wrap", { static: true }) elementView: ElementRef;
+
+  constructor(
+    private monthService: MonthService,
+    private calendarService: CalendarService
+  ) {}
 
   ngOnInit() {
-    // console.log("Month-view onInit");
+    //console.log("Month-view onInit");
 
+    this.calendarService.animationStep.subscribe(data => {
+      this.animationStep = data;
+    });
     this.monthService.getMonth(this.date);
     this.monthService.weeks.subscribe(data => {
       this.weeks = data;
-      console.log("MONTH WEEKS", this.weeks);
+      //console.log("MONTH WEEKS", this.weeks);
     });
   }
 
-  ngOnChanges() {}
+  ngOnChanges() {
+    console.log(this.elementView.nativeElement.width);
+    //console.log("Month-view ngOnChanges");
+  }
 }

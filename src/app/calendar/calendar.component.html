@@ -1,8 +1,22 @@
 <div class="calendarWrap">
+    <div class="dateSelector">
 
-    <div style="display:block; float:left" (click)="goPrev()">
-        <</div> <app-month-view *ngFor="let date of calendar" [date]="date">
-            </app-month-view>
-            <div style="display:block; float:left" (click)="goNext()">></div>
 
+
+        <div (click)="goPrev()" class="nextPrevBtn">{{'<'}}</div>
+
+        <div class="wrapMonths" [ngStyle]="{width: width+'px'}">
+            <div class="months">
+                <app-month-view *ngFor="let date of calendar" #someName [date]="date" [vertical]="vertical">
+                </app-month-view>
+            </div>
+        </div>
+
+        <div (click)="goNext()" class="nextPrevBtn">{{">"}}</div>
     </div>
+    <div style="padding: 8px 16px;
+    color: #696969;
+    font-size: 12px;
+    border-top: 1px solid #eee;">11</div>
+
+</div>

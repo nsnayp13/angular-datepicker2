@@ -66,6 +66,12 @@ export class CalendarService {
   shownDate: Date;
   countMonths: number;
 
+  animationStep = new BehaviorSubject("stop");
+
+  recountWidth = new BehaviorSubject(1);
+
+  updateDate = new BehaviorSubject(new Date());
+
   constructor() {}
 
   setSelectedDates(selectedDates: Date[]) {
@@ -143,31 +149,55 @@ export class CalendarService {
     lastDate = this.getLastDate(viewMode);
     countMonths = this.getCountMonths(viewMode);
     this.countMonths = countMonths;
+    //this.countMonths += 2;
 
     for (let i = countMonths - 1; i >= 0; i--) {
       months.push(new Date(lastDate).adjustMonth(-i));
     }
 
+    // add firs and last month
+    // months.unshift(new Date(new Date(months[0]).adjustMonth(-1)));
+    // months.push(new Date(new Date(months[months.length - 1]).adjustMonth(1)));
     this.calendar.next(months);
-    console.log(this.calendar.value);
+    //console.log(this.calendar.value);
   }
 
   goPrev(firstDate: Date) {
     let prevDate = new Date(firstDate);
     prevDate.setMonth(firstDate.getMonth() - 1);
     let dates = [...this.calendar.value];
-    dates.splice(dates.length - 1, 1);
+    //dates.splice(dates.length - 1, 1);
     dates.unshift(prevDate);
     this.calendar.next(dates);
+    this.animationStep.next("left");
+
+    setTimeout(() => {
+      dates = [...this.calendar.value];
+
+      dates.splice(dates.length - 1, 1);
+      this.calendar.next(dates);
+      this.animationStep.next("stop");
+      //this.recountWidth.next(this.recountWidth.value + 1);
+    }, 255);
   }
 
   goNext(lastDate: Date) {
     let nextDate = new Date(lastDate);
     nextDate.setMonth(lastDate.getMonth() + 1);
     let dates = [...this.calendar.value];
-    dates.splice(0, 1);
+    //dates.splice(0, 1);
     dates.push(nextDate);
     this.calendar.next(dates);
+    this.animationStep.next("right");
+
+    setTimeout(() => {
+      dates = [...this.calendar.value];
+
+      dates.splice(0, 1);
+      this.calendar.next(dates);
+      this.animationStep.next("stop");
+      //this.recountWidth.next(this.recountWidth.value + 1);
+    }, 255);
   }
 
   reRenderCalendar() {

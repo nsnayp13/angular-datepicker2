@@ -10,7 +10,7 @@ export class WeekService {
   constructor() {}
 
   getWeek(date: Date) {
-    console.error(date.getFullYear());
+    //console.error(date.getFullYear());
 
     const dayInWeek = 7;
     //const dayInDate = date.getDay();

@@ -29,24 +29,23 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
     private calendarService: CalendarService
   ) {}
 
+  // bad idea, too mach subscribes for every day
   ngOnInit() {
-    // console.log("Day-view onInit");
-    //this.dayService.day.subscribe(data => (this.day = data));
     this.day = this.dayService.createDay(this.date);
-
     this.sub = this.calendarService.selectedDates.subscribe(data => {
-      console.log("selectedDates changed");
-      for (let k in data) {
-        if (data[k].getYmd() === this.day.date.getYmd()) {
-          this.day.isSelected = true;
-        }
-      }
+      const days = data.map(item => item.getYmd());
+      this.day.isSelected = days.includes(this.day.date.getYmd());
     });
   }
 
-  ngOnChanges() {}
+  detectChanges() {}
+
+  ngOnChanges() {
+    console.log("Day changed");
+  }
 
   onClick() {
+    console.log(this.day, this.calendarService.selectedDates.value);
     this.dayService.toggleDate();
   }
   ngOnDestroy() {

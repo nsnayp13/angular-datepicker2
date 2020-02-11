@@ -17,7 +17,7 @@ export class WeekViewComponent implements OnInit {
     this.weekService.getWeek(this.date);
     this.weekService.days.subscribe(data => {
       this.days = data;
-      console.log("WEEk DAYS", this.days.length, this.days);
+      //console.log("WEEk DAYS", this.days.length, this.days);
     });
   }
 }

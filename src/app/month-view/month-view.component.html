@@ -1,12 +1,23 @@
-<div class="monthWrap" style="display:block; float:left; ">
+<div #wrap class="monthWrap monthOne {{animationStep}}" style="display:block; float:left; width: 100%; ">
     <div class="monthHeader">
         {{date | date: "MMMM yyyy"}}
     </div>
+    <div class="weekWrap" [ngStyle]="{flexDirection: (vertical)?'row':'column'}">
 
-    <app-week-view *ngFor="let weekStartDate of weeks" [date]="weekStartDate" [firstMonthDate]="date"
-        style="width:100%; display:block;">
-    </app-week-view>
+        <div [ngStyle]="{flexDirection: ((vertical)?'column':'row')}" style="display: flex;">
+            <div class="dayWeekTitle">пн</div>
+            <div class="dayWeekTitle">вт</div>
+            <div class="dayWeekTitle">ср</div>
+            <div class="dayWeekTitle">чт</div>
+            <div class="dayWeekTitle">пт</div>
+            <div class="dayWeekTitle">сб</div>
+            <div class="dayWeekTitle">вс</div>
+        </div>
 
+        <app-week-view *ngFor="let weekStartDate of weeks" [date]="weekStartDate" [firstMonthDate]="date"
+            [ngStyle]="{flexDirection: (vertical)?'column':'row'}">
+        </app-week-view>
+    </div>
     <!-- <div *ngFor="let date of weeks" >
         
     </div> -->

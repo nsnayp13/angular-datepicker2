@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
       new Date(2020, 3, 9),
       new Date(2020, 3, 10)
     ];
-    this.date = new Date();
-    setTimeout(() => (this.date = new Date(2020, 3, 7)), 3000);
+    this.date = new Date(2020, 3, 7);
   }
 }

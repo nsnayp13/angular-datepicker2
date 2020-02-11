@@ -1,4 +1,13 @@
-import { Component, OnInit, Input, OnChanges } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  ViewChildren,
+  AfterViewInit,
+  AfterContentInit,
+  AfterViewChecked
+} from "@angular/core";
 import { registerLocaleData } from "@angular/common";
 import localeRu from "@angular/common/locales/ru";
 import { CalendarService, Day, Calendar } from "../_service/calendar.service";
@@ -14,10 +23,12 @@ interface Suggest {
   styleUrls: ["./calendar.component.scss"],
   providers: [CalendarService]
 })
-export class CalendarComponent implements OnInit, OnChanges {
+export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
   /** Init array of selected dates */
   @Input() selectedDates: [] = [];
   @Input() shownDate: Date;
+
+  @Input() vertical: boolean;
 
   /** year, quarter, semester or qty months (max 12) */
   @Input() viewMode: string | number;
@@ -41,20 +52,51 @@ export class CalendarComponent implements OnInit, OnChanges {
   showMonthQty: number;
 
   calendar: any[];
+  updateDate;
+
+  width: number | null;
+
+  @ViewChildren("someName") someDivs;
 
   constructor(private calendarService: CalendarService) {
     registerLocaleData(localeRu, "ru");
   }
 
+  recountWidth() {
+    let width = 0;
+    this.someDivs
+      ? this.someDivs
+          .toArray()
+          .map(item => (width += item.elementView.nativeElement.clientWidth))
+      : null;
+    this.calendarService.animationStep.value === "stop"
+      ? (this.width = width)
+      : null;
+  }
+
+  ngAfterViewChecked() {
+    this.recountWidth();
+  }
+
   ngOnInit() {
-    //console.log("onInit");
-
-    //this.nowDate = new Date();
-
     this.goToDate();
     this.setSelectedDates();
     this.calendarService.calendar.subscribe(data => {
       this.calendar = data;
+    });
+
+    this.calendarService.animationStep.subscribe(data => {
+      if (data === "stop") {
+        setTimeout(() => this.recountWidth(), 10);
+      }
+    });
+
+    this.calendarService.updateDate.subscribe(data => {
+      this.updateDate = data;
+    });
+
+    this.calendarService.selectedDates.subscribe(data => {
+      console.log("selectedDates changed in calendar.ts");
     });
   }
 

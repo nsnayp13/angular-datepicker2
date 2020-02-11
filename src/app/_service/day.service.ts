@@ -29,8 +29,19 @@ export class DayService {
   }
 
   toggleDate() {
-    if (!this.day.isSelected) {
-      this.calendarService.addSelected(this.day.date);
+    if (this.day.isSelected) {
+      let selectedDates = this.calendarService.selectedDates.value.filter(
+        elem => elem.getYmd() !== this.day.date.getYmd()
+      );
+      this.calendarService.selectedDates.next(selectedDates);
+      //this.day.isSelected = false;
+    } else {
+      let selectedDates = this.calendarService.selectedDates.value;
+      selectedDates.push(this.day.date);
+      this.calendarService.selectedDates.next(selectedDates);
+      //this.day.isSelected = true;
     }
+
+    //this.calendarService.updateDate.next(new Date());
   }
 }
