@@ -90,7 +90,7 @@ app-month-view {
   float: left;
   min-width: 200px;
   animation: appear $animSpeed ease-in-out;
-  border-left: 1px solid #eee;
+  height: 100%;
 }
 
 @keyframes appear {
@@ -110,6 +110,7 @@ app-month-view {
   position: relative;
   overflow: hidden;
   width: 1200px;
+  height: 100%;
 }
 
 .wrapMonths {
@@ -121,6 +122,7 @@ app-month-view {
 
 .monthOne {
   position: relative;
+  border-left: 1px solid #eee;
 }
 
 .monthOne.right {
