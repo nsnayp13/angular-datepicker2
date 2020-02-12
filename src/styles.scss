@@ -228,6 +228,10 @@ app-day-view {
   color: #2b2b2b;
 }
 
+.monthHeader::first-letter {
+  text-transform: uppercase;
+}
+
 .monthHeader:hover {
   cursor: pointer;
   user-select: none;
