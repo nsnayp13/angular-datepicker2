@@ -4,6 +4,8 @@
   font-family: sans-serif;
 }
 
+$animSpeed: 0.2s;
+
 body {
   background: #c3c3c3;
 }
@@ -19,9 +21,14 @@ app-calendar {
   justify-content: center;
   align-items: center;
   user-select: none;
+  position: absolute;
   cursor: pointer;
-  padding: 0 8px;
+  padding: 8px 16px;
   transition: all 0.2s;
+  font-size: 0.9em;
+  color: #4f96d4;
+  z-index: 1;
+  background: #fff;
 }
 
 .nextPrevBtn:hover {
@@ -54,9 +61,45 @@ app-week-view {
   flex-direction: column;
 }
 
+app-month-select {
+  display: flex;
+  float: left;
+  min-width: 170px;
+  animation: appear $animSpeed ease-in-out;
+}
+
+.monthItem {
+  width: 33%;
+  font-size: 0.8em;
+  text-align: center;
+  padding: 9px 0;
+  box-shadow: 0 0 0 1px #f4f3f3;
+  color: #313131;
+}
+
+.monthItem:hover {
+  user-select: none;
+  cursor: pointer;
+  background: #eee;
+  transition: $animSpeed;
+}
+
 app-month-view {
   display: flex;
   float: left;
+  min-width: 170px;
+  animation: appear $animSpeed ease-in-out;
+}
+
+@keyframes appear {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .months {
@@ -79,32 +122,40 @@ app-month-view {
 }
 
 .monthOne.right {
-  animation: right 0.25s ease-in-out;
+  animation: right $animSpeed ease-in-out;
 }
 .monthOne.left {
-  animation: left 0.25s ease-in-out;
+  animation: left $animSpeed ease-in-out;
 }
 @keyframes left {
   from {
-    left: -100%;
+    transform: translateX(-100%);
   }
   to {
-    left: 0;
+    transform: translateX(0%);
   }
 }
 
 @keyframes right {
   from {
-    left: 0;
+    transform: translateX(0%);
   }
   to {
-    left: -100%;
+    transform: translateX(-100%);
   }
+}
+
+.monthSelectBtn {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding: 4px 8px;
 }
 
 app-day-view {
   display: block;
   float: left;
+  width: 100%;
 }
 
 .day.isDisabled {
@@ -150,14 +201,16 @@ app-day-view {
   flex-direction: column;
   border-radius: 4px;
   box-shadow: 1px 1px 3px -3px #000;
+  transition: all 0.2s;
 }
 
 .dateSelector {
   float: left;
   width: auto;
   display: flex;
-
+  position: relative;
   flex-direction: row;
+  transition: all 0.2s;
 }
 
 .monthWrap {
@@ -170,4 +223,10 @@ app-day-view {
   padding: 8px 16px;
   font-size: 14px;
   color: #a6a6a6;
+}
+
+.monthHeader:hover {
+  cursor: pointer;
+  user-select: none;
+  background: #eee;
 }

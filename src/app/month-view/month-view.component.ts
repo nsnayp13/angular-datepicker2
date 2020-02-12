@@ -33,6 +33,10 @@ export class MonthViewComponent implements OnInit, OnChanges {
     private calendarService: CalendarService
   ) {}
 
+  showYears() {
+    this.calendarService.getShownYears(this.date);
+  }
+
   ngOnInit() {
     //console.log("Month-view onInit");
 

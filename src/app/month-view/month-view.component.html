@@ -1,5 +1,5 @@
 <div #wrap class="monthWrap monthOne {{animationStep}}" style="display:block; float:left; width: 100%; ">
-    <div class="monthHeader">
+    <div class="monthHeader" (click)="showYears()">
         {{date | date: "MMMM yyyy"}}
     </div>
     <div class="weekWrap" [ngStyle]="{flexDirection: (vertical)?'row':'column'}">

@@ -4,6 +4,7 @@ import { BehaviorSubject, Subject } from "rxjs";
 declare global {
   interface Date {
     adjustMonth(number: number): Date;
+    adjustYear(number: number): Date;
     getFirstDateDay(): number;
     getYmd(): string;
   }
@@ -13,6 +14,14 @@ declare global {
 Date.prototype.adjustMonth = function(num = 0): Date {
   this.setDate(1);
   this.setMonth(this.getMonth() + num);
+  return this;
+};
+
+/** Adjust & setDate = 1 */
+Date.prototype.adjustYear = function(num = 0): Date {
+  this.setDate(1);
+  this.setMonth(0);
+  this.setYear(this.getFullYear() + num);
   return this;
 };
 
@@ -70,6 +79,10 @@ export class CalendarService {
 
   recountWidth = new BehaviorSubject(1);
 
+  viewSelectorMode = new BehaviorSubject(null);
+
+  viewMode = new BehaviorSubject(null);
+
   updateDate = new BehaviorSubject(new Date());
 
   constructor() {}
@@ -98,7 +111,8 @@ export class CalendarService {
     this.selectedDates.next(selectedDates);
   }
 
-  private getCountMonths(viewMode: string | number): number {
+  private getCountMonths(): number {
+    let viewMode = this.viewMode.value;
     if (typeof viewMode === "number") {
       return viewMode;
     } else if (typeof viewMode === "string") {
@@ -111,7 +125,8 @@ export class CalendarService {
     return 1;
   }
 
-  private getLastDate(viewMode: string | number): Date {
+  private getLastDate(): Date {
+    let viewMode = this.viewMode.value;
     let lastDate = this.shownDate
       ? new Date(this.shownDate)
       : this.selectedDates.value
@@ -141,13 +156,28 @@ export class CalendarService {
     return lastDate;
   }
 
-  getShownMonths(viewMode: string | number) {
+  getShownYears(lastDateShown: Date) {
+    let countMonths = 0;
+    const months = [];
+
+    countMonths = this.getCountMonths();
+    this.countMonths = countMonths;
+
+    for (let i = countMonths - 1; i >= 0; i--) {
+      months.push(new Date(lastDateShown).adjustYear(-i));
+    }
+    console.log(months);
+    this.calendar.next(months);
+    this.viewSelectorMode.next("months");
+  }
+
+  getShownMonths(date?: Date) {
     let countMonths = 0;
     const months = [];
     let lastDate: Date;
 
-    lastDate = this.getLastDate(viewMode);
-    countMonths = this.getCountMonths(viewMode);
+    lastDate = date ? date : this.getLastDate();
+    countMonths = this.getCountMonths();
     this.countMonths = countMonths;
     //this.countMonths += 2;
 
@@ -155,16 +185,19 @@ export class CalendarService {
       months.push(new Date(lastDate).adjustMonth(-i));
     }
 
-    // add firs and last month
-    // months.unshift(new Date(new Date(months[0]).adjustMonth(-1)));
-    // months.push(new Date(new Date(months[months.length - 1]).adjustMonth(1)));
     this.calendar.next(months);
-    //console.log(this.calendar.value);
+    this.viewSelectorMode.next("days");
   }
 
   goPrev(firstDate: Date) {
     let prevDate = new Date(firstDate);
-    prevDate.setMonth(firstDate.getMonth() - 1);
+
+    if (this.viewSelectorMode.value === "days") {
+      prevDate.adjustMonth(-1);
+    } else if (this.viewSelectorMode.value === "months") {
+      prevDate.adjustYear(-1);
+    }
+
     let dates = [...this.calendar.value];
     //dates.splice(dates.length - 1, 1);
     dates.unshift(prevDate);
@@ -178,12 +211,19 @@ export class CalendarService {
       this.calendar.next(dates);
       this.animationStep.next("stop");
       //this.recountWidth.next(this.recountWidth.value + 1);
-    }, 255);
+    }, 205);
   }
 
   goNext(lastDate: Date) {
     let nextDate = new Date(lastDate);
-    nextDate.setMonth(lastDate.getMonth() + 1);
+    //nextDate.setMonth(lastDate.getMonth() + 1);
+
+    if (this.viewSelectorMode.value === "days") {
+      nextDate.adjustMonth(1);
+    } else if (this.viewSelectorMode.value === "months") {
+      nextDate.adjustYear(1);
+    }
+
     let dates = [...this.calendar.value];
     //dates.splice(0, 1);
     dates.push(nextDate);
@@ -197,7 +237,7 @@ export class CalendarService {
       this.calendar.next(dates);
       this.animationStep.next("stop");
       //this.recountWidth.next(this.recountWidth.value + 1);
-    }, 255);
+    }, 205);
   }
 
   reRenderCalendar() {

@@ -4,8 +4,6 @@ import {
   Input,
   OnChanges,
   ViewChildren,
-  AfterViewInit,
-  AfterContentInit,
   AfterViewChecked
 } from "@angular/core";
 import { registerLocaleData } from "@angular/common";
@@ -24,19 +22,43 @@ interface Suggest {
   providers: [CalendarService]
 })
 export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
-  /** Init array of selected dates */
-  @Input() selectedDates: [] = [];
+  /**
+   * @description
+   *  Array of selected dates.
+   * */
+  @Input() selectedDates: Date[] = [];
+
+  /**
+   * @description
+   *  Date whould be render for default calendar .
+   * */
   @Input() shownDate: Date;
 
+  /**
+   * @description
+   *  Alignment of days in a week. Default horizontal.
+   * */
   @Input() vertical: boolean;
 
-  /** year, quarter, semester or qty months (max 12) */
+  /**
+   * @description
+   *  Array custom definitions of days.
+   * @See `Day`
+   * */
+  @Input() days?: Day[];
+
+  /**
+   * @description
+   * Present mode of calendar. Year, quarter, semester or qty months. Default 1.
+   * */
   @Input() viewMode: string | number;
+
+  /************* */
 
   /** Single, multiple, period or keyboard */
   selectMode: string;
   /** day, month, year */
-  viewSelectorMode: string;
+  private viewSelectorMode: string = "days";
 
   weekStart: number;
   weekends: [];
@@ -47,7 +69,7 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
     mode: "after"; // 'after'|'before'
   };
   suggestions: [];
-  days: Day[];
+
   nowDate: Date;
   showMonthQty: number;
 
@@ -60,6 +82,7 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
 
   constructor(private calendarService: CalendarService) {
     registerLocaleData(localeRu, "ru");
+    //setTimeout(() => this.changeViewSelectorMode(), 1000);
   }
 
   recountWidth() {
@@ -69,7 +92,8 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
           .toArray()
           .map(item => (width += item.elementView.nativeElement.clientWidth))
       : null;
-    this.calendarService.animationStep.value === "stop"
+    this.calendarService.animationStep.value === "stop" &&
+    this.viewSelectorMode === "days"
       ? (this.width = width)
       : null;
   }
@@ -79,8 +103,16 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   ngOnInit() {
+    this.calendarService.viewSelectorMode.next("days");
+    this.calendarService.viewMode.next(this.viewMode);
+
     this.goToDate();
     this.setSelectedDates();
+
+    this.calendarService.viewSelectorMode.subscribe(
+      data => (this.viewSelectorMode = data)
+    );
+
     this.calendarService.calendar.subscribe(data => {
       this.calendar = data;
     });
@@ -107,7 +139,7 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
   /** Show date in calendar */
   goToDate() {
     this.calendarService.setShownDate(this.shownDate);
-    this.calendarService.getShownMonths(this.viewMode);
+    this.calendarService.getShownMonths(this.shownDate);
   }
 
   /** Set dates would be selected in calendar. Depend from selectMode */

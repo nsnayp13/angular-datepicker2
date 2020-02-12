@@ -3,7 +3,7 @@
         isDisabled : day.isDisabled,
         isSelected: day.isSelected
     }">
-        {{day.date | date: "dd"}}
+        {{day.date | date: "d"}}
     </span>
     <span *ngIf="!thisMonth" class="day"></span>
 </div>

@@ -3,16 +3,26 @@
 
 
 
-        <div (click)="goPrev()" class="nextPrevBtn">{{'<'}}</div>
+        <div (click)="goPrev()" class="nextPrevBtn" style="left:0;">{{'<'}}</div>
 
         <div class="wrapMonths" [ngStyle]="{width: width+'px'}">
-            <div class="months">
+            <div class="months" *ngIf="viewSelectorMode==='days'">
                 <app-month-view *ngFor="let date of calendar" #someName [date]="date" [vertical]="vertical">
                 </app-month-view>
             </div>
+
+            <div class="" *ngIf="viewSelectorMode==='months'" style="width: 100%; display:flex; flex:1;">
+
+                <app-month-select *ngFor="let date of calendar" [date]="date">
+                </app-month-select>
+
+
+
+            </div>
+
         </div>
 
-        <div (click)="goNext()" class="nextPrevBtn">{{">"}}</div>
+        <div (click)="goNext()" class="nextPrevBtn" style="right:0;">{{">"}}</div>
     </div>
     <div style="padding: 8px 16px;
     color: #696969;
