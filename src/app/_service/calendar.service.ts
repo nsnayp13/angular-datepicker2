@@ -5,7 +5,8 @@ declare global {
   interface Date {
     adjustMonth(number: number): Date;
     adjustYear(number: number): Date;
-    getFirstDateDay(): number;
+    getFirstDateDay(start): number;
+    getDayWithStart(start): number;
     getYmd(): string;
   }
 }
@@ -25,10 +26,25 @@ Date.prototype.adjustYear = function(num = 0): Date {
   return this;
 };
 
-Date.prototype.getFirstDateDay = function(): number {
+Date.prototype.getDayWithStart = function(start): number {
+  const date = new Date(this.getTime());
+  let day = date.getDay();
+
+  day = day - start;
+
+  if (day <= 0) {
+    day = 7 + day;
+  }
+
+  console.log(date, date.getDay(), day, "start", start);
+
+  return day;
+};
+
+Date.prototype.getFirstDateDay = function(start): number {
   const date = new Date(this.getTime());
   date.setDate(1);
-  return date.getDay();
+  return date.getDayWithStart(start);
 };
 
 Date.prototype.getYmd = function(): string {

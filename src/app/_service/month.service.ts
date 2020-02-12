@@ -16,11 +16,17 @@ export class MonthService {
       0
     ).getDate();
 
-    const countWeek = Math.ceil((daysInMonth + date.getFirstDateDay()) / 7);
+    let startDay = 1;
+
+    const countWeek = Math.ceil(
+      (daysInMonth + date.getFirstDateDay(startDay)) / 7
+    );
     const weeks = [];
     for (let i = 0; i < countWeek; i++) {
       const startWeekDate = new Date(date);
-      startWeekDate.setDate(date.getDate() + i * 7 - date.getDay());
+      startWeekDate.setDate(
+        date.getDate() + i * 7 - date.getDayWithStart(startDay)
+      );
       weeks.push(startWeekDate);
     }
     //console.log(weeks);

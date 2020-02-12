@@ -5,6 +5,7 @@
 }
 
 $animSpeed: 0.2s;
+$cyan: #26b1b1;
 
 body {
   background: #c3c3c3;
@@ -26,7 +27,7 @@ app-calendar {
   padding: 8px 16px;
   transition: all 0.2s;
   font-size: 0.9em;
-  color: #4f96d4;
+  color: $cyan;
   z-index: 1;
   background: #fff;
 }
@@ -44,7 +45,7 @@ app-week-view {
 .dayWeekTitle {
   display: flex;
   flex: 1;
-  color: #ff9a19;
+  color: #a9a9a9;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -64,7 +65,7 @@ app-week-view {
 app-month-select {
   display: flex;
   float: left;
-  min-width: 170px;
+  min-width: 200px;
   animation: appear $animSpeed ease-in-out;
 }
 
@@ -87,8 +88,9 @@ app-month-select {
 app-month-view {
   display: flex;
   float: left;
-  min-width: 170px;
+  min-width: 200px;
   animation: appear $animSpeed ease-in-out;
+  border-left: 1px solid #eee;
 }
 
 @keyframes appear {
@@ -163,8 +165,9 @@ app-day-view {
 }
 
 .day.isSelected {
-  background: #4f96d4 !important  ;
+  background: $cyan !important  ;
   color: #fff !important ;
+  animation: appear $animSpeed ease-in-out;
 }
 
 .day {
@@ -174,10 +177,9 @@ app-day-view {
   justify-content: center;
   align-items: center;
   font-size: 0.8em;
-  padding: 4px;
+  padding: 6px;
   color: #313131;
   transition: all 0.2s;
-  border-radius: 2px;
 }
 
 .day:hover {
@@ -211,6 +213,7 @@ app-day-view {
   position: relative;
   flex-direction: row;
   transition: all 0.2s;
+  padding: 8px 0;
 }
 
 .monthWrap {
@@ -221,8 +224,8 @@ app-day-view {
   text-align: center;
   text-align: center;
   padding: 8px 16px;
-  font-size: 14px;
-  color: #a6a6a6;
+  font-size: 15px;
+  color: #2b2b2b;
 }
 
 .monthHeader:hover {
