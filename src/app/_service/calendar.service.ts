@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subject } from "rxjs";
+import { Component } from "@angular/compiler/src/core";
 
 declare global {
   interface Date {
@@ -60,13 +61,13 @@ Date.prototype.getYmd = function(): string {
 };
 
 export interface Day {
-  id: number;
+  id?: number;
   title: string;
   isDisabled: boolean;
   isWeekEnd: boolean;
   isSelected: boolean;
   isHovered: boolean;
-  template?: string;
+  template?: any;
   date?: Date;
 }
 
@@ -92,6 +93,7 @@ export interface Calendar {
 export class CalendarService {
   calendar: BehaviorSubject<any[]> = new BehaviorSubject([]);
   selectedDates: BehaviorSubject<Date[]> = new BehaviorSubject([]);
+  days: BehaviorSubject<Day[]> = new BehaviorSubject([]);
   shownDate: Date;
   countMonths: number;
   weekStart: number;

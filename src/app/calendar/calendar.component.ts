@@ -30,6 +30,13 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
 
   /**
    * @description
+   *  Array custom definitions of days. Subscribable
+   * @see `Day`
+   * */
+  @Input() days: Day[];
+
+  /**
+   * @description
    *  Date whould be render for default calendar .
    * */
   @Input() shownDate: Date;
@@ -39,13 +46,6 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
    *  Alignment of days in a week. Default horizontal.
    * */
   @Input() vertical: boolean;
-
-  /**
-   * @description
-   *  Array custom definitions of days.
-   * @See `Day`
-   * */
-  @Input() days?: Day[];
 
   /**
    * @description
@@ -115,6 +115,7 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
   ngOnInit() {
     this.calendarService.viewSelectorMode.next("days");
     this.calendarService.viewMode.next(this.viewMode);
+    this.calendarService.days.next(this.days);
     this.calendarService.weekStart = this.weekStart;
     this.calendarService.weekends = this.weekends;
     // console.log(this.weekends);

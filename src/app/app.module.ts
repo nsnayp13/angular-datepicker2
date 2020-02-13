@@ -11,6 +11,7 @@ import { YearSelectComponent } from "./year-select/year-select.component";
 import { registerLocaleData } from "@angular/common";
 import localeRu from "@angular/common/locales/ru";
 import { WeekViewComponent } from "./week-view/week-view.component";
+import { TestDayComponent } from "./test-day/test-day.component";
 
 registerLocaleData(localeRu, "ru");
 
@@ -22,8 +23,11 @@ registerLocaleData(localeRu, "ru");
     DayViewComponent,
     MonthSelectComponent,
     YearSelectComponent,
-    WeekViewComponent
+    WeekViewComponent,
+    TestDayComponent
   ],
+
+  entryComponents: [TestDayComponent],
   imports: [BrowserModule],
   providers: [{ provide: LOCALE_ID, useValue: "ru" }],
   bootstrap: [AppComponent]
