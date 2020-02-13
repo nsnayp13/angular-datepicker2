@@ -21,6 +21,9 @@ export class MonthService {
     const countWeek = Math.ceil(
       (daysInMonth + date.getFirstDateDay(startDay)) / 7
     );
+
+    console.log(date.getMonth(), countWeek, date.getFirstDateDay(startDay));
+
     const weeks = [];
     for (let i = 0; i < countWeek; i++) {
       const startWeekDate = new Date(date);

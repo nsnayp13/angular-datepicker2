@@ -24,6 +24,7 @@ export class MonthViewComponent implements OnInit, OnChanges {
   @Input() updateDate;
   @Input() vertical: boolean;
   animationStep;
+  weekDays: Date[];
 
   @Output() @HostBinding("style") elWidth: number;
   @ViewChild("wrap", { static: true }) elementView: ElementRef;
@@ -45,8 +46,12 @@ export class MonthViewComponent implements OnInit, OnChanges {
     });
     this.monthService.getMonth(this.date);
     this.monthService.weeks.subscribe(data => {
+      let weekDays = [];
+      for (let i = 0; i < 7; i++) {
+        weekDays.push(data[0].adjustDate(i));
+      }
+      this.weekDays = weekDays;
       this.weeks = data;
-      //console.log("MONTH WEEKS", this.weeks);
     });
   }
 

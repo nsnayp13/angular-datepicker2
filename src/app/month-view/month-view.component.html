@@ -5,13 +5,7 @@
     <div class="weekWrap" [ngStyle]="{flexDirection: (vertical)?'row':'column'}">
 
         <div [ngStyle]="{flexDirection: ((vertical)?'column':'row')}" style="display: flex;">
-            <div class="dayWeekTitle">пн</div>
-            <div class="dayWeekTitle">вт</div>
-            <div class="dayWeekTitle">ср</div>
-            <div class="dayWeekTitle">чт</div>
-            <div class="dayWeekTitle">пт</div>
-            <div class="dayWeekTitle">сб</div>
-            <div class="dayWeekTitle">вс</div>
+            <div *ngFor="let d of weekDays" class="dayWeekTitle">{{ d | date: 'EEEEEE' }}</div>
         </div>
 
         <app-week-view *ngFor="let weekStartDate of weeks" [date]="weekStartDate" [firstMonthDate]="date"

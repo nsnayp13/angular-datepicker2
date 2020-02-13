@@ -4,12 +4,19 @@ import { BehaviorSubject, Subject } from "rxjs";
 declare global {
   interface Date {
     adjustMonth(number: number): Date;
+    adjustDate(number: number): Date;
     adjustYear(number: number): Date;
     getFirstDateDay(start): number;
     getDayWithStart(start): number;
     getYmd(): string;
   }
 }
+
+Date.prototype.adjustDate = function(num = 0): Date {
+  let date = new Date(this);
+  date.setDate(date.getDate() + num);
+  return date;
+};
 
 /** Adjust & setDate = 1 */
 Date.prototype.adjustMonth = function(num = 0): Date {
@@ -32,7 +39,7 @@ Date.prototype.getDayWithStart = function(start): number {
 
   day = day - start;
 
-  if (day <= 0) {
+  if (day < 0) {
     day = 7 + day;
   }
 
@@ -110,16 +117,6 @@ export class CalendarService {
   setShownDate(date: Date) {
     this.shownDate = date;
   }
-
-  /*findInSelected(date: Date) {
-    for (let k in this.selectedDates) {
-      const item = this.selectedDates[k];
-      if (date.getYmd() === item.getYmd()) {
-        return true;
-      }
-    }
-    return false;
-  }*/
 
   addSelected(date: Date) {
     let selectedDates = this.selectedDates.value;
