@@ -41,11 +41,11 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
   detectChanges() {}
 
   ngOnChanges() {
-    console.log("Day changed");
+    //console.log("Day changed");
   }
 
   onClick() {
-    console.log(this.day, this.calendarService.selectedDates.value);
+    //console.log(this.day, this.calendarService.selectedDates.value);
     this.dayService.toggleDate();
   }
   ngOnDestroy() {

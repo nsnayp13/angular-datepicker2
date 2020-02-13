@@ -53,15 +53,26 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
    * */
   @Input() viewMode: string | number;
 
+  /**
+   * @description
+   * Start week day, default 0
+   */
+  @Input() weekStart: number = 0;
+
+  /**
+   * @description
+   * Weekends, default [0,6], set Day.isWeekend true
+   */
+  @Input() weekends: number[] = [0, 6];
+
+  /** day, month, year */
+  private viewSelectorMode: string = "days";
+
   /************* */
 
   /** Single, multiple, period or keyboard */
   selectMode: string;
-  /** day, month, year */
-  private viewSelectorMode: string = "days";
 
-  weekStart: number;
-  weekends: [];
   timeMode: string;
   disabled?: {
     // disable date to select
@@ -81,7 +92,6 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
   @ViewChildren("someName") someDivs;
 
   constructor(private calendarService: CalendarService) {
-    registerLocaleData(localeRu, "ru");
     //setTimeout(() => this.changeViewSelectorMode(), 1000);
   }
 
@@ -105,6 +115,9 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
   ngOnInit() {
     this.calendarService.viewSelectorMode.next("days");
     this.calendarService.viewMode.next(this.viewMode);
+    this.calendarService.weekStart = this.weekStart;
+    this.calendarService.weekends = this.weekends;
+    // console.log(this.weekends);
 
     this.goToDate();
     this.setSelectedDates();

@@ -42,9 +42,6 @@ Date.prototype.getDayWithStart = function(start): number {
   if (day < 0) {
     day = 7 + day;
   }
-
-  console.log(date, date.getDay(), day, "start", start);
-
   return day;
 };
 
@@ -97,6 +94,8 @@ export class CalendarService {
   selectedDates: BehaviorSubject<Date[]> = new BehaviorSubject([]);
   shownDate: Date;
   countMonths: number;
+  weekStart: number;
+  weekends: number[];
 
   animationStep = new BehaviorSubject("stop");
 

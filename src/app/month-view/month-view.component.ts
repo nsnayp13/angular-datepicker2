@@ -56,7 +56,7 @@ export class MonthViewComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log(this.elementView.nativeElement.width);
+    //console.log(this.elementView.nativeElement.width);
     //console.log("Month-view ngOnChanges");
   }
 }

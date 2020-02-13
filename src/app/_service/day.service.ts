@@ -14,7 +14,7 @@ export class DayService {
       id: 1,
       title: "",
       isDisabled: false,
-      isWeekEnd: false,
+      isWeekEnd: this.calendarService.weekends.includes(date.getDay()),
       isSelected: false,
       isHovered: false,
       template: "",
