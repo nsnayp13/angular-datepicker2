@@ -2,7 +2,8 @@
     <span *ngIf="thisMonth&&!day.template" (click)="onClick()" class="day" [ngClass]="{
         isDisabled : day.isDisabled,
         isSelected: day.isSelected,
-        isWeekEnd: day.isWeekEnd
+        isWeekEnd: day.isWeekEnd,
+        isInPeriod: day.isInPeriod
     }">
         {{day.date | date: "d"}}
     </span>

@@ -4,7 +4,9 @@ import {
   Input,
   OnChanges,
   ViewChildren,
-  AfterViewChecked
+  AfterViewChecked,
+  EventEmitter,
+  Output
 } from "@angular/core";
 import { registerLocaleData } from "@angular/common";
 import localeRu from "@angular/common/locales/ru";
@@ -27,6 +29,7 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
    *  Array of selected dates.
    * */
   @Input() selectedDates: Date[] = [];
+  @Output() selectedDatesChange = new EventEmitter<Date[]>()
 
   /**
    * @description
@@ -65,13 +68,17 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
    */
   @Input() weekends: number[] = [0, 6];
 
+  /**
+   * @description
+   * Single, multiple, period 
+  */
+  @Input() selectMode: string = 'single';
+
+
   /** day, month, year */
   private viewSelectorMode: string = "days";
 
-  /************* */
 
-  /** Single, multiple, period or keyboard */
-  selectMode: string;
 
   timeMode: string;
   disabled?: {
@@ -99,11 +106,11 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
     let width = 0;
     this.someDivs
       ? this.someDivs
-          .toArray()
-          .map(item => (width += item.elementView.nativeElement.clientWidth))
+        .toArray()
+        .map(item => (width += item.elementView.nativeElement.clientWidth))
       : null;
     this.calendarService.animationStep.value === "stop" &&
-    this.viewSelectorMode === "days"
+      this.viewSelectorMode === "days"
       ? (this.width = width)
       : null;
   }
@@ -115,6 +122,7 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
   ngOnInit() {
     this.calendarService.viewSelectorMode.next("days");
     this.calendarService.viewMode.next(this.viewMode);
+    this.calendarService.selectMode.next(this.selectMode);
     this.calendarService.days.next(this.days);
     this.calendarService.weekStart = this.weekStart;
     this.calendarService.weekends = this.weekends;
@@ -142,12 +150,13 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
     });
 
     this.calendarService.selectedDates.subscribe(data => {
-      console.log("selectedDates changed in calendar.ts");
+      this.selectedDates = data;
+      this.selectedDatesChange.emit(this.selectedDates)
     });
   }
 
   ngOnChanges() {
-    this.goToDate();
+    //this.goToDate();
   }
 
   /** Show date in calendar */
@@ -162,7 +171,7 @@ export class CalendarComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   /** Set custom Day[] */
-  setDays(days: Day[]) {}
+  setDays(days: Day[]) { }
 
   goNext() {
     let lastDate = this.calendar[this.calendar.length - 1];

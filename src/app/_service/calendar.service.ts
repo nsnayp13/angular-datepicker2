@@ -13,28 +13,28 @@ declare global {
   }
 }
 
-Date.prototype.adjustDate = function(num = 0): Date {
+Date.prototype.adjustDate = function (num = 0): Date {
   let date = new Date(this);
   date.setDate(date.getDate() + num);
   return date;
 };
 
 /** Adjust & setDate = 1 */
-Date.prototype.adjustMonth = function(num = 0): Date {
+Date.prototype.adjustMonth = function (num = 0): Date {
   this.setDate(1);
   this.setMonth(this.getMonth() + num);
   return this;
 };
 
 /** Adjust & setDate = 1 */
-Date.prototype.adjustYear = function(num = 0): Date {
+Date.prototype.adjustYear = function (num = 0): Date {
   this.setDate(1);
   this.setMonth(0);
   this.setYear(this.getFullYear() + num);
   return this;
 };
 
-Date.prototype.getDayWithStart = function(start): number {
+Date.prototype.getDayWithStart = function (start): number {
   const date = new Date(this.getTime());
   let day = date.getDay();
 
@@ -46,13 +46,13 @@ Date.prototype.getDayWithStart = function(start): number {
   return day;
 };
 
-Date.prototype.getFirstDateDay = function(start): number {
+Date.prototype.getFirstDateDay = function (start): number {
   const date = new Date(this.getTime());
   date.setDate(1);
   return date.getDayWithStart(start);
 };
 
-Date.prototype.getYmd = function(): string {
+Date.prototype.getYmd = function (): string {
   return (
     this.getFullYear().toString() +
     this.getMonth().toString() +
@@ -67,6 +67,7 @@ export interface Day {
   isWeekEnd: boolean;
   isSelected: boolean;
   isHovered: boolean;
+  isInPeriod?: boolean;
   template?: any;
   date?: Date;
 }
@@ -88,7 +89,7 @@ export interface Calendar {
 }
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class CalendarService {
   calendar: BehaviorSubject<any[]> = new BehaviorSubject([]);
@@ -106,10 +107,11 @@ export class CalendarService {
   viewSelectorMode = new BehaviorSubject(null);
 
   viewMode = new BehaviorSubject(null);
+  selectMode = new BehaviorSubject(null);
 
   updateDate = new BehaviorSubject(new Date());
 
-  constructor() {}
+  constructor() { }
 
   setSelectedDates(selectedDates: Date[]) {
     this.selectedDates.next(selectedDates); //= selectedDates ? selectedDates : [];
@@ -144,8 +146,8 @@ export class CalendarService {
     let lastDate = this.shownDate
       ? new Date(this.shownDate)
       : this.selectedDates.value
-      ? new Date(this.selectedDates[this.selectedDates.value.length - 1])
-      : new Date();
+        ? new Date(this.selectedDates[this.selectedDates.value.length - 1])
+        : new Date();
 
     if (typeof viewMode === "string") {
       if (viewMode === "quarter") {

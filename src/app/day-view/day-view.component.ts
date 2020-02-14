@@ -79,7 +79,12 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
     this.sub = this.calendarService.selectedDates.subscribe(data => {
       const days = data.map(item => item.getYmd());
       this.day.isSelected = days.includes(this.day.date.getYmd());
+
+      this.day.isInPeriod = this.dayService.getIsInPeriod(this.day.date)
+
     });
+
+
 
     this.sub1 = this.calendarService.days.subscribe(data => {
       //console.log(data);
@@ -97,8 +102,7 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onClick() {
-    //console.log(this.day, this.calendarService.selectedDates.value);
-    this.dayService.toggleDate();
+    (!this.day.isDisabled) ? this.dayService.toggleDate() : null;
   }
   ngOnDestroy() {
     this.sub.unsubscribe();

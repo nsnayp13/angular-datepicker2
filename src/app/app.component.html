@@ -1,8 +1,14 @@
-<app-calendar [shownDate]="date" [selectedDates]="selectedDates" [days]="days" [weekStart]="1" [viewMode]="'quarter'">
+<app-calendar [shownDate]="date" [days]="days" [(selectedDates)]="selectedDates" [selectMode]="'period'" [weekStart]="1"
+    [viewMode]="'quarter'">
 </app-calendar>
-<app-calendar [shownDate]="date" [selectedDates]="selectedDates" [vertical]="false" [viewMode]="3"></app-calendar>
-<app-calendar [shownDate]="date" [selectedDates]="selectedDates">
+
+<p *ngFor="let date of selectedDates">{{date | date:'yyyyMMMMdd'}}</p>
+
+<!-- 
+<app-calendar [shownDate]="date" [selectedDates]="selectedDates" [selectMode]="'multiple'" [vertical]="false"
+    [viewMode]="3"></app-calendar>
+<app-calendar [shownDate]="date" [selectedDates]="selectedDates" [selectMode]="'single'">
 </app-calendar>
 <app-calendar [viewMode]="1" [selectedDates]="selectedDates" [vertical]="false" [shownDate]="date"></app-calendar>
 <app-calendar [viewMode]="1" [selectedDates]="selectedDates" [vertical]="true" [shownDate]="date"></app-calendar>
-<app-calendar [viewMode]="4" [selectedDates]="selectedDates" [vertical]="true" [shownDate]="date"></app-calendar>
+<app-calendar [viewMode]="4" [selectedDates]="selectedDates" [vertical]="true" [shownDate]="date"></app-calendar> -->

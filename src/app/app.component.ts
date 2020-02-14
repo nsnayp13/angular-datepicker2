@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Day } from "./_service/calendar.service";
-import { DayViewComponent } from "./day-view/day-view.component";
 import { TestDayComponent } from "./test-day/test-day.component";
 
 @Component({
@@ -18,11 +17,31 @@ export class AppComponent implements OnInit {
     this.selectedDates = [
       new Date(2020, 3, 7),
       new Date(2020, 3, 9),
-      new Date(2020, 3, 10)
+
     ];
     this.date = new Date(2020, 3, 7);
 
     this.days = [
+      {
+        title: "",
+        isDisabled: true,
+        isHovered: false,
+        isSelected: false,
+        isWeekEnd: true,
+        date: new Date(2020, 3, 23),
+
+      },
+      {
+        title: "",
+        isDisabled: false,
+        isHovered: false,
+        isSelected: false,
+        isWeekEnd: true,
+        date: new Date(2020, 3, 21),
+
+      },
+
+
       {
         title: "",
         isDisabled: true,
@@ -40,7 +59,7 @@ export class AppComponent implements OnInit {
             callback2: {
               type: 'output',
               value: (data) => {
-                console.log(data)
+                console.log(data);
               }
             },
 
@@ -50,3 +69,4 @@ export class AppComponent implements OnInit {
     ];
   }
 }
+

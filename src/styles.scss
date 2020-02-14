@@ -171,6 +171,10 @@ app-day-view {
   color: #a7a7a7;
 }
 
+.day.isInPeriod{
+  background: #26b1b12b !important  ;
+}
+
 .day.isSelected {
   background: $cyan !important  ;
   color: #fff !important ;
