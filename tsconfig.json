@@ -24,6 +24,18 @@
       ],
       "angular-calendar/*": [
         "dist/angular-calendar/*"
+      ],
+      "angular-calendar2": [
+        "dist/angular-calendar2"
+      ],
+      "angular-calendar2/*": [
+        "dist/angular-calendar2/*"
+      ],
+      "angular-datepicker2": [
+        "dist/angular-datepicker2"
+      ],
+      "angular-datepicker2/*": [
+        "dist/angular-datepicker2/*"
       ]
     }
   },

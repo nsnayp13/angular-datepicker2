@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Day } from "../../projects/angular-calendar/src/lib/_service/calendar.service";
-import { TestDayComponent } from "../../projects/angular-calendar/src/lib/test-day/test-day.component";
+import { Day } from "../../projects/angular-datepicker2/src/lib/_service/calendar.service";
+import { TestDayComponent } from "../../projects/angular-datepicker2/src/lib/test-day/test-day.component";
 
 @Component({
   selector: "app-root",
