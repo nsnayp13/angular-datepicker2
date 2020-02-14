@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "angular-calendar": [
+        "dist/angular-calendar"
+      ],
+      "angular-calendar/*": [
+        "dist/angular-calendar/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
