@@ -1,6 +1,6 @@
 {
   "name": "angular-datepicker2",
-  "version": "0.0.3",
+  "version": "1.0.4",
   "description": "Angular datepicker, best calendar. Select Period, single, or multiple dates. Template your own day in calendar. Two way databinding and others",
   "peerDependencies": {
     "@angular/common": "^8.2.14",

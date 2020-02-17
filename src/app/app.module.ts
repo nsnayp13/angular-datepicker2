@@ -9,18 +9,18 @@ import localeRu from "@angular/common/locales/ru";
 
 import { TestDayComponent } from "./test-day/test-day.component";
 import { FormsModule } from '@angular/forms';
+import { AngularDatepicker2, AngularDatepicker2Module } from 'angular-datepicker2';
 
 registerLocaleData(localeRu, "ru");
 
 @NgModule({
   declarations: [
     AppComponent,
-
     TestDayComponent
   ],
 
   entryComponents: [TestDayComponent],
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, AngularDatepicker2Module],
   providers: [{ provide: LOCALE_ID, useValue: "ru" }],
   bootstrap: [AppComponent]
 })

@@ -10,7 +10,7 @@ now @angular/core: ^8.2.14
 
 ## Getting started
 
-Set to imports app.module.ts `import { AngularDatepicker2 } from 'angular-datepicker2'`. Then you can use it by tag  `<angular-datepicker2></angular-datepicker2>`.
+Set to imports app.module.ts `import { AngularDatepicker2Module } from 'angular-datepicker2'`. Then you can use it by tag  `<angular-datepicker2></angular-datepicker2>`.
 
 
 ## Options
