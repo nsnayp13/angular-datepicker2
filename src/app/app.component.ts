@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { TestDayComponent } from "./test-day/test-day.component";
-
+import { Day } from 'angular-datepicker2';
 
 @Component({
   selector: "app-root",
@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   title = "angular-datepicker";
   date: Date;
   selectedDates: Date[];
-  days: any[];
+  days: Day[];
 
   ngOnInit(): void {
     this.selectedDates = [
