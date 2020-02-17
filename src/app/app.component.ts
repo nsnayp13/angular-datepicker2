@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   title = "angular-datepicker";
   date: Date;
   selectedDates: Date[];
-  days: [];
+  days: any[];
 
   ngOnInit(): void {
     this.selectedDates = [
