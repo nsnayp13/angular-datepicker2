@@ -1,0 +1,24 @@
+{
+  "name": "angular-datepicker2",
+  "version": "0.0.3",
+  "description": "Angular datepicker, best calendar. Select Period, single, or multiple dates. Template your own day in calendar. Two way databinding and others",
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nsnayp13/angular-calendar"
+  },
+  "keywords": [
+    "angular",
+    "datepicker",
+    "calendar",
+    "date",
+    "component",
+    "ui",
+    "input"
+  ],
+  "author": "Ivanov.N <nikaglichev@gmail.com>",
+  "license": "MIT"
+}

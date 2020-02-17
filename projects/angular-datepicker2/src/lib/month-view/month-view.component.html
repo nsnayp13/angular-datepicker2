@@ -1,0 +1,18 @@
+<div #wrap class="monthWrap monthOne {{animationStep}}" style="display:block; float:left; width: 100%; ">
+    <div class="monthHeader" (click)="showYears()">
+        {{date | date: "LLLL yyyy"}}
+    </div>
+    <div class="weekWrap" [ngStyle]="{flexDirection: (vertical)?'row':'column'}">
+
+        <div [ngStyle]="{flexDirection: ((vertical)?'column':'row')}" style="display: flex;">
+            <div *ngFor="let d of weekDays" class="dayWeekTitle">{{ d | date: 'EEEEEE' }}</div>
+        </div>
+
+        <app-week-view *ngFor="let weekStartDate of weeks" [date]="weekStartDate" [firstMonthDate]="date"
+            [ngStyle]="{flexDirection: (vertical)?'column':'row'}">
+        </app-week-view>
+    </div>
+    <!-- <div *ngFor="let date of weeks" >
+        
+    </div> -->
+</div>
