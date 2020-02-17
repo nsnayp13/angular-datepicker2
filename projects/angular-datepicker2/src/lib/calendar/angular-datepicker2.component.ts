@@ -7,10 +7,7 @@ import {
   AfterViewChecked,
   EventEmitter,
   Output,
-  ChangeDetectionStrategy
 } from "@angular/core";
-import { registerLocaleData } from "@angular/common";
-import localeRu from "@angular/common/locales/ru";
 import { CalendarService } from "../_service/calendar.service";
 import { Day } from '../interfaces';
 
@@ -76,7 +73,7 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
 
 
   /** day, month, year */
-  private viewSelectorMode: string = "days";
+  public viewSelectorMode: string = "days";
 
 
 

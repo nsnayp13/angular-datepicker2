@@ -7,7 +7,7 @@ import { CalendarService } from "../_service/calendar.service";
   styleUrls: ["./month-select.component.scss"]
 })
 export class MonthSelectComponent implements OnInit {
-  constructor(private calendarService: CalendarService) {}
+  constructor(private calendarService: CalendarService) { }
 
   @Input() date: Date;
   months = [];
