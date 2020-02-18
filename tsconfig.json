@@ -32,10 +32,10 @@
         "dist/angular-calendar2/*"
       ],
       "angular-datepicker2": [
-        "dist/angular-datepicker2"
+        "dist/angular-datepicker22"
       ],
       "angular-datepicker2/*": [
-        "dist/angular-datepicker2/*"
+        "dist/angular-datepicker22/*"
       ]
     }
   },

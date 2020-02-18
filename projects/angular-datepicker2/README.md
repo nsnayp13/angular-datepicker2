@@ -1,5 +1,9 @@
 # Angular Datepicker2
 
+[![build status](https://github.com/coryrylan/angular-github-actions/workflows/Build/badge.svg)](https://github.com/coryrylan/angular-github-actions/actions)
+
+
+
 `npm i angular-datepicker2`
 
 ![angular datepicker2](https://i.postimg.cc/fWSFpxp7/angular-datepicker2.png)

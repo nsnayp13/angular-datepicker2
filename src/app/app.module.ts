@@ -9,7 +9,7 @@ import localeRu from "@angular/common/locales/ru";
 
 import { TestDayComponent } from "./test-day/test-day.component";
 import { FormsModule } from '@angular/forms';
-import { AngularDatepicker2, AngularDatepicker2Module } from 'angular-datepicker2';
+import { AngularDatepicker2, AngularDatepicker2Module, Day } from 'angular-datepicker2';
 
 registerLocaleData(localeRu, "ru");
 
