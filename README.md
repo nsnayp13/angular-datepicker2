@@ -1,6 +1,6 @@
 # Angular Datepicker2
 
-![Node.js CI](https://github.com/nsnayp13/angular-calendar/workflows/Node.js%20CI/badge.svg)
+![Node.js CI](https://github.com/nsnayp13/angular-datepicker2/workflows/Node.js%20CI/badge.svg)
 
 
 `npm i angular-datepicker2`
