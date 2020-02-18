@@ -3,24 +3,7 @@ name: Node.js CI
 on: [push]
 
 jobs:
-  build:
 
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x]
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm run build --if-present
-      env:
-        CI: true
   publish: # Опубликовать 
     runs-on: ubuntu-latest
     steps:
@@ -29,8 +12,8 @@ jobs:
         with:
           node-version: 10.x
           registry-url: https://registry.npmjs.org/
-      - run: npm run build # Выполняем билд
-
+      - run: npm install
+      - run: npm run build angular-datepicker2
       - name: Publish stable # Публикуем стабильную версию
         run: npm publish
         env:
