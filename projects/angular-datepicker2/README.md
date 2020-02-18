@@ -1,6 +1,5 @@
 # Angular Datepicker2
 
-[![build status](https://github.com/nsnayp13/angular-calendar/workflows/build/badge.svg)](https://github.com/nsnayp13/angular-calendar/actions)
 ![Node.js CI](https://github.com/nsnayp13/angular-calendar/workflows/Node.js%20CI/badge.svg)
 
 
