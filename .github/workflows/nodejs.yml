@@ -13,8 +13,8 @@ jobs:
           node-version: 10.x
           registry-url: https://registry.npmjs.org/
       - run: npm install
-      - run: npm run build angular-datepicker2
+      - run: ng build angular-datepicker2
       - name: Publish stable # Публикуем стабильную версию
-        run: npm publish
+        run: cd dist/angular-datepicker2 && npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_LOGIN}}
