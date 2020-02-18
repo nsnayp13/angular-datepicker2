@@ -8,8 +8,6 @@ import { MonthSelectComponent } from './month-select/month-select.component';
 import { YearSelectComponent } from './year-select/year-select.component';
 import { WeekViewComponent } from './week-view/week-view.component';
 
-
-
 @NgModule({
   declarations: [AngularDatepicker2,
     MonthViewComponent,
