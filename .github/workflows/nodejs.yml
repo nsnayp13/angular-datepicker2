@@ -17,4 +17,4 @@ jobs:
       - name: publish 
         run: cd dist/angular-datepicker2 && npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_LOGIN}}
+          NODE_AUTH_TOKEN: ${{secrets.npm}}
