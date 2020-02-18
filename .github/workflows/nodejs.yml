@@ -1,0 +1,20 @@
+name: Node.js CI
+
+on: [push]
+
+jobs:
+
+  publish: # Опубликовать 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+          registry-url: https://registry.npmjs.org/
+      - run: npm install
+      - run: ng build angular-datepicker2
+      - name: Publish stable # Публикуем стабильную версию
+        run: cd dist/angular-datepicker2 && npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_LOGIN}}
