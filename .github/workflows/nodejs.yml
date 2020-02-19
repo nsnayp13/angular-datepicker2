@@ -11,7 +11,7 @@ jobs:
         with:
           node-version: 10.x
       - run: npm install
-      - run: npm test angular-datepicker2 --watch false
+      - run: npm run test-once
 
   publish: # Опубликовать 
     runs-on: ubuntu-latest
