@@ -1,22 +1,38 @@
-name: CI
+name: Node.js CI
 
 on: [push]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-18.04
+  test:
+    runs-on: ubuntu-latest 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js 8.15.1
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10.x
-    - name: Build and Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v2
-      env:
-        ACCESS_TOKEN: ${{ secrets.GHP }}
-        BASE_BRANCH: master
-        BRANCH: gh-pages
-        FOLDER: dist/angular-datepicker
-        BUILD_SCRIPT: npm install && npm run build --prod
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - run: npm install
+      - run: npm run test-once
+
+  publish: # Опубликовать 
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+          registry-url: https://registry.npmjs.org/
+      - run: npm install
+      - run: npm run build angular-datepicker2
+      - name: publish 
+        run: cd dist/angular-datepicker2 && npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm}}
+      - uses: JamesIves/github-pages-deploy-action@releases/v2
+        env:
+          ACCESS_TOKEN: ${{ secrets.GHP }}
+          BASE_BRANCH: master
+          BRANCH: gh-pages
+          FOLDER: dist/angular-datepicker
+          BUILD_SCRIPT: npm install && npm run build --prod
