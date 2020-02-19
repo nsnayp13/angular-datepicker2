@@ -5,11 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/checkout@v1
-      - uses: nsnayp13/angular-datepicker2@master
+      - 
+        uses: crazy-max/ghaction-github-pages@v1
+        with:
+          target_branch: gh-pages
+          build_dir: build
         env:
-          ACCESS_TOKEN: ${{ secrets.GHP }}
-          BASE_BRANCH: master # The branch the action should deploy from.
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: target # The folder the action should deploy.
-          BUILD_SCRIPT: npm install && npm run-script build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
