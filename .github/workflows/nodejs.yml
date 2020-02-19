@@ -5,11 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 10.x
-          registry-url: https://registry.npmjs.org/
       - name: Deploy with github-pages
       - uses: actions/checkout@v1
       - uses: nsnayp13/angular-datepicker2@master
