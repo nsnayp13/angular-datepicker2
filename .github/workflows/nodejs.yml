@@ -30,21 +30,13 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm}}
 
-  deploy:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-    needs: [test,publish]
-    steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 10.x
-          registry-url: https://registry.npmjs.org/
-      - run: npm install angular-cli-ghpages
-      - run: npm install
-      - run: npm run ngh
-      - run: ngh --dir dist/angular-datepicker/ --no-silent
-       
-
-
-          
+      - name: Deploy with github-pages
+      - uses: nsnayp13/angular-datepicker2@master
+        env:
+          ACCESS_TOKEN: ${{ secrets.GHP }}
+          BASE_BRANCH: master # The branch the action should deploy from.
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: target # The folder the action should deploy.
+          BUILD_SCRIPT: npm install && npm run-script build
+      
