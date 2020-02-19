@@ -6,9 +6,8 @@ import { CalendarService } from "./calendar.service";
   providedIn: "root"
 })
 export class MonthService {
-  weeks: BehaviorSubject<Date[] | null[]> = new BehaviorSubject([]);
 
-  constructor(private calendarService: CalendarService) {}
+  constructor(private calendarService: CalendarService) { }
 
   getMonth(date: Date) {
     const daysInMonth = new Date(
@@ -23,8 +22,6 @@ export class MonthService {
       (daysInMonth + date.getFirstDateDay(weekStart)) / 7
     );
 
-    //console.log(date.getMonth(), countWeek, date.getFirstDateDay(weekStart));
-
     const weeks = [];
     for (let i = 0; i < countWeek; i++) {
       const startWeekDate = new Date(date);
@@ -33,7 +30,7 @@ export class MonthService {
       );
       weeks.push(startWeekDate);
     }
-    //console.log(weeks);
-    this.weeks.next(weeks);
+
+    return weeks;
   }
 }
