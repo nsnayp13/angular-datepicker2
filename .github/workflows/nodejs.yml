@@ -1,17 +1,22 @@
-name: Node.js CI
+name: CI
+
 on: [push]
+
 jobs:
-  publish: # Опубликовать 
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+  build:
+
+    runs-on: ubuntu-18.04
     steps:
-      - 
-        name: Checkout
-        uses: actions/checkout@v1
-      - 
-        uses: crazy-max/ghaction-github-pages@v1
-        with:
-          target_branch: gh-pages
-          build_dir: 'dist'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v1
+    - name: Use Node.js 8.15.1
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v2
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BASE_BRANCH: master
+        BRANCH: gh-pages
+        FOLDER: dist/angular-datepicker2
+        BUILD_SCRIPT: npm install && npm run build --prod
