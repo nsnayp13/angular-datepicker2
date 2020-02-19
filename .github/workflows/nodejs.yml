@@ -3,9 +3,19 @@ name: Node.js CI
 on: [push]
 
 jobs:
+  test: # Тестирование, тут всё просто
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - run: npm test angular-datepicker2 --watch=false
 
   publish: # Опубликовать 
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: [test]
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
