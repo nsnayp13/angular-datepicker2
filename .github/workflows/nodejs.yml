@@ -29,7 +29,6 @@ jobs:
         run: cd dist/angular-datepicker2 && npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm}}
-      
       - name: Deploy with github-pages
       - uses: actions/checkout@v1
       - uses: nsnayp13/angular-datepicker2@master
