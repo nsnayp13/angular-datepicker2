@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TestDayComponent } from "./test-day/test-day.component";
-import { Calendar, Day } from 'angular-datepicker2';
+import { Calendar, Day } from 'projects/angular-datepicker2/src/public-api';
+
 
 
 @Component({

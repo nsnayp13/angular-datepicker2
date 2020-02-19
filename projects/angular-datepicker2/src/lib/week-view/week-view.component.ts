@@ -11,13 +11,9 @@ export class WeekViewComponent implements OnInit {
   @Input() date: Date;
   @Input() firstMonthDate: Date;
   days: Date[] | null[];
-  constructor(private weekService: WeekService) {}
+  constructor(private weekService: WeekService) { }
 
   ngOnInit() {
-    this.weekService.getWeek(this.date);
-    this.weekService.days.subscribe(data => {
-      this.days = data;
-      //console.log("WEEk DAYS", this.days.length, this.days);
-    });
+    this.days = this.weekService.getWeek(this.date);
   }
 }

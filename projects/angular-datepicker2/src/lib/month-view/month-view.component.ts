@@ -43,15 +43,14 @@ export class MonthViewComponent implements OnInit, OnDestroy {
     this.sub.add(this.calendarService.animationStep.subscribe(data => {
       this.animationStep = data;
     }));
-    this.monthService.getMonth(this.date);
-    this.sub.add(this.monthService.weeks.subscribe(data => {
-      let weekDays = [];
-      for (let i = 0; i < 7; i++) {
-        weekDays.push(data[0].adjustDate(i));
-      }
-      this.weekDays = weekDays;
-      this.weeks = data;
-    }));
+    this.weeks = this.monthService.getMonth(this.date);
+
+    let weekDays = [];
+    for (let i = 0; i < 7; i++) {
+      weekDays.push(this.weeks[0].adjustDate(i));
+    }
+    this.weekDays = weekDays;
+
   }
 
   ngOnDestroy() {
