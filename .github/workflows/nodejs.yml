@@ -6,9 +6,12 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - 
+        name: Checkout
+        uses: actions/checkout@v1
+      - 
         uses: crazy-max/ghaction-github-pages@v1
         with:
           target_branch: gh-pages
-          build_dir: build
+          build_dir: ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
