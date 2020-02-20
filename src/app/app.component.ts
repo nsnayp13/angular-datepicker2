@@ -1,13 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { TestDayComponent } from "./test-day/test-day.component";
-import { Calendar, Day } from 'projects/angular-datepicker2/src/public-api';
-
+import { Calendar, Day, SelectMode, ViewMode } from 'projects/angular-datepicker2/src/public-api';
+//import {  } from 'projects/angular-datepicker2/src/lib/interfaces';
 
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"]
+  styleUrls: ["./app.component.scss"],
+  //changeDetection: ChangeDetectionStrategy
 })
 export class AppComponent implements OnInit {
   title = "angular-datepicker";
@@ -16,6 +17,54 @@ export class AppComponent implements OnInit {
 
   lol: Calendar
   days: Day[];
+  vertical = false;
+  selectMode: SelectMode = SelectMode.Period
+  viewMode: ViewMode | number = ViewMode.Quarter
+
+
+  _viewModeVal = [
+    ViewMode.Quarter,
+    1,
+    3,
+    4,
+    ViewMode.Semester,
+    6
+  ];
+
+  _selectModeVal = [
+    SelectMode.Period,
+    SelectMode.Multiple,
+    SelectMode.Single
+  ];
+
+
+  _verticalVal = [
+    false,
+    true
+  ]
+
+  _shownDateVal = [new Date(2020, 3, 1)];
+
+
+  _selectMode(e) {
+    let val = e.target.value
+    this.selectMode = val;
+  }
+
+  _viewMode(e) {
+    let val = e.target.value
+    if (typeof val === 'string' && val.length <= 2) {
+      val = parseInt(val)
+    }
+    this.viewMode = val;
+  }
+
+  _vertical(e) {
+    let val = e.target.value;
+    this.vertical = (val === 'true') ? true : false;
+  }
+
+
 
   ngOnInit(): void {
     this.selectedDates = [
@@ -24,6 +73,19 @@ export class AppComponent implements OnInit {
 
     ];
     this.date = new Date(2020, 3, 7);
+
+    /* setTimeout(() => {
+       this.vertical = true;
+     }, 2000)
+     setTimeout(() => {
+       this.viewMode = ViewMode.Quarter;
+     }, 4000)
+ 
+     setTimeout(() => {
+       this.selectMode = SelectMode.Multiple;
+     }, 6000)*/
+
+
 
     this.days = [
       {

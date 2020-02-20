@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
 
 @Component({
@@ -10,6 +10,7 @@ export class MonthSelectComponent implements OnInit {
   constructor(private calendarService: CalendarService) { }
 
   @Input() date: Date;
+  @ViewChild("wrap", { static: true }) elementView: ElementRef;
   months = [];
   animationStep;
 

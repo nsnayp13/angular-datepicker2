@@ -28,7 +28,7 @@ export class DayService {
   getIsInPeriod(date: Date): boolean {
 
 
-    if (this.calendarService.selectMode.value === 'period' && this.calendarService.selectedDates.value.length == 2 && date.getTime() >= this.calendarService.selectedDates.value[0].getTime() && date.getTime() <= this.calendarService.selectedDates.value[1].getTime()) {
+    if (this.calendarService.selectMode === 'period' && this.calendarService.selectedDates.value.length == 2 && date.getTime() >= this.calendarService.selectedDates.value[0].getTime() && date.getTime() <= this.calendarService.selectedDates.value[1].getTime()) {
       return true;
     }
     return false;
@@ -47,11 +47,11 @@ export class DayService {
 
   toggleDate() {
 
-    if (this.calendarService.selectMode.value === 'single') {
+    if (this.calendarService.selectMode === 'single') {
       if (this.calendarService.selectedDates.value.length > 0) {
         this.calendarService.selectedDates.next([this.day.date]);
       }
-    } else if (this.calendarService.selectMode.value === 'multiple') {
+    } else if (this.calendarService.selectMode === 'multiple') {
       if (this.day.isSelected) {
         let selectedDates = this.calendarService.selectedDates.value.filter(
           elem => elem.getYmd() !== this.day.date.getYmd()
@@ -64,7 +64,7 @@ export class DayService {
         selectedDates.push(this.day.date);
         this.calendarService.selectedDates.next(selectedDates);
       }
-    } else if (this.calendarService.selectMode.value === 'period') {
+    } else if (this.calendarService.selectMode === 'period') {
       if (this.day.isSelected) {
         let selectedDates = this.calendarService.selectedDates.value.filter(
           elem => elem.getYmd() !== this.day.date.getYmd()

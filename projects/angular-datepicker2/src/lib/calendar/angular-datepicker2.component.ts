@@ -7,9 +7,10 @@ import {
   AfterViewChecked,
   EventEmitter,
   Output,
+  ChangeDetectorRef,
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
-import { Day } from '../interfaces';
+import { Day, SelectMode, ViewMode } from '../interfaces';
 
 
 
@@ -51,7 +52,7 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
    * @description
    * Present mode of calendar. Year, quarter, semester or qty months. Default 1.
    * */
-  @Input() viewMode: string | number;
+  @Input() viewMode: ViewMode | number;
 
   /**
    * @description
@@ -67,49 +68,55 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
 
   /**
    * @description
-   * Single, multiple, period 
+   * Single, Multiple, Period 
+   * @See `SelectMode` 
   */
-  @Input() selectMode: string = 'single';
+  @Input() selectMode: SelectMode;
 
 
-  /** day, month, year */
-  public viewSelectorMode: string = "days";
+  /**
+  * @description
+  * Date  
+  * @See `SelectMode` 
+ */
+  @Input() nowDate: Date;
 
-
-
-  timeMode: string;
-  disabled?: {
-    // disable date to select
-    enabled: true;
-    mode: "after"; // 'after'|'before'
-  };
-  suggestions: [];
-
-  nowDate: Date;
-  showMonthQty: number;
-
-  calendar: any[];
-  updateDate;
+  @ViewChildren("column") columns;
 
   width: number | null;
 
-  @ViewChildren("someName") someDivs;
+  // disabled?: {
+  //   enabled: true;
+  //   mode: "after"; // 'after'|'before'
+  // };
 
-  constructor(private calendarService: CalendarService) {
+  //suggestions: [];
+
+
+  //showMonthQty: number;
+
+
+
+
+
+
+  constructor(private calendarService: CalendarService, private cdr: ChangeDetectorRef) {
     //setTimeout(() => this.changeViewSelectorMode(), 1000);
   }
 
   recountWidth() {
     let width = 0;
-    this.someDivs
-      ? this.someDivs
+    this.columns
+      ? this.columns
         .toArray()
         .map(item => (width += item.elementView.nativeElement.clientWidth))
       : null;
     this.calendarService.animationStep.value === "stop" &&
-      this.viewSelectorMode === "days"
+      this.calendarService.viewSelectorMode === "days"
       ? (this.width = width)
       : null;
+
+    this.cdr.detectChanges();
   }
 
   ngAfterViewChecked() {
@@ -117,26 +124,6 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
   }
 
   ngOnInit() {
-    console.log('CALENDAR')
-    this.calendarService.viewSelectorMode.next("days");
-    this.calendarService.viewMode.next(this.viewMode);
-    this.calendarService.selectMode.next(this.selectMode);
-    this.calendarService.days.next(this.days);
-
-    this.calendarService.weekStart = this.weekStart;
-    this.calendarService.weekends = this.weekends;
-    // console.log(this.weekends);
-
-    this.goToDate();
-    this.setSelectedDates();
-
-    this.calendarService.viewSelectorMode.subscribe(
-      data => (this.viewSelectorMode = data)
-    );
-
-    this.calendarService.calendar.subscribe(data => {
-      this.calendar = data;
-    });
 
     this.calendarService.animationStep.subscribe(data => {
       if (data === "stop") {
@@ -144,42 +131,109 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
       }
     });
 
-    this.calendarService.updateDate.subscribe(data => {
-      this.updateDate = data;
-    });
-
     this.calendarService.selectedDates.subscribe(data => {
-
-      this.selectedDates = data;
-      //console.log(this.selectedDates, data, this.selectedDates === data)
-      this.selectedDatesChange.emit(this.selectedDates)
+      this.selectedDatesChange.emit(data)
     });
-  }
 
-  ngOnChanges() {
+    this.calendarService.days.next(this.days);
+    this.calendarService.weekStart = this.weekStart;
+    this.calendarService.weekends = this.weekends;
+    this.calendarService.viewMode = this.viewMode;
+    this.calendarService.viewSelectorMode = 'days';
+    this.calendarService.selectMode = this.selectMode;
+    this.calendarService.shownDate = this.shownDate;
 
-  }
-
-  /** Show date in calendar */
-  goToDate() {
-    this.calendarService.setShownDate(this.shownDate);
-    this.calendarService.getShownMonths(this.shownDate);
-  }
-
-  /** Set dates would be selected in calendar. Depend from selectMode */
-  setSelectedDates() {
     this.calendarService.setSelectedDates(this.selectedDates);
+    this.calendarService.setDays(this.days);
+
+    this.calendarService.getShownMonths(this.shownDate);
+
+
+
   }
+
+
+
+  getCalendar() {
+    return this.calendarService.calendar;
+  }
+
+
+  calculate() {
+    let date = this.shownDate
+    let countMonths = 0;
+    const months = [];
+    let lastDate: Date;
+
+    lastDate = date ? date : this.calendarService.getLastDate();
+    countMonths = this.calendarService.getCountMonths();
+    //this.countMonths = countMonths;
+
+    for (let i = countMonths - 1; i >= 0; i--) {
+      months.push(new Date(lastDate).adjustMonth(-i));
+    }
+
+    return months;
+  }
+
+  isEqual(array, array1) {
+    console.log(array, array1)
+    let a = array.filter(
+      item => array1.includes(item)
+    );
+    return (a.length === 0 && array.length === array1.length);
+  }
+
+  private _viewMode(simpleChange) {
+    if (simpleChange.viewMode.currentValue !== simpleChange.viewMode.previousValue) {
+      this.calendarService.viewMode = simpleChange.viewMode.currentValue;
+      this.calendarService.getShownMonths(this.shownDate);
+      setTimeout(() => this.recountWidth(), 10);
+    }
+  }
+
+
+  private _selectMode(simpleChange) {
+    if (simpleChange.selectMode.currentValue !== simpleChange.selectMode.previousValue) {
+      this.calendarService.selectMode = simpleChange.selectMode.currentValue;
+      this.calendarService.getShownMonths(this.shownDate);
+      setTimeout(() => this.recountWidth(), 10);
+    }
+  }
+
+  private _shownDate(simpleChange) {
+    if (simpleChange.shownDate.currentValue !== simpleChange.shownDate.previousValue) {
+      this.calendarService.shownDate = simpleChange.shownDate.currentValue;
+      this.calendarService.getShownMonths(this.shownDate);
+      setTimeout(() => this.recountWidth(), 10);
+    }
+  }
+
+  /* private _vertical(simpleChange) {
+     this.calendarService.ve vertical = simpleChange.vertical.currentValue;
+   } */
+
+
+  ngOnChanges(simpleChange) {
+    //console.log(simpleChange);
+    (simpleChange.viewMode) && this._viewMode(simpleChange);
+    (simpleChange.selectMode) && this._selectMode(simpleChange);
+    (simpleChange.shownDate) && this._shownDate(simpleChange);
+  }
+
+
+
+
 
   /** Set custom Day[] */
   setDays(days: Day[]) { }
 
   goNext() {
-    let lastDate = this.calendar[this.calendar.length - 1];
+    let lastDate = this.calendarService.calendar[this.calendarService.calendar.length - 1];
     this.calendarService.goNext(lastDate);
   }
   goPrev() {
-    let firstDate = this.calendar[0];
+    let firstDate = this.calendarService.calendar[0];
     this.calendarService.goPrev(firstDate);
   }
 }
