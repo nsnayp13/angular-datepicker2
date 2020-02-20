@@ -74,22 +74,31 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
   @Input() selectMode: SelectMode;
 
 
+  /**
+  * @description
+  * Date  
+  * @See `SelectMode` 
+ */
+  @Input() nowDate: Date;
 
-
-  disabled?: {
-    // disable date to select
-    enabled: true;
-    mode: "after"; // 'after'|'before'
-  };
-  suggestions: [];
-
-  nowDate: Date;
-  showMonthQty: number;
-
+  @ViewChildren("column") columns;
 
   width: number | null;
 
-  @ViewChildren("column") columns;
+  // disabled?: {
+  //   enabled: true;
+  //   mode: "after"; // 'after'|'before'
+  // };
+
+  //suggestions: [];
+
+
+  //showMonthQty: number;
+
+
+
+
+
 
   constructor(private calendarService: CalendarService, private cdr: ChangeDetectorRef) {
     //setTimeout(() => this.changeViewSelectorMode(), 1000);
@@ -132,6 +141,7 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
     this.calendarService.viewMode = this.viewMode;
     this.calendarService.viewSelectorMode = 'days';
     this.calendarService.selectMode = this.selectMode;
+    this.calendarService.shownDate = this.shownDate;
 
     this.calendarService.setSelectedDates(this.selectedDates);
     this.calendarService.setDays(this.days);
@@ -182,15 +192,33 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
     }
   }
 
+
+  private _selectMode(simpleChange) {
+    if (simpleChange.selectMode.currentValue !== simpleChange.selectMode.previousValue) {
+      this.calendarService.selectMode = simpleChange.selectMode.currentValue;
+      this.calendarService.getShownMonths(this.shownDate);
+      setTimeout(() => this.recountWidth(), 10);
+    }
+  }
+
+  private _shownDate(simpleChange) {
+    if (simpleChange.shownDate.currentValue !== simpleChange.shownDate.previousValue) {
+      this.calendarService.shownDate = simpleChange.shownDate.currentValue;
+      this.calendarService.getShownMonths(this.shownDate);
+      setTimeout(() => this.recountWidth(), 10);
+    }
+  }
+
   /* private _vertical(simpleChange) {
      this.calendarService.ve vertical = simpleChange.vertical.currentValue;
    } */
 
 
   ngOnChanges(simpleChange) {
-    console.log(simpleChange);
+    //console.log(simpleChange);
     (simpleChange.viewMode) && this._viewMode(simpleChange);
-    //(simpleChange.vertical) && this._vertical(simpleChange);
+    (simpleChange.selectMode) && this._selectMode(simpleChange);
+    (simpleChange.shownDate) && this._shownDate(simpleChange);
   }
 
 

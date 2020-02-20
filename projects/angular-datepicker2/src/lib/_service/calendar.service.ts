@@ -118,7 +118,7 @@ export class CalendarService {
     let viewMode = this.viewMode;
     if (typeof viewMode === "number") {
       return viewMode;
-    } else if (typeof viewMode === "string") {
+    } else {
       if (viewMode === "quarter") {
         return 3;
       } else if (viewMode === "semester") {
