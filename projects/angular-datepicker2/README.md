@@ -39,8 +39,8 @@ shownDate: Date
 // Alignment of days in a week. Default horizontal.
 vertical: boolean
 
-// Present mode of calendar. Quarter, semester or number of months. Default 1.
-viewMode: string | number
+// Present mode of calendar. Quarter, semester or number of months. Default 1. Import from public-api or interfaces. Its enum
+viewMode: ViewMode | number
 
 // Start week day, default 0
 weekStart: number
@@ -48,8 +48,8 @@ weekStart: number
 // Weekends, default [0,6], set Day.isWeekend true
 weekends: number[] = [0, 6]
 
-// Single, multiple, period 
-selectMode: string = 'single'
+// Single, Multiple, Period. Import from public-api or interfaces. Its enum
+selectMode: SelectMode
 
 ```
 

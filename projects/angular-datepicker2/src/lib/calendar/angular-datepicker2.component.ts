@@ -158,6 +158,12 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
     return this.calendarService.calendar;
   }
 
+  getViewSelectorMode() {
+    return this.calendarService.viewSelectorMode;
+  }
+
+
+
 
   calculate() {
     let date = this.shownDate
