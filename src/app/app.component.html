@@ -1,5 +1,5 @@
-<angular-datepicker2 [shownDate]="date" [days]="days" [(selectedDates)]="selectedDates" [selectMode]="'period'"
-    [weekends]="[0,1]" [weekStart]="1" [viewMode]="'quarter'">
+<angular-datepicker2 [shownDate]="date" [days]="days" [(selectedDates)]="selectedDates" [selectMode]="selectMode"
+    [weekends]="[0,1]" [weekStart]="1" [viewMode]="viewMode" [vertical]="vertical">
 </angular-datepicker2>
 
 <p *ngFor="let date of selectedDates">{{date | date:'yyyyMMMMdd'}}</p>

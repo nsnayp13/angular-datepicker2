@@ -6,14 +6,15 @@
         <div (click)="goPrev()" class="nextPrevBtn" style="left:0;">{{'<'}}</div>
 
         <div class="wrapMonths" [ngStyle]="{width: width+'px'}">
-            <div class="months" *ngIf="viewSelectorMode==='days'">
-                <app-month-view *ngFor="let date of calendar" #someName [date]="date" [vertical]="vertical">
+            <div class="months" *ngIf="calendarService.viewSelectorMode==='days'">
+                <app-month-view *ngFor="let date of  getCalendar()" #column [date]="date" [vertical]="vertical">
                 </app-month-view>
             </div>
 
-            <div class="" *ngIf="viewSelectorMode==='months'" style="width: 100%; display:flex; flex:1;">
+            <div class="" *ngIf="calendarService.viewSelectorMode==='months'"
+                style="width: 100%; display:flex; flex:1;">
 
-                <app-month-select *ngFor="let date of calendar" [date]="date">
+                <app-month-select *ngFor="let date of  getCalendar()" #column [date]="date">
                 </app-month-select>
 
 

@@ -12,12 +12,9 @@ export class TestDayComponent implements OnInit {
   @Output() callback2: EventEmitter<any> = new EventEmitter();
 
   constructor() {
-    console.log("cos", this.title);
+
   }
 
-  // click() {
-  //   this.callback('awdwa' + this.title)
-  // }
 
   click(event) {
     this.callback2.emit('awdwa' + this.title)

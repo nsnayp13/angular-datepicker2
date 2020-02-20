@@ -31,3 +31,22 @@ export interface Suggest {
     title: string;
     dates: [];
 }
+
+
+/**
+ * @publicApi
+*/
+export enum SelectMode {
+    Single = 'single',
+    Multiple = 'multiple',
+    Period = 'period'
+}
+
+
+export enum ViewMode {
+    Year = 'year',
+    Quarter = 'quarter',
+    Semester = 'semester'
+}
+
+

@@ -1,21 +1,26 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { TestDayComponent } from "./test-day/test-day.component";
-import { Calendar, Day } from 'projects/angular-datepicker2/src/public-api';
-
+import { Calendar, Day, SelectMode, ViewMode } from 'projects/angular-datepicker2/src/public-api';
+//import {  } from 'projects/angular-datepicker2/src/lib/interfaces';
 
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"]
+  styleUrls: ["./app.component.scss"],
+  //changeDetection: ChangeDetectionStrategy
 })
 export class AppComponent implements OnInit {
   title = "angular-datepicker";
   date: Date;
   selectedDates: Date[];
+  viewMode;
 
   lol: Calendar
   days: Day[];
+  vertical = false;
+  selectMode: SelectMode = SelectMode.Period
+  viwMode: ViewMode | number = ViewMode.Semester
 
   ngOnInit(): void {
     this.selectedDates = [
@@ -24,6 +29,11 @@ export class AppComponent implements OnInit {
 
     ];
     this.date = new Date(2020, 3, 7);
+
+    setTimeout(() => {
+      this.viewMode = 2;
+      this.vertical = true;
+    }, 2000)
 
     this.days = [
       {
