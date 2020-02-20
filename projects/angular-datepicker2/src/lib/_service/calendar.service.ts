@@ -65,10 +65,17 @@ Date.prototype.getYmd = function (): string {
   providedIn: 'root'
 })
 export class CalendarService {
-  calendar: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  //calendar: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  calendar: Date[];
+  shownDate: Date;
+  viewMode;
+  viewSelectorMode;
+  selectMode;
+
+
   selectedDates: BehaviorSubject<Date[]> = new BehaviorSubject([]);
   days: BehaviorSubject<Day[]> = new BehaviorSubject([]);
-  shownDate: Date;
+
   countMonths: number;
   weekStart: number;
   weekends: number[];
@@ -77,17 +84,24 @@ export class CalendarService {
 
   recountWidth = new BehaviorSubject(1);
 
-  viewSelectorMode = new BehaviorSubject(null);
 
-  viewMode = new BehaviorSubject(null);
-  selectMode = new BehaviorSubject(null);
+
+
+
 
   updateDate = new BehaviorSubject(new Date());
 
   constructor() { }
 
   setSelectedDates(selectedDates: Date[]) {
-    this.selectedDates.next(selectedDates); //= selectedDates ? selectedDates : [];
+    this.selectedDates.next(selectedDates);
+  }
+
+
+
+
+  setDays(days: Day[]) {
+    this.days.next(days);
   }
 
   setShownDate(date: Date) {
@@ -100,8 +114,8 @@ export class CalendarService {
     this.selectedDates.next(selectedDates);
   }
 
-  private getCountMonths(): number {
-    let viewMode = this.viewMode.value;
+  public getCountMonths(): number {
+    let viewMode = this.viewMode;
     if (typeof viewMode === "number") {
       return viewMode;
     } else if (typeof viewMode === "string") {
@@ -114,8 +128,8 @@ export class CalendarService {
     return 1;
   }
 
-  private getLastDate(): Date {
-    let viewMode = this.viewMode.value;
+  public getLastDate(): Date {
+    let viewMode = this.viewMode;
     let lastDate = this.shownDate
       ? new Date(this.shownDate)
       : this.selectedDates.value
@@ -155,8 +169,8 @@ export class CalendarService {
     for (let i = countMonths - 1; i >= 0; i--) {
       months.push(new Date(lastDateShown).adjustYear(-i));
     }
-    this.calendar.next(months);
-    this.viewSelectorMode.next("months");
+    this.calendar = months;
+    this.viewSelectorMode = "months";
   }
 
   getShownMonths(date?: Date) {
@@ -172,28 +186,28 @@ export class CalendarService {
       months.push(new Date(lastDate).adjustMonth(-i));
     }
 
-    this.calendar.next(months);
-    this.viewSelectorMode.next("days");
+    this.calendar = months;
+    this.viewSelectorMode = "days";
   }
 
   goPrev(firstDate: Date) {
     let prevDate = new Date(firstDate);
 
-    if (this.viewSelectorMode.value === "days") {
+    if (this.viewSelectorMode === "days") {
       prevDate.adjustMonth(-1);
-    } else if (this.viewSelectorMode.value === "months") {
+    } else if (this.viewSelectorMode === "months") {
       prevDate.adjustYear(-1);
     }
 
-    let dates = [...this.calendar.value];
+    let dates = [...this.calendar];
     dates.unshift(prevDate);
-    this.calendar.next(dates);
+    this.calendar = dates;
     this.animationStep.next("left");
 
     setTimeout(() => {
-      dates = [...this.calendar.value];
+      dates = [...this.calendar];
       dates.splice(dates.length - 1, 1);
-      this.calendar.next(dates);
+      this.calendar = dates;
       this.animationStep.next("stop");
     }, 205);
   }
@@ -201,23 +215,23 @@ export class CalendarService {
   goNext(lastDate: Date) {
     let nextDate = new Date(lastDate);
 
-    if (this.viewSelectorMode.value === "days") {
+    if (this.viewSelectorMode === "days") {
       nextDate.adjustMonth(1);
-    } else if (this.viewSelectorMode.value === "months") {
+    } else if (this.viewSelectorMode === "months") {
       nextDate.adjustYear(1);
     }
 
-    let dates = [...this.calendar.value];
+    let dates = [...this.calendar];
     //dates.splice(0, 1);
     dates.push(nextDate);
-    this.calendar.next(dates);
+    this.calendar = dates;
     this.animationStep.next("right");
 
     setTimeout(() => {
-      dates = [...this.calendar.value];
+      dates = [...this.calendar];
 
       dates.splice(0, 1);
-      this.calendar.next(dates);
+      this.calendar = dates;
       this.animationStep.next("stop");
       //this.recountWidth.next(this.recountWidth.value + 1);
     }, 205);
