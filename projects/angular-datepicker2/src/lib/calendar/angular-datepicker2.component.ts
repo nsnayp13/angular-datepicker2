@@ -34,7 +34,7 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
    * @description
    *  Callback event when click on day
   */
-  @Output() onDayClick = new EventEmitter<any>()
+  @Output() onDayClick = new EventEmitter<Day>()
 
 
   /**
@@ -141,6 +141,10 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
 
     this.calendarService.selectedDates.subscribe(data => {
       this.selectedDatesChange.emit(data)
+    });
+
+    this.calendarService.clickDayKey.subscribe(data => {
+      (data) ? this.onDayClick.emit(data.day) : null;
     });
 
     this.calendarService.days.next(this.days);

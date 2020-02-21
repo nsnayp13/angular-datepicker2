@@ -84,8 +84,8 @@ export class CalendarService {
 
   recountWidth = new BehaviorSubject(1);
 
-
-
+  /** Needs for onClickDay detect change */
+  clickDayKey: BehaviorSubject<{ day: Day, key: string } | null> = new BehaviorSubject(null);
 
 
 

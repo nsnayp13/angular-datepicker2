@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { CalendarService } from "./calendar.service";
 import { Day } from '../interfaces';
+import { VirtualTimeScheduler } from 'rxjs';
 
 @Injectable({
   providedIn: "root"
@@ -46,6 +47,9 @@ export class DayService {
 
 
   toggleDate() {
+
+
+    this.calendarService.clickDayKey.next({ key: new Date().getYmd() + '' + Math.random(), day: this.day })
 
     if (this.calendarService.selectMode === 'single') {
       if (this.calendarService.selectedDates.value.length > 0) {

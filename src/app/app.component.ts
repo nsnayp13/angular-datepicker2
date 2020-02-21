@@ -65,6 +65,10 @@ export class AppComponent implements OnInit {
   }
 
 
+  onDayClick(day) {
+    console.log('day clicked', day)
+  }
+
 
   ngOnInit(): void {
     this.selectedDates = [

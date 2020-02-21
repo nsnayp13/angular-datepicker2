@@ -1,4 +1,4 @@
-# Angular Datepicker2
+# Angular Datepicker2 : v1.2.x
 
 ![Node.js CI](https://github.com/nsnayp13/angular-datepicker2/workflows/Node.js%20CI/badge.svg)
 
@@ -50,6 +50,12 @@ weekends: number[] = [0, 6]
 
 // Single, Multiple, Period. Import from public-api or interfaces. Its enum
 selectMode: SelectMode
+
+
+// Callback event when click on day
+// its returns a Day object before change self state by click
+(onDayClick) 
+
 
 ```
 

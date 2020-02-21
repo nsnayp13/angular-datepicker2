@@ -3,8 +3,8 @@
     <div style="width:100%; display:block; float:left;">
         <div style="width:100%; display:block; float:left;">
             <angular-datepicker2 [shownDate]="_shownDateVal" [days]="days" [(selectedDates)]="selectedDates"
-                [selectMode]="selectMode" [weekends]="[0,1]" [weekStart]="1" [viewMode]="viewMode"
-                [vertical]="vertical">
+                [selectMode]="selectMode" [weekends]="[0,1]" [weekStart]="1" [viewMode]="viewMode" [vertical]="vertical"
+                (onDayClick)="onDayClick($event)">
             </angular-datepicker2>
         </div>
 
