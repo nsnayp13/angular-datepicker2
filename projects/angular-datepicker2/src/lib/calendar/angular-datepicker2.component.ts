@@ -29,6 +29,14 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
   @Input() selectedDates: Date[] = [];
   @Output() selectedDatesChange = new EventEmitter<Date[]>()
 
+
+  /**
+   * @description
+   *  Callback event when click on day
+  */
+  @Output() onDayClick = new EventEmitter<any>()
+
+
   /**
    * @description
    *  Array custom definitions of days. Subscribable
