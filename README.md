@@ -85,7 +85,6 @@ this.days = [
         date: new Date(2020, 3, 21),
     },
     {
-        title: "",
         isDisabled: true,
         isHovered: false,
         isSelected: false,
