@@ -5,7 +5,7 @@
 
 `npm i angular-datepicker2`
 
-![angular datepicker2](https://i.postimg.cc/fWSFpxp7/angular-datepicker2.png)
+![angular datepicker2](https://s4.gifyu.com/images/Peek-2020-02-27-13-33.gif)
 
 
 now @angular/core: ^8.2.14
