@@ -1,4 +1,4 @@
-# Angular Datepicker2 : v1.2.x
+# Angular Datepicker2 : v2.1.x
 
 ![Node.js CI](https://github.com/nsnayp13/angular-datepicker2/workflows/Node.js%20CI/badge.svg)
 
