@@ -1,5 +1,5 @@
 <div class="dayWrap">
-    <span *ngIf="thisMonth&&!day.template" (click)="onClick()" [title]="day.title" class="day" [ngClass]="{
+    <span *ngIf="thisMonth&&!day.template" (click)="onClick()" class="day" [ngClass]="{
         isDisabled : day.isDisabled,
         isSelected: day.isSelected,
         isWeekEnd: day.isWeekEnd,
