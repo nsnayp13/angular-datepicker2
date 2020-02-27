@@ -1,7 +1,16 @@
 <div style="width:100%; display:block; float:left;">
 
-    <div style="width:100%; display:block; float:left;">
-        <div style="width:100%; display:block; float:left;">
+    <div style="width: 100%;
+    float: left;
+    background: #c3c3c3;
+    padding: 32px;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;">
+        <div style=" display:block; float:left;">
             <angular-datepicker2 [shownDate]="_shownDateVal" [days]="days" [(selectedDates)]="selectedDates"
                 [selectMode]="selectMode" [weekends]="[0,1]" [weekStart]="1" [viewMode]="viewMode" [vertical]="vertical"
                 (onDayClick)="onDayClick($event)">
@@ -11,7 +20,7 @@
 
     </div>
 
-    <div style="min-height: 50%;">
+    <div style=" width:50%; display: block; float: left; padding: 16px; box-sizing: border-box">
         <h3>Props</h3>
         <table border=1 style="width:100%; background: #fff; border-collapse: collapse;">
             <tr>
@@ -74,12 +83,29 @@
                 </td>
             </tr>
 
+
+
+
+        </table>
+
+
+
+
+    </div>
+
+
+    <div style=" width:50%; display: block; float: left; padding: 16px;  box-sizing: border-box">
+        <h3>Events</h3>
+        <table border=1 style="width:100%; background: #fff; border-collapse: collapse;">
+
             <tr>
                 <td>onDayClick</td>
                 <td>Event</td>
                 <td>Callback event when click on day. Its returns a Day object before change self state by click</td>
                 <td>
-
+                    <div *ngFor="let item of _stackOnDayClick">
+                        <pre>{{item | json}}</pre>
+                    </div>
                 </td>
             </tr>
 

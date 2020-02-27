@@ -1,8 +1,6 @@
 import { Type, Component } from '@angular/core'
 
 export interface Day {
-    id?: number;
-    title: string;
     isDisabled: boolean;
     isWeekEnd: boolean;
     isSelected: boolean;

@@ -12,8 +12,6 @@ export class DayService {
 
   createDay(date: Date): Day {
     this.day = {
-      id: 1,
-      title: "",
       isDisabled: false,
       isWeekEnd: this.calendarService.weekends.includes(date.getDay()),
       isSelected: false,

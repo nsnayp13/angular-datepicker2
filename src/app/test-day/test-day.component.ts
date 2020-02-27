@@ -17,7 +17,7 @@ export class TestDayComponent implements OnInit {
 
 
   click(event) {
-    this.callback2.emit('awdwa' + this.title)
+    this.callback2.emit('TestDayComponent' + this.title)
   }
 
   ngOnInit() {

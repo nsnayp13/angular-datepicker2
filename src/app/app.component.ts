@@ -22,6 +22,8 @@ export class AppComponent implements OnInit {
   viewMode: ViewMode | number = ViewMode.Quarter
 
 
+  _stackOnDayClick = [];
+
   _viewModeVal = [
     ViewMode.Quarter,
     1,
@@ -65,8 +67,11 @@ export class AppComponent implements OnInit {
   }
 
 
+
+
+
   onDayClick(day) {
-    console.log('day clicked', day)
+    this._stackOnDayClick.push({ ...day })
   }
 
 
@@ -93,7 +98,6 @@ export class AppComponent implements OnInit {
 
     this.days = [
       {
-        title: "",
         isDisabled: true,
         isHovered: false,
         isSelected: false,
@@ -103,7 +107,6 @@ export class AppComponent implements OnInit {
 
       },
       {
-        title: "",
         isDisabled: false,
         isHovered: false,
         isSelected: false,
@@ -114,7 +117,6 @@ export class AppComponent implements OnInit {
 
 
       {
-        title: "",
         isDisabled: true,
         isHovered: false,
         isSelected: false,
@@ -134,7 +136,7 @@ export class AppComponent implements OnInit {
                 propName: 'callback2',
                 type: 'output',
                 value: (data) => {
-                  console.log(data);
+                  alert('click custom day. See Day interface')
                 }
               }
             ]
