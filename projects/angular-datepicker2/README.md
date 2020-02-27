@@ -92,20 +92,24 @@ this.days = [
         isWeekEnd: true,
         date: new Date(2020, 3, 26),
         template: {
-            component: TestDayComponent,
-            props: {
-                title: {
-                    type: 'input',
-                    value: new Date(2020, 3, 26).getDate()
-                },
-                callback2: {
-                    type: 'output',
-                    value: (data) => {
-                        // custom code here
-                        console.log(data);
-                    }
+          component:
+          {
+            componentClass: TestDayComponent,
+            props: [
+              {
+                propName: 'title',
+                type: 'input',
+                value: new Date(2020, 3, 26).getDate()
+              },
+              {
+                propName: 'callback2',
+                type: 'output',
+                value: (data) => {
+                  alert('click custom day. See Day interface')
                 }
-            }
+              }
+            ]
+          }
         }
     }
 ];
