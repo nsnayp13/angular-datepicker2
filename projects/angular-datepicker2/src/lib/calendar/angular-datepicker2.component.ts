@@ -8,6 +8,7 @@ import {
   EventEmitter,
   Output,
   ChangeDetectorRef,
+  ViewEncapsulation,
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
 import { Day, SelectMode, ViewMode } from '../interfaces';
@@ -19,7 +20,8 @@ import { Day, SelectMode, ViewMode } from '../interfaces';
   selector: "angular-datepicker2",
   templateUrl: "./angular-datepicker2.component.html",
   styleUrls: ["./angular-datepicker2.component.scss"],
-  providers: [CalendarService]
+  providers: [CalendarService],
+  encapsulation: ViewEncapsulation.None
 })
 export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
   /**

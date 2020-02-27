@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subject } from "rxjs";
-import { Day } from '../interfaces';
+import { Day, ViewMode } from '../interfaces';
 
 declare global {
   interface Date {
@@ -119,42 +119,47 @@ export class CalendarService {
     if (typeof viewMode === "number") {
       return viewMode;
     } else {
-      if (viewMode === "quarter") {
+      if (viewMode === ViewMode.Quarter) {
         return 3;
-      } else if (viewMode === "semester") {
+      } else if (viewMode === ViewMode.Semester) {
         return 6;
       }
     }
     return 1;
   }
 
-  public getLastDate(): Date {
+  public getLastDate(date?: Date): Date {
+    //console.log(date, 'date getlasr')
     let viewMode = this.viewMode;
-    let lastDate = this.shownDate
-      ? new Date(this.shownDate)
-      : this.selectedDates.value
-        ? new Date(this.selectedDates[this.selectedDates.value.length - 1])
-        : new Date();
+    let lastDate =
 
-    if (typeof viewMode === "string") {
-      if (viewMode === "quarter") {
-        if (lastDate.getMonth() >= 0 && lastDate.getMonth() <= 2) {
-          lastDate.setMonth(2);
-        } else if (lastDate.getMonth() >= 3 && lastDate.getMonth() <= 5) {
-          lastDate.setMonth(5);
-        } else if (lastDate.getMonth() >= 6 && lastDate.getMonth() <= 8) {
-          lastDate.setMonth(8);
-        } else if (lastDate.getMonth() >= 9 && lastDate.getMonth() <= 11) {
-          lastDate.setMonth(11);
-        }
-      } else if (viewMode === "semester") {
-        if (lastDate.getMonth() >= 0 && lastDate.getMonth() <= 5) {
-          lastDate.setMonth(5);
-        } else if (lastDate.getMonth() >= 6 && lastDate.getMonth() <= 11) {
-          lastDate.setMonth(11);
-        }
+      this.shownDate
+        ? new Date(this.shownDate)
+        : this.selectedDates.value
+          ? new Date(this.selectedDates[this.selectedDates.value.length - 1])
+          : new Date();
+
+    lastDate = date ? new Date(date) : lastDate;
+
+    //if (typeof viewMode === "ViewMode") {
+    if (viewMode === ViewMode.Quarter) {
+      if (lastDate.getMonth() >= 0 && lastDate.getMonth() <= 2) {
+        lastDate.setMonth(2);
+      } else if (lastDate.getMonth() >= 3 && lastDate.getMonth() <= 5) {
+        lastDate.setMonth(5);
+      } else if (lastDate.getMonth() >= 6 && lastDate.getMonth() <= 8) {
+        lastDate.setMonth(8);
+      } else if (lastDate.getMonth() >= 9 && lastDate.getMonth() <= 11) {
+        lastDate.setMonth(11);
+      }
+    } else if (viewMode === ViewMode.Semester) {
+      if (lastDate.getMonth() >= 0 && lastDate.getMonth() <= 5) {
+        lastDate.setMonth(5);
+      } else if (lastDate.getMonth() >= 6 && lastDate.getMonth() <= 11) {
+        lastDate.setMonth(11);
       }
     }
+    //}
 
     return lastDate;
   }
@@ -178,7 +183,7 @@ export class CalendarService {
     const months = [];
     let lastDate: Date;
 
-    lastDate = date ? date : this.getLastDate();
+    lastDate = this.getLastDate(date);
     countMonths = this.getCountMonths();
     this.countMonths = countMonths;
 

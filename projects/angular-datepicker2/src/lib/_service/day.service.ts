@@ -19,7 +19,6 @@ export class DayService {
       isSelected: false,
       isHovered: false,
       isInPeriod: this.getIsInPeriod(date),
-      template: "",
       date: date
     };
 

@@ -100,6 +100,7 @@ export class AppComponent implements OnInit {
         isWeekEnd: true,
         date: new Date(2020, 3, 23),
 
+
       },
       {
         title: "",
@@ -120,20 +121,26 @@ export class AppComponent implements OnInit {
         isWeekEnd: true,
         date: new Date(2020, 3, 26),
         template: {
-          component: TestDayComponent,
-          props: {
-            title: {
-              type: 'input',
-              value: new Date(2020, 3, 26).getDate()
-            },
-            callback2: {
-              type: 'output',
-              value: (data) => {
-                console.log(data);
+          component:
+          {
+            componentClass: TestDayComponent,
+            props: [
+              {
+                propName: 'title',
+                type: 'input',
+                value: new Date(2020, 3, 26).getDate()
+              },
+              {
+                propName: 'callback2',
+                type: 'output',
+                value: (data) => {
+                  console.log(data);
+                }
               }
-            },
-
+            ]
           }
+
+
         }
       }
     ];

@@ -7,13 +7,5 @@
     }">
         {{day.date | date: "d"}}
     </span>
-    <span *ngIf="!thisMonth" class="day"></span>
-
-
-
     <ng-template #tpl></ng-template>
-
-
-    <!-- <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: item }"></ng-container> -->
-
 </div>
