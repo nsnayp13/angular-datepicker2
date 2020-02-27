@@ -8,19 +8,19 @@ import {
   ComponentFactoryResolver,
   ViewContainerRef,
 
+
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
 import { DayService } from "../_service/day.service";
 import { Subscription } from "rxjs";
-import { Day } from '../interfaces';
+import { Day, ComponentDay, ComponentDayProps } from '../interfaces';
 
 
 @Component({
   selector: "app-day-view",
   templateUrl: "./day-view.component.html",
   styleUrls: ["./day-view.component.scss"],
-  providers: [DayService],
-
+  providers: [DayService]
 })
 export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
   @Input() date: Date;
@@ -37,33 +37,33 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
     private calendarService: CalendarService
   ) { }
 
-  createChildComponent(component, props) {
+  createChildComponent(component: ComponentDay) {
+    const props = component.props
+
     let factory = this.componentFactoryResolver.resolveComponentFactory(
-      component
+      component.componentClass
     );
     let viewContainerRef = this.template;
     viewContainerRef.clear();
     let childComponentRef = viewContainerRef.createComponent(factory);
 
+
     for (let k of Object.keys(props)) {
       let prop = props[k];
       if (prop.type === 'output') {
-        (childComponentRef.instance)[k].subscribe(data => {
+        (childComponentRef.instance)[prop.propName].subscribe(data => {
           prop.value(data)
         })
       } else if (prop.type === 'input') {
-        (childComponentRef.instance)[k] = prop.value;
+        (childComponentRef.instance)[prop.propName] = prop.value;
       }
-
-
     }
   }
 
   ngAfterViewInit() {
     if (this.day.template && this.day.template.component) {
       this.createChildComponent(
-        this.day.template.component,
-        this.day.template.props
+        this.day.template.component
       );
     }
   }

@@ -22,6 +22,8 @@ export class AppComponent implements OnInit {
   viewMode: ViewMode | number = ViewMode.Quarter
 
 
+  _stackOnDayClick = [];
+
   _viewModeVal = [
     ViewMode.Quarter,
     1,
@@ -66,6 +68,13 @@ export class AppComponent implements OnInit {
 
 
 
+
+
+  onDayClick(day) {
+    this._stackOnDayClick.push({ ...day })
+  }
+
+
   ngOnInit(): void {
     this.selectedDates = [
       new Date(2020, 3, 7),
@@ -89,16 +98,15 @@ export class AppComponent implements OnInit {
 
     this.days = [
       {
-        title: "",
         isDisabled: true,
         isHovered: false,
         isSelected: false,
         isWeekEnd: true,
         date: new Date(2020, 3, 23),
 
+
       },
       {
-        title: "",
         isDisabled: false,
         isHovered: false,
         isSelected: false,
@@ -109,27 +117,32 @@ export class AppComponent implements OnInit {
 
 
       {
-        title: "",
         isDisabled: true,
         isHovered: false,
         isSelected: false,
         isWeekEnd: true,
         date: new Date(2020, 3, 26),
         template: {
-          component: TestDayComponent,
-          props: {
-            title: {
-              type: 'input',
-              value: new Date(2020, 3, 26).getDate()
-            },
-            callback2: {
-              type: 'output',
-              value: (data) => {
-                console.log(data);
+          component:
+          {
+            componentClass: TestDayComponent,
+            props: [
+              {
+                propName: 'title',
+                type: 'input',
+                value: new Date(2020, 3, 26).getDate()
+              },
+              {
+                propName: 'callback2',
+                type: 'output',
+                value: (data) => {
+                  alert('click custom day. See Day interface')
+                }
               }
-            },
-
+            ]
           }
+
+
         }
       }
     ];

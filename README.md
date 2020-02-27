@@ -1,4 +1,4 @@
-# Angular Datepicker2
+# Angular Datepicker2 : v1.2.x
 
 ![Node.js CI](https://github.com/nsnayp13/angular-datepicker2/workflows/Node.js%20CI/badge.svg)
 
@@ -51,6 +51,12 @@ weekends: number[] = [0, 6]
 // Single, Multiple, Period. Import from public-api or interfaces. Its enum
 selectMode: SelectMode
 
+
+// Callback event when click on day
+// its returns a Day object before change self state by click
+(onDayClick) 
+
+
 ```
 
 ## i18n
@@ -86,20 +92,24 @@ this.days = [
         isWeekEnd: true,
         date: new Date(2020, 3, 26),
         template: {
-            component: TestDayComponent,
-            props: {
-                title: {
-                    type: 'input',
-                    value: new Date(2020, 3, 26).getDate()
-                },
-                callback2: {
-                    type: 'output',
-                    value: (data) => {
-                        // custom code here
-                        console.log(data);
-                    }
+          component:
+          {
+            componentClass: TestDayComponent,
+            props: [
+              {
+                propName: 'title',
+                type: 'input',
+                value: new Date(2020, 3, 26).getDate()
+              },
+              {
+                propName: 'callback2',
+                type: 'output',
+                value: (data) => {
+                  alert('click custom day. See Day interface')
                 }
-            }
+              }
+            ]
+          }
         }
     }
 ];

@@ -1,0 +1,241 @@
+
+$animSpeed: 0.2s;
+$cyan: #26b1b1;
+app-calendar {
+    display: block;
+    float: left;
+    width: 100%;
+  }
+  .nextPrevBtn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    position: absolute;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: all 0.2s;
+    font-size: 0.9em;
+    color: $cyan;
+    z-index: 1;
+    background: #fff;
+  }
+  
+  .nextPrevBtn:hover {
+    background: #eee;
+  }
+  
+  app-week-view {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .dayWeekTitle {
+    display: flex;
+    flex: 1;
+    color: #a9a9a9;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 0.8em;
+    padding: 4px;
+  }
+  
+  .day.isWeekEnd {
+    color: #c53c3c;
+  }
+  
+  .weekWrap {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  app-month-select {
+    display: flex;
+    float: left;
+    min-width: 200px;
+    animation: appear $animSpeed ease-in-out;
+  }
+  
+  .monthItem {
+    width: 33%;
+    font-size: 0.8em;
+    text-align: center;
+    padding: 9px 0;
+    box-shadow: 0 0 0 1px #f4f3f3;
+    color: #313131;
+  }
+  
+  .monthItem:hover {
+    user-select: none;
+    cursor: pointer;
+    background: #eee;
+    transition: $animSpeed;
+  }
+  
+  app-month-view {
+    display: flex;
+    float: left;
+    min-width: 200px;
+    animation: appear $animSpeed ease-in-out;
+    height: 100%;
+  }
+  
+  @keyframes appear {
+    from {
+      transform: scale(0.6);
+      opacity: 0.6;
+    }
+  
+    50% {
+      transform: opacity(0);
+      transform: scale(0.8);
+    }
+  
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .months {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+  }
+  
+  .wrapMonths {
+    display: block;
+    float: left;
+    overflow: hidden;
+    width: 477px;
+  }
+  
+  .monthOne {
+    position: relative;
+    border-left: 1px solid #eee;
+  }
+  
+  .monthOne.right {
+    animation: right $animSpeed ease-in-out;
+  }
+  .monthOne.left {
+    animation: left $animSpeed ease-in-out;
+  }
+  @keyframes left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
+  
+  @keyframes right {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .monthSelectBtn {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    padding: 4px 8px;
+  }
+  
+  app-day-view {
+    display: block;
+    float: left;
+    width: 100%;
+  }
+  
+  .day.isDisabled {
+    color: #a7a7a7;
+  }
+  
+  .day.isInPeriod{
+    background: #26b1b12b !important  ;
+  }
+  
+  .day.isSelected {
+    background: $cyan !important  ;
+    color: #fff !important ;
+    animation: appear $animSpeed ease-in-out;
+  }
+  
+  .day {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+    padding: 6px;
+    color: #313131;
+    transition: all 0.2s;
+  }
+  
+  .day:hover {
+    background: #eee;
+    cursor: pointer;
+    color: #313131;
+    user-select: none;
+  }
+  
+  .dayWrap {
+    display: flex;
+    flex: 1;
+  }
+  
+  .calendarWrap {
+    float: left;
+    width: auto;
+    display: flex;
+    background: #fff;
+    margin: 10px 0;
+    flex-direction: column;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px -3px #000;
+    transition: all 0.2s;
+  }
+  
+  .dateSelector {
+    float: left;
+    width: auto;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    transition: all 0.2s;
+    padding: 8px 0;
+  }
+  
+  .monthWrap {
+    padding: 0 8px;
+  }
+  
+  .monthHeader {
+    text-align: center;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 15px;
+    color: #2b2b2b;
+  }
+  
+  .monthHeader::first-letter {
+    text-transform: uppercase;
+  }
+  
+  .monthHeader:hover {
+    cursor: pointer;
+    user-select: none;
+    background: #eee;
+  }
+  

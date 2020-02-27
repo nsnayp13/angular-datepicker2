@@ -8,6 +8,7 @@ import {
   EventEmitter,
   Output,
   ChangeDetectorRef,
+  ViewEncapsulation,
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
 import { Day, SelectMode, ViewMode } from '../interfaces';
@@ -19,7 +20,8 @@ import { Day, SelectMode, ViewMode } from '../interfaces';
   selector: "angular-datepicker2",
   templateUrl: "./angular-datepicker2.component.html",
   styleUrls: ["./angular-datepicker2.component.scss"],
-  providers: [CalendarService]
+  providers: [CalendarService],
+  encapsulation: ViewEncapsulation.None
 })
 export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
   /**
@@ -28,6 +30,14 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
    * */
   @Input() selectedDates: Date[] = [];
   @Output() selectedDatesChange = new EventEmitter<Date[]>()
+
+
+  /**
+   * @description
+   *  Callback event when click on day
+  */
+  @Output() onDayClick = new EventEmitter<Day>()
+
 
   /**
    * @description
@@ -133,6 +143,10 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
 
     this.calendarService.selectedDates.subscribe(data => {
       this.selectedDatesChange.emit(data)
+    });
+
+    this.calendarService.clickDayKey.subscribe(data => {
+      (data) ? this.onDayClick.emit(data.day) : null;
     });
 
     this.calendarService.days.next(this.days);
