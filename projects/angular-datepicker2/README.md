@@ -13,7 +13,7 @@ now @angular/core: ^8.2.14
 
 ## DEMO
 
-[https://nsnayp13.github.io/angular-datepicker2/](https://nsnayp13.github.io/angular-datepicker2)
+[https://angular-datepicker.com/](https://angular-datepicker.com/)
 
 
 ## Getting started
@@ -77,7 +77,6 @@ this.shownDate = new Date(2020, 3, 7);
 
 this.days = [
     {
-        title: "Custom day",
         isDisabled: false,
         isHovered: false,
         isSelected: false,
