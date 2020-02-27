@@ -1,4 +1,4 @@
-# Angular Datepicker2 : v1.2.x
+# Angular Datepicker2 : v2.1.x
 
 ![Node.js CI](https://github.com/nsnayp13/angular-datepicker2/workflows/Node.js%20CI/badge.svg)
 
@@ -85,7 +85,6 @@ this.days = [
         date: new Date(2020, 3, 21),
     },
     {
-        title: "",
         isDisabled: true,
         isHovered: false,
         isSelected: false,
