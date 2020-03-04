@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { TestDayComponent } from "./test-day/test-day.component";
-import { Calendar, Day, SelectMode, ViewMode } from 'projects/angular-datepicker2/src/public-api';
+import { Calendar, Day, SelectMode, ViewMode, Suggest } from 'projects/angular-datepicker2/src/public-api';
 //import {  } from 'projects/angular-datepicker2/src/lib/interfaces';
 
 
@@ -20,6 +20,35 @@ export class AppComponent implements OnInit {
   vertical = false;
   selectMode: SelectMode = SelectMode.Period
   viewMode: ViewMode | number = ViewMode.Quarter
+
+  suggest = [
+    {
+      title: 'Last two weeks',
+      selectMode: SelectMode.Period,
+      selectedDates: [
+        new Date(2020, 3, 1),
+        new Date(2020, 3, 12),
+      ]
+    },
+    {
+      title: 'Last month',
+      selectMode: SelectMode.Period,
+      selectedDates: [
+        new Date(2020, 3, 1),
+        new Date(2020, 3, 30),
+      ]
+    },
+    {
+      title: '1, 4 and 30',
+      selectMode: SelectMode.Multiple,
+      selectedDates: [
+        new Date(2020, 3, 1),
+        new Date(2020, 3, 4),
+        new Date(2020, 3, 30),
+      ]
+    }
+  ]
+
 
 
   _stackOnDayClick = [];
