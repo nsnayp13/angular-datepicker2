@@ -9,8 +9,7 @@
     "test-once": "ng test angular-datepicker2 --watch false --code-coverage",
     "ngh": "ng build --prod --base-href https://nsnayp13.github.io/angular-datepicker2/",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "commit": "git-cz"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
