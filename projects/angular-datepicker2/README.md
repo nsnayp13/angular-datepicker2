@@ -81,6 +81,35 @@ this.selectedDates = [
 
 this.shownDate = new Date(2020, 3, 7);   
 
+this.suggest = [
+    {
+      title: 'Last two weeks',
+      selectMode: SelectMode.Period,
+      selectedDates: [
+        new Date(2020, 3, 1),
+        new Date(2020, 3, 12),
+      ]
+    },
+    {
+      title: 'Last month',
+      selectMode: SelectMode.Period,
+      selectedDates: [
+        new Date(2020, 3, 1),
+        new Date(2020, 3, 30),
+      ]
+    },
+    {
+      title: '1, 4 and 30',
+      selectMode: SelectMode.Multiple,
+      selectedDates: [
+        new Date(2020, 3, 1),
+        new Date(2020, 3, 4),
+        new Date(2020, 3, 30),
+      ]
+    }
+  ]
+
+
 this.days = [
     {
         isDisabled: false,
@@ -121,6 +150,6 @@ this.days = [
 
 ```html
 
-<angular-datepicker2 [shownDate]="shownDate" [days]="days" [(selectedDates)]="selectedDates" [selectMode]="'period'" [weekends]="[0,1]" [weekStart]="1" [viewMode]="'quarter'"></angular-datepicker2>
+<angular-datepicker2 [shownDate]="shownDate" [suggest]="suggest" [days]="days" [(selectedDates)]="selectedDates" [selectMode]="'period'" [weekends]="[0,1]" [weekStart]="1" [viewMode]="'quarter'"></angular-datepicker2>
 
 ```
