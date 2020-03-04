@@ -1,4 +1,5 @@
-# Angular Datepicker2 : v2.1.x 
+# Angular Datepicker 2
+v2.x.x
 
 Add suggestions from v2.2.x
 Add events from v2.1.x
