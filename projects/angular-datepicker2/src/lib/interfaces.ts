@@ -45,6 +45,13 @@ template: {
 }*/
 
 
+export interface Suggest {
+    selectMode: SelectMode;
+    selectedDates: Date[];
+    title: string
+}
+
+
 
 export interface Week {
     id: number;
@@ -63,10 +70,7 @@ export interface Calendar {
 }
 
 
-export interface Suggest {
-    title: string;
-    dates: [];
-}
+
 
 
 /**

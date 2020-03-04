@@ -1,6 +1,32 @@
 
 $animSpeed: 0.2s;
 $cyan: #26b1b1;
+
+
+
+.suggest{
+
+  background: #e0f5f5;
+  width: auto;
+  display:block;
+  float: left;
+  color: #26b1b1;
+  border-radius: 2px;
+  padding: 4px 8px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  font-size: 13px;
+  transition: all 0.2s;
+  cursor: pointer;
+
+}
+
+
+.suggest:hover{
+  background: #82dcdc;
+  color: #148a8a;
+}
+
 app-calendar {
     display: block;
     float: left;
@@ -197,7 +223,6 @@ app-calendar {
   
   .calendarWrap {
     float: left;
-    width: auto;
     display: flex;
     background: #fff;
     margin: 10px 0;
@@ -205,6 +230,7 @@ app-calendar {
     border-radius: 4px;
     box-shadow: 1px 1px 3px -3px #000;
     transition: all 0.2s;
+    width: min-content;
   }
   
   .dateSelector {

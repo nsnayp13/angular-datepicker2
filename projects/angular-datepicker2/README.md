@@ -1,11 +1,14 @@
-# Angular Datepicker2 : v2.1.x
+# Angular Datepicker2 : v2.1.x 
+
+Add suggestions from v2.2.x
+Add events from v2.1.x
 
 ![Node.js CI](https://github.com/nsnayp13/angular-datepicker2/workflows/Node.js%20CI/badge.svg)
 
 
 `npm i angular-datepicker2`
 
-![angular datepicker2](https://s4.gifyu.com/images/Peek-2020-02-27-13-33.gif)
+![angular datepicker2](https://s5.gifyu.com/images/Peek-2020-03-04-12-33.gif)
 
 
 now @angular/core: ^8.2.14
@@ -32,6 +35,9 @@ Props of `AngularDatepicker2`:
 
 // Array custom definitions of days. Subscribable. See Day interface
 [days]: Day[]
+
+// Array custom definitions of suggestions. Suggestions for select dates
+[suggest]: Suggest[]
 
 // Date whould be render for default calendar .
 shownDate: Date

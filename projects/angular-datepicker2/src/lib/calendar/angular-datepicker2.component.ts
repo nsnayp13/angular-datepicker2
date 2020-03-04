@@ -11,7 +11,7 @@ import {
   ViewEncapsulation,
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
-import { Day, SelectMode, ViewMode } from '../interfaces';
+import { Day, SelectMode, ViewMode, Suggest } from '../interfaces';
 
 
 
@@ -37,6 +37,14 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
    *  Callback event when click on day
   */
   @Output() onDayClick = new EventEmitter<Day>()
+
+
+  /**
+   * @description
+   *  Array custom definitions of suggestions
+   * @see `Suggest`
+   * */
+  @Input() suggest: Suggest[];
 
 
   /**
@@ -114,6 +122,14 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
     //setTimeout(() => this.changeViewSelectorMode(), 1000);
   }
 
+
+  clickSuggest(suggest: Suggest) {
+    this.calendarService.selectMode = this.selectMode = suggest.selectMode;
+    this.calendarService.selectedDates.next(suggest.selectedDates);
+  }
+
+
+
   recountWidth() {
     let width = 0;
     this.columns
@@ -156,13 +172,9 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
     this.calendarService.viewSelectorMode = 'days';
     this.calendarService.selectMode = this.selectMode;
     this.calendarService.shownDate = this.shownDate;
-
     this.calendarService.setSelectedDates(this.selectedDates);
     this.calendarService.setDays(this.days);
-
     this.calendarService.getShownMonths(this.shownDate);
-
-
 
   }
 
@@ -180,11 +192,11 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
 
 
   calculate() {
+
     let date = this.shownDate
     let countMonths = 0;
     const months = [];
     let lastDate: Date;
-
     lastDate = date ? date : this.calendarService.getLastDate();
     countMonths = this.calendarService.getCountMonths();
     //this.countMonths = countMonths;
@@ -192,8 +204,8 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
     for (let i = countMonths - 1; i >= 0; i--) {
       months.push(new Date(lastDate).adjustMonth(-i));
     }
-
     return months;
+
   }
 
   isEqual(array, array1) {
