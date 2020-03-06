@@ -1,10 +1,13 @@
 {
   "name": "angular-datepicker2",
-  "version": "2.2.11",
+  "version": "2.2.12",
   "description": "Angular datepicker, best calendar. Select Period, single, or multiple dates. Template your own day in calendar. Two way databinding and others",
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/nsnayp"
   },
   "repository": {
     "type": "git",
