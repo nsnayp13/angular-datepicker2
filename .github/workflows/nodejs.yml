@@ -26,7 +26,7 @@ jobs:
       - run: npm install
       - run: npm run build angular-datepicker2
       - name: publish
-        run: cd dist/angular-datepicker2 && npm publish --registry=https://npm.pkg.github.com/
+        run: cd dist/angular-datepicker2 && npm config set registry https://registry.npmjs.org && npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm}}
       - uses: JamesIves/github-pages-deploy-action@releases/v2
