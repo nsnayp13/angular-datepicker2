@@ -21,6 +21,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     #needs: [test]
     steps:
+      - name: install
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
@@ -28,25 +29,12 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm install
       - run: npm run build angular-datepicker2
-      - name: publish
-
-        run: |
-          cd dist/angular-datepicker2
-          npm config set //registry.npmjs.org/:_authToken=${{secrets.npm}}
-          npm config set scope "@nsnayp"
-          npm config list
-          npm publish --access public 
+      - name: publish    
+      
+        run: cd dist/angular-datepicker2 && npm publish
         env:
-          CI: true
           NODE_AUTH_TOKEN: ${{secrets.npm}}
-      
-      
-      
-      
-      
-        #run: cd dist/angular-datepicker2 && npm publish --registry=https://npm.pkg.github.com/
-        #env:
-        #  NODE_AUTH_TOKEN: ${{secrets.npm}}
+      - name: GHP
       - uses: JamesIves/github-pages-deploy-action@releases/v2
         env:
           ACCESS_TOKEN: ${{ secrets.GHP }}
