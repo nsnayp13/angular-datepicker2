@@ -6,9 +6,6 @@
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/nsnayp"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nsnayp13/angular-calendar"
