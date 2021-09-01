@@ -22,11 +22,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 10.x
-          registry-url: https://registry.npmjs.org/
+          registry-url: https://registry.npmjs.org/nsnayp
       - run: npm install
       - run: npm run build angular-datepicker2
       - name: publish
-        run: cd dist/angular-datepicker2 && npm config set registry https://registry.npmjs.org && npm publish
+        run: cd dist/angular-datepicker2 && npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm}}
       - uses: JamesIves/github-pages-deploy-action@releases/v2
