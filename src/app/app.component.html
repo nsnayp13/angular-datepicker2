@@ -11,9 +11,9 @@
     align-items: center;
     justify-content: center;">
         <div style=" display:block; float:left;">
-            <angular-datepicker2 [shownDate]="_shownDateVal" [days]="days" [(selectedDates)]="selectedDates"
-                [selectMode]="selectMode" [weekends]="[0,1]" [suggest]="suggest" [weekStart]="1" [viewMode]="viewMode"
-                [vertical]="vertical" (onDayClick)="onDayClick($event)">
+            <angular-datepicker2 [days]="days" [(selectedDates)]="selectedDates" [selectMode]="selectMode"
+                [weekends]="[0,1]" [suggest]="suggest" [weekStart]="1" [viewMode]="viewMode" [vertical]="vertical"
+                (onDayClick)="onDayClick($event)">
             </angular-datepicker2>
         </div>
     </div>
