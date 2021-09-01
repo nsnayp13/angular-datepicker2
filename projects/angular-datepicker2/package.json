@@ -1,5 +1,5 @@
 {
-  "name": "@nsnayp/angular-datepicker2",
+  "name": "angular-datepicker2",
   "version": "2.2.13",
   "description": "Angular datepicker, best calendar. Select Period, single, or multiple dates. Template your own day in calendar. Two way databinding and others",
   "peerDependencies": {
