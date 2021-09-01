@@ -11,17 +11,14 @@ import {
   ViewEncapsulation,
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
-import { Day, SelectMode, ViewMode, Suggest } from '../interfaces';
-
-
-
+import { Day, SelectMode, ViewMode, Suggest } from "../interfaces";
 
 @Component({
   selector: "angular-datepicker2",
   templateUrl: "./angular-datepicker2.component.html",
   styleUrls: ["./angular-datepicker2.component.scss"],
   providers: [CalendarService],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
   /**
@@ -29,15 +26,13 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
    *  Array of selected dates.
    * */
   @Input() selectedDates: Date[] = [];
-  @Output() selectedDatesChange = new EventEmitter<Date[]>()
-
+  @Output() selectedDatesChange = new EventEmitter<Date[]>();
 
   /**
    * @description
    *  Callback event when click on day
-  */
-  @Output() onDayClick = new EventEmitter<Day>()
-
+   */
+  @Output() onDayClick = new EventEmitter<Day>();
 
   /**
    * @description
@@ -45,7 +40,6 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
    * @see `Suggest`
    * */
   @Input() suggest: Suggest[];
-
 
   /**
    * @description
@@ -86,17 +80,16 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
 
   /**
    * @description
-   * Single, Multiple, Period 
-   * @See `SelectMode` 
-  */
+   * Single, Multiple, Period
+   * @See `SelectMode`
+   */
   @Input() selectMode: SelectMode;
 
-
   /**
-  * @description
-  * Date  
-  * @See `SelectMode` 
- */
+   * @description
+   * Date
+   * @See `SelectMode`
+   */
   @Input() nowDate: Date;
 
   @ViewChildren("column") columns;
@@ -110,35 +103,29 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
 
   //suggestions: [];
 
-
   //showMonthQty: number;
 
-
-
-
-
-
-  constructor(private calendarService: CalendarService, private cdr: ChangeDetectorRef) {
+  constructor(
+    private calendarService: CalendarService,
+    private cdr: ChangeDetectorRef
+  ) {
     //setTimeout(() => this.changeViewSelectorMode(), 1000);
   }
-
 
   clickSuggest(suggest: Suggest) {
     this.calendarService.selectMode = this.selectMode = suggest.selectMode;
     this.calendarService.selectedDates.next(suggest.selectedDates);
   }
 
-
-
   recountWidth() {
     let width = 0;
     this.columns
       ? this.columns
-        .toArray()
-        .map(item => (width += item.elementView.nativeElement.clientWidth))
+          .toArray()
+          .map((item) => (width += item.elementView.nativeElement.clientWidth))
       : null;
     this.calendarService.animationStep.value === "stop" &&
-      this.calendarService.viewSelectorMode === "days"
+    this.calendarService.viewSelectorMode === "days"
       ? (this.width = width)
       : null;
 
@@ -150,35 +137,35 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
   }
 
   ngOnInit() {
+    if (!this.shownDate) {
+      this.shownDate = new Date();
+    }
 
-    this.calendarService.animationStep.subscribe(data => {
+    this.calendarService.animationStep.subscribe((data) => {
       if (data === "stop") {
         setTimeout(() => this.recountWidth(), 10);
       }
     });
 
-    this.calendarService.selectedDates.subscribe(data => {
-      this.selectedDatesChange.emit(data)
+    this.calendarService.selectedDates.subscribe((data) => {
+      this.selectedDatesChange.emit(data);
     });
 
-    this.calendarService.clickDayKey.subscribe(data => {
-      (data) ? this.onDayClick.emit(data.day) : null;
+    this.calendarService.clickDayKey.subscribe((data) => {
+      data ? this.onDayClick.emit(data.day) : null;
     });
 
     this.calendarService.days.next(this.days);
     this.calendarService.weekStart = this.weekStart;
     this.calendarService.weekends = this.weekends;
     this.calendarService.viewMode = this.viewMode;
-    this.calendarService.viewSelectorMode = 'days';
+    this.calendarService.viewSelectorMode = "days";
     this.calendarService.selectMode = this.selectMode;
     this.calendarService.shownDate = this.shownDate;
     this.calendarService.setSelectedDates(this.selectedDates);
     this.calendarService.setDays(this.days);
     this.calendarService.getShownMonths(this.shownDate);
-
   }
-
-
 
   getCalendar() {
     return this.calendarService.calendar;
@@ -188,12 +175,8 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
     return this.calendarService.viewSelectorMode;
   }
 
-
-
-
   calculate() {
-
-    let date = this.shownDate
+    let date = this.shownDate;
     let countMonths = 0;
     const months = [];
     let lastDate: Date;
@@ -205,28 +188,29 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
       months.push(new Date(lastDate).adjustMonth(-i));
     }
     return months;
-
   }
 
   isEqual(array, array1) {
-    console.log(array, array1)
-    let a = array.filter(
-      item => array1.includes(item)
-    );
-    return (a.length === 0 && array.length === array1.length);
+    console.log(array, array1);
+    let a = array.filter((item) => array1.includes(item));
+    return a.length === 0 && array.length === array1.length;
   }
 
   private _viewMode(simpleChange) {
-    if (simpleChange.viewMode.currentValue !== simpleChange.viewMode.previousValue) {
+    if (
+      simpleChange.viewMode.currentValue !== simpleChange.viewMode.previousValue
+    ) {
       this.calendarService.viewMode = simpleChange.viewMode.currentValue;
       this.calendarService.getShownMonths(this.shownDate);
       setTimeout(() => this.recountWidth(), 10);
     }
   }
 
-
   private _selectMode(simpleChange) {
-    if (simpleChange.selectMode.currentValue !== simpleChange.selectMode.previousValue) {
+    if (
+      simpleChange.selectMode.currentValue !==
+      simpleChange.selectMode.previousValue
+    ) {
       this.calendarService.selectMode = simpleChange.selectMode.currentValue;
       this.calendarService.getShownMonths(this.shownDate);
       setTimeout(() => this.recountWidth(), 10);
@@ -234,7 +218,10 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
   }
 
   private _shownDate(simpleChange) {
-    if (simpleChange.shownDate.currentValue !== simpleChange.shownDate.previousValue) {
+    if (
+      simpleChange.shownDate.currentValue !==
+      simpleChange.shownDate.previousValue
+    ) {
       this.calendarService.shownDate = simpleChange.shownDate.currentValue;
       this.calendarService.getShownMonths(this.shownDate);
       setTimeout(() => this.recountWidth(), 10);
@@ -245,23 +232,20 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
      this.calendarService.ve vertical = simpleChange.vertical.currentValue;
    } */
 
-
   ngOnChanges(simpleChange) {
     //console.log(simpleChange);
-    (simpleChange.viewMode) && this._viewMode(simpleChange);
-    (simpleChange.selectMode) && this._selectMode(simpleChange);
-    (simpleChange.shownDate) && this._shownDate(simpleChange);
+    simpleChange.viewMode && this._viewMode(simpleChange);
+    simpleChange.selectMode && this._selectMode(simpleChange);
+    simpleChange.shownDate && this._shownDate(simpleChange);
   }
 
-
-
-
-
   /** Set custom Day[] */
-  setDays(days: Day[]) { }
+  setDays(days: Day[]) {}
 
   goNext() {
-    let lastDate = this.calendarService.calendar[this.calendarService.calendar.length - 1];
+    let lastDate = this.calendarService.calendar[
+      this.calendarService.calendar.length - 1
+    ];
     this.calendarService.goNext(lastDate);
   }
   goPrev() {
