@@ -10,10 +10,10 @@ import { WeekService } from "../_service/week.service";
 export class WeekViewComponent implements OnInit {
   @Input() date: Date;
   @Input() firstMonthDate: Date;
-  days: Date[] | null[];
+  dates: Date[] | null[];
   constructor(private weekService: WeekService) { }
-
+  
   ngOnInit() {
-    this.days = this.weekService.getWeek(this.date);
+    this.dates = this.weekService.getWeek(this.date);
   }
 }
