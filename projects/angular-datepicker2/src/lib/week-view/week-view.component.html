@@ -1,4 +1,4 @@
 <div *ngFor="let day of days" style="display: flex;
 flex: 1;">
-    <app-day-view [date]="day" [thisMonth]="day.getMonth()===firstMonthDate.getMonth()"></app-day-view>
+    <app-day-view [date]="day" [thisMonth]="day.getMonth()===firstMonthDate.getMonth()&&day.getFullYear()===firstMonthDate.getFullYear()"></app-day-view>
 </div>
