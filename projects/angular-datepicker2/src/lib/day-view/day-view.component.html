@@ -7,7 +7,7 @@
     }">
         {{day.date | date: "d"}}
     </span>
-    <span *ngIf="thisMonth&&day.template">
+    <span *ngIf="thisMonth&&day.template" style="display: block; float: left; width: 100%;">
       <ng-template #tpl></ng-template>
     </span>
 </div>
