@@ -1,13 +1,15 @@
 <div class="dayWrap">
-    <span *ngIf="thisMonth&&!day.template" (click)="onClick()" class="day" [ngClass]="{
+    <div class="styledDay" (click)="onClick()" [ngClass]="{
         isDisabled : day.isDisabled,
         isSelected: day.isSelected,
         isWeekEnd: day.isWeekEnd,
         isInPeriod: day.isInPeriod
     }">
-        {{day.date | date: "d"}}
-    </span>
-    <span *ngIf="thisMonth&&day.template" style="display: block; float: left; width: 100%;">
-      <ng-template #tpl></ng-template>
-    </span>
+        <span *ngIf="thisMonth&&!day.template" class="day">
+            {{day.date | date: "d"}}
+        </span>
+        <div *ngIf="thisMonth&&day.template" style="display: block; float: left; width: 100%;">
+            <ng-template #tpl></ng-template>
+        </div>
+    </div>
 </div>

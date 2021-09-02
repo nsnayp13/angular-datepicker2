@@ -104,7 +104,7 @@ export class AppComponent implements OnInit {
       },
 
       {
-        isDisabled: true,
+        isDisabled: false,
         isHovered: false,
         isSelected: false,
         isWeekEnd: true,
