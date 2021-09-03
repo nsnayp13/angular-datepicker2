@@ -1,14 +1,14 @@
 <div class="dayWrap">
     <div class="styledDay" (click)="onClick()" [ngClass]="{
-        isDisabled : day.isDisabled,
-        isSelected: day.isSelected,
-        isWeekEnd: day.isWeekEnd,
-        isInPeriod: day.isInPeriod
+        isDisabled : dayService.day.isDisabled,
+        isSelected: dayService.day.isSelected,
+        isWeekEnd: dayService.day.isWeekEnd,
+        isInPeriod: dayService.day.isInPeriod
     }">
-        <span *ngIf="thisMonth&&!day.template" class="day">
-            {{day.date | date: "d"}}
+        <span *ngIf="thisMonth&&!dayService.day.template" class="day">
+            {{dayService.day.date | date: "d"}}
         </span>
-        <div *ngIf="thisMonth&&day.template" style="display: block; float: left; width: 100%;">
+        <div *ngIf="thisMonth" style="display: block; float: left; width: 100%;">
             <ng-template #tpl></ng-template>
         </div>
     </div>

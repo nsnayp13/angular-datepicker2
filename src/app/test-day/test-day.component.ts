@@ -14,7 +14,7 @@ export class TestDayComponent implements OnInit {
   constructor() {}
 
   click(event) {
-    this.callback2.emit("TestDayComponent" + this.title);
+    this.callback2.emit(this);
   }
 
   ngOnInit() {}

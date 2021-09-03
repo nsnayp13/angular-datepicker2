@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subject } from "rxjs";
-import { Day, ViewMode } from '../interfaces';
+import { Day, ViewMode } from "../interfaces";
 
 declare global {
   interface Date {
@@ -55,14 +55,13 @@ Date.prototype.getFirstDateDay = function (start): number {
 Date.prototype.getYmd = function (): string {
   return (
     this.getFullYear().toString() +
-    this.getMonth().toString() +
-    this.getDate().toString()
+    String(this.getMonth().toString()).padStart(2, "0") +
+    String(this.getDate().toString()).padStart(2, "0")
   );
 };
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CalendarService {
   //calendar: BehaviorSubject<any[]> = new BehaviorSubject([]);
@@ -71,7 +70,6 @@ export class CalendarService {
   viewMode;
   viewSelectorMode;
   selectMode;
-
 
   selectedDates: BehaviorSubject<Date[]> = new BehaviorSubject([]);
   days: BehaviorSubject<Day[]> = new BehaviorSubject([]);
@@ -85,20 +83,18 @@ export class CalendarService {
   recountWidth = new BehaviorSubject(1);
 
   /** Needs for onClickDay detect change */
-  clickDayKey: BehaviorSubject<{ day: Day, key: string } | null> = new BehaviorSubject(null);
-
-
+  clickDayKey: BehaviorSubject<{
+    day: Day;
+    key: string;
+  } | null> = new BehaviorSubject(null);
 
   updateDate = new BehaviorSubject(new Date());
 
-  constructor() { }
+  constructor() {}
 
   setSelectedDates(selectedDates: Date[]) {
     this.selectedDates.next(selectedDates);
   }
-
-
-
 
   setDays(days: Day[]) {
     this.days.next(days);
@@ -131,13 +127,11 @@ export class CalendarService {
   public getLastDate(date?: Date): Date {
     //console.log(date, 'date getlasr')
     let viewMode = this.viewMode;
-    let lastDate =
-
-      this.shownDate
-        ? new Date(this.shownDate)
-        : this.selectedDates.value
-          ? new Date(this.selectedDates[this.selectedDates.value.length - 1])
-          : new Date();
+    let lastDate = this.shownDate
+      ? new Date(this.shownDate)
+      : this.selectedDates.value
+      ? new Date(this.selectedDates[this.selectedDates.value.length - 1])
+      : new Date();
 
     lastDate = date ? new Date(date) : lastDate;
 
@@ -241,7 +235,4 @@ export class CalendarService {
       //this.recountWidth.next(this.recountWidth.value + 1);
     }, 205);
   }
-
-
-
 }
