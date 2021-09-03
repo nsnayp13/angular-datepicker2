@@ -238,6 +238,8 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
     simpleChange.selectMode && this._selectMode(simpleChange);
     simpleChange.shownDate && this._shownDate(simpleChange);
     simpleChange.days && this.calendarService.days.next(this.days);
+    simpleChange.selectedDates &&
+      this.calendarService.setSelectedDates(this.selectedDates);
   }
 
   /** Set custom Day[] */
