@@ -3,7 +3,10 @@
         isDisabled : dayService.day.isDisabled,
         isSelected: dayService.day.isSelected,
         isWeekEnd: dayService.day.isWeekEnd,
-        isInPeriod: dayService.day.isInPeriod
+        isInPeriod: dayService.day.isInPeriod,
+        period: getSelectMode()==='period',
+        end: isStartOrEndDatePeriod()==='end',
+        start: isStartOrEndDatePeriod()==='start'
     }">
         <span *ngIf="thisMonth&&!dayService.day.template" class="day">
             {{dayService.day.date | date: "d"}}

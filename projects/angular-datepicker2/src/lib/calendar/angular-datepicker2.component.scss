@@ -185,8 +185,23 @@ app-day-view {
 }
 
 .styledDay.isSelected {
-  background: $cyan !important  ;
-  color: #fff !important ;
+  background: #26b1b180 !important;
+}
+
+.styledDay.isSelected.period.end {
+  background: linear-gradient(
+    120deg,
+    #26b1b12b 45%,
+    #26b1b180 113%
+  ) !important ;
+  animation: appear $animSpeed ease-in-out;
+}
+.styledDay.isSelected.period.start {
+  background: linear-gradient(
+    -50deg,
+    #26b1b12b 45%,
+    #26b1b180 113%
+  ) !important ;
   animation: appear $animSpeed ease-in-out;
 }
 

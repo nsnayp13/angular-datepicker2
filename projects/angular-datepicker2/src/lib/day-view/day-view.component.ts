@@ -58,6 +58,27 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  isStartOrEndDatePeriod() {
+    if (this.getSelectMode() === "period") {
+      if (this.getSelectedDates().length == 2) {
+        if (this.date.getYmd() === this.getSelectedDates()[0].getYmd()) {
+          return "start";
+        } else if (this.date.getYmd() === this.getSelectedDates()[1].getYmd()) {
+          return "end";
+        }
+      }
+    }
+    return false;
+  }
+
+  getSelectedDates() {
+    return this.calendarService.selectedDates.value;
+  }
+
+  getSelectMode() {
+    return this.calendarService.selectMode;
+  }
+
   ngAfterViewInit() {
     if (
       this.dayService.day.template &&

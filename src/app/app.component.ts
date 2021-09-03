@@ -89,96 +89,49 @@ export class AppComponent implements OnInit {
       new Date(new Date().getFullYear(), new Date().getMonth(), 11),
     ];
     this.date = new Date(new Date().getFullYear(), new Date().getMonth(), 7);
-    this.test();
-    // this.days = [
-    //   {
-    //     isDisabled: true,
-    //     isHovered: false,
-    //     isSelected: false,
-    //     isWeekEnd: true,
-    //     date: new Date(2020, 3, 23),
-    //   },
-    //   {
-    //     isDisabled: false,
-    //     isHovered: false,
-    //     isSelected: false,
-    //     isWeekEnd: true,
-    //     date: new Date(2020, 3, 21),
-    //   },
 
-    //   {
-    //     isDisabled: false,
-    //     isHovered: false,
-    //     isSelected: false,
-    //     isWeekEnd: true,
-    //     date: new Date(new Date().getFullYear(), new Date().getMonth(), 25),
-    //     template: {
-    //       component: {
-    //         componentClass: TestDayComponent,
-    //         props: [
-    //           {
-    //             propName: "title",
-    //             type: "input",
-    //             value: new Date(2020, 3, 25).getDate(),
-    //           },
-    //           {
-    //             propName: "callback2",
-    //             type: "output",
-    //             value: (data) => {
-    //               alert("click custom day. See Day interface");
-    //             },
-    //           },
-    //         ],
-    //       },
-    //     },
-    //   },
-    // ];
-  }
+    this.days = [
+      {
+        isDisabled: true,
+        isHovered: false,
+        isSelected: false,
+        isWeekEnd: true,
+        date: new Date(2020, 3, 23),
+      },
+      {
+        isDisabled: false,
+        isHovered: false,
+        isSelected: false,
+        isWeekEnd: true,
+        date: new Date(2020, 3, 21),
+      },
 
-  test() {
-    setTimeout(() => {
-      let days = [];
-      this.http
-        .get(
-          "http://localhost:8000/history/byCompany/37587?params=%7B%22time%22:1630650267930%7D&accessToken=1e65bb26c4f64ead2b1b37fe4ae72101&signature=7e7936bd3da2463b2407dc75a03c21e5"
-        )
-        .subscribe((data: any) => {
-          data = data.response.data;
-          data.forEach((historyDay) => {
-            let historyDayDate = new Date(historyDay.day);
-
-            days.push({
-              isDisabled: false,
-              isHovered: false,
-              isSelected: false,
-              isWeekEnd: false,
-              date: historyDayDate,
-              template: {
-                component: {
-                  componentClass: TestDayComponent,
-                  props: [
-                    {
-                      propName: "title",
-                      type: "input",
-                      value: historyDayDate.getDate(),
-                    },
-                    {
-                      propName: "callback2",
-                      type: "output",
-                      value: (data) => {
-                        //alert(historyDayDate);
-                        console.log("click custom", data);
-                      },
-                    },
-                  ],
+      {
+        isDisabled: false,
+        isHovered: false,
+        isSelected: false,
+        isWeekEnd: true,
+        date: new Date(new Date().getFullYear(), new Date().getMonth(), 25),
+        template: {
+          component: {
+            componentClass: TestDayComponent,
+            props: [
+              {
+                propName: "title",
+                type: "input",
+                value: new Date(2020, 3, 25).getDate(),
+              },
+              {
+                propName: "callback2",
+                type: "output",
+                value: (data) => {
+                  alert("click custom day. See Day interface");
                 },
               },
-            });
-          });
-
-          this.days = days;
-          console.log(this.days);
-        });
-    }, 500);
+            ],
+          },
+        },
+      },
+    ];
   }
 }
