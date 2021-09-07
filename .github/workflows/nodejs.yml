@@ -34,11 +34,11 @@ jobs:
 #           NODE_AUTH_TOKEN: ${{secrets.npm}}
      
           
-      - name: Install and Build
+      - name: Install and Build for GP
         run: npm install && npm run build --prod
         
       - name: Deploy GP
-      - uses: JamesIves/github-pages-deploy-action@4.1.5
+        uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           branch: gh-pages
           folder: dist/angular-datepicker
