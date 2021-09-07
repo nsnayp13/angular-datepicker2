@@ -34,7 +34,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.npm}}
       - uses: JamesIves/github-pages-deploy-action@releases/v2
         env:
-          ACCESS_TOKEN: ${{ secrets.GHP }}
+          ACCESS_TOKEN: ${{secrets.GHP}}
           BASE_BRANCH: master
           BRANCH: gh-pages
           FOLDER: dist/angular-datepicker
