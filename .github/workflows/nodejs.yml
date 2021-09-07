@@ -21,17 +21,17 @@ jobs:
     if: github.ref == 'refs/heads/master'
     #needs: [test]
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
-      - run: npm install
-      - run: npm run build angular-datepicker2
-      - name: publish    
-        run: cd dist/angular-datepicker2 && npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm}}
+#       - uses: actions/checkout@v1
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: 12
+#           registry-url: https://registry.npmjs.org/
+#       - run: npm install
+#       - run: npm run build angular-datepicker2
+#       - name: publish    
+#         run: cd dist/angular-datepicker2 && npm publish
+#         env:
+#           NODE_AUTH_TOKEN: ${{secrets.npm}}
       - uses: JamesIves/github-pages-deploy-action@releases/v3-test
         env:
           ACCESS_TOKEN: ${{secrets.GHP}}
