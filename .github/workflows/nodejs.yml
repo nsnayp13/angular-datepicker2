@@ -45,7 +45,7 @@ jobs:
         with:
           branch: gh-pages
           folder: dist/angular-datepicker
-          ssh-key: ${{ secrets.GHP }}
+          token: ${{ secrets.GP_PAT_TOKEN }}
 #       - uses: JamesIves/github-pages-deploy-action@releases/v3-test 
 #         env:
 #           ACCESS_TOKEN: ${{secrets.GHP}}
