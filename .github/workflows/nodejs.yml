@@ -32,7 +32,7 @@ jobs:
 #         run: cd dist/angular-datepicker2 && npm publish
 #         env:
 #           NODE_AUTH_TOKEN: ${{secrets.npm}}
-      - uses: JamesIves/github-pages-deploy-action@releases/v3-test
+      - uses: JamesIves/github-pages-deploy-action@releases/v3-test 
         env:
           ACCESS_TOKEN: ${{secrets.GHP}}
           BASE_BRANCH: master
