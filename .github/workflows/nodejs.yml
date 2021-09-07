@@ -33,7 +33,7 @@ jobs:
 #         env:
 #           NODE_AUTH_TOKEN: ${{secrets.npm}}
      
-      - name: Deploy GP 
+
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
