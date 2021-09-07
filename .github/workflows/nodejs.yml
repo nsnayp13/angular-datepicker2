@@ -32,10 +32,21 @@ jobs:
 #         run: cd dist/angular-datepicker2 && npm publish
 #         env:
 #           NODE_AUTH_TOKEN: ${{secrets.npm}}
-      - uses: JamesIves/github-pages-deploy-action@releases/v3-test 
-        env:
-          ACCESS_TOKEN: ${{secrets.GHP}}
-          BASE_BRANCH: master
-          BRANCH: gh-pages
-          FOLDER: dist/angular-datepicker
-          BUILD_SCRIPT: npm install && npm run build --prod
+     
+          
+      - name: Install and Build
+        run: npm install && npm run build --prod
+        
+      - name: Deploy GP
+      - uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: dist/angular-datepicker
+          ssh-key: ${{ secrets.GHP }}
+#       - uses: JamesIves/github-pages-deploy-action@releases/v3-test 
+#         env:
+#           ACCESS_TOKEN: ${{secrets.GHP}}
+#           BASE_BRANCH: master
+#           BRANCH: gh-pages
+#           FOLDER: dist/angular-datepicker
+#           BUILD_SCRIPT: npm install && npm run build --prod
