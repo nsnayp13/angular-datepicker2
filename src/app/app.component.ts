@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { TestDayComponent } from "./test-day/test-day.component";
+import { Component, OnInit } from "@angular/core";
 import {
   Calendar,
   Day,
@@ -7,14 +6,11 @@ import {
   ViewMode,
   Suggest,
 } from "projects/angular-datepicker2/src/public-api";
-import { HttpClient } from "@angular/common/http";
-//import {  } from 'projects/angular-datepicker2/src/lib/interfaces';
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
-  //changeDetection: ChangeDetectionStrategy
 })
 export class AppComponent implements OnInit {
   title = "angular-datepicker";
@@ -31,20 +27,34 @@ export class AppComponent implements OnInit {
     {
       title: "Last two weeks",
       selectMode: SelectMode.Period,
-      selectedDates: [new Date(2020, 3, 1), new Date(2020, 3, 12)],
+      selectedDates: [
+        new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          new Date().getDate() - 14
+        ),
+        new Date(),
+      ],
     },
     {
       title: "Last month",
       selectMode: SelectMode.Period,
-      selectedDates: [new Date(2020, 3, 1), new Date(2020, 3, 30)],
+      selectedDates: [
+        new Date(
+          new Date().getFullYear(),
+          new Date().getMonth() - 1,
+          new Date().getDate()
+        ),
+        new Date(),
+      ],
     },
     {
       title: "1, 4 and 30",
       selectMode: SelectMode.Multiple,
       selectedDates: [
-        new Date(2020, 3, 1),
-        new Date(2020, 3, 4),
-        new Date(2020, 3, 30),
+        new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+        new Date(new Date().getFullYear(), new Date().getMonth(), 4),
+        new Date(new Date().getFullYear(), new Date().getMonth(), 30),
       ],
     },
   ];
@@ -81,7 +91,7 @@ export class AppComponent implements OnInit {
     this._stackOnDayClick.push({ ...day });
   }
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.selectedDates = [
@@ -96,41 +106,28 @@ export class AppComponent implements OnInit {
         isHovered: false,
         isSelected: false,
         isWeekEnd: true,
-        date: new Date(2020, 3, 23),
+        date: new Date(new Date().getFullYear(), new Date().getMonth(), 2),
       },
       {
         isDisabled: false,
         isHovered: false,
         isSelected: false,
         isWeekEnd: true,
-        date: new Date(2020, 3, 21),
+        date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 30),
       },
-
       {
         isDisabled: false,
         isHovered: false,
         isSelected: false,
         isWeekEnd: true,
-        date: new Date(new Date().getFullYear(), new Date().getMonth(), 25),
-        template: {
-          component: {
-            componentClass: TestDayComponent,
-            props: [
-              {
-                propName: "title",
-                type: "input",
-                value: new Date(2020, 3, 25).getDate(),
-              },
-              {
-                propName: "callback2",
-                type: "output",
-                value: (data) => {
-                  alert("click custom day. See Day interface");
-                },
-              },
-            ],
-          },
-        },
+        date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 5),
+      },
+      {
+        isDisabled: false,
+        isHovered: false,
+        isSelected: false,
+        isWeekEnd: true,
+        date: new Date(new Date().getFullYear(), new Date().getMonth(), 6),
       },
     ];
   }

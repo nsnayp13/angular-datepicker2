@@ -1,9 +1,6 @@
 # Angular Datepicker 2
 
-v2.x.x
-
-Add suggestions from v2.2.x
-Add events from v2.1.x
+v3.x.x
 
 ![Node.js CI](https://github.com/nsnayp13/angular-datepicker2/workflows/Node.js%20CI/badge.svg)
 
@@ -52,12 +49,13 @@ weekends: number[] = [0, 6]
 // Single, Multiple, Period. Import from public-api or interfaces. Its enum
 selectMode: SelectMode
 
-
 // Callback event when click on day
 // its returns a Day object before change self state by click
-(onDayClick)
+(onDayClick):Day
 
-
+// Callback event when selectedDatesChange changed
+// its returns a Date[]
+(selectedDatesChange):Date[]
 ```
 
 ## i18n
@@ -107,25 +105,6 @@ this.days = [
     isSelected: false,
     isWeekEnd: true,
     date: new Date(2020, 3, 26),
-    template: {
-      component: {
-        componentClass: TestDayComponent,
-        props: [
-          {
-            propName: "title",
-            type: "input",
-            value: new Date(2020, 3, 26).getDate(),
-          },
-          {
-            propName: "callback2",
-            type: "output",
-            value: (data) => {
-              alert("click custom day. See Day interface");
-            },
-          },
-        ],
-      },
-    },
   },
 ];
 ```
@@ -140,5 +119,17 @@ this.days = [
   [weekends]="[0,1]"
   [weekStart]="1"
   [viewMode]="'quarter'"
-></angular-datepicker2>
+>
+  <!--  Here special directive *day="let date from new Date()"
+        Wrap or html or component by *day
+  -->
+  <div *day="let date from days[0].date" [attr.title]="'Custom day'">
+    {{date.getDate()}}
+    <div class="points">
+      <div class="point blue"></div>
+      <div class="point green"></div>
+    </div>
+    <!--app -my-custom-component-->
+  </div>
+</angular-datepicker2>
 ```
