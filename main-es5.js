@@ -45,7 +45,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"calendarWrap\">\n\n    <div class=\"headerCalendar\">\n        <div *ngIf=\"suggest&&suggest.length>0\" style=\"    padding:8px 8px 0 8px;\n        display: block;\n        float: left;\n        width: 100%;\n        box-sizing: border-box;\n        \">\n\n\n            <div *ngFor=\"let item of suggest ; let i = index\" class=\"suggest\" (click)=\"clickSuggest(item)\">\n                {{item.title}}</div>\n\n        </div>\n\n    </div>\n\n    <div class=\"dateSelector\">\n        <div (click)=\"goPrev()\" class=\"nextPrevBtn\" style=\"left:0;\">{{'<'}}</div>\n        <div class=\"wrapMonths\" [ngStyle]=\"{width: width+'px'}\">\n            <div class=\"months\" *ngIf=\"getViewSelectorMode()==='days'\">\n                <app-month-view *ngFor=\"let date of  getCalendar()\" #column [date]=\"date\" [vertical]=\"vertical\">\n                </app-month-view>\n            </div>\n\n            <div class=\"\" *ngIf=\"getViewSelectorMode()==='months'\" style=\"width: 100%; display:flex; flex:1;\">\n                <app-month-select *ngFor=\"let date of  getCalendar()\" #column [date]=\"date\">\n                </app-month-select>\n            </div>\n        </div>\n        <div (click)=\"goNext()\" class=\"nextPrevBtn\" style=\"right:0;\">{{\">\"}}</div>\n    </div>\n</div>";
+    __webpack_exports__["default"] = "<div class=\"calendarWrap\">\n    <div class=\"headerCalendar\">\n        <div *ngIf=\"suggest&&suggest.length>0\" class=\"suggests\">\n            <div *ngFor=\"let item of suggest ; let i = index\" class=\"suggest\" (click)=\"clickSuggest(item)\">\n                {{item.title}}</div>\n        </div>\n    </div>\n    <div class=\"dateSelector\">\n        <div (click)=\"goPrev()\" class=\"nextPrevBtn\" style=\"left:0;\">{{'<'}}</div>\n        <div class=\"wrapMonths\" [ngStyle]=\"{width: width+'px'}\">\n            <div class=\"months\" *ngIf=\"getViewSelectorMode()==='days'\">\n                <app-month-view *ngFor=\"let date of  getCalendar()\" #column [date]=\"date\" [vertical]=\"vertical\"\n                    [dayDirectives]=\"getMonthDayDirectives(date)\">\n                </app-month-view>\n            </div>\n\n            <div class=\"\" *ngIf=\"getViewSelectorMode()==='months'\" style=\"width: 100%; display:flex; flex:1;\">\n                <app-month-select *ngFor=\"let date of  getCalendar()\" #column [date]=\"date\">\n                </app-month-select>\n            </div>\n        </div>\n        <div (click)=\"goNext()\" class=\"nextPrevBtn\" style=\"right:0;\">{{\">\"}}</div>\n    </div>\n</div>";
     /***/
   },
 
@@ -65,7 +65,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"dayWrap\">\n    <div class=\"styledDay\" (click)=\"onClick()\" [ngClass]=\"{\n        isDisabled : dayService.day.isDisabled,\n        isSelected: dayService.day.isSelected,\n        isWeekEnd: dayService.day.isWeekEnd,\n        isInPeriod: dayService.day.isInPeriod,\n        period: getSelectMode()==='period',\n        end: isStartOrEndDatePeriod()==='end',\n        start: isStartOrEndDatePeriod()==='start'\n    }\">\n        <span *ngIf=\"thisMonth&&!dayService.day.template\" class=\"day\">\n            {{dayService.day.date | date: \"d\"}}\n        </span>\n        <div *ngIf=\"thisMonth\" style=\"display: block; float: left; width: 100%;\">\n            <ng-template #tpl></ng-template>\n        </div>\n    </div>\n</div>";
+    __webpack_exports__["default"] = "<div class=\"dayWrap\">\n    <div class=\"styledDay\" *ngIf=\"thisMonth\" (click)=\"onClick()\" [ngClass]=\"{\n        isDisabled : dayService.day.isDisabled,\n        isSelected: dayService.day.isSelected,\n        isWeekEnd: dayService.day.isWeekEnd,\n        isInPeriod: dayService.day.isInPeriod,\n        period: getSelectMode()==='period',\n        end: isStartOrEndDatePeriod()==='end',\n        start: isStartOrEndDatePeriod()==='start'\n    }\">\n        <span *ngIf=\"!dayDirective\" class=\"day\">\n            {{dayService.day.date | date: \"d\"}}\n        </span>\n        <div class=\"dayDir\">\n            <ng-template #tpl></ng-template>\n        </div>\n    </div>\n</div>";
     /***/
   },
 
@@ -105,7 +105,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div #wrap class=\"monthWrap monthOne {{animationStep}}\" style=\"display:block; float:left; width: 100%; \">\n    <div class=\"monthHeader\" (click)=\"showYears()\">\n        {{date | date: \"LLLL yyyy\"}}\n    </div>\n    <div class=\"weekWrap\" [ngStyle]=\"{flexDirection: (vertical)?'row':'column'}\">\n\n        <div [ngStyle]=\"{flexDirection: ((vertical)?'column':'row')}\" style=\"display: flex;\">\n            <div *ngFor=\"let d of weekDays\" class=\"dayWeekTitle\">{{ d | date: 'EEEEEE' }}</div>\n        </div>\n\n        <app-week-view *ngFor=\"let weekStartDate of weeks\" [date]=\"weekStartDate\" [firstMonthDate]=\"date\"\n            [ngStyle]=\"{flexDirection: (vertical)?'column':'row'}\">\n        </app-week-view>\n    </div>\n    <!-- <div *ngFor=\"let date of weeks\" >\n        \n    </div> -->\n</div>";
+    __webpack_exports__["default"] = "<div #wrap class=\"monthWrap monthOne {{animationStep}}\">\n    <div class=\"monthHeader\" (click)=\"showYears()\">\n        {{date | date: \"LLLL yyyy\"}}\n    </div>\n    <div class=\"weekWrap\" [ngStyle]=\"{flexDirection: (vertical)?'row':'column'}\">\n        <div [ngStyle]=\"{flexDirection: ((vertical)?'column':'row')}\" style=\"display: flex;\">\n            <div *ngFor=\"let d of weekDays\" class=\"dayWeekTitle\">{{ d | date: 'EEEEEE' }}</div>\n        </div>\n        <app-week-view *ngFor=\"let weekStartDate of weeks\" [date]=\"weekStartDate\"\n            [dayDirectives]=\"getWeekDayDirectives(weekStartDate)\" [firstMonthDate]=\"date\"\n            [ngStyle]=\"{flexDirection: (vertical)?'column':'row'}\">\n        </app-week-view>\n    </div>\n</div>";
     /***/
   },
 
@@ -125,7 +125,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div *ngFor=\"let date of dates\" style=\"display: flex;\nflex: 1;\">\n    <app-day-view [date]=\"date\"\n        [thisMonth]=\"date.getMonth()===firstMonthDate.getMonth()&&date.getFullYear()===firstMonthDate.getFullYear()\">\n    </app-day-view>\n</div>";
+    __webpack_exports__["default"] = "<div *ngFor=\"let date of dates\" class=\"f1\">\n    <app-day-view [dayDirective]=\"getDayDirective(date)\" [date]=\"date\"\n        [thisMonth]=\"date.getMonth()===firstMonthDate.getMonth()&&date.getFullYear()===firstMonthDate.getFullYear()\">\n    </app-day-view>\n</div>";
     /***/
   },
 
@@ -165,27 +165,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div style=\"width:100%; display:block; float:left;\">\n\n    <div style=\"width: 100%;\n    float: left;\n    background: #c3c3c3;\n    padding: 32px;\n    box-sizing: border-box;\n    text-align: center;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\">\n        <div style=\" display:block; float:left;\">\n            <angular-datepicker2 [days]=\"days\" [(selectedDates)]=\"selectedDates\" [selectMode]=\"selectMode\"\n                [weekends]=\"[0,1]\" [suggest]=\"suggest\" [weekStart]=\"1\" [viewMode]=\"viewMode\" [vertical]=\"vertical\"\n                (onDayClick)=\"onDayClick($event)\">\n            </angular-datepicker2>\n        </div>\n    </div>\n\n    <div style=\" width:50%; display: block; float: left; padding: 16px; box-sizing: border-box\">\n        <h3>Props</h3>\n        <table border=1 style=\"width:100%; background: #fff; border-collapse: collapse;\">\n            <tr>\n                <td>viewMode</td>\n                <td>ViewMode | int</td>\n                <td>Template for render months. If quater start month woul be January, April or August. If 3 - end by\n                    shownDate else last date in selectedDates</td>\n                <td>\n                    <select (change)=\"_viewMode($event)\" value=\"quarter\">\n                        <option *ngFor=\"let i of _viewModeVal\" [value]=\"i\">\n                            {{i}}\n                        </option>\n                    </select>\n                </td>\n            </tr>\n\n            <tr>\n                <td>vertical</td>\n                <td>boolean</td>\n                <td>Alignment of days in a week. Default horizontal.</td>\n                <td>\n                    <select (change)=\"_vertical($event)\" value=\"quarter\">\n                        <option *ngFor=\"let i of _verticalVal\" [value]=\"i\">\n                            {{i}}\n                        </option>\n                    </select>\n                </td>\n            </tr>\n\n            <tr>\n                <td>shownDate</td>\n                <td>Date</td>\n                <td>Date whould be render for default calendar. Calendar ends by month of this date</td>\n                <td>\n                    <angular-datepicker2 [shownDate]=\"_shownDateVal\" selectMode=\"single\" [weekends]=\"[0,1]\"\n                        [(selectedDates)]=\"_shownDateVal\" [weekStart]=\"1\" [viewMode]=\"1\" [vertical]=\"vertical\">\n                    </angular-datepicker2>\n                </td>\n            </tr>\n\n            <tr>\n                <td>selectMode</td>\n                <td>SelectMode</td>\n                <td>Single, multiple or period</td>\n                <td>\n                    <select (change)=\"_selectMode($event)\" value=\"period\">\n                        <option *ngFor=\"let i of _selectModeVal\" [value]=\"i\">\n                            {{i}}\n                        </option>\n                    </select>\n                </td>\n            </tr>\n\n            <tr>\n                <td>selectedDates</td>\n                <td>[Date]</td>\n                <td>Array of selected date. Support [(selectedDates)]</td>\n                <td>\n                    <p *ngFor=\"let date of selectedDates\">{{date | date:'yyyy.MM.dd'}}</p>\n                </td>\n            </tr>\n\n\n\n\n        </table>\n\n\n\n\n    </div>\n\n\n    <div style=\" width:50%; display: block; float: left; padding: 16px;  box-sizing: border-box\">\n        <h3>Events</h3>\n        <table border=1 style=\"width:100%; background: #fff; border-collapse: collapse;\">\n\n            <tr>\n                <td>onDayClick</td>\n                <td>Event</td>\n                <td>Callback event when click on day. Its returns a Day object before change self state by click</td>\n                <td>\n                    <div *ngFor=\"let item of _stackOnDayClick\">\n                        <pre>{{item | json}}</pre>\n                    </div>\n                </td>\n            </tr>\n\n\n\n        </table>\n\n\n\n\n    </div>\n\n\n</div>\n\n\n<!-- \n<datepicker2 [shownDate]=\"date\" [selectedDates]=\"selectedDates\" [selectMode]=\"'multiple'\" [vertical]=\"false\"\n    [viewMode]=\"3\"></datepicker2>\n<datepicker2 [shownDate]=\"date\" [selectedDates]=\"selectedDates\" [selectMode]=\"'single'\">\n</datepicker2>\n<datepicker2 [viewMode]=\"1\" [selectedDates]=\"selectedDates\" [vertical]=\"false\" [shownDate]=\"date\"></datepicker2>\n<datepicker2 [viewMode]=\"1\" [selectedDates]=\"selectedDates\" [vertical]=\"true\" [shownDate]=\"date\"></datepicker2>\n<datepicker2 [viewMode]=\"4\" [selectedDates]=\"selectedDates\" [vertical]=\"true\" [shownDate]=\"date\"></datepicker2> -->";
-    /***/
-  },
-
-  /***/
-  "./node_modules/raw-loader/dist/cjs.js!./src/app/test-day/test-day.component.html":
-  /*!****************************************************************************************!*\
-    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/test-day/test-day.component.html ***!
-    \****************************************************************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function node_modulesRawLoaderDistCjsJsSrcAppTestDayTestDayComponentHtml(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony default export */
-
-
-    __webpack_exports__["default"] = "<div (click)=\"click($event)\" title=\"Custom day\" class=\"day\" style=\"font-size: 13px;\npadding: 6px;\nposition: relative;\n\nbox-shadow: 1px 1px 4px -2px #000;\nz-index: 100000;\nborder-radius: 2px;\ncolor: green;\">{{title}}\n\n  <div style=\" position: absolute;\n    bottom: 0;\n    left: 0; width:100%;\">\n    <div style=\"width: 25%;\n        height: 3px;\n        background: #c1c1c1;\n        display: block;\n        float: left;\n        \n       \"></div>\n    <div style=\"width: 25%;\n        height: 3px;\n        background: #949494;\n        display: block;\n        float: left;\n      \"></div>\n\n    <div style=\"width: 25%;\nheight: 3px;\nbackground: #636363;\ndisplay: block;\nfloat: left;\n\"></div>\n    <div style=\"width: 25%;\nheight: 3px;\nbackground: #333;\ndisplay: block;\nfloat: left;\n\"></div>\n\n  </div>\n\n</div>";
+    __webpack_exports__["default"] = "<div style=\"width:100%; display:block; float:left;\">\n\n    <div class=\"wrap\">\n        <div style=\" display:block; float:left;\">\n            <angular-datepicker2 [days]=\"days\" [nowDate]=\"date\" [(selectedDates)]=\"selectedDates\"\n                [selectMode]=\"selectMode\" [weekends]=\"[0,1]\" [suggest]=\"suggest\" [weekStart]=\"1\" [viewMode]=\"viewMode\"\n                [vertical]=\"vertical\" (onDayClick)=\"onDayClick($event)\">\n\n                <div *day=\"let date from days[0].date\" [attr.title]=\"'Custom day'\" class=\"customDay\">\n                    {{date.getDate()}}\n                    <div class=\"points\">\n                        <div class=\"point\"></div>\n                        <div class=\"point red\"></div>\n                    </div>\n                </div>\n\n                <div *day=\"let date from days[1].date\" [attr.title]=\"'Custom day'\" class=\"customDay\">\n                    {{date.getDate()}}\n                    <div class=\"points\">\n                        <div class=\"point blue\"></div>\n                        <div class=\"point red\"></div>\n                    </div>\n                </div>\n\n                <div *day=\"let date from days[2].date\" [attr.title]=\"'Custom day'\" class=\"customDay\">\n                    {{date.getDate()}}\n                    <div class=\"points\">\n                        <div class=\"point blue\"></div>\n                        <div class=\"point green\"></div>\n                    </div>\n                </div>\n\n                <div *day=\"let date from days[3].date\" [attr.title]=\"'Custom day'\" class=\"customDay\">\n                    {{date.getDate()}}\n                    <div class=\"points\">\n                        <div class=\"point blue\"></div>\n                        <div class=\"point red\"></div>\n                        <div class=\"point green\"></div>\n                    </div>\n                </div>\n\n            </angular-datepicker2>\n        </div>\n    </div>\n\n    <div style=\" width:50%; display: block; float: left; padding: 16px; box-sizing: border-box\">\n        <h3>Props</h3>\n        <table border=1 style=\"width:100%; background: #fff; border-collapse: collapse;\">\n            <tr>\n                <td>viewMode</td>\n                <td>ViewMode | int</td>\n                <td>Template for render months. If quater start month woul be January, April or August. If 3 - end by\n                    shownDate else last date in selectedDates</td>\n                <td>\n                    <select (change)=\"_viewMode($event)\" value=\"quarter\">\n                        <option *ngFor=\"let i of _viewModeVal\" [value]=\"i\">\n                            {{i}}\n                        </option>\n                    </select>\n                </td>\n            </tr>\n\n            <tr>\n                <td>vertical</td>\n                <td>boolean</td>\n                <td>Alignment of days in a week. Default horizontal.</td>\n                <td>\n                    <select (change)=\"_vertical($event)\" value=\"quarter\">\n                        <option *ngFor=\"let i of _verticalVal\" [value]=\"i\">\n                            {{i}}\n                        </option>\n                    </select>\n                </td>\n            </tr>\n\n            <!-- <tr>\n                <td>shownDate</td>\n                <td>Date</td>\n                <td>Date whould be render for default calendar. Calendar ends by month of this date</td>\n                <td>\n                    <angular-datepicker2 [shownDate]=\"_shownDateVal\" selectMode=\"single\" [weekends]=\"[0,1]\"\n                        [(selectedDates)]=\"_shownDateVal\" [weekStart]=\"1\" [viewMode]=\"1\" [vertical]=\"vertical\">\n                    </angular-datepicker2>\n                </td>\n            </tr> -->\n\n            <tr>\n                <td>selectMode</td>\n                <td>SelectMode</td>\n                <td>Single, multiple or period</td>\n                <td>\n                    <select (change)=\"_selectMode($event)\" value=\"period\">\n                        <option *ngFor=\"let i of _selectModeVal\" [value]=\"i\">\n                            {{i}}\n                        </option>\n                    </select>\n                </td>\n            </tr>\n\n            <tr>\n                <td>selectedDates</td>\n                <td>[Date]</td>\n                <td>Array of selected date. Support [(selectedDates)]</td>\n                <td>\n                    <p *ngFor=\"let date of selectedDates\">{{date | date:'yyyy.MM.dd'}}</p>\n                </td>\n            </tr>\n\n\n\n\n        </table>\n\n\n\n\n    </div>\n\n\n    <div style=\" width:50%; display: block; float: left; padding: 16px;  box-sizing: border-box\">\n        <h3>Events</h3>\n        <table border=1 style=\"width:100%; background: #fff; border-collapse: collapse;\">\n\n            <tr>\n                <td>onDayClick</td>\n                <td>Event</td>\n                <td>Callback event when click on day. Its returns a Day object before change self state by click</td>\n                <td>\n                    <div *ngFor=\"let item of _stackOnDayClick\">\n                        <pre>{{item | json}}</pre>\n                    </div>\n                </td>\n            </tr>\n\n\n\n        </table>\n\n\n\n\n    </div>\n\n\n</div>\n\n\n<!-- \n<datepicker2 [shownDate]=\"date\" [selectedDates]=\"selectedDates\" [selectMode]=\"'multiple'\" [vertical]=\"false\"\n    [viewMode]=\"3\"></datepicker2>\n<datepicker2 [shownDate]=\"date\" [selectedDates]=\"selectedDates\" [selectMode]=\"'single'\">\n</datepicker2>\n<datepicker2 [viewMode]=\"1\" [selectedDates]=\"selectedDates\" [vertical]=\"false\" [shownDate]=\"date\"></datepicker2>\n<datepicker2 [viewMode]=\"1\" [selectedDates]=\"selectedDates\" [vertical]=\"true\" [shownDate]=\"date\"></datepicker2>\n<datepicker2 [viewMode]=\"4\" [selectedDates]=\"selectedDates\" [vertical]=\"true\" [shownDate]=\"date\"></datepicker2> -->";
     /***/
   },
 
@@ -1288,10 +1268,16 @@
     var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @angular/common */
     "./node_modules/@angular/common/fesm2015/common.js");
+    /* harmony import */
+
+
+    var _day_directive__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! ./day.directive */
+    "./projects/angular-datepicker2/src/lib/day.directive.ts");
 
     let AngularDatepicker2Module = class AngularDatepicker2Module {};
     AngularDatepicker2Module = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      declarations: [_calendar_angular_datepicker2_component__WEBPACK_IMPORTED_MODULE_2__["AngularDatepicker2"], _month_view_month_view_component__WEBPACK_IMPORTED_MODULE_3__["MonthViewComponent"], _day_view_day_view_component__WEBPACK_IMPORTED_MODULE_4__["DayViewComponent"], _month_select_month_select_component__WEBPACK_IMPORTED_MODULE_5__["MonthSelectComponent"], _year_select_year_select_component__WEBPACK_IMPORTED_MODULE_6__["YearSelectComponent"], _week_view_week_view_component__WEBPACK_IMPORTED_MODULE_7__["WeekViewComponent"]],
+      declarations: [_calendar_angular_datepicker2_component__WEBPACK_IMPORTED_MODULE_2__["AngularDatepicker2"], _month_view_month_view_component__WEBPACK_IMPORTED_MODULE_3__["MonthViewComponent"], _day_view_day_view_component__WEBPACK_IMPORTED_MODULE_4__["DayViewComponent"], _month_select_month_select_component__WEBPACK_IMPORTED_MODULE_5__["MonthSelectComponent"], _year_select_year_select_component__WEBPACK_IMPORTED_MODULE_6__["YearSelectComponent"], _week_view_week_view_component__WEBPACK_IMPORTED_MODULE_7__["WeekViewComponent"], _day_directive__WEBPACK_IMPORTED_MODULE_9__["DayDirective"]],
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_8__["CommonModule"]],
       exports: [_calendar_angular_datepicker2_component__WEBPACK_IMPORTED_MODULE_2__["AngularDatepicker2"]]
     })], AngularDatepicker2Module);
@@ -1314,7 +1300,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".suggest {\n  background: #e0f5f5;\n  width: auto;\n  display: block;\n  float: left;\n  color: #26b1b1;\n  border-radius: 2px;\n  padding: 4px 8px;\n  margin-right: 2px;\n  margin-bottom: 2px;\n  font-size: 13px;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n  cursor: pointer;\n}\n\n.suggest:hover {\n  background: #82dcdc;\n  color: #148a8a;\n}\n\napp-calendar {\n  display: block;\n  float: left;\n  width: 100%;\n}\n\n.nextPrevBtn {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: absolute;\n  cursor: pointer;\n  padding: 8px 16px;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n  font-size: 0.9em;\n  color: #26b1b1;\n  z-index: 1;\n  background: #fff;\n}\n\n.nextPrevBtn:hover {\n  background: #eee;\n}\n\napp-week-view {\n  width: 100%;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n}\n\n.dayWeekTitle {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-flex: 1;\n          flex: 1;\n  color: #a9a9a9;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  display: flex;\n  font-size: 0.8em;\n  padding: 4px;\n}\n\n.styledDay.isWeekEnd {\n  color: #c53c3c;\n}\n\n.weekWrap {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n}\n\napp-month-select {\n  display: -webkit-box;\n  display: flex;\n  float: left;\n  min-width: 200px;\n  -webkit-animation: appear 0.2s ease-in-out;\n          animation: appear 0.2s ease-in-out;\n}\n\n.monthItem {\n  width: 33%;\n  font-size: 0.8em;\n  text-align: center;\n  padding: 9px 0;\n  box-shadow: 0 0 0 1px #f4f3f3;\n  color: #313131;\n}\n\n.monthItem:hover {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  cursor: pointer;\n  background: #eee;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n\napp-month-view {\n  display: -webkit-box;\n  display: flex;\n  float: left;\n  min-width: 200px;\n  -webkit-animation: appear 0.2s ease-in-out;\n          animation: appear 0.2s ease-in-out;\n  height: 100%;\n}\n\n@-webkit-keyframes appear {\n  from {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n    opacity: 0.6;\n  }\n  50% {\n    -webkit-transform: opacity(0);\n            transform: opacity(0);\n    -webkit-transform: scale(0.8);\n            transform: scale(0.8);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: scale(1);\n            transform: scale(1);\n  }\n}\n\n@keyframes appear {\n  from {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n    opacity: 0.6;\n  }\n  50% {\n    -webkit-transform: opacity(0);\n            transform: opacity(0);\n    -webkit-transform: scale(0.8);\n            transform: scale(0.8);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: scale(1);\n            transform: scale(1);\n  }\n}\n\n.months {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n  position: relative;\n  overflow: hidden;\n  height: 100%;\n}\n\n.wrapMonths {\n  display: block;\n  float: left;\n  overflow: hidden;\n  width: 477px;\n}\n\n.monthOne {\n  position: relative;\n}\n\n.monthOne.right {\n  -webkit-animation: right 0.2s ease-in-out;\n          animation: right 0.2s ease-in-out;\n}\n\n.monthOne.left {\n  -webkit-animation: left 0.2s ease-in-out;\n          animation: left 0.2s ease-in-out;\n}\n\n@-webkit-keyframes left {\n  from {\n    -webkit-transform: translateX(-100%);\n            transform: translateX(-100%);\n  }\n  to {\n    -webkit-transform: translateX(0%);\n            transform: translateX(0%);\n  }\n}\n\n@keyframes left {\n  from {\n    -webkit-transform: translateX(-100%);\n            transform: translateX(-100%);\n  }\n  to {\n    -webkit-transform: translateX(0%);\n            transform: translateX(0%);\n  }\n}\n\n@-webkit-keyframes right {\n  from {\n    -webkit-transform: translateX(0%);\n            transform: translateX(0%);\n  }\n  to {\n    -webkit-transform: translateX(-100%);\n            transform: translateX(-100%);\n  }\n}\n\n@keyframes right {\n  from {\n    -webkit-transform: translateX(0%);\n            transform: translateX(0%);\n  }\n  to {\n    -webkit-transform: translateX(-100%);\n            transform: translateX(-100%);\n  }\n}\n\n.monthSelectBtn {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n  -webkit-box-flex: 1;\n          flex: 1;\n  padding: 4px 8px;\n}\n\napp-day-view {\n  display: block;\n  float: left;\n  width: 100%;\n}\n\n.styledDay.isDisabled {\n  color: #a7a7a7;\n}\n\n.styledDay.isInPeriod {\n  background: #26b1b12b !important;\n}\n\n.styledDay.isSelected {\n  background: #26b1b180 !important;\n}\n\n.styledDay.isSelected.period.end {\n  background: linear-gradient(120deg, #26b1b12b 45%, #26b1b180 113%) !important;\n  -webkit-animation: appear 0.2s ease-in-out;\n          animation: appear 0.2s ease-in-out;\n}\n\n.styledDay.isSelected.period.start {\n  background: linear-gradient(-50deg, #26b1b12b 45%, #26b1b180 113%) !important;\n  -webkit-animation: appear 0.2s ease-in-out;\n          animation: appear 0.2s ease-in-out;\n}\n\n.day {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-flex: 1;\n          flex: 1;\n  font-size: 0.8em;\n  padding: 6px;\n}\n\n.styledDay {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  color: #313131;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n\n.styledDay:hover {\n  background: #eee;\n  cursor: pointer;\n  color: #313131;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n\n.dayWrap {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-flex: 1;\n          flex: 1;\n}\n\n.calendarWrap {\n  float: left;\n  display: -webkit-box;\n  display: flex;\n  background: #fff;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  border-radius: 4px;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n  width: -webkit-min-content;\n  width: -moz-min-content;\n  width: min-content;\n}\n\n.dateSelector {\n  float: left;\n  width: auto;\n  display: -webkit-box;\n  display: flex;\n  position: relative;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n\n.monthWrap {\n  padding: 0 8px;\n}\n\n.monthHeader {\n  text-align: center;\n  text-align: center;\n  padding: 8px 16px;\n  font-size: 15px;\n  color: #2b2b2b;\n}\n\n.monthHeader::first-letter {\n  text-transform: uppercase;\n}\n\n.monthHeader:hover {\n  cursor: pointer;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  background: #eee;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3J1bm5lci93b3JrL2FuZ3VsYXItZGF0ZXBpY2tlcjIvYW5ndWxhci1kYXRlcGlja2VyMi9wcm9qZWN0cy9hbmd1bGFyLWRhdGVwaWNrZXIyL3NyYy9saWIvY2FsZW5kYXIvYW5ndWxhci1kYXRlcGlja2VyMi5jb21wb25lbnQuc2NzcyIsInByb2plY3RzL2FuZ3VsYXItZGF0ZXBpY2tlcjIvc3JjL2xpYi9jYWxlbmRhci9hbmd1bGFyLWRhdGVwaWNrZXIyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUdBO0VBQ0UsbUJBQUE7RUFDQSxXQUFBO0VBQ0EsY0FBQTtFQUNBLFdBQUE7RUFDQSxjQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxlQUFBO0VBQ0EsNEJBQUE7RUFBQSxvQkFBQTtFQUNBLGVBQUE7QUNGRjs7QURLQTtFQUNFLG1CQUFBO0VBQ0EsY0FBQTtBQ0ZGOztBREtBO0VBQ0UsY0FBQTtFQUNBLFdBQUE7RUFDQSxXQUFBO0FDRkY7O0FESUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSw0QkFBQTtFQUFBLDZCQUFBO1VBQUEsc0JBQUE7RUFDQSx3QkFBQTtVQUFBLHVCQUFBO0VBQ0EseUJBQUE7VUFBQSxtQkFBQTtFQUNBLHlCQUFBO0tBQUEsc0JBQUE7TUFBQSxxQkFBQTtVQUFBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSw0QkFBQTtFQUFBLG9CQUFBO0VBQ0EsZ0JBQUE7RUFDQSxjQXRDSztFQXVDTCxVQUFBO0VBQ0EsZ0JBQUE7QUNERjs7QURJQTtFQUNFLGdCQUFBO0FDREY7O0FESUE7RUFDRSxXQUFBO0VBQ0Esb0JBQUE7RUFBQSxhQUFBO0VBQ0EsOEJBQUE7RUFBQSw2QkFBQTtVQUFBLG1CQUFBO0FDREY7O0FESUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSxtQkFBQTtVQUFBLE9BQUE7RUFDQSxjQUFBO0VB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QUFBO0VBQ0EseUJBQUE7VUFBQSxtQkFBQTtFQUdBLGNBQUE7RUFDQSw0QkFBQTtFQUFBLG9CQUFBO0FDckJGOztBRHdCQTtFQUNFLGdCQUFBO0VBQ0EsZUFBQTtFQUNBLGNBQUE7RUFDQSx5QkFBQTtLQUFBLHNCQUFBO01BQUEscUJBQUE7VUFBQSxpQkFBQTtBQ3JCRjs7QUR3QkE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSxtQkFBQTtVQUFBLE9BQUE7QUNyQkY7O0FEd0JBO0VBQ0UsV0FBQTtFQUNBLG9CQUFBO0VBQUEsYUFBQTtFQUNBLGdCQUFBO0VBQ0EsNEJBQUE7RUFBQSw2QkFBQTtVQUFBLHNCQUFBO0VBQ0Esa0JBQUE7RUFDQSw0QkFBQTtFQUFBLG9CQUFBO0VBQ0EsMEJBQUE7RUFBQSx1QkFBQTtFQUFBLGtCQUFBO0FDckJGOztBRHdCQTtFQUNFLFdBQUE7RUFDQSxXQUFBO0VBQ0Esb0JBQUE7RUFBQSxhQUFBO0VBQ0Esa0JBQUE7RUFDQSw4QkFBQTtFQUFBLDZCQUFBO1VBQUEsbUJBQUE7RUFDQSw0QkFBQTtFQUFBLG9CQUFBO0FDckJGOztBRHdCQTtFQUNFLGNBQUE7QUNyQkY7O0FEd0JBO0VBQ0Usa0JBQUE7RUFDQSxrQkFBQTtFQUNBLGlCQUFBO0VBQ0EsZUFBQTtFQUNBLGNBQUE7QUNyQkY7O0FEd0JBO0VBQ0UseUJBQUE7QUNyQkY7O0FEd0JBO0VBQ0UsZUFBQTtFQUNBLHlCQUFBO0tBQUEsc0JBQUE7TUFBQSxxQkFBQTtVQUFBLGlCQUFBO0VBQ0EsZ0JBQUE7QUNyQkYiLCJmaWxlIjoicHJvamVjdHMvYW5ndWxhci1kYXRlcGlja2VyMi9zcmMvbGliL2NhbGVuZGFyL2FuZ3VsYXItZGF0ZXBpY2tlcjIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIkYW5pbVNwZWVkOiAwLjJzO1xuJGN5YW46ICMyNmIxYjE7XG5cbi5zdWdnZXN0IHtcbiAgYmFja2dyb3VuZDogI2UwZjVmNTtcbiAgd2lkdGg6IGF1dG87XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBmbG9hdDogbGVmdDtcbiAgY29sb3I6ICMyNmIxYjE7XG4gIGJvcmRlci1yYWRpdXM6IDJweDtcbiAgcGFkZGluZzogNHB4IDhweDtcbiAgbWFyZ2luLXJpZ2h0OiAycHg7XG4gIG1hcmdpbi1ib3R0b206IDJweDtcbiAgZm9udC1zaXplOiAxM3B4O1xuICB0cmFuc2l0aW9uOiBhbGwgMC4ycztcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4uc3VnZ2VzdDpob3ZlciB7XG4gIGJhY2tncm91bmQ6ICM4MmRjZGM7XG4gIGNvbG9yOiAjMTQ4YThhO1xufVxuXG5hcHAtY2FsZW5kYXIge1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiAxMDAlO1xufVxuLm5leHRQcmV2QnRuIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIHVzZXItc2VsZWN0OiBub25lO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgcGFkZGluZzogOHB4IDE2cHg7XG4gIHRyYW5zaXRpb246IGFsbCAwLjJzO1xuICBmb250LXNpemU6IDAuOWVtO1xuICBjb2xvcjogJGN5YW47XG4gIHotaW5kZXg6IDE7XG4gIGJhY2tncm91bmQ6ICNmZmY7XG59XG5cbi5uZXh0UHJldkJ0bjpob3ZlciB7XG4gIGJhY2tncm91bmQ6ICNlZWU7XG59XG5cbmFwcC13ZWVrLXZpZXcge1xuICB3aWR0aDogMTAwJTtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbn1cblxuLmRheVdlZWtUaXRsZSB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXg6IDE7XG4gIGNvbG9yOiAjYTlhOWE5O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZGlzcGxheTogZmxleDtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgcGFkZGluZzogNHB4O1xufVxuXG4uc3R5bGVkRGF5LmlzV2Vla0VuZCB7XG4gIGNvbG9yOiAjYzUzYzNjO1xufVxuXG4ud2Vla1dyYXAge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xufVxuXG5hcHAtbW9udGgtc2VsZWN0IHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxvYXQ6IGxlZnQ7XG4gIG1pbi13aWR0aDogMjAwcHg7XG4gIGFuaW1hdGlvbjogYXBwZWFyICRhbmltU3BlZWQgZWFzZS1pbi1vdXQ7XG59XG5cbi5tb250aEl0ZW0ge1xuICB3aWR0aDogMzMlO1xuICBmb250LXNpemU6IDAuOGVtO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHBhZGRpbmc6IDlweCAwO1xuICBib3gtc2hhZG93OiAwIDAgMCAxcHggI2Y0ZjNmMztcbiAgY29sb3I6ICMzMTMxMzE7XG59XG5cbi5tb250aEl0ZW06aG92ZXIge1xuICB1c2VyLXNlbGVjdDogbm9uZTtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBiYWNrZ3JvdW5kOiAjZWVlO1xuICB0cmFuc2l0aW9uOiAkYW5pbVNwZWVkO1xufVxuXG5hcHAtbW9udGgtdmlldyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiBsZWZ0O1xuICBtaW4td2lkdGg6IDIwMHB4O1xuICBhbmltYXRpb246IGFwcGVhciAkYW5pbVNwZWVkIGVhc2UtaW4tb3V0O1xuICBoZWlnaHQ6IDEwMCU7XG59XG5cbkBrZXlmcmFtZXMgYXBwZWFyIHtcbiAgZnJvbSB7XG4gICAgdHJhbnNmb3JtOiBzY2FsZSgwLjYpO1xuICAgIG9wYWNpdHk6IDAuNjtcbiAgfVxuXG4gIDUwJSB7XG4gICAgdHJhbnNmb3JtOiBvcGFjaXR5KDApO1xuICAgIHRyYW5zZm9ybTogc2NhbGUoMC44KTtcbiAgfVxuXG4gIHRvIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zZm9ybTogc2NhbGUoMSk7XG4gIH1cbn1cblxuLm1vbnRocyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4ud3JhcE1vbnRocyB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBmbG9hdDogbGVmdDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgd2lkdGg6IDQ3N3B4O1xufVxuXG4ubW9udGhPbmUge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG5cbi5tb250aE9uZS5yaWdodCB7XG4gIGFuaW1hdGlvbjogcmlnaHQgJGFuaW1TcGVlZCBlYXNlLWluLW91dDtcbn1cbi5tb250aE9uZS5sZWZ0IHtcbiAgYW5pbWF0aW9uOiBsZWZ0ICRhbmltU3BlZWQgZWFzZS1pbi1vdXQ7XG59XG5Aa2V5ZnJhbWVzIGxlZnQge1xuICBmcm9tIHtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTEwMCUpO1xuICB9XG4gIHRvIHtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoMCUpO1xuICB9XG59XG5cbkBrZXlmcmFtZXMgcmlnaHQge1xuICBmcm9tIHtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoMCUpO1xuICB9XG4gIHRvIHtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTEwMCUpO1xuICB9XG59XG5cbi5tb250aFNlbGVjdEJ0biB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGZsZXg6IDE7XG4gIHBhZGRpbmc6IDRweCA4cHg7XG59XG5cbmFwcC1kYXktdmlldyB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBmbG9hdDogbGVmdDtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5zdHlsZWREYXkuaXNEaXNhYmxlZCB7XG4gIGNvbG9yOiAjYTdhN2E3O1xufVxuXG4uc3R5bGVkRGF5LmlzSW5QZXJpb2Qge1xuICBiYWNrZ3JvdW5kOiAjMjZiMWIxMmIgIWltcG9ydGFudCAgO1xufVxuXG4uc3R5bGVkRGF5LmlzU2VsZWN0ZWQge1xuICBiYWNrZ3JvdW5kOiAjMjZiMWIxODAgIWltcG9ydGFudDtcbn1cblxuLnN0eWxlZERheS5pc1NlbGVjdGVkLnBlcmlvZC5lbmQge1xuICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoXG4gICAgMTIwZGVnLFxuICAgICMyNmIxYjEyYiA0NSUsXG4gICAgIzI2YjFiMTgwIDExMyVcbiAgKSAhaW1wb3J0YW50IDtcbiAgYW5pbWF0aW9uOiBhcHBlYXIgJGFuaW1TcGVlZCBlYXNlLWluLW91dDtcbn1cbi5zdHlsZWREYXkuaXNTZWxlY3RlZC5wZXJpb2Quc3RhcnQge1xuICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoXG4gICAgLTUwZGVnLFxuICAgICMyNmIxYjEyYiA0NSUsXG4gICAgIzI2YjFiMTgwIDExMyVcbiAgKSAhaW1wb3J0YW50IDtcbiAgYW5pbWF0aW9uOiBhcHBlYXIgJGFuaW1TcGVlZCBlYXNlLWluLW91dDtcbn1cblxuLmRheSB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXg6IDE7XG5cbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgcGFkZGluZzogNnB4O1xufVxuXG4vLyAuZGF5OmhvdmVyIHtcbi8vICAgYmFja2dyb3VuZDogI2VlZTtcbi8vICAgY3Vyc29yOiBwb2ludGVyO1xuLy8gICBjb2xvcjogIzMxMzEzMTtcbi8vICAgdXNlci1zZWxlY3Q6IG5vbmU7XG4vLyB9XG5cbi5zdHlsZWREYXkge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4OiAxO1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgLy8gZm9udC1zaXplOiAwLjhlbTtcbiAgLy8gcGFkZGluZzogNnB4O1xuICBjb2xvcjogIzMxMzEzMTtcbiAgdHJhbnNpdGlvbjogYWxsIDAuMnM7XG59XG5cbi5zdHlsZWREYXk6aG92ZXIge1xuICBiYWNrZ3JvdW5kOiAjZWVlO1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIGNvbG9yOiAjMzEzMTMxO1xuICB1c2VyLXNlbGVjdDogbm9uZTtcbn1cblxuLmRheVdyYXAge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4OiAxO1xufVxuXG4uY2FsZW5kYXJXcmFwIHtcbiAgZmxvYXQ6IGxlZnQ7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGJhY2tncm91bmQ6ICNmZmY7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgdHJhbnNpdGlvbjogYWxsIDAuMnM7XG4gIHdpZHRoOiBtaW4tY29udGVudDtcbn1cblxuLmRhdGVTZWxlY3RvciB7XG4gIGZsb2F0OiBsZWZ0O1xuICB3aWR0aDogYXV0bztcbiAgZGlzcGxheTogZmxleDtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICB0cmFuc2l0aW9uOiBhbGwgMC4ycztcbn1cblxuLm1vbnRoV3JhcCB7XG4gIHBhZGRpbmc6IDAgOHB4O1xufVxuXG4ubW9udGhIZWFkZXIge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgcGFkZGluZzogOHB4IDE2cHg7XG4gIGZvbnQtc2l6ZTogMTVweDtcbiAgY29sb3I6ICMyYjJiMmI7XG59XG5cbi5tb250aEhlYWRlcjo6Zmlyc3QtbGV0dGVyIHtcbiAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtcbn1cblxuLm1vbnRoSGVhZGVyOmhvdmVyIHtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICB1c2VyLXNlbGVjdDogbm9uZTtcbiAgYmFja2dyb3VuZDogI2VlZTtcbn1cbiIsIi5zdWdnZXN0IHtcbiAgYmFja2dyb3VuZDogI2UwZjVmNTtcbiAgd2lkdGg6IGF1dG87XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBmbG9hdDogbGVmdDtcbiAgY29sb3I6ICMyNmIxYjE7XG4gIGJvcmRlci1yYWRpdXM6IDJweDtcbiAgcGFkZGluZzogNHB4IDhweDtcbiAgbWFyZ2luLXJpZ2h0OiAycHg7XG4gIG1hcmdpbi1ib3R0b206IDJweDtcbiAgZm9udC1zaXplOiAxM3B4O1xuICB0cmFuc2l0aW9uOiBhbGwgMC4ycztcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4uc3VnZ2VzdDpob3ZlciB7XG4gIGJhY2tncm91bmQ6ICM4MmRjZGM7XG4gIGNvbG9yOiAjMTQ4YThhO1xufVxuXG5hcHAtY2FsZW5kYXIge1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG4ubmV4dFByZXZCdG4ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgdXNlci1zZWxlY3Q6IG5vbmU7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBwYWRkaW5nOiA4cHggMTZweDtcbiAgdHJhbnNpdGlvbjogYWxsIDAuMnM7XG4gIGZvbnQtc2l6ZTogMC45ZW07XG4gIGNvbG9yOiAjMjZiMWIxO1xuICB6LWluZGV4OiAxO1xuICBiYWNrZ3JvdW5kOiAjZmZmO1xufVxuXG4ubmV4dFByZXZCdG46aG92ZXIge1xuICBiYWNrZ3JvdW5kOiAjZWVlO1xufVxuXG5hcHAtd2Vlay12aWV3IHtcbiAgd2lkdGg6IDEwMCU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG59XG5cbi5kYXlXZWVrVGl0bGUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4OiAxO1xuICBjb2xvcjogI2E5YTlhOTtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZvbnQtc2l6ZTogMC44ZW07XG4gIHBhZGRpbmc6IDRweDtcbn1cblxuLnN0eWxlZERheS5pc1dlZWtFbmQge1xuICBjb2xvcjogI2M1M2MzYztcbn1cblxuLndlZWtXcmFwIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbn1cblxuYXBwLW1vbnRoLXNlbGVjdCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiBsZWZ0O1xuICBtaW4td2lkdGg6IDIwMHB4O1xuICBhbmltYXRpb246IGFwcGVhciAwLjJzIGVhc2UtaW4tb3V0O1xufVxuXG4ubW9udGhJdGVtIHtcbiAgd2lkdGg6IDMzJTtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBwYWRkaW5nOiA5cHggMDtcbiAgYm94LXNoYWRvdzogMCAwIDAgMXB4ICNmNGYzZjM7XG4gIGNvbG9yOiAjMzEzMTMxO1xufVxuXG4ubW9udGhJdGVtOmhvdmVyIHtcbiAgdXNlci1zZWxlY3Q6IG5vbmU7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgYmFja2dyb3VuZDogI2VlZTtcbiAgdHJhbnNpdGlvbjogMC4ycztcbn1cblxuYXBwLW1vbnRoLXZpZXcge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogbGVmdDtcbiAgbWluLXdpZHRoOiAyMDBweDtcbiAgYW5pbWF0aW9uOiBhcHBlYXIgMC4ycyBlYXNlLWluLW91dDtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG5Aa2V5ZnJhbWVzIGFwcGVhciB7XG4gIGZyb20ge1xuICAgIHRyYW5zZm9ybTogc2NhbGUoMC42KTtcbiAgICBvcGFjaXR5OiAwLjY7XG4gIH1cbiAgNTAlIHtcbiAgICB0cmFuc2Zvcm06IG9wYWNpdHkoMCk7XG4gICAgdHJhbnNmb3JtOiBzY2FsZSgwLjgpO1xuICB9XG4gIHRvIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zZm9ybTogc2NhbGUoMSk7XG4gIH1cbn1cbi5tb250aHMge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGhlaWdodDogMTAwJTtcbn1cblxuLndyYXBNb250aHMge1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIHdpZHRoOiA0NzdweDtcbn1cblxuLm1vbnRoT25lIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG4ubW9udGhPbmUucmlnaHQge1xuICBhbmltYXRpb246IHJpZ2h0IDAuMnMgZWFzZS1pbi1vdXQ7XG59XG5cbi5tb250aE9uZS5sZWZ0IHtcbiAgYW5pbWF0aW9uOiBsZWZ0IDAuMnMgZWFzZS1pbi1vdXQ7XG59XG5cbkBrZXlmcmFtZXMgbGVmdCB7XG4gIGZyb20ge1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgtMTAwJSk7XG4gIH1cbiAgdG8ge1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgwJSk7XG4gIH1cbn1cbkBrZXlmcmFtZXMgcmlnaHQge1xuICBmcm9tIHtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoMCUpO1xuICB9XG4gIHRvIHtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTEwMCUpO1xuICB9XG59XG4ubW9udGhTZWxlY3RCdG4ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBmbGV4OiAxO1xuICBwYWRkaW5nOiA0cHggOHB4O1xufVxuXG5hcHAtZGF5LXZpZXcge1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG4uc3R5bGVkRGF5LmlzRGlzYWJsZWQge1xuICBjb2xvcjogI2E3YTdhNztcbn1cblxuLnN0eWxlZERheS5pc0luUGVyaW9kIHtcbiAgYmFja2dyb3VuZDogIzI2YjFiMTJiICFpbXBvcnRhbnQ7XG59XG5cbi5zdHlsZWREYXkuaXNTZWxlY3RlZCB7XG4gIGJhY2tncm91bmQ6ICMyNmIxYjE4MCAhaW1wb3J0YW50O1xufVxuXG4uc3R5bGVkRGF5LmlzU2VsZWN0ZWQucGVyaW9kLmVuZCB7XG4gIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxMjBkZWcsICMyNmIxYjEyYiA0NSUsICMyNmIxYjE4MCAxMTMlKSAhaW1wb3J0YW50O1xuICBhbmltYXRpb246IGFwcGVhciAwLjJzIGVhc2UtaW4tb3V0O1xufVxuXG4uc3R5bGVkRGF5LmlzU2VsZWN0ZWQucGVyaW9kLnN0YXJ0IHtcbiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KC01MGRlZywgIzI2YjFiMTJiIDQ1JSwgIzI2YjFiMTgwIDExMyUpICFpbXBvcnRhbnQ7XG4gIGFuaW1hdGlvbjogYXBwZWFyIDAuMnMgZWFzZS1pbi1vdXQ7XG59XG5cbi5kYXkge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4OiAxO1xuICBmb250LXNpemU6IDAuOGVtO1xuICBwYWRkaW5nOiA2cHg7XG59XG5cbi5zdHlsZWREYXkge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4OiAxO1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgY29sb3I6ICMzMTMxMzE7XG4gIHRyYW5zaXRpb246IGFsbCAwLjJzO1xufVxuXG4uc3R5bGVkRGF5OmhvdmVyIHtcbiAgYmFja2dyb3VuZDogI2VlZTtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBjb2xvcjogIzMxMzEzMTtcbiAgdXNlci1zZWxlY3Q6IG5vbmU7XG59XG5cbi5kYXlXcmFwIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleDogMTtcbn1cblxuLmNhbGVuZGFyV3JhcCB7XG4gIGZsb2F0OiBsZWZ0O1xuICBkaXNwbGF5OiBmbGV4O1xuICBiYWNrZ3JvdW5kOiAjZmZmO1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIHRyYW5zaXRpb246IGFsbCAwLjJzO1xuICB3aWR0aDogbWluLWNvbnRlbnQ7XG59XG5cbi5kYXRlU2VsZWN0b3Ige1xuICBmbG9hdDogbGVmdDtcbiAgd2lkdGg6IGF1dG87XG4gIGRpc3BsYXk6IGZsZXg7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgdHJhbnNpdGlvbjogYWxsIDAuMnM7XG59XG5cbi5tb250aFdyYXAge1xuICBwYWRkaW5nOiAwIDhweDtcbn1cblxuLm1vbnRoSGVhZGVyIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHBhZGRpbmc6IDhweCAxNnB4O1xuICBmb250LXNpemU6IDE1cHg7XG4gIGNvbG9yOiAjMmIyYjJiO1xufVxuXG4ubW9udGhIZWFkZXI6OmZpcnN0LWxldHRlciB7XG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XG59XG5cbi5tb250aEhlYWRlcjpob3ZlciB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgdXNlci1zZWxlY3Q6IG5vbmU7XG4gIGJhY2tncm91bmQ6ICNlZWU7XG59Il19 */";
+    __webpack_exports__["default"] = ".suggest {\n  background: #e0f5f5;\n  width: auto;\n  display: block;\n  float: left;\n  color: #26b1b1;\n  border-radius: 2px;\n  padding: 4px 8px;\n  margin-right: 2px;\n  margin-bottom: 2px;\n  font-size: 13px;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n  cursor: pointer;\n}\n\n.suggest:hover {\n  background: #82dcdc;\n  color: #148a8a;\n}\n\napp-calendar {\n  display: block;\n  float: left;\n  width: 100%;\n}\n\n.nextPrevBtn {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  position: absolute;\n  cursor: pointer;\n  padding: 8px 16px;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n  font-size: 0.9em;\n  color: #26b1b1;\n  z-index: 1;\n  background: #fff;\n}\n\n.nextPrevBtn:hover {\n  background: #eee;\n}\n\napp-week-view {\n  width: 100%;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n}\n\n.dayWeekTitle {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-flex: 1;\n          flex: 1;\n  color: #a9a9a9;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  display: flex;\n  font-size: 0.8em;\n  padding: 4px;\n}\n\n.styledDay.isWeekEnd {\n  color: #c53c3c;\n}\n\n.weekWrap {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n}\n\napp-month-select {\n  display: -webkit-box;\n  display: flex;\n  float: left;\n  min-width: 200px;\n  -webkit-animation: appear 0.2s ease-in-out;\n          animation: appear 0.2s ease-in-out;\n}\n\n.monthItem {\n  width: 33%;\n  font-size: 0.8em;\n  text-align: center;\n  padding: 9px 0;\n  box-shadow: 0 0 0 1px #f4f3f3;\n  color: #313131;\n}\n\n.monthItem:hover {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  cursor: pointer;\n  background: #eee;\n  -webkit-transition: 0.2s;\n  transition: 0.2s;\n}\n\napp-month-view {\n  display: -webkit-box;\n  display: flex;\n  float: left;\n  min-width: 200px;\n  -webkit-animation: appear 0.2s ease-in-out;\n          animation: appear 0.2s ease-in-out;\n  height: 100%;\n}\n\n@-webkit-keyframes appear {\n  from {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n    opacity: 0.6;\n  }\n  50% {\n    -webkit-transform: opacity(0);\n            transform: opacity(0);\n    -webkit-transform: scale(0.8);\n            transform: scale(0.8);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: scale(1);\n            transform: scale(1);\n  }\n}\n\n@keyframes appear {\n  from {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n    opacity: 0.6;\n  }\n  50% {\n    -webkit-transform: opacity(0);\n            transform: opacity(0);\n    -webkit-transform: scale(0.8);\n            transform: scale(0.8);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: scale(1);\n            transform: scale(1);\n  }\n}\n\n.months {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n  position: relative;\n  overflow: hidden;\n  height: 100%;\n}\n\n.wrapMonths {\n  display: block;\n  float: left;\n  overflow: hidden;\n  width: 477px;\n}\n\n.monthOne {\n  position: relative;\n}\n\n.monthOne.right {\n  -webkit-animation: right 0.2s ease-in-out;\n          animation: right 0.2s ease-in-out;\n}\n\n.monthOne.left {\n  -webkit-animation: left 0.2s ease-in-out;\n          animation: left 0.2s ease-in-out;\n}\n\n@-webkit-keyframes left {\n  from {\n    -webkit-transform: translateX(-100%);\n            transform: translateX(-100%);\n  }\n  to {\n    -webkit-transform: translateX(0%);\n            transform: translateX(0%);\n  }\n}\n\n@keyframes left {\n  from {\n    -webkit-transform: translateX(-100%);\n            transform: translateX(-100%);\n  }\n  to {\n    -webkit-transform: translateX(0%);\n            transform: translateX(0%);\n  }\n}\n\n@-webkit-keyframes right {\n  from {\n    -webkit-transform: translateX(0%);\n            transform: translateX(0%);\n  }\n  to {\n    -webkit-transform: translateX(-100%);\n            transform: translateX(-100%);\n  }\n}\n\n@keyframes right {\n  from {\n    -webkit-transform: translateX(0%);\n            transform: translateX(0%);\n  }\n  to {\n    -webkit-transform: translateX(-100%);\n            transform: translateX(-100%);\n  }\n}\n\n.suggests {\n  padding: 8px 8px 0 8px;\n  display: block;\n  float: left;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.monthSelectBtn {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n  -webkit-box-flex: 1;\n          flex: 1;\n  padding: 4px 8px;\n}\n\napp-day-view {\n  display: block;\n  float: left;\n  width: 100%;\n}\n\n.styledDay.isDisabled {\n  color: #a7a7a7;\n}\n\n.styledDay.isInPeriod {\n  background: #26b1b12b !important;\n}\n\n.styledDay.isSelected {\n  background: #26b1b180 !important;\n}\n\n.styledDay.isSelected.period.end {\n  background: linear-gradient(120deg, #26b1b12b 45%, #26b1b180 113%) !important;\n  -webkit-animation: appear 0.2s ease-in-out;\n          animation: appear 0.2s ease-in-out;\n}\n\n.styledDay.isSelected.period.start {\n  background: linear-gradient(-50deg, #26b1b12b 45%, #26b1b180 113%) !important;\n  -webkit-animation: appear 0.2s ease-in-out;\n          animation: appear 0.2s ease-in-out;\n}\n\n.day {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-flex: 1;\n          flex: 1;\n  font-size: 0.8em;\n  padding: 6px;\n}\n\n.dayDir {\n  display: block;\n  float: left;\n  width: 100%;\n  height: 100%;\n}\n\n.styledDay {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-flex: 1;\n          flex: 1;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  color: #313131;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n\n.styledDay:hover {\n  background: #eee;\n  cursor: pointer;\n  color: #313131;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n\n.dayWrap {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-flex: 1;\n          flex: 1;\n  height: 100%;\n  width: 100%;\n}\n\n.calendarWrap {\n  float: left;\n  display: -webkit-box;\n  display: flex;\n  background: #fff;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  border-radius: 4px;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n  width: -webkit-min-content;\n  width: -moz-min-content;\n  width: min-content;\n}\n\n.dateSelector {\n  float: left;\n  width: auto;\n  display: -webkit-box;\n  display: flex;\n  position: relative;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n          flex-direction: row;\n  -webkit-transition: all 0.2s;\n  transition: all 0.2s;\n}\n\n.monthWrap {\n  padding: 0 8px;\n  display: block;\n  float: left;\n  width: 100%;\n}\n\n.f1 {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-flex: 1;\n          flex: 1;\n}\n\n.monthHeader {\n  text-align: center;\n  text-align: center;\n  padding: 8px 16px;\n  font-size: 15px;\n  color: #2b2b2b;\n}\n\n.monthHeader::first-letter {\n  text-transform: uppercase;\n}\n\n.monthHeader:hover {\n  cursor: pointer;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  background: #eee;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3J1bm5lci93b3JrL2FuZ3VsYXItZGF0ZXBpY2tlcjIvYW5ndWxhci1kYXRlcGlja2VyMi9wcm9qZWN0cy9hbmd1bGFyLWRhdGVwaWNrZXIyL3NyYy9saWIvY2FsZW5kYXIvYW5ndWxhci1kYXRlcGlja2VyMi5jb21wb25lbnQuc2NzcyIsInByb2plY3RzL2FuZ3VsYXItZGF0ZXBpY2tlcjIvc3JjL2xpYi9jYWxlbmRhci9hbmd1bGFyLWRhdGVwaWNrZXIyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUdBO0VBQ0UsbUJBQUE7RUFDQSxXQUFBO0VBQ0EsY0FBQTtFQUNBLFdBQUE7RUFDQSxjQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxlQUFBO0VBQ0EsNEJBQUE7RUFBQSxvQkFBQTtFQUNBLGVBQUE7QUNGRjs7QURLQTtFQUNFLG1CQUFBO0VBQ0EsY0FBQTtBQ0ZGOztBREtBO0VBQ0UsY0FBQTtFQUNBLFdBQUE7RUFDQSxXQUFBO0FDRkY7O0FESUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSw0QkFBQTtFQUFBLDZCQUFBO1VBQUEsc0JBQUE7RUFDQSx3QkFBQTtVQUFBLHVCQUFBO0VBQ0EseUJBQUE7VUFBQSxtQkFBQTtFQUNBLHlCQUFBO0tBQUEsc0JBQUE7TUFBQSxxQkFBQTtVQUFBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSw0QkFBQTtFQUFBLG9CQUFBO0VBQ0EsZ0JBQUE7RUFDQSxjQXRDSztFQXVDTCxVQUFBO0VBQ0EsZ0JBQUE7QUNERjs7QURJQTtFQUNFLGdCQUFBO0FDREY7O0FESUE7RUFDRSxXQUFBO0VBQ0Esb0JBQUE7RUFBQSxhQUFBO0VBQ0EsOEJBQUE7RUFBQSw2QkFBQTtVQUFBLG1CQUFBO0FDREY7O0FESUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSxtQkFBQTtVQUFBLE9BQUE7RUFDQSxjQUFBO0VB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ZXBpY2tlcjIvc3JjL2xpYi9jYWxlbmRhci9hbmd1bGFyLWRhdGVwaWNrZXIyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiJGFuaW1TcGVlZDogMC4ycztcbiRjeWFuOiAjMjZiMWIxO1xuXG4uc3VnZ2VzdCB7XG4gIGJhY2tncm91bmQ6ICNlMGY1ZjU7XG4gIHdpZHRoOiBhdXRvO1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIGNvbG9yOiAjMjZiMWIxO1xuICBib3JkZXItcmFkaXVzOiAycHg7XG4gIHBhZGRpbmc6IDRweCA4cHg7XG4gIG1hcmdpbi1yaWdodDogMnB4O1xuICBtYXJnaW4tYm90dG9tOiAycHg7XG4gIGZvbnQtc2l6ZTogMTNweDtcbiAgdHJhbnNpdGlvbjogYWxsIDAuMnM7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuLnN1Z2dlc3Q6aG92ZXIge1xuICBiYWNrZ3JvdW5kOiAjODJkY2RjO1xuICBjb2xvcjogIzE0OGE4YTtcbn1cblxuYXBwLWNhbGVuZGFyIHtcbiAgZGlzcGxheTogYmxvY2s7XG4gIGZsb2F0OiBsZWZ0O1xuICB3aWR0aDogMTAwJTtcbn1cbi5uZXh0UHJldkJ0biB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB1c2VyLXNlbGVjdDogbm9uZTtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIHBhZGRpbmc6IDhweCAxNnB4O1xuICB0cmFuc2l0aW9uOiBhbGwgMC4ycztcbiAgZm9udC1zaXplOiAwLjllbTtcbiAgY29sb3I6ICRjeWFuO1xuICB6LWluZGV4OiAxO1xuICBiYWNrZ3JvdW5kOiAjZmZmO1xufVxuXG4ubmV4dFByZXZCdG46aG92ZXIge1xuICBiYWNrZ3JvdW5kOiAjZWVlO1xufVxuXG5hcHAtd2Vlay12aWV3IHtcbiAgd2lkdGg6IDEwMCU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG59XG5cbi5kYXlXZWVrVGl0bGUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4OiAxO1xuICBjb2xvcjogI2E5YTlhOTtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZvbnQtc2l6ZTogMC44ZW07XG4gIHBhZGRpbmc6IDRweDtcbn1cblxuLnN0eWxlZERheS5pc1dlZWtFbmQge1xuICBjb2xvcjogI2M1M2MzYztcbn1cblxuLndlZWtXcmFwIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbn1cblxuYXBwLW1vbnRoLXNlbGVjdCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiBsZWZ0O1xuICBtaW4td2lkdGg6IDIwMHB4O1xuICBhbmltYXRpb246IGFwcGVhciAkYW5pbVNwZWVkIGVhc2UtaW4tb3V0O1xufVxuXG4ubW9udGhJdGVtIHtcbiAgd2lkdGg6IDMzJTtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBwYWRkaW5nOiA5cHggMDtcbiAgYm94LXNoYWRvdzogMCAwIDAgMXB4ICNmNGYzZjM7XG4gIGNvbG9yOiAjMzEzMTMxO1xufVxuXG4ubW9udGhJdGVtOmhvdmVyIHtcbiAgdXNlci1zZWxlY3Q6IG5vbmU7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgYmFja2dyb3VuZDogI2VlZTtcbiAgdHJhbnNpdGlvbjogJGFuaW1TcGVlZDtcbn1cblxuYXBwLW1vbnRoLXZpZXcge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogbGVmdDtcbiAgbWluLXdpZHRoOiAyMDBweDtcbiAgYW5pbWF0aW9uOiBhcHBlYXIgJGFuaW1TcGVlZCBlYXNlLWluLW91dDtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG5Aa2V5ZnJhbWVzIGFwcGVhciB7XG4gIGZyb20ge1xuICAgIHRyYW5zZm9ybTogc2NhbGUoMC42KTtcbiAgICBvcGFjaXR5OiAwLjY7XG4gIH1cblxuICA1MCUge1xuICAgIHRyYW5zZm9ybTogb3BhY2l0eSgwKTtcbiAgICB0cmFuc2Zvcm06IHNjYWxlKDAuOCk7XG4gIH1cblxuICB0byB7XG4gICAgb3BhY2l0eTogMTtcbiAgICB0cmFuc2Zvcm06IHNjYWxlKDEpO1xuICB9XG59XG5cbi5tb250aHMge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGhlaWdodDogMTAwJTtcbn1cblxuLndyYXBNb250aHMge1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIHdpZHRoOiA0NzdweDtcbn1cblxuLm1vbnRoT25lIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG4ubW9udGhPbmUucmlnaHQge1xuICBhbmltYXRpb246IHJpZ2h0ICRhbmltU3BlZWQgZWFzZS1pbi1vdXQ7XG59XG4ubW9udGhPbmUubGVmdCB7XG4gIGFuaW1hdGlvbjogbGVmdCAkYW5pbVNwZWVkIGVhc2UtaW4tb3V0O1xufVxuQGtleWZyYW1lcyBsZWZ0IHtcbiAgZnJvbSB7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKC0xMDAlKTtcbiAgfVxuICB0byB7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKDAlKTtcbiAgfVxufVxuXG5Aa2V5ZnJhbWVzIHJpZ2h0IHtcbiAgZnJvbSB7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKDAlKTtcbiAgfVxuICB0byB7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKC0xMDAlKTtcbiAgfVxufVxuXG4uc3VnZ2VzdHMge1xuICBwYWRkaW5nOiA4cHggOHB4IDAgOHB4O1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiAxMDAlO1xuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xufVxuXG4ubW9udGhTZWxlY3RCdG4ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBmbGV4OiAxO1xuICBwYWRkaW5nOiA0cHggOHB4O1xufVxuXG5hcHAtZGF5LXZpZXcge1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG4uc3R5bGVkRGF5LmlzRGlzYWJsZWQge1xuICBjb2xvcjogI2E3YTdhNztcbn1cblxuLnN0eWxlZERheS5pc0luUGVyaW9kIHtcbiAgYmFja2dyb3VuZDogIzI2YjFiMTJiICFpbXBvcnRhbnQgIDtcbn1cblxuLnN0eWxlZERheS5pc1NlbGVjdGVkIHtcbiAgYmFja2dyb3VuZDogIzI2YjFiMTgwICFpbXBvcnRhbnQ7XG59XG5cbi5zdHlsZWREYXkuaXNTZWxlY3RlZC5wZXJpb2QuZW5kIHtcbiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KFxuICAgIDEyMGRlZyxcbiAgICAjMjZiMWIxMmIgNDUlLFxuICAgICMyNmIxYjE4MCAxMTMlXG4gICkgIWltcG9ydGFudCA7XG4gIGFuaW1hdGlvbjogYXBwZWFyICRhbmltU3BlZWQgZWFzZS1pbi1vdXQ7XG59XG4uc3R5bGVkRGF5LmlzU2VsZWN0ZWQucGVyaW9kLnN0YXJ0IHtcbiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KFxuICAgIC01MGRlZyxcbiAgICAjMjZiMWIxMmIgNDUlLFxuICAgICMyNmIxYjE4MCAxMTMlXG4gICkgIWltcG9ydGFudCA7XG4gIGFuaW1hdGlvbjogYXBwZWFyICRhbmltU3BlZWQgZWFzZS1pbi1vdXQ7XG59XG5cbi5kYXkge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4OiAxO1xuICBmb250LXNpemU6IDAuOGVtO1xuICBwYWRkaW5nOiA2cHg7XG59XG4uZGF5RGlyIHtcbiAgZGlzcGxheTogYmxvY2s7XG4gIGZsb2F0OiBsZWZ0O1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uc3R5bGVkRGF5IHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleDogMTtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGNvbG9yOiAjMzEzMTMxO1xuICB0cmFuc2l0aW9uOiBhbGwgMC4ycztcbn1cblxuLnN0eWxlZERheTpob3ZlciB7XG4gIGJhY2tncm91bmQ6ICNlZWU7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgY29sb3I6ICMzMTMxMzE7XG4gIHVzZXItc2VsZWN0OiBub25lO1xufVxuXG4uZGF5V3JhcCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXg6IDE7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5jYWxlbmRhcldyYXAge1xuICBmbG9hdDogbGVmdDtcbiAgZGlzcGxheTogZmxleDtcbiAgYmFja2dyb3VuZDogI2ZmZjtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgYm9yZGVyLXJhZGl1czogNHB4O1xuICB0cmFuc2l0aW9uOiBhbGwgMC4ycztcbiAgd2lkdGg6IG1pbi1jb250ZW50O1xufVxuXG4uZGF0ZVNlbGVjdG9yIHtcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiBhdXRvO1xuICBkaXNwbGF5OiBmbGV4O1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIHRyYW5zaXRpb246IGFsbCAwLjJzO1xufVxuXG4ubW9udGhXcmFwIHtcbiAgcGFkZGluZzogMCA4cHg7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBmbG9hdDogbGVmdDtcbiAgd2lkdGg6IDEwMCU7XG59XG4uZjEge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4OiAxO1xufVxuXG4ubW9udGhIZWFkZXIge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgcGFkZGluZzogOHB4IDE2cHg7XG4gIGZvbnQtc2l6ZTogMTVweDtcbiAgY29sb3I6ICMyYjJiMmI7XG59XG5cbi5tb250aEhlYWRlcjo6Zmlyc3QtbGV0dGVyIHtcbiAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtcbn1cblxuLm1vbnRoSGVhZGVyOmhvdmVyIHtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICB1c2VyLXNlbGVjdDogbm9uZTtcbiAgYmFja2dyb3VuZDogI2VlZTtcbn1cbiIsIi5zdWdnZXN0IHtcbiAgYmFja2dyb3VuZDogI2UwZjVmNTtcbiAgd2lkdGg6IGF1dG87XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBmbG9hdDogbGVmdDtcbiAgY29sb3I6ICMyNmIxYjE7XG4gIGJvcmRlci1yYWRpdXM6IDJweDtcbiAgcGFkZGluZzogNHB4IDhweDtcbiAgbWFyZ2luLXJpZ2h0OiAycHg7XG4gIG1hcmdpbi1ib3R0b206IDJweDtcbiAgZm9udC1zaXplOiAxM3B4O1xuICB0cmFuc2l0aW9uOiBhbGwgMC4ycztcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4uc3VnZ2VzdDpob3ZlciB7XG4gIGJhY2tncm91bmQ6ICM4MmRjZGM7XG4gIGNvbG9yOiAjMTQ4YThhO1xufVxuXG5hcHAtY2FsZW5kYXIge1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG4ubmV4dFByZXZCdG4ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgdXNlci1zZWxlY3Q6IG5vbmU7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBwYWRkaW5nOiA4cHggMTZweDtcbiAgdHJhbnNpdGlvbjogYWxsIDAuMnM7XG4gIGZvbnQtc2l6ZTogMC45ZW07XG4gIGNvbG9yOiAjMjZiMWIxO1xuICB6LWluZGV4OiAxO1xuICBiYWNrZ3JvdW5kOiAjZmZmO1xufVxuXG4ubmV4dFByZXZCdG46aG92ZXIge1xuICBiYWNrZ3JvdW5kOiAjZWVlO1xufVxuXG5hcHAtd2Vlay12aWV3IHtcbiAgd2lkdGg6IDEwMCU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG59XG5cbi5kYXlXZWVrVGl0bGUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4OiAxO1xuICBjb2xvcjogI2E5YTlhOTtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZvbnQtc2l6ZTogMC44ZW07XG4gIHBhZGRpbmc6IDRweDtcbn1cblxuLnN0eWxlZERheS5pc1dlZWtFbmQge1xuICBjb2xvcjogI2M1M2MzYztcbn1cblxuLndlZWtXcmFwIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbn1cblxuYXBwLW1vbnRoLXNlbGVjdCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiBsZWZ0O1xuICBtaW4td2lkdGg6IDIwMHB4O1xuICBhbmltYXRpb246IGFwcGVhciAwLjJzIGVhc2UtaW4tb3V0O1xufVxuXG4ubW9udGhJdGVtIHtcbiAgd2lkdGg6IDMzJTtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBwYWRkaW5nOiA5cHggMDtcbiAgYm94LXNoYWRvdzogMCAwIDAgMXB4ICNmNGYzZjM7XG4gIGNvbG9yOiAjMzEzMTMxO1xufVxuXG4ubW9udGhJdGVtOmhvdmVyIHtcbiAgdXNlci1zZWxlY3Q6IG5vbmU7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgYmFja2dyb3VuZDogI2VlZTtcbiAgdHJhbnNpdGlvbjogMC4ycztcbn1cblxuYXBwLW1vbnRoLXZpZXcge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogbGVmdDtcbiAgbWluLXdpZHRoOiAyMDBweDtcbiAgYW5pbWF0aW9uOiBhcHBlYXIgMC4ycyBlYXNlLWluLW91dDtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG5Aa2V5ZnJhbWVzIGFwcGVhciB7XG4gIGZyb20ge1xuICAgIHRyYW5zZm9ybTogc2NhbGUoMC42KTtcbiAgICBvcGFjaXR5OiAwLjY7XG4gIH1cbiAgNTAlIHtcbiAgICB0cmFuc2Zvcm06IG9wYWNpdHkoMCk7XG4gICAgdHJhbnNmb3JtOiBzY2FsZSgwLjgpO1xuICB9XG4gIHRvIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zZm9ybTogc2NhbGUoMSk7XG4gIH1cbn1cbi5tb250aHMge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGhlaWdodDogMTAwJTtcbn1cblxuLndyYXBNb250aHMge1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIHdpZHRoOiA0NzdweDtcbn1cblxuLm1vbnRoT25lIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG4ubW9udGhPbmUucmlnaHQge1xuICBhbmltYXRpb246IHJpZ2h0IDAuMnMgZWFzZS1pbi1vdXQ7XG59XG5cbi5tb250aE9uZS5sZWZ0IHtcbiAgYW5pbWF0aW9uOiBsZWZ0IDAuMnMgZWFzZS1pbi1vdXQ7XG59XG5cbkBrZXlmcmFtZXMgbGVmdCB7XG4gIGZyb20ge1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgtMTAwJSk7XG4gIH1cbiAgdG8ge1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgwJSk7XG4gIH1cbn1cbkBrZXlmcmFtZXMgcmlnaHQge1xuICBmcm9tIHtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoMCUpO1xuICB9XG4gIHRvIHtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTEwMCUpO1xuICB9XG59XG4uc3VnZ2VzdHMge1xuICBwYWRkaW5nOiA4cHggOHB4IDAgOHB4O1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiAxMDAlO1xuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xufVxuXG4ubW9udGhTZWxlY3RCdG4ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBmbGV4OiAxO1xuICBwYWRkaW5nOiA0cHggOHB4O1xufVxuXG5hcHAtZGF5LXZpZXcge1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG4uc3R5bGVkRGF5LmlzRGlzYWJsZWQge1xuICBjb2xvcjogI2E3YTdhNztcbn1cblxuLnN0eWxlZERheS5pc0luUGVyaW9kIHtcbiAgYmFja2dyb3VuZDogIzI2YjFiMTJiICFpbXBvcnRhbnQ7XG59XG5cbi5zdHlsZWREYXkuaXNTZWxlY3RlZCB7XG4gIGJhY2tncm91bmQ6ICMyNmIxYjE4MCAhaW1wb3J0YW50O1xufVxuXG4uc3R5bGVkRGF5LmlzU2VsZWN0ZWQucGVyaW9kLmVuZCB7XG4gIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxMjBkZWcsICMyNmIxYjEyYiA0NSUsICMyNmIxYjE4MCAxMTMlKSAhaW1wb3J0YW50O1xuICBhbmltYXRpb246IGFwcGVhciAwLjJzIGVhc2UtaW4tb3V0O1xufVxuXG4uc3R5bGVkRGF5LmlzU2VsZWN0ZWQucGVyaW9kLnN0YXJ0IHtcbiAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KC01MGRlZywgIzI2YjFiMTJiIDQ1JSwgIzI2YjFiMTgwIDExMyUpICFpbXBvcnRhbnQ7XG4gIGFuaW1hdGlvbjogYXBwZWFyIDAuMnMgZWFzZS1pbi1vdXQ7XG59XG5cbi5kYXkge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4OiAxO1xuICBmb250LXNpemU6IDAuOGVtO1xuICBwYWRkaW5nOiA2cHg7XG59XG5cbi5kYXlEaXIge1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG59XG5cbi5zdHlsZWREYXkge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4OiAxO1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgY29sb3I6ICMzMTMxMzE7XG4gIHRyYW5zaXRpb246IGFsbCAwLjJzO1xufVxuXG4uc3R5bGVkRGF5OmhvdmVyIHtcbiAgYmFja2dyb3VuZDogI2VlZTtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBjb2xvcjogIzMxMzEzMTtcbiAgdXNlci1zZWxlY3Q6IG5vbmU7XG59XG5cbi5kYXlXcmFwIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleDogMTtcbiAgaGVpZ2h0OiAxMDAlO1xuICB3aWR0aDogMTAwJTtcbn1cblxuLmNhbGVuZGFyV3JhcCB7XG4gIGZsb2F0OiBsZWZ0O1xuICBkaXNwbGF5OiBmbGV4O1xuICBiYWNrZ3JvdW5kOiAjZmZmO1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIHRyYW5zaXRpb246IGFsbCAwLjJzO1xuICB3aWR0aDogbWluLWNvbnRlbnQ7XG59XG5cbi5kYXRlU2VsZWN0b3Ige1xuICBmbG9hdDogbGVmdDtcbiAgd2lkdGg6IGF1dG87XG4gIGRpc3BsYXk6IGZsZXg7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgdHJhbnNpdGlvbjogYWxsIDAuMnM7XG59XG5cbi5tb250aFdyYXAge1xuICBwYWRkaW5nOiAwIDhweDtcbiAgZGlzcGxheTogYmxvY2s7XG4gIGZsb2F0OiBsZWZ0O1xuICB3aWR0aDogMTAwJTtcbn1cblxuLmYxIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleDogMTtcbn1cblxuLm1vbnRoSGVhZGVyIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHBhZGRpbmc6IDhweCAxNnB4O1xuICBmb250LXNpemU6IDE1cHg7XG4gIGNvbG9yOiAjMmIyYjJiO1xufVxuXG4ubW9udGhIZWFkZXI6OmZpcnN0LWxldHRlciB7XG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XG59XG5cbi5tb250aEhlYWRlcjpob3ZlciB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgdXNlci1zZWxlY3Q6IG5vbmU7XG4gIGJhY2tncm91bmQ6ICNlZWU7XG59Il19 */";
     /***/
   },
 
@@ -1355,14 +1341,14 @@
     var _service_calendar_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! ../_service/calendar.service */
     "./projects/angular-datepicker2/src/lib/_service/calendar.service.ts");
+    /* harmony import */
+
+
+    var _day_directive__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../day.directive */
+    "./projects/angular-datepicker2/src/lib/day.directive.ts");
 
     let AngularDatepicker2 = class AngularDatepicker2 {
-      // disabled?: {
-      //   enabled: true;
-      //   mode: "after"; // 'after'|'before'
-      // };
-      //suggestions: [];
-      //showMonthQty: number;
       constructor(calendarService, cdr) {
         this.calendarService = calendarService;
         this.cdr = cdr;
@@ -1390,7 +1376,16 @@
          * Weekends, default [0,6], set Day.isWeekend true
          */
 
-        this.weekends = [0, 6]; //setTimeout(() => this.changeViewSelectorMode(), 1000);
+        this.weekends = [0, 6];
+        this.dayDirectives = [];
+      }
+
+      ngAfterViewInit() {
+        this.dayDirectives = this.dayDirectivesQueryList.toArray();
+      }
+
+      getMonthDayDirectives(date) {
+        return this.dayDirectives.filter(directive => directive.date.getMonth() === date.getMonth() && directive.date.getFullYear() === date.getFullYear());
       }
 
       clickSuggest(suggest) {
@@ -1451,7 +1446,7 @@
         const months = [];
         let lastDate;
         lastDate = date ? date : this.calendarService.getLastDate();
-        countMonths = this.calendarService.getCountMonths(); //this.countMonths = countMonths;
+        countMonths = this.calendarService.getCountMonths();
 
         for (let i = countMonths - 1; i >= 0; i--) {
           months.push(new Date(lastDate).adjustMonth(-i));
@@ -1489,13 +1484,8 @@
           setTimeout(() => this.recountWidth(), 10);
         }
       }
-      /* private _vertical(simpleChange) {
-         this.calendarService.ve vertical = simpleChange.vertical.currentValue;
-       } */
-
 
       ngOnChanges(simpleChange) {
-        //console.log(simpleChange);
         simpleChange.viewMode && this._viewMode(simpleChange);
         simpleChange.selectMode && this._selectMode(simpleChange);
         simpleChange.shownDate && this._shownDate(simpleChange);
@@ -1505,7 +1495,7 @@
       /** Set custom Day[] */
 
 
-      setDays(days) {}
+      setDays() {}
 
       goNext() {
         let lastDate = this.calendarService.calendar[this.calendarService.calendar.length - 1];
@@ -1538,6 +1528,7 @@
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AngularDatepicker2.prototype, "selectMode", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AngularDatepicker2.prototype, "nowDate", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChildren"])("column")], AngularDatepicker2.prototype, "columns", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ContentChildren"])(_day_directive__WEBPACK_IMPORTED_MODULE_3__["DayDirective"])], AngularDatepicker2.prototype, "dayDirectivesQueryList", void 0);
     AngularDatepicker2 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: "angular-datepicker2",
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -1623,27 +1614,10 @@
         this.calendarService = calendarService;
       }
 
-      createChildComponent(component) {
-        if (this.template) {
-          const props = component.props;
-          let factory = this.componentFactoryResolver.resolveComponentFactory(component.componentClass);
-          let viewContainerRef = this.template;
-          viewContainerRef.clear();
-          let childComponentRef = viewContainerRef.createComponent(factory);
-
-          for (var _i = 0, _Object$keys = Object.keys(props); _i < _Object$keys.length; _i++) {
-            let k = _Object$keys[_i];
-            let prop = props[k];
-
-            if (prop.type === "output") {
-              childComponentRef.instance[prop.propName].subscribe(data => {
-                prop.value(data);
-              });
-            } else if (prop.type === "input") {
-              childComponentRef.instance[prop.propName] = prop.value;
-            }
-          }
-        }
+      createChildComponent() {
+        let viewContainerRef = this.template;
+        viewContainerRef.clear();
+        viewContainerRef.createEmbeddedView(this.dayDirective.template, this.dayDirective.context);
       }
 
       isStartOrEndDatePeriod() {
@@ -1669,26 +1643,14 @@
       }
 
       ngAfterViewInit() {
-        if (this.dayService.day.template && this.dayService.day.template.component) {
-          this.createChildComponent(this.dayService.day.template.component);
+        if (this.dayDirective && this.template) {
+          this.createChildComponent();
         }
       } // bad idea, too mach subscribes for every day
 
 
       ngOnInit() {
         this.dayService.createDay(this.date);
-        this.sub1 = this.calendarService.days.subscribe(data => {
-          if (data && data.length > 0) {
-            let day = data.find(item => item.date.getYmd() == this.date.getYmd());
-            day ? this.dayService.day = Object.assign({}, this.dayService.day, day) : null; // if (day) {
-            //   this.dayService.day == day;
-            // }
-
-            if (day && this.template) {
-              this.createChildComponent(this.dayService.day.template.component);
-            }
-          }
-        });
         this.sub = this.calendarService.selectedDates.subscribe(data => {
           const days = data.map(item => item.getYmd());
           this.dayService.day.isSelected = days.includes(this.dayService.day.date.getYmd());
@@ -1698,7 +1660,10 @@
 
       detectChanges() {}
 
-      ngOnChanges() {//console.log("Day changed");
+      ngOnChanges() {
+        if (this.dayDirective && this.template) {
+          this.createChildComponent();
+        }
       }
 
       onClick() {
@@ -1707,7 +1672,6 @@
 
       ngOnDestroy() {
         this.sub.unsubscribe();
-        this.sub1.unsubscribe();
       }
 
     };
@@ -1722,6 +1686,7 @@
 
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], DayViewComponent.prototype, "date", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], DayViewComponent.prototype, "thisMonth", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], DayViewComponent.prototype, "dayDirective", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])("tpl", {
       static: false,
       read: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewContainerRef"]
@@ -1736,6 +1701,75 @@
       /*! ./day-view.component.scss */
       "./projects/angular-datepicker2/src/lib/day-view/day-view.component.scss")).default]
     })], DayViewComponent);
+    /***/
+  },
+
+  /***/
+  "./projects/angular-datepicker2/src/lib/day.directive.ts":
+  /*!***************************************************************!*\
+    !*** ./projects/angular-datepicker2/src/lib/day.directive.ts ***!
+    \***************************************************************/
+
+  /*! exports provided: DayDirective */
+
+  /***/
+  function projectsAngularDatepicker2SrcLibDayDirectiveTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "DayDirective", function () {
+      return DayDirective;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+
+    let DayDirective = class DayDirective {
+      constructor(template, container) {
+        this.template = template;
+        this.container = container;
+        this.context = null;
+      }
+
+      set day(date) {
+        this.context = {
+          $implicit: this.date
+        };
+      }
+
+      ngOnInit() {
+        this.context = {
+          $implicit: this.date,
+          date: this.date
+        };
+        this.container.createEmbeddedView(this.template, this.context);
+      }
+
+    };
+
+    DayDirective.ctorParameters = () => [{
+      type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["TemplateRef"]
+    }, {
+      type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewContainerRef"]
+    }];
+
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])("dayFrom")], DayDirective.prototype, "date", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], DayDirective.prototype, "day", null);
+    DayDirective = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Directive"])({
+      selector: "[day]"
+    })], DayDirective);
     /***/
   },
 
@@ -1772,7 +1806,7 @@
     "./node_modules/tslib/tslib.es6.js");
     /**
      * @publicApi
-    */
+     */
 
 
     var SelectMode;
@@ -1996,6 +2030,15 @@
         this.sub.unsubscribe();
       }
 
+      getWeekDayDirectives(weekStartDate) {
+        weekStartDate.setHours(0, 0, 0, 0);
+        const weekEndDate = new Date(weekStartDate);
+        weekEndDate.setDate(weekStartDate.getDate() + 7);
+        weekEndDate.setHours(0, 0, 0, 0);
+        let directives = this.dayDirectives.filter(directive => directive.date.getTime() >= weekStartDate.getTime() && directive.date.getTime() < weekEndDate.getTime());
+        return directives;
+      }
+
     };
 
     MonthViewComponent.ctorParameters = () => [{
@@ -2007,6 +2050,7 @@
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], MonthViewComponent.prototype, "date", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], MonthViewComponent.prototype, "updateDate", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], MonthViewComponent.prototype, "vertical", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], MonthViewComponent.prototype, "dayDirectives", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(), Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostBinding"])("style")], MonthViewComponent.prototype, "elWidth", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])("wrap", {
       static: true
@@ -2091,6 +2135,11 @@
         this.dates = this.weekService.getWeek(this.date);
       }
 
+      getDayDirective(date) {
+        let day = this.dayDirectives.find(directive => directive.date.getTime() === date.getTime());
+        return day;
+      }
+
     };
 
     WeekViewComponent.ctorParameters = () => [{
@@ -2099,6 +2148,7 @@
 
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], WeekViewComponent.prototype, "date", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], WeekViewComponent.prototype, "firstMonthDate", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], WeekViewComponent.prototype, "dayDirectives", void 0);
     WeekViewComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: "app-week-view",
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -2267,7 +2317,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "html, body {\n  padding: 0;\n  display: block;\n  float: left;\n  width: 100%;\n  margin: 0;\n  height: 100%;\n}\n\ntable {\n  border: 1px solid #c3c3c3;\n}\n\ntable td {\n  padding: 10px;\n  font-size: 14px;\n  vertical-align: top;\n}\n\n.customDay {\n  width: 100%;\n  height: 100%;\n  background: #000;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3J1bm5lci93b3JrL2FuZ3VsYXItZGF0ZXBpY2tlcjIvYW5ndWxhci1kYXRlcGlja2VyMi9zcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksVUFBQTtFQUNBLGNBQUE7RUFDQSxXQUFBO0VBQ0EsV0FBQTtFQUNBLFNBQUE7RUFDQSxZQUFBO0FDQ0o7O0FER0E7RUFDSSx5QkFBQTtBQ0FKOztBREdBO0VBQ0ksYUFBQTtFQUNBLGVBQUE7RUFDQSxtQkFBQTtBQ0FKOztBREtBO0VBQ0ksV0FBQTtFQUNBLFlBQUE7RUFDQSxnQkFBQTtBQ0ZKIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaHRtbCwgYm9keXtcbiAgICBwYWRkaW5nOiAwO1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIGZsb2F0OiBsZWZ0O1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIG1hcmdpbjogMDtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICBcbn1cblxudGFibGV7XG4gICAgYm9yZGVyOjFweCBzb2xpZCAjYzNjM2MzXG59XG5cbnRhYmxlIHRke1xuICAgIHBhZGRpbmc6IDEwcHg7XG4gICAgZm9udC1zaXplOjE0cHg7XG4gICAgdmVydGljYWwtYWxpZ246IHRvcFxufVxuXG5cblxuLmN1c3RvbURheXtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6MTAwJTtcbiAgICBiYWNrZ3JvdW5kOiAjMDAwO1xufSIsImh0bWwsIGJvZHkge1xuICBwYWRkaW5nOiAwO1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiAxMDAlO1xuICBtYXJnaW46IDA7XG4gIGhlaWdodDogMTAwJTtcbn1cblxudGFibGUge1xuICBib3JkZXI6IDFweCBzb2xpZCAjYzNjM2MzO1xufVxuXG50YWJsZSB0ZCB7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgdmVydGljYWwtYWxpZ246IHRvcDtcbn1cblxuLmN1c3RvbURheSB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGJhY2tncm91bmQ6ICMwMDA7XG59Il19 */";
+    __webpack_exports__["default"] = "html,\nbody {\n  padding: 0;\n  display: block;\n  float: left;\n  width: 100%;\n  margin: 0;\n  height: 100%;\n}\n\ntable {\n  border: 1px solid #c3c3c3;\n}\n\ntable td {\n  padding: 10px;\n  font-size: 14px;\n  vertical-align: top;\n}\n\n.wrap {\n  width: 100%;\n  float: left;\n  background: #c3c3c3;\n  padding: 32px;\n  box-sizing: border-box;\n  text-align: center;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n\n.customDay {\n  position: relative;\n  font-size: 0.8em;\n  display: -webkit-box;\n  display: flex;\n  align-self: center;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-flex: 1;\n          flex: 1;\n  -webkit-box-align: center;\n          align-items: center;\n  height: 100%;\n  background: #f0f4f5;\n}\n\n.customDay .points {\n  position: absolute;\n  top: 1px;\n  right: 1px;\n}\n\n.customDay .points .point {\n  width: 4px;\n  height: 4px;\n  background: #999;\n  border-radius: 5px;\n  margin: 1px 0;\n}\n\n.customDay .points .point.red {\n  background: #ff4444;\n}\n\n.customDay .points .point.blue {\n  background: #5a81b3;\n}\n\n.customDay .points .point.green {\n  background: #319e36;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3J1bm5lci93b3JrL2FuZ3VsYXItZGF0ZXBpY2tlcjIvYW5ndWxhci1kYXRlcGlja2VyMi9zcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztFQUVFLFVBQUE7RUFDQSxjQUFBO0VBQ0EsV0FBQTtFQUNBLFdBQUE7RUFDQSxTQUFBO0VBQ0EsWUFBQTtBQ0NGOztBREVBO0VBQ0UseUJBQUE7QUNDRjs7QURFQTtFQUNFLGFBQUE7RUFDQSxlQUFBO0VBQ0EsbUJBQUE7QUNDRjs7QURFQTtFQUNFLFdBQUE7RUFDQSxXQUFBO0VBQ0EsbUJBQUE7RUFDQSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSxrQkFBQTtFQUNBLG9CQUFBO0VBQUEsYUFBQTtFQUNBLDRCQUFBO0VBQUEsNkJBQUE7VUFBQSxzQkFBQTtFQUNBLHlCQUFBO1VBQUEsbUJBQUE7RUFDQSx3QkFBQTtVQUFBLHVCQUFBO0FDQ0Y7O0FERUE7RUFDRSxrQkFBQTtFQUNBLGdCQUFBO0VBQ0Esb0JBQUE7RUFBQSxhQUFBO0VBQ0Esa0JBQUE7RUFDQSx3QkFBQTtVQUFBLHVCQUFBO0VBQ0EsbUJBQUE7VUFBQSxPQUFBO0VBQ0EseUJBQUE7VUFBQSxtQkFBQTtFQUNBLFlBQUE7RUFDQSxtQkFBQTtBQ0NGOztBRENFO0VBQ0Usa0JBQUE7RUFDQSxRQUFBO0VBQ0EsVUFBQTtBQ0NKOztBREFJO0VBQ0UsVUFBQTtFQUNBLFdBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0VBQ0EsYUFBQTtBQ0VOOztBREFJO0VBQ0UsbUJBQUE7QUNFTjs7QURBSTtFQUNFLG1CQUFBO0FDRU47O0FEQUk7RUFDRSxtQkFBQTtBQ0VOIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaHRtbCxcbmJvZHkge1xuICBwYWRkaW5nOiAwO1xuICBkaXNwbGF5OiBibG9jaztcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiAxMDAlO1xuICBtYXJnaW46IDA7XG4gIGhlaWdodDogMTAwJTtcbn1cblxudGFibGUge1xuICBib3JkZXI6IDFweCBzb2xpZCAjYzNjM2MzO1xufVxuXG50YWJsZSB0ZCB7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgdmVydGljYWwtYWxpZ246IHRvcDtcbn1cblxuLndyYXAge1xuICB3aWR0aDogMTAwJTtcbiAgZmxvYXQ6IGxlZnQ7XG4gIGJhY2tncm91bmQ6ICNjM2MzYzM7XG4gIHBhZGRpbmc6IDMycHg7XG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG5cbi5jdXN0b21EYXkge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIGZvbnQtc2l6ZTogMC44ZW07XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLXNlbGY6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGZsZXg6IDE7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGhlaWdodDogMTAwJTtcbiAgYmFja2dyb3VuZDogI2YwZjRmNTtcblxuICAucG9pbnRzIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAxcHg7XG4gICAgcmlnaHQ6IDFweDtcbiAgICAucG9pbnQge1xuICAgICAgd2lkdGg6IDRweDtcbiAgICAgIGhlaWdodDogNHB4O1xuICAgICAgYmFja2dyb3VuZDogIzk5OTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgICAgIG1hcmdpbjogMXB4IDA7XG4gICAgfVxuICAgIC5wb2ludC5yZWQge1xuICAgICAgYmFja2dyb3VuZDogI2ZmNDQ0NDtcbiAgICB9XG4gICAgLnBvaW50LmJsdWUge1xuICAgICAgYmFja2dyb3VuZDogIzVhODFiMztcbiAgICB9XG4gICAgLnBvaW50LmdyZWVuIHtcbiAgICAgIGJhY2tncm91bmQ6ICMzMTllMzY7XG4gICAgfVxuICB9XG59XG4iLCJodG1sLFxuYm9keSB7XG4gIHBhZGRpbmc6IDA7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBmbG9hdDogbGVmdDtcbiAgd2lkdGg6IDEwMCU7XG4gIG1hcmdpbjogMDtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG50YWJsZSB7XG4gIGJvcmRlcjogMXB4IHNvbGlkICNjM2MzYzM7XG59XG5cbnRhYmxlIHRkIHtcbiAgcGFkZGluZzogMTBweDtcbiAgZm9udC1zaXplOiAxNHB4O1xuICB2ZXJ0aWNhbC1hbGlnbjogdG9wO1xufVxuXG4ud3JhcCB7XG4gIHdpZHRoOiAxMDAlO1xuICBmbG9hdDogbGVmdDtcbiAgYmFja2dyb3VuZDogI2MzYzNjMztcbiAgcGFkZGluZzogMzJweDtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbn1cblxuLmN1c3RvbURheSB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24tc2VsZjogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgZmxleDogMTtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgaGVpZ2h0OiAxMDAlO1xuICBiYWNrZ3JvdW5kOiAjZjBmNGY1O1xufVxuLmN1c3RvbURheSAucG9pbnRzIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDFweDtcbiAgcmlnaHQ6IDFweDtcbn1cbi5jdXN0b21EYXkgLnBvaW50cyAucG9pbnQge1xuICB3aWR0aDogNHB4O1xuICBoZWlnaHQ6IDRweDtcbiAgYmFja2dyb3VuZDogIzk5OTtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBtYXJnaW46IDFweCAwO1xufVxuLmN1c3RvbURheSAucG9pbnRzIC5wb2ludC5yZWQge1xuICBiYWNrZ3JvdW5kOiAjZmY0NDQ0O1xufVxuLmN1c3RvbURheSAucG9pbnRzIC5wb2ludC5ibHVlIHtcbiAgYmFja2dyb3VuZDogIzVhODFiMztcbn1cbi5jdXN0b21EYXkgLnBvaW50cyAucG9pbnQuZ3JlZW4ge1xuICBiYWNrZ3JvdW5kOiAjMzE5ZTM2O1xufSJdfQ== */";
     /***/
   },
 
@@ -2305,46 +2355,32 @@
     /* harmony import */
 
 
-    var _test_day_test_day_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ./test-day/test-day.component */
-    "./src/app/test-day/test-day.component.ts");
-    /* harmony import */
-
-
-    var projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! projects/angular-datepicker2/src/public-api */
     "./projects/angular-datepicker2/src/public-api.ts");
-    /* harmony import */
-
-
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-    /*! @angular/common/http */
-    "./node_modules/@angular/common/fesm2015/http.js"); //import {  } from 'projects/angular-datepicker2/src/lib/interfaces';
-
 
     let AppComponent = class AppComponent {
-      constructor(http) {
-        this.http = http;
+      constructor() {
         this.title = "angular-datepicker";
         this.vertical = false;
-        this.selectMode = projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_3__["SelectMode"].Period;
-        this.viewMode = projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_3__["ViewMode"].Quarter;
+        this.selectMode = projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_2__["SelectMode"].Period;
+        this.viewMode = projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_2__["ViewMode"].Quarter;
         this.suggest = [{
           title: "Last two weeks",
-          selectMode: projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_3__["SelectMode"].Period,
-          selectedDates: [new Date(2020, 3, 1), new Date(2020, 3, 12)]
+          selectMode: projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_2__["SelectMode"].Period,
+          selectedDates: [new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 14), new Date()]
         }, {
           title: "Last month",
-          selectMode: projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_3__["SelectMode"].Period,
-          selectedDates: [new Date(2020, 3, 1), new Date(2020, 3, 30)]
+          selectMode: projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_2__["SelectMode"].Period,
+          selectedDates: [new Date(new Date().getFullYear(), new Date().getMonth() - 1, new Date().getDate()), new Date()]
         }, {
           title: "1, 4 and 30",
-          selectMode: projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_3__["SelectMode"].Multiple,
-          selectedDates: [new Date(2020, 3, 1), new Date(2020, 3, 4), new Date(2020, 3, 30)]
+          selectMode: projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_2__["SelectMode"].Multiple,
+          selectedDates: [new Date(new Date().getFullYear(), new Date().getMonth(), 1), new Date(new Date().getFullYear(), new Date().getMonth(), 4), new Date(new Date().getFullYear(), new Date().getMonth(), 30)]
         }];
         this._stackOnDayClick = [];
-        this._viewModeVal = [projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_3__["ViewMode"].Quarter, 1, 3, 4, projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_3__["ViewMode"].Semester, 6];
-        this._selectModeVal = [projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_3__["SelectMode"].Period, projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_3__["SelectMode"].Multiple, projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_3__["SelectMode"].Single];
+        this._viewModeVal = [projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_2__["ViewMode"].Quarter, 1, 3, 4, projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_2__["ViewMode"].Semester, 6];
+        this._selectModeVal = [projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_2__["SelectMode"].Period, projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_2__["SelectMode"].Multiple, projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_2__["SelectMode"].Single];
         this._verticalVal = [false, true];
         this._shownDateVal = [new Date()];
       }
@@ -2381,44 +2417,29 @@
           isHovered: false,
           isSelected: false,
           isWeekEnd: true,
-          date: new Date(2020, 3, 23)
+          date: new Date(new Date().getFullYear(), new Date().getMonth(), 2)
         }, {
           isDisabled: false,
           isHovered: false,
           isSelected: false,
           isWeekEnd: true,
-          date: new Date(2020, 3, 21)
+          date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 30)
         }, {
           isDisabled: false,
           isHovered: false,
           isSelected: false,
           isWeekEnd: true,
-          date: new Date(new Date().getFullYear(), new Date().getMonth(), 25),
-          template: {
-            component: {
-              componentClass: _test_day_test_day_component__WEBPACK_IMPORTED_MODULE_2__["TestDayComponent"],
-              props: [{
-                propName: "title",
-                type: "input",
-                value: new Date(2020, 3, 25).getDate()
-              }, {
-                propName: "callback2",
-                type: "output",
-                value: data => {
-                  alert("click custom day. See Day interface");
-                }
-              }]
-            }
-          }
+          date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 5)
+        }, {
+          isDisabled: false,
+          isHovered: false,
+          isSelected: false,
+          isWeekEnd: true,
+          date: new Date(new Date().getFullYear(), new Date().getMonth(), 6)
         }];
       }
 
     };
-
-    AppComponent.ctorParameters = () => [{
-      type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]
-    }];
-
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: "app-root",
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -2483,132 +2504,46 @@
     /* harmony import */
 
 
-    var _angular_common_locales_ru__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-    /*! @angular/common/locales/ru */
-    "./node_modules/@angular/common/locales/ru.js");
+    var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @angular/common/locales/en */
+    "./node_modules/@angular/common/locales/en.js");
     /* harmony import */
 
 
-    var _angular_common_locales_ru__WEBPACK_IMPORTED_MODULE_5___default =
+    var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_5___default =
     /*#__PURE__*/
-    __webpack_require__.n(_angular_common_locales_ru__WEBPACK_IMPORTED_MODULE_5__);
+    __webpack_require__.n(_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_5__);
     /* harmony import */
 
 
-    var _test_day_test_day_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-    /*! ./test-day/test-day.component */
-    "./src/app/test-day/test-day.component.ts");
-    /* harmony import */
-
-
-    var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/forms */
     "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
-    var projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! projects/angular-datepicker2/src/public-api */
     "./projects/angular-datepicker2/src/public-api.ts");
     /* harmony import */
 
 
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
-    /*! @angular/common/http */
-    "./node_modules/@angular/common/fesm2015/http.js");
+    var projects_angular_datepicker2_src_lib_day_directive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! projects/angular-datepicker2/src/lib/day.directive */
+    "./projects/angular-datepicker2/src/lib/day.directive.ts");
 
-    Object(_angular_common__WEBPACK_IMPORTED_MODULE_4__["registerLocaleData"])(_angular_common_locales_ru__WEBPACK_IMPORTED_MODULE_5___default.a, "ru");
+    Object(_angular_common__WEBPACK_IMPORTED_MODULE_4__["registerLocaleData"])(_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_5___default.a, "en");
     let AppModule = class AppModule {};
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _test_day_test_day_component__WEBPACK_IMPORTED_MODULE_6__["TestDayComponent"]],
-      entryComponents: [_test_day_test_day_component__WEBPACK_IMPORTED_MODULE_6__["TestDayComponent"]],
-      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"], projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_8__["AngularDatepicker2Module"], _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"]],
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], projects_angular_datepicker2_src_lib_day_directive__WEBPACK_IMPORTED_MODULE_8__["DayDirective"]],
+      entryComponents: [],
+      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"], projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_7__["AngularDatepicker2Module"]],
       providers: [{
         provide: _angular_core__WEBPACK_IMPORTED_MODULE_2__["LOCALE_ID"],
-        useValue: "ru"
+        useValue: "en"
       }],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
     })], AppModule);
-    /***/
-  },
-
-  /***/
-  "./src/app/test-day/test-day.component.scss":
-  /*!**************************************************!*\
-    !*** ./src/app/test-day/test-day.component.scss ***!
-    \**************************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function srcAppTestDayTestDayComponentScss(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony default export */
-
-
-    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Rlc3QtZGF5L3Rlc3QtZGF5LmNvbXBvbmVudC5zY3NzIn0= */";
-    /***/
-  },
-
-  /***/
-  "./src/app/test-day/test-day.component.ts":
-  /*!************************************************!*\
-    !*** ./src/app/test-day/test-day.component.ts ***!
-    \************************************************/
-
-  /*! exports provided: TestDayComponent */
-
-  /***/
-  function srcAppTestDayTestDayComponentTs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "TestDayComponent", function () {
-      return TestDayComponent;
-    });
-    /* harmony import */
-
-
-    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! tslib */
-    "./node_modules/tslib/tslib.es6.js");
-    /* harmony import */
-
-
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/fesm2015/core.js");
-
-    let TestDayComponent = class TestDayComponent {
-      constructor() {
-        this.callback2 = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
-      }
-
-      click(event) {
-        this.callback2.emit(this);
-      }
-
-      ngOnInit() {}
-
-    };
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], TestDayComponent.prototype, "title", void 0);
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], TestDayComponent.prototype, "isInPeriod", void 0);
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], TestDayComponent.prototype, "callback", void 0);
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()], TestDayComponent.prototype, "callback2", void 0);
-    TestDayComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-      selector: "app-test-day",
-      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
-      /*! raw-loader!./test-day.component.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/test-day/test-day.component.html")).default,
-      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
-      /*! ./test-day.component.scss */
-      "./src/app/test-day/test-day.component.scss")).default]
-    })], TestDayComponent);
     /***/
   },
 
