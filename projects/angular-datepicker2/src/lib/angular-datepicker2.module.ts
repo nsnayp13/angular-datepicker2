@@ -21,6 +21,6 @@ import { DayDirective } from "./day.directive";
     DayDirective,
   ],
   imports: [CommonModule],
-  exports: [AngularDatepicker2],
+  exports: [AngularDatepicker2, DayDirective],
 })
 export class AngularDatepicker2Module {}

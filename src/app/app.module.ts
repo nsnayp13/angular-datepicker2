@@ -8,11 +8,10 @@ import localeEn from "@angular/common/locales/en";
 
 import { FormsModule } from "@angular/forms";
 import { AngularDatepicker2Module } from "projects/angular-datepicker2/src/public-api";
-import { DayDirective } from "projects/angular-datepicker2/src/lib/day.directive";
 registerLocaleData(localeEn, "en");
 
 @NgModule({
-  declarations: [AppComponent, DayDirective],
+  declarations: [AppComponent],
 
   entryComponents: [],
   imports: [BrowserModule, FormsModule, AngularDatepicker2Module],
