@@ -16,7 +16,7 @@ jobs:
   publish: # Опубликовать
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
-       needs: [test]
+    needs: [test]
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
