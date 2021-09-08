@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = [[module.i, "/* You can add global styles to this file, and also import other style files */\n* {\n  font-family: sans-serif;\n}\nbody {\n  background: #fff;\n}\napp-root {\n  position: relative;\n}\nhtml, body {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9naXRodWIvd29ya3NwYWNlL3NyYy9zdHlsZXMuc2NzcyIsInNyYy9zdHlsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSw4RUFBQTtBQUVBO0VBQ0UsdUJBQUE7QUNBRjtBRElBO0VBQ0UsZ0JBQUE7QUNERjtBRElBO0VBQ0Usa0JBQUE7QUNERjtBRElBO0VBQ0UsU0FBQTtFQUNBLFVBQUE7RUFDQSxXQUFBO0FDREYiLCJmaWxlIjoic3JjL3N0eWxlcy5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyogWW91IGNhbiBhZGQgZ2xvYmFsIHN0eWxlcyB0byB0aGlzIGZpbGUsIGFuZCBhbHNvIGltcG9ydCBvdGhlciBzdHlsZSBmaWxlcyAqL1xuXG4qIHtcbiAgZm9udC1mYW1pbHk6IHNhbnMtc2VyaWY7XG59XG5cblxuYm9keSB7XG4gIGJhY2tncm91bmQ6ICNmZmY7XG59XG5cbmFwcC1yb290e1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG5cbmh0bWwsIGJvZHl7XG4gIG1hcmdpbjowO1xuICBwYWRkaW5nIDogMDtcbiAgd2lkdGg6IDEwMCU7XG59XG4iLCIvKiBZb3UgY2FuIGFkZCBnbG9iYWwgc3R5bGVzIHRvIHRoaXMgZmlsZSwgYW5kIGFsc28gaW1wb3J0IG90aGVyIHN0eWxlIGZpbGVzICovXG4qIHtcbiAgZm9udC1mYW1pbHk6IHNhbnMtc2VyaWY7XG59XG5cbmJvZHkge1xuICBiYWNrZ3JvdW5kOiAjZmZmO1xufVxuXG5hcHAtcm9vdCB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cblxuaHRtbCwgYm9keSB7XG4gIG1hcmdpbjogMDtcbiAgcGFkZGluZzogMDtcbiAgd2lkdGg6IDEwMCU7XG59Il19 */", '', '']]
+module.exports = [[module.i, "/* You can add global styles to this file, and also import other style files */\n* {\n  font-family: sans-serif;\n}\nbody {\n  background: #fff;\n}\napp-root {\n  position: relative;\n}\nhtml, body {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3J1bm5lci93b3JrL2FuZ3VsYXItZGF0ZXBpY2tlcjIvYW5ndWxhci1kYXRlcGlja2VyMi9zcmMvc3R5bGVzLnNjc3MiLCJzcmMvc3R5bGVzLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsOEVBQUE7QUFFQTtFQUNFLHVCQUFBO0FDQUY7QURJQTtFQUNFLGdCQUFBO0FDREY7QURJQTtFQUNFLGtCQUFBO0FDREY7QURJQTtFQUNFLFNBQUE7RUFDQSxVQUFBO0VBQ0EsV0FBQTtBQ0RGIiwiZmlsZSI6InNyYy9zdHlsZXMuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi8qIFlvdSBjYW4gYWRkIGdsb2JhbCBzdHlsZXMgdG8gdGhpcyBmaWxlLCBhbmQgYWxzbyBpbXBvcnQgb3RoZXIgc3R5bGUgZmlsZXMgKi9cblxuKiB7XG4gIGZvbnQtZmFtaWx5OiBzYW5zLXNlcmlmO1xufVxuXG5cbmJvZHkge1xuICBiYWNrZ3JvdW5kOiAjZmZmO1xufVxuXG5hcHAtcm9vdHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG5odG1sLCBib2R5e1xuICBtYXJnaW46MDtcbiAgcGFkZGluZyA6IDA7XG4gIHdpZHRoOiAxMDAlO1xufVxuIiwiLyogWW91IGNhbiBhZGQgZ2xvYmFsIHN0eWxlcyB0byB0aGlzIGZpbGUsIGFuZCBhbHNvIGltcG9ydCBvdGhlciBzdHlsZSBmaWxlcyAqL1xuKiB7XG4gIGZvbnQtZmFtaWx5OiBzYW5zLXNlcmlmO1xufVxuXG5ib2R5IHtcbiAgYmFja2dyb3VuZDogI2ZmZjtcbn1cblxuYXBwLXJvb3Qge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG5cbmh0bWwsIGJvZHkge1xuICBtYXJnaW46IDA7XG4gIHBhZGRpbmc6IDA7XG4gIHdpZHRoOiAxMDAlO1xufSJdfQ== */", '', '']]
 
 /***/ }),
 
@@ -338,7 +338,7 @@ if (content.locals) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /github/workspace/src/styles.scss */"./src/styles.scss");
+module.exports = __webpack_require__(/*! /home/runner/work/angular-datepicker2/angular-datepicker2/src/styles.scss */"./src/styles.scss");
 
 
 /***/ })
