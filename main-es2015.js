@@ -781,7 +781,7 @@ AngularDatepicker2Module = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _day_directive__WEBPACK_IMPORTED_MODULE_9__["DayDirective"],
         ],
         imports: [_angular_common__WEBPACK_IMPORTED_MODULE_8__["CommonModule"]],
-        exports: [_calendar_angular_datepicker2_component__WEBPACK_IMPORTED_MODULE_2__["AngularDatepicker2"]],
+        exports: [_calendar_angular_datepicker2_component__WEBPACK_IMPORTED_MODULE_2__["AngularDatepicker2"], _day_directive__WEBPACK_IMPORTED_MODULE_9__["DayDirective"]],
     })
 ], AngularDatepicker2Module);
 
@@ -1696,8 +1696,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! projects/angular-datepicker2/src/public-api */ "./projects/angular-datepicker2/src/public-api.ts");
-/* harmony import */ var projects_angular_datepicker2_src_lib_day_directive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! projects/angular-datepicker2/src/lib/day.directive */ "./projects/angular-datepicker2/src/lib/day.directive.ts");
-
 
 
 
@@ -1711,7 +1709,7 @@ let AppModule = class AppModule {
 };
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], projects_angular_datepicker2_src_lib_day_directive__WEBPACK_IMPORTED_MODULE_8__["DayDirective"]],
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
         entryComponents: [],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"], projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_7__["AngularDatepicker2Module"]],
         providers: [{ provide: _angular_core__WEBPACK_IMPORTED_MODULE_2__["LOCALE_ID"], useValue: "en" }],

@@ -1279,7 +1279,7 @@
     AngularDatepicker2Module = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       declarations: [_calendar_angular_datepicker2_component__WEBPACK_IMPORTED_MODULE_2__["AngularDatepicker2"], _month_view_month_view_component__WEBPACK_IMPORTED_MODULE_3__["MonthViewComponent"], _day_view_day_view_component__WEBPACK_IMPORTED_MODULE_4__["DayViewComponent"], _month_select_month_select_component__WEBPACK_IMPORTED_MODULE_5__["MonthSelectComponent"], _year_select_year_select_component__WEBPACK_IMPORTED_MODULE_6__["YearSelectComponent"], _week_view_week_view_component__WEBPACK_IMPORTED_MODULE_7__["WeekViewComponent"], _day_directive__WEBPACK_IMPORTED_MODULE_9__["DayDirective"]],
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_8__["CommonModule"]],
-      exports: [_calendar_angular_datepicker2_component__WEBPACK_IMPORTED_MODULE_2__["AngularDatepicker2"]]
+      exports: [_calendar_angular_datepicker2_component__WEBPACK_IMPORTED_MODULE_2__["AngularDatepicker2"], _day_directive__WEBPACK_IMPORTED_MODULE_9__["DayDirective"]]
     })], AngularDatepicker2Module);
     /***/
   },
@@ -2525,17 +2525,11 @@
     var projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! projects/angular-datepicker2/src/public-api */
     "./projects/angular-datepicker2/src/public-api.ts");
-    /* harmony import */
-
-
-    var projects_angular_datepicker2_src_lib_day_directive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-    /*! projects/angular-datepicker2/src/lib/day.directive */
-    "./projects/angular-datepicker2/src/lib/day.directive.ts");
 
     Object(_angular_common__WEBPACK_IMPORTED_MODULE_4__["registerLocaleData"])(_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_5___default.a, "en");
     let AppModule = class AppModule {};
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], projects_angular_datepicker2_src_lib_day_directive__WEBPACK_IMPORTED_MODULE_8__["DayDirective"]],
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
       entryComponents: [],
       imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"], projects_angular_datepicker2_src_public_api__WEBPACK_IMPORTED_MODULE_7__["AngularDatepicker2Module"]],
       providers: [{
