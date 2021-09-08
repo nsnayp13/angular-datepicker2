@@ -1,26 +1,16 @@
 <div class="calendarWrap">
-
     <div class="headerCalendar">
-        <div *ngIf="suggest&&suggest.length>0" style="    padding:8px 8px 0 8px;
-        display: block;
-        float: left;
-        width: 100%;
-        box-sizing: border-box;
-        ">
-
-
+        <div *ngIf="suggest&&suggest.length>0" class="suggests">
             <div *ngFor="let item of suggest ; let i = index" class="suggest" (click)="clickSuggest(item)">
                 {{item.title}}</div>
-
         </div>
-
     </div>
-
     <div class="dateSelector">
         <div (click)="goPrev()" class="nextPrevBtn" style="left:0;">{{'<'}}</div>
         <div class="wrapMonths" [ngStyle]="{width: width+'px'}">
             <div class="months" *ngIf="getViewSelectorMode()==='days'">
-                <app-month-view *ngFor="let date of  getCalendar()" #column [date]="date" [vertical]="vertical">
+                <app-month-view *ngFor="let date of  getCalendar()" #column [date]="date" [vertical]="vertical"
+                    [dayDirectives]="getMonthDayDirectives(date)">
                 </app-month-view>
             </div>
 

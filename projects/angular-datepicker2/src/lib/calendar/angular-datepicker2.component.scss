@@ -163,6 +163,14 @@ app-month-view {
   }
 }
 
+.suggests {
+  padding: 8px 8px 0 8px;
+  display: block;
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .monthSelectBtn {
   display: flex;
   flex-direction: row;
@@ -208,17 +216,15 @@ app-day-view {
 .day {
   display: flex;
   flex: 1;
-
   font-size: 0.8em;
   padding: 6px;
 }
-
-// .day:hover {
-//   background: #eee;
-//   cursor: pointer;
-//   color: #313131;
-//   user-select: none;
-// }
+.dayDir {
+  display: block;
+  float: left;
+  width: 100%;
+  height: 100%;
+}
 
 .styledDay {
   display: flex;
@@ -226,8 +232,6 @@ app-day-view {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // font-size: 0.8em;
-  // padding: 6px;
   color: #313131;
   transition: all 0.2s;
 }
@@ -242,6 +246,8 @@ app-day-view {
 .dayWrap {
   display: flex;
   flex: 1;
+  height: 100%;
+  width: 100%;
 }
 
 .calendarWrap {
@@ -265,6 +271,13 @@ app-day-view {
 
 .monthWrap {
   padding: 0 8px;
+  display: block;
+  float: left;
+  width: 100%;
+}
+.f1 {
+  display: flex;
+  flex: 1;
 }
 
 .monthHeader {

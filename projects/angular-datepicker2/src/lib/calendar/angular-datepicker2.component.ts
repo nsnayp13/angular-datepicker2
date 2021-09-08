@@ -9,9 +9,12 @@ import {
   Output,
   ChangeDetectorRef,
   ViewEncapsulation,
+  AfterViewInit,
+  ContentChildren,
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
 import { Day, SelectMode, ViewMode, Suggest } from "../interfaces";
+import { DayDirective } from "../day.directive";
 
 @Component({
   selector: "angular-datepicker2",
@@ -20,7 +23,8 @@ import { Day, SelectMode, ViewMode, Suggest } from "../interfaces";
   providers: [CalendarService],
   encapsulation: ViewEncapsulation.None,
 })
-export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
+export class AngularDatepicker2
+  implements OnInit, OnChanges, AfterViewChecked, AfterViewInit {
   /**
    * @description
    *  Array of selected dates.
@@ -96,20 +100,24 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
 
   width: number | null;
 
-  // disabled?: {
-  //   enabled: true;
-  //   mode: "after"; // 'after'|'before'
-  // };
-
-  //suggestions: [];
-
-  //showMonthQty: number;
+  @ContentChildren(DayDirective) dayDirectivesQueryList;
+  dayDirectives: DayDirective[] = [];
 
   constructor(
     private calendarService: CalendarService,
     private cdr: ChangeDetectorRef
-  ) {
-    //setTimeout(() => this.changeViewSelectorMode(), 1000);
+  ) {}
+
+  ngAfterViewInit() {
+    this.dayDirectives = this.dayDirectivesQueryList.toArray();
+  }
+
+  getMonthDayDirectives(date: Date): DayDirective[] {
+    return this.dayDirectives.filter(
+      (directive: DayDirective) =>
+        directive.date.getMonth() === date.getMonth() &&
+        directive.date.getFullYear() === date.getFullYear()
+    );
   }
 
   clickSuggest(suggest: Suggest) {
@@ -182,7 +190,6 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
     let lastDate: Date;
     lastDate = date ? date : this.calendarService.getLastDate();
     countMonths = this.calendarService.getCountMonths();
-    //this.countMonths = countMonths;
 
     for (let i = countMonths - 1; i >= 0; i--) {
       months.push(new Date(lastDate).adjustMonth(-i));
@@ -228,12 +235,7 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
     }
   }
 
-  /* private _vertical(simpleChange) {
-     this.calendarService.ve vertical = simpleChange.vertical.currentValue;
-   } */
-
   ngOnChanges(simpleChange) {
-    //console.log(simpleChange);
     simpleChange.viewMode && this._viewMode(simpleChange);
     simpleChange.selectMode && this._selectMode(simpleChange);
     simpleChange.shownDate && this._shownDate(simpleChange);
@@ -243,7 +245,7 @@ export class AngularDatepicker2 implements OnInit, OnChanges, AfterViewChecked {
   }
 
   /** Set custom Day[] */
-  setDays(days: Day[]) {}
+  setDays() {}
 
   goNext() {
     let lastDate = this.calendarService.calendar[

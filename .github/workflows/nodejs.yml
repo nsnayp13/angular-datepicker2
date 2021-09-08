@@ -3,21 +3,20 @@ name: Node.js CI
 on: [push]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm install
-      - run: npm run test-once
-
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 12
+  #     - run: npm install
+  #     - run: npm run test-once
 
   publish: # Опубликовать
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
-    needs: [test]
+    #    needs: [test]
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
@@ -26,18 +25,17 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm install
       - run: npm run build angular-datepicker2
-      - name: publish    
+      - name: publish
         run: cd dist/angular-datepicker2 && npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm}}
-     
 
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
-           node-version: 12
+          node-version: 12
       - run: npm install && npm run build --prod
-        
+
       - name: Deploy GP
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
