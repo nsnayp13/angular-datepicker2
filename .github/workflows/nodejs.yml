@@ -47,7 +47,7 @@ jobs:
           folder: dist/angular-datepicker
           token: ${{ secrets.GP_PAT_TOKEN }}
 #       - uses: JamesIves/github-pages-deploy-action@releases/v3-test 
-#         env:
+#         env: 
 #           ACCESS_TOKEN: ${{secrets.GHP}}
 #           BASE_BRANCH: master
 #           BRANCH: gh-pages
