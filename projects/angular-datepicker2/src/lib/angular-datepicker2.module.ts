@@ -8,6 +8,7 @@ import { MonthSelectComponent } from "./month-select/month-select.component";
 import { YearSelectComponent } from "./year-select/year-select.component";
 import { WeekViewComponent } from "./week-view/week-view.component";
 import { CommonModule } from "@angular/common";
+import { DayDirective } from "./day.directive";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CommonModule } from "@angular/common";
     MonthSelectComponent,
     YearSelectComponent,
     WeekViewComponent,
+    DayDirective,
   ],
   imports: [CommonModule],
   exports: [AngularDatepicker2],
