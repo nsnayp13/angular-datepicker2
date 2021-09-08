@@ -3,35 +3,33 @@ name: Node.js CI
 on: [push]
 
 jobs:
-#   test:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v1
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: 12
-#       - run: npm install
-#       - run: npm run test-once
-
-  
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm install
+      - run: npm run test-once
 
 
   publish: # Опубликовать
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
-    #needs: [test]
+    needs: [test]
     steps:
-#       - uses: actions/checkout@v1
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: 12
-#           registry-url: https://registry.npmjs.org/
-#       - run: npm install
-#       - run: npm run build angular-datepicker2
-#       - name: publish    
-#         run: cd dist/angular-datepicker2 && npm publish
-#         env:
-#           NODE_AUTH_TOKEN: ${{secrets.npm}}
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - run: npm install
+      - run: npm run build angular-datepicker2
+      - name: publish    
+        run: cd dist/angular-datepicker2 && npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm}}
      
 
       - uses: actions/checkout@v1
@@ -46,10 +44,3 @@ jobs:
           branch: gh-pages
           folder: dist/angular-datepicker
           token: ${{ secrets.GP_PAT_TOKEN }}
-#       - uses: JamesIves/github-pages-deploy-action@releases/v3-test 
-#         env: 
-#           ACCESS_TOKEN: ${{secrets.GHP}}
-#           BASE_BRANCH: master
-#           BRANCH: gh-pages
-#           FOLDER: dist/angular-datepicker
-#           BUILD_SCRIPT: npm install && npm run build --prod
