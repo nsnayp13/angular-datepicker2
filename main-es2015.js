@@ -1133,7 +1133,8 @@ let DayViewComponent = class DayViewComponent {
         });
     }
     detectChanges() { }
-    ngOnChanges() {
+    ngOnChanges(changes) {
+        console.log(changes);
         if (this.dayDirective && this.template) {
             this.createChildComponent();
         }
@@ -1197,28 +1198,14 @@ let DayDirective = class DayDirective {
     }
     set day(date) {
         this.context = {
-            $implicit: this.date,
+            $implicit: date,
         };
-    }
-    __create() {
-        console.log(this);
-        if (!this.__created && this.template) {
-            this.container.createEmbeddedView(this.template, this.context);
-            this.__created = true;
-        }
     }
     ngOnInit() {
         this.context = {
             $implicit: this.date,
             date: this.date,
         };
-        this.__create();
-    }
-    ngAfterContentInit() {
-        this.__create();
-    }
-    ngAfterViewInit() {
-        this.__create();
     }
 };
 DayDirective.ctorParameters = () => [
