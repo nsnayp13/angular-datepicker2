@@ -6,7 +6,7 @@
                 [selectMode]="selectMode" [weekends]="[6]" [suggest]="suggest" [weekStart]="0" [viewMode]="viewMode"
                 [vertical]="vertical" (onDayClick)="onDayClick($event)" [disabledDates]="disabledDates">
 
-                <div *day="let date from days[0].date" [attr.title]="'Custom day'" class="customDay">
+                <div *ad2day="let date from days[0].date" [attr.title]="'Custom day'" class="customDay">
                     {{date.getDate()}}
                     <div class="points">
                         <div class="point"></div>
@@ -14,7 +14,7 @@
                     </div>
                 </div>
 
-                <div *day="let date from days[1].date" [attr.title]="'Custom day'" class="customDay">
+                <div *ad2day="let date from days[1].date" [attr.title]="'Custom day'" class="customDay">
                     {{date.getDate()}}
                     <div class="points">
                         <div class="point blue"></div>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
 
-                <div *day="let date from days[2].date" [attr.title]="'Custom day'" class="customDay">
+                <div *ad2day="let date from days[2].date" [attr.title]="'Custom day'" class="customDay">
                     {{date.getDate()}}
                     <div class="points">
                         <div class="point blue"></div>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
 
-                <div *day="let date from days[3].date" [attr.title]="'Custom day'" class="customDay">
+                <div *ad2day="let date from days[3].date" [attr.title]="'Custom day'" class="customDay">
                     {{date.getDate()}}
                     <div class="points">
                         <div class="point blue"></div>

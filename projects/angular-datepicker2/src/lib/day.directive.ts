@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 
 @Directive({
-  selector: "[day]",
+  selector: "[ad2day]",
   //providers: [TemplateRef],
 })
 export class DayDirective implements AfterContentInit, AfterViewInit {
@@ -20,7 +20,7 @@ export class DayDirective implements AfterContentInit, AfterViewInit {
     private container: ViewContainerRef
   ) {}
 
-  @Input("dayFrom") date: Date;
+  @Input("ad2dayFrom") date: Date;
 
   @Input() set day(date: Date) {
     this.context = {
@@ -29,6 +29,7 @@ export class DayDirective implements AfterContentInit, AfterViewInit {
   }
 
   __create() {
+    console.log(this);
     if (!this.__created && this.template) {
       this.container.createEmbeddedView(this.template, this.context);
       this.__created = true;
