@@ -21,4 +21,10 @@ import { DayDirective } from "./day.directive";
   imports: [CommonModule],
   exports: [AngularDatepicker2, DayDirective],
 })
-export class AngularDatepicker2Module {}
+export class AngularDatepicker2Module {
+  static forRoot(): ModuleWithProviders<AngularDatepicker2Module> {
+    return {
+      ngModule: AngularDatepicker2Module,
+    };
+  }
+}
