@@ -7,7 +7,6 @@ import {
   Suggest,
   DisabledDates,
 } from "projects/angular-datepicker2/src/public-api";
-import { runInThisContext } from "vm";
 
 @Component({
   selector: "app-root",
