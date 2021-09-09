@@ -29,7 +29,6 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
   sub1: Subscription;
 
   constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
     public dayService: DayService,
     private calendarService: CalendarService
   ) {}

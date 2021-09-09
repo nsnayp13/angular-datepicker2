@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subject } from "rxjs";
-import { Day, ViewMode } from "../interfaces";
+import { Day, DisabledDates, ViewMode } from "../interfaces";
 
 declare global {
   interface Date {
@@ -72,6 +72,7 @@ export class CalendarService {
   selectMode;
 
   selectedDates: BehaviorSubject<Date[]> = new BehaviorSubject([]);
+  disabledDates: BehaviorSubject<DisabledDates> = new BehaviorSubject(null);
   days: BehaviorSubject<Day[]> = new BehaviorSubject([]);
 
   countMonths: number;
@@ -94,6 +95,10 @@ export class CalendarService {
 
   setSelectedDates(selectedDates: Date[]) {
     this.selectedDates.next(selectedDates);
+  }
+
+  setDisabledDates(disabledDates: DisabledDates) {
+    this.disabledDates.next(disabledDates);
   }
 
   setDays(days: Day[]) {

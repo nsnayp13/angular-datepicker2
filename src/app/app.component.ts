@@ -5,6 +5,7 @@ import {
   SelectMode,
   ViewMode,
   Suggest,
+  DisabledDates,
 } from "projects/angular-datepicker2/src/public-api";
 
 @Component({
@@ -22,6 +23,8 @@ export class AppComponent implements OnInit {
   vertical = false;
   selectMode: SelectMode = SelectMode.Period;
   viewMode: ViewMode | number = ViewMode.Quarter;
+
+  disabledDates: DisabledDates;
 
   suggest = [
     {
@@ -94,6 +97,20 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const disabledBefore = new Date(today);
+    disabledBefore.setDate(disabledBefore.getDate() - 50);
+
+    const disabledAfter = new Date(today);
+    disabledAfter.setDate(disabledAfter.getDate() + 15);
+
+    this.disabledDates = {
+      before: disabledBefore,
+      //after: disabledAfter,
+    };
+
     this.selectedDates = [
       new Date(new Date().getFullYear(), new Date().getMonth(), 2),
       new Date(new Date().getFullYear(), new Date().getMonth(), 11),

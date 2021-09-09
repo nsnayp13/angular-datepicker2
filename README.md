@@ -34,6 +34,9 @@ Props of `AngularDatepicker2`:
 // Date whould be render for default calendar .
 shownDate: Date
 
+// Disabed dates to select by click on a day. See DisabledDates interface. Suggest select work
+disabledDates: DisabledDates
+
 // Alignment of days in a week. Default horizontal.
 vertical: boolean
 
@@ -68,6 +71,12 @@ set `registerLocaleData(locale, "locale")` in your `app.module.ts`. See [https:/
 this.selectedDates = [new Date(2020, 3, 7), new Date(2020, 3, 9)];
 
 this.shownDate = new Date(2020, 3, 7);
+
+this.disabledDates = {
+  dates?:[], // :Date[]
+  after?: new Date(2020, 3, 7), // :Date
+  before?:null // : Date
+};
 
 this.suggest = [
   {

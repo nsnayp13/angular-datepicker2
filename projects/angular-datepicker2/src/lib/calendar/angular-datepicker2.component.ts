@@ -13,7 +13,13 @@ import {
   ContentChildren,
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
-import { Day, SelectMode, ViewMode, Suggest } from "../interfaces";
+import {
+  Day,
+  SelectMode,
+  ViewMode,
+  Suggest,
+  DisabledDates,
+} from "../interfaces";
 import { DayDirective } from "../day.directive";
 
 @Component({
@@ -96,6 +102,13 @@ export class AngularDatepicker2
    */
   @Input() nowDate: Date;
 
+  /**
+   * @description
+   * Disable select dates. Before after date or array
+   * @See `DisabledDates`
+   */
+  @Input() disabledDates: DisabledDates;
+
   @ViewChildren("column") columns;
 
   width: number | null;
@@ -173,6 +186,7 @@ export class AngularDatepicker2
     this.calendarService.setSelectedDates(this.selectedDates);
     this.calendarService.setDays(this.days);
     this.calendarService.getShownMonths(this.shownDate);
+    this.calendarService.setDisabledDates(this.disabledDates);
   }
 
   getCalendar() {

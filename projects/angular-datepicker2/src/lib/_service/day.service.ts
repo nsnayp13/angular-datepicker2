@@ -10,9 +10,35 @@ export class DayService {
   day: Day;
   constructor(private calendarService: CalendarService) {}
 
+  private getIsDisabled(date: Date): boolean {
+    const disabledDates = this.calendarService.disabledDates.value;
+    if (!disabledDates) {
+      return false;
+    }
+    if (
+      disabledDates.dates &&
+      disabledDates.dates.length > 0 &&
+      disabledDates.dates.find(
+        (disableDate) => disableDate.getTime() === date.getTime()
+      )
+    ) {
+      return true;
+    }
+    if (disabledDates.after && disabledDates.after.getTime() < date.getTime()) {
+      return true;
+    }
+    if (
+      disabledDates.before &&
+      disabledDates.before.getTime() > date.getTime()
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   createDay(date: Date): Day {
     this.day = {
-      isDisabled: false,
+      isDisabled: this.getIsDisabled(date),
       isWeekEnd: this.calendarService.weekends.includes(date.getDay()),
       isSelected: false,
       isHovered: false,
