@@ -780,6 +780,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _week_view_week_view_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./week-view/week-view.component */ "./projects/angular-datepicker2/src/lib/week-view/week-view.component.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var _day_directive__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./day.directive */ "./projects/angular-datepicker2/src/lib/day.directive.ts");
+var AngularDatepicker2Module_1;
 
 
 
@@ -790,9 +791,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let AngularDatepicker2Module = class AngularDatepicker2Module {
+let AngularDatepicker2Module = AngularDatepicker2Module_1 = class AngularDatepicker2Module {
+    static forRoot() {
+        return {
+            ngModule: AngularDatepicker2Module_1,
+        };
+    }
 };
-AngularDatepicker2Module = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+AngularDatepicker2Module = AngularDatepicker2Module_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         declarations: [
             _calendar_angular_datepicker2_component__WEBPACK_IMPORTED_MODULE_2__["AngularDatepicker2"],
