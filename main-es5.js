@@ -1302,16 +1302,8 @@
     /*! ./day.directive */
     "./projects/angular-datepicker2/src/lib/day.directive.ts");
 
-    var AngularDatepicker2Module_1;
-    let AngularDatepicker2Module = AngularDatepicker2Module_1 = class AngularDatepicker2Module {
-      static forRoot() {
-        return {
-          ngModule: AngularDatepicker2Module_1
-        };
-      }
-
-    };
-    AngularDatepicker2Module = AngularDatepicker2Module_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+    let AngularDatepicker2Module = class AngularDatepicker2Module {};
+    AngularDatepicker2Module = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       declarations: [_calendar_angular_datepicker2_component__WEBPACK_IMPORTED_MODULE_2__["AngularDatepicker2"], _month_view_month_view_component__WEBPACK_IMPORTED_MODULE_3__["MonthViewComponent"], _day_view_day_view_component__WEBPACK_IMPORTED_MODULE_4__["DayViewComponent"], _month_select_month_select_component__WEBPACK_IMPORTED_MODULE_5__["MonthSelectComponent"], _year_select_year_select_component__WEBPACK_IMPORTED_MODULE_6__["YearSelectComponent"], _week_view_week_view_component__WEBPACK_IMPORTED_MODULE_7__["WeekViewComponent"], _day_directive__WEBPACK_IMPORTED_MODULE_9__["DayDirective"]],
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_8__["CommonModule"]],
       exports: [_calendar_angular_datepicker2_component__WEBPACK_IMPORTED_MODULE_2__["AngularDatepicker2"], _day_directive__WEBPACK_IMPORTED_MODULE_9__["DayDirective"]]
