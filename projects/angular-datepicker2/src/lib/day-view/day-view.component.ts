@@ -5,7 +5,6 @@ import {
   OnChanges,
   OnDestroy,
   ViewChild,
-  ComponentFactoryResolver,
   ViewContainerRef,
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
@@ -85,7 +84,8 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
 
   detectChanges() {}
 
-  ngOnChanges() {
+  ngOnChanges(changes) {
+    console.log(changes);
     if (this.dayDirective && this.template) {
       this.createChildComponent();
     }

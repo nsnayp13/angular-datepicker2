@@ -1,17 +1,10 @@
-import {
-  ViewContainerRef,
-  Directive,
-  Input,
-  TemplateRef,
-  AfterContentInit,
-  AfterViewInit,
-} from "@angular/core";
+import { ViewContainerRef, Directive, Input, TemplateRef } from "@angular/core";
 
 @Directive({
   selector: "[ad2day]",
   //providers: [TemplateRef],
 })
-export class DayDirective implements AfterContentInit, AfterViewInit {
+export class DayDirective {
   context: any | null = null;
   __created = false;
 
@@ -24,16 +17,8 @@ export class DayDirective implements AfterContentInit, AfterViewInit {
 
   @Input() set day(date: Date) {
     this.context = {
-      $implicit: this.date,
+      $implicit: date,
     };
-  }
-
-  __create() {
-    console.log(this);
-    if (!this.__created && this.template) {
-      this.container.createEmbeddedView(this.template, this.context);
-      this.__created = true;
-    }
   }
 
   ngOnInit() {
@@ -41,14 +26,5 @@ export class DayDirective implements AfterContentInit, AfterViewInit {
       $implicit: this.date,
       date: this.date,
     };
-    this.__create();
-  }
-
-  ngAfterContentInit() {
-    this.__create();
-  }
-
-  ngAfterViewInit() {
-    this.__create();
   }
 }
