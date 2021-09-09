@@ -3,8 +3,8 @@
     <div class="wrap">
         <div style=" display:block; float:left;">
             <angular-datepicker2 [days]="days" [nowDate]="date" [(selectedDates)]="selectedDates"
-                [selectMode]="selectMode" [weekends]="[0,1]" [suggest]="suggest" [weekStart]="1" [viewMode]="viewMode"
-                [vertical]="vertical" (onDayClick)="onDayClick($event)">
+                [selectMode]="selectMode" [weekends]="[6]" [suggest]="suggest" [weekStart]="0" [viewMode]="viewMode"
+                [vertical]="vertical" (onDayClick)="onDayClick($event)" [disabledDates]="disabledDates">
 
                 <div *day="let date from days[0].date" [attr.title]="'Custom day'" class="customDay">
                     {{date.getDate()}}

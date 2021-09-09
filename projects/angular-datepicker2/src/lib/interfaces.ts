@@ -31,6 +31,12 @@ export interface Calendar {
   months?: Month[] | null;
 }
 
+export interface DisabledDates {
+  dates?: Date[];
+  before?: Date;
+  after?: Date;
+}
+
 /**
  * @publicApi
  */
