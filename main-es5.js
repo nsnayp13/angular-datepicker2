@@ -2264,7 +2264,7 @@
     !*** ./projects/angular-datepicker2/src/public-api.ts ***!
     \********************************************************/
 
-  /*! exports provided: AngularDatepicker2, AngularDatepicker2Module, SelectMode, ViewMode */
+  /*! exports provided: AngularDatepicker2, AngularDatepicker2Module, SelectMode, ViewMode, DayDirective */
 
   /***/
   function projectsAngularDatepicker2SrcPublicApiTs(module, __webpack_exports__, __webpack_require__) {
@@ -2318,6 +2318,18 @@
 
     __webpack_require__.d(__webpack_exports__, "ViewMode", function () {
       return _lib_interfaces__WEBPACK_IMPORTED_MODULE_3__["ViewMode"];
+    });
+    /* harmony import */
+
+
+    var _lib_day_directive__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ./lib/day.directive */
+    "./projects/angular-datepicker2/src/lib/day.directive.ts");
+    /* harmony reexport (safe) */
+
+
+    __webpack_require__.d(__webpack_exports__, "DayDirective", function () {
+      return _lib_day_directive__WEBPACK_IMPORTED_MODULE_4__["DayDirective"];
     });
     /*
      * Public API Surface of angular-datepicker2
