@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { ModuleWithProviders, NgModule } from "@angular/core";
 import { AngularDatepicker2 } from "./calendar/angular-datepicker2.component";
 import { MonthViewComponent } from "./month-view/month-view.component";
 import { DayViewComponent } from "./day-view/day-view.component";
@@ -21,4 +21,10 @@ import { DayDirective } from "./day.directive";
   imports: [CommonModule],
   exports: [AngularDatepicker2, DayDirective],
 })
-export class AngularDatepicker2Module {}
+export class AngularDatepicker2Module {
+  static forRoot(): ModuleWithProviders<AngularDatepicker2Module> {
+    return {
+      ngModule: AngularDatepicker2Module,
+    };
+  }
+}
