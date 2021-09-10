@@ -117,35 +117,45 @@ export class AppComponent implements OnInit {
     ];
     this.date = new Date(new Date().getFullYear(), new Date().getMonth(), 7);
 
-    this.days = [
-      {
-        isDisabled: true,
-        isHovered: false,
-        isSelected: false,
-        isWeekEnd: true,
-        date: new Date(new Date().getFullYear(), new Date().getMonth(), 2),
-      },
-      {
-        isDisabled: false,
-        isHovered: false,
-        isSelected: false,
-        isWeekEnd: true,
-        date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 30),
-      },
-      {
-        isDisabled: false,
-        isHovered: false,
-        isSelected: false,
-        isWeekEnd: true,
-        date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 5),
-      },
-      {
-        isDisabled: false,
-        isHovered: false,
-        isSelected: false,
-        isWeekEnd: true,
-        date: new Date(new Date().getFullYear(), new Date().getMonth(), 6),
-      },
-    ];
+    setTimeout(() => {
+      this.days = [
+        {
+          isDisabled: true,
+          isHovered: false,
+          isSelected: false,
+          isWeekEnd: true,
+          date: new Date(new Date().getFullYear(), new Date().getMonth(), 2),
+        },
+        {
+          isDisabled: false,
+          isHovered: false,
+          isSelected: false,
+          isWeekEnd: true,
+          date: new Date(
+            new Date().getFullYear(),
+            new Date().getMonth() - 1,
+            30
+          ),
+        },
+        {
+          isDisabled: false,
+          isHovered: false,
+          isSelected: false,
+          isWeekEnd: true,
+          date: new Date(
+            new Date().getFullYear(),
+            new Date().getMonth() - 1,
+            5
+          ),
+        },
+        {
+          isDisabled: false,
+          isHovered: false,
+          isSelected: false,
+          isWeekEnd: true,
+          date: new Date(new Date().getFullYear(), new Date().getMonth(), 6),
+        },
+      ];
+    }, 4000);
   }
 }

@@ -6,7 +6,15 @@
                 [selectMode]="selectMode" [weekends]="[6]" [suggest]="suggest" [weekStart]="0" [viewMode]="viewMode"
                 [vertical]="vertical" (onDayClick)="onDayClick($event)" [disabledDates]="disabledDates">
 
-                <div *ad2day="let date from days[0].date" [attr.title]="'Custom day'" class="customDay">
+
+                <div *ngFor="let dd of days">
+
+                    <div *ad2day="let date from dd.date">hh</div>
+
+                </div>
+
+
+                <!-- <div *ad2day="let date from days[0].date" [attr.title]="'Custom day'" class="customDay">
                     {{date.getDate()}}
                     <div class="points">
                         <div class="point"></div>
@@ -37,7 +45,7 @@
                         <div class="point red"></div>
                         <div class="point green"></div>
                     </div>
-                </div>
+                </div> -->
 
             </angular-datepicker2>
         </div>

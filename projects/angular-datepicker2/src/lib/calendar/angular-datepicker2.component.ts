@@ -122,10 +122,8 @@ export class AngularDatepicker2
   ) {}
 
   ngAfterViewInit() {
-    this.dayDirectives = this.dayDirectivesQueryList.toArray();
-    console.log(
-      "calendar ngAfterViewInit this.dayDirectives",
-      this.dayDirectives
+    this.dayDirectivesQueryList.changes.subscribe(
+      (data) => (this.dayDirectives = data.toArray())
     );
   }
 
