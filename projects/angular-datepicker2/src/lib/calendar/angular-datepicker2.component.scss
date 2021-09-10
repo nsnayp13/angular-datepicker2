@@ -34,11 +34,13 @@ app-calendar {
   user-select: none;
   position: absolute;
   cursor: pointer;
-  padding: 8px 16px;
+  padding: 10px 16px;
   transition: all 0.2s;
   font-size: 0.9em;
+  border-radius: 2px;
   color: $cyan;
   z-index: 1;
+  margin: 0 8px;
   background: #fff;
 }
 
