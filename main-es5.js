@@ -1417,6 +1417,7 @@
 
       ngAfterViewInit() {
         this.dayDirectives = this.dayDirectivesQueryList.toArray();
+        console.log("calendar ngAfterViewInit this.dayDirectives", this.dayDirectives);
       }
 
       getMonthDayDirectives(date) {
@@ -1697,8 +1698,7 @@
       detectChanges() {}
 
       ngOnChanges(changes) {
-        console.log(changes);
-
+        // console.log(changes);
         if (this.dayDirective && this.template) {
           this.createChildComponent();
         }
@@ -2049,6 +2049,7 @@
       }
 
       ngOnInit() {
+        console.log("onInit monthView this.dayDirectives", this.dayDirectives);
         this.sub.add(this.calendarService.animationStep.subscribe(data => {
           this.animationStep = data;
         }));
@@ -2169,6 +2170,7 @@
 
       ngOnInit() {
         this.dates = this.weekService.getWeek(this.date);
+        console.log("onInit weekView this.dayDirectives", this.dayDirectives);
       }
 
       getDayDirective(date) {

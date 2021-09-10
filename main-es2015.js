@@ -878,6 +878,7 @@ let AngularDatepicker2 = class AngularDatepicker2 {
     }
     ngAfterViewInit() {
         this.dayDirectives = this.dayDirectivesQueryList.toArray();
+        console.log("calendar ngAfterViewInit this.dayDirectives", this.dayDirectives);
     }
     getMonthDayDirectives(date) {
         return this.dayDirectives.filter((directive) => directive.date.getMonth() === date.getMonth() &&
@@ -1134,7 +1135,7 @@ let DayViewComponent = class DayViewComponent {
     }
     detectChanges() { }
     ngOnChanges(changes) {
-        console.log(changes);
+        // console.log(changes);
         if (this.dayDirective && this.template) {
             this.createChildComponent();
         }
@@ -1373,6 +1374,7 @@ let MonthViewComponent = class MonthViewComponent {
         this.calendarService.getShownYears(this.date);
     }
     ngOnInit() {
+        console.log("onInit monthView this.dayDirectives", this.dayDirectives);
         this.sub.add(this.calendarService.animationStep.subscribe((data) => {
             this.animationStep = data;
         }));
@@ -1466,6 +1468,7 @@ let WeekViewComponent = class WeekViewComponent {
     }
     ngOnInit() {
         this.dates = this.weekService.getWeek(this.date);
+        console.log("onInit weekView this.dayDirectives", this.dayDirectives);
     }
     getDayDirective(date) {
         let day = this.dayDirectives.find((directive) => directive.date.getTime() === date.getTime());
