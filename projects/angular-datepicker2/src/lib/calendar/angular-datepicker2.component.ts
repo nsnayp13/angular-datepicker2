@@ -119,8 +119,6 @@ export class AngularDatepicker2
 
   @ViewChildren("column") columns;
 
-  @Output() retrunThis = new EventEmitter<AngularDatepicker2>();
-
   width: number | null;
 
   @ContentChildren(DayDirective)
@@ -129,26 +127,20 @@ export class AngularDatepicker2
 
   constructor(
     private calendarService: CalendarService,
-    private cdr: ChangeDetectorRef,
-    private vcr: ViewContainerRef
+    private cdr: ChangeDetectorRef
   ) {}
 
   private __getDirectives() {
-    this.dayDirectivesQueryList.notifyOnChanges();
-    this.retrunThis.emit(this);
-
     if (this.dayDirectivesQueryList) {
       this.dayDirectives = this.dayDirectivesQueryList.toArray();
-      console.log(this.dayDirectivesQueryList);
       this.dayDirectivesQueryList.changes.subscribe((data) => {
         this.dayDirectives = data.toArray();
-        console.log(data);
       });
     }
   }
 
   ngAfterContentInit() {
-    this.__getDirectives();
+    // this.__getDirectives();
   }
 
   ngAfterViewInit() {

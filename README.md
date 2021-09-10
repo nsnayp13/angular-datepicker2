@@ -100,6 +100,7 @@ this.suggest = [
   },
 ];
 
+
 this.days = [
   {
     isDisabled: false,
@@ -128,10 +129,20 @@ this.days = [
   [weekends]="[0,1]"
   [weekStart]="1"
   [viewMode]="'quarter'"
+  [disabledDates]="disabledDates"
 >
   <!--  Here special directive *day="let date from new Date()"
         Wrap or html or component by *day
   -->
+
+  <!--  If you are use *ngFor set it to ng-container. 
+        <ng-container *ngFor="let dateItem of datesArray">
+          <yourComponentOrDiv *ad2day="let date from dateItem">
+              day is {{date.getDate()}}
+          </yourComponentOrDiv>
+        </ng-container>
+  -->
+
   <div *day="let date from days[0].date" [attr.title]="'Custom day'">
     {{date.getDate()}}
     <div class="points">

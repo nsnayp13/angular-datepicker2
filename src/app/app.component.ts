@@ -100,67 +100,57 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    // const today = new Date();
-    // today.setHours(0, 0, 0, 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    // const disabledBefore = new Date(today);
-    // disabledBefore.setDate(disabledBefore.getDate() - 50);
+    const disabledBefore = new Date(today);
+    disabledBefore.setDate(disabledBefore.getDate() - 50);
 
-    // const disabledAfter = new Date(today);
-    // disabledAfter.setDate(disabledAfter.getDate() + 15);
+    const disabledAfter = new Date(today);
+    disabledAfter.setDate(disabledAfter.getDate() + 15);
 
-    // this.disabledDates = {
-    //   before: disabledBefore,
-    //   //after: disabledAfter,
-    // };
+    this.disabledDates = {
+      before: disabledBefore,
+      //after: disabledAfter,
+    };
 
-    // this.selectedDates = [
-    //   new Date(new Date().getFullYear(), new Date().getMonth(), 2),
-    //   new Date(new Date().getFullYear(), new Date().getMonth(), 11),
-    // ];
-    // this.date = new Date(new Date().getFullYear(), new Date().getMonth(), 7);
+    this.selectedDates = [
+      new Date(new Date().getFullYear(), new Date().getMonth(), 2),
+      new Date(new Date().getFullYear(), new Date().getMonth(), 11),
+    ];
+    this.date = new Date(new Date().getFullYear(), new Date().getMonth(), 7);
 
-    setTimeout(() => {
-      this.dates = [new Date(2021, 8, 9), new Date(2021, 8, 3)];
-
-      // this.days = [
-      //   {
-      //     isDisabled: true,
-      //     isHovered: false,
-      //     isSelected: false,
-      //     isWeekEnd: true,
-      //     date: new Date(new Date().getFullYear(), new Date().getMonth(), 2),
-      //   },
-      //   {
-      //     isDisabled: false,
-      //     isHovered: false,
-      //     isSelected: false,
-      //     isWeekEnd: true,
-      //     date: new Date(
-      //       new Date().getFullYear(),
-      //       new Date().getMonth() - 1,
-      //       30
-      //     ),
-      //   },
-      //   {
-      //     isDisabled: false,
-      //     isHovered: false,
-      //     isSelected: false,
-      //     isWeekEnd: true,
-      //     date: new Date(
-      //       new Date().getFullYear(),
-      //       new Date().getMonth() - 1,
-      //       5
-      //     ),
-      //   },
-      //   {
-      //     isDisabled: false,
-      //     isHovered: false,
-      //     isSelected: false,
-      //     isWeekEnd: true,
-      //     date: new Date(new Date().getFullYear(), new Date().getMonth(), 6),
-      //   },
-      // ];
-    }, 2000);
+    //setTimeout(() => {
+    this.days = [
+      {
+        isDisabled: true,
+        isHovered: false,
+        isSelected: false,
+        isWeekEnd: true,
+        date: new Date(new Date().getFullYear(), new Date().getMonth(), 2),
+      },
+      {
+        isDisabled: false,
+        isHovered: false,
+        isSelected: false,
+        isWeekEnd: true,
+        date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 30),
+      },
+      {
+        isDisabled: false,
+        isHovered: false,
+        isSelected: false,
+        isWeekEnd: true,
+        date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 5),
+      },
+      {
+        isDisabled: false,
+        isHovered: false,
+        isSelected: false,
+        isWeekEnd: true,
+        date: new Date(new Date().getFullYear(), new Date().getMonth(), 6),
+      },
+    ];
+    //}, 2000);
   }
 }
