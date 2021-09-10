@@ -877,7 +877,11 @@ let AngularDatepicker2 = class AngularDatepicker2 {
         this.dayDirectives = [];
     }
     ngAfterViewInit() {
-        this.dayDirectivesQueryList.changes.subscribe((data) => (this.dayDirectives = data.toArray()));
+        console.log(this.dayDirectivesQueryList);
+        this.dayDirectivesQueryList.changes.subscribe((data) => {
+            this.dayDirectives = data.toArray();
+            console.log(data);
+        });
     }
     getMonthDayDirectives(date) {
         return this.dayDirectives.filter((directive) => directive.date.getMonth() === date.getMonth() &&
