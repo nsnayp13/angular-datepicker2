@@ -117,7 +117,7 @@ export class AngularDatepicker2
 
   @ViewChildren("column") columns;
 
-  @Output() retrunThis: EventEmitter<any>;
+  @Output() retrunThis = new EventEmitter<AngularDatepicker2>();
 
   width: number | null;
 
