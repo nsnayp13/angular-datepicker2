@@ -117,6 +117,8 @@ export class AngularDatepicker2
 
   @ViewChildren("column") columns;
 
+  @Output() retrunThis: EventEmitter<any>;
+
   width: number | null;
 
   @ContentChildren(DayDirective) dayDirectivesQueryList;
@@ -128,6 +130,8 @@ export class AngularDatepicker2
   ) {}
 
   private __getDirectives() {
+    this.retrunThis.emit(this);
+
     if (this.dayDirectivesQueryList) {
       this.dayDirectives = this.dayDirectivesQueryList.toArray();
       console.log(this.dayDirectivesQueryList);
