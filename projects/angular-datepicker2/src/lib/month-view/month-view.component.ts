@@ -7,6 +7,7 @@ import {
   ViewChild,
   ElementRef,
   OnDestroy,
+  OnChanges,
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
 import { MonthService } from "../_service/month.service";
@@ -19,7 +20,7 @@ import { DayDirective } from "../day.directive";
   styleUrls: ["./month-view.component.scss"],
   providers: [MonthService],
 })
-export class MonthViewComponent implements OnInit, OnDestroy {
+export class MonthViewComponent implements OnInit, OnDestroy, OnChanges {
   @Input() date: Date;
   @Input() updateDate;
   @Input() vertical: boolean;
@@ -40,6 +41,16 @@ export class MonthViewComponent implements OnInit, OnDestroy {
 
   showYears() {
     this.calendarService.getShownYears(this.date);
+  }
+
+  ngOnChanges(changes) {
+    if (this.dayDirectives) {
+      console.log(
+        "onchange month this.dayDirectives, changes",
+        this.dayDirectives,
+        changes
+      );
+    }
   }
 
   ngOnInit() {
