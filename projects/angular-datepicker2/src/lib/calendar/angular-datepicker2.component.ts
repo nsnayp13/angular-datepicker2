@@ -12,6 +12,8 @@ import {
   AfterViewInit,
   ContentChildren,
   AfterContentInit,
+  QueryList,
+  ViewContainerRef,
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
 import {
@@ -121,15 +123,18 @@ export class AngularDatepicker2
 
   width: number | null;
 
-  @ContentChildren(DayDirective) dayDirectivesQueryList;
+  @ContentChildren(DayDirective)
+  dayDirectivesQueryList: QueryList<DayDirective>;
   dayDirectives: DayDirective[] = [];
 
   constructor(
     private calendarService: CalendarService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private vcr: ViewContainerRef
   ) {}
 
   private __getDirectives() {
+    this.dayDirectivesQueryList.notifyOnChanges();
     this.retrunThis.emit(this);
 
     if (this.dayDirectivesQueryList) {

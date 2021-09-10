@@ -2,9 +2,7 @@
 
     <div class="wrap">
         <div style=" display:block; float:left;">
-            <angular-datepicker2 [days]="days" [nowDate]="date" [(selectedDates)]="selectedDates"
-                [selectMode]="selectMode" [weekends]="[6]" [suggest]="suggest" [weekStart]="0" [viewMode]="viewMode"
-                [vertical]="vertical" (onDayClick)="onDayClick($event)" [disabledDates]="disabledDates">
+            <angular-datepicker2>
 
 
                 <div *ngFor="let dd of dates">
