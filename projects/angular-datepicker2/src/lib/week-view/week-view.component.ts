@@ -17,6 +17,7 @@ export class WeekViewComponent implements OnInit {
 
   ngOnInit() {
     this.dates = this.weekService.getWeek(this.date);
+    console.log("onInit weekView this.dayDirectives", this.dayDirectives);
   }
 
   getDayDirective(date: Date): DayDirective {

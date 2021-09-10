@@ -43,6 +43,8 @@ export class MonthViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log("onInit monthView this.dayDirectives", this.dayDirectives);
+
     this.sub.add(
       this.calendarService.animationStep.subscribe((data) => {
         this.animationStep = data;

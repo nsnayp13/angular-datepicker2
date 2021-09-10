@@ -123,6 +123,10 @@ export class AngularDatepicker2
 
   ngAfterViewInit() {
     this.dayDirectives = this.dayDirectivesQueryList.toArray();
+    console.log(
+      "calendar ngAfterViewInit this.dayDirectives",
+      this.dayDirectives
+    );
   }
 
   getMonthDayDirectives(date: Date): DayDirective[] {

@@ -85,7 +85,7 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
   detectChanges() {}
 
   ngOnChanges(changes) {
-    console.log(changes);
+    // console.log(changes);
     if (this.dayDirective && this.template) {
       this.createChildComponent();
     }
