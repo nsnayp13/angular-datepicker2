@@ -11,6 +11,7 @@ import {
   ViewEncapsulation,
   AfterViewInit,
   ContentChildren,
+  AfterContentInit,
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
 import {
@@ -30,7 +31,12 @@ import { DayDirective } from "../day.directive";
   encapsulation: ViewEncapsulation.None,
 })
 export class AngularDatepicker2
-  implements OnInit, OnChanges, AfterViewChecked, AfterViewInit {
+  implements
+    OnInit,
+    OnChanges,
+    AfterViewChecked,
+    AfterViewInit,
+    AfterContentInit {
   /**
    * @description
    *  Array of selected dates.
@@ -121,12 +127,23 @@ export class AngularDatepicker2
     private cdr: ChangeDetectorRef
   ) {}
 
+  private __getDirectives() {
+    if (this.dayDirectivesQueryList) {
+      this.dayDirectives = this.dayDirectivesQueryList.toArray();
+      console.log(this.dayDirectivesQueryList);
+      this.dayDirectivesQueryList.changes.subscribe((data) => {
+        this.dayDirectives = data.toArray();
+        console.log(data);
+      });
+    }
+  }
+
+  ngAfterContentInit() {
+    this.__getDirectives();
+  }
+
   ngAfterViewInit() {
-    console.log(this.dayDirectivesQueryList);
-    this.dayDirectivesQueryList.changes.subscribe((data) => {
-      this.dayDirectives = data.toArray();
-      console.log(data);
-    });
+    this.__getDirectives();
   }
 
   getMonthDayDirectives(date: Date): DayDirective[] {
