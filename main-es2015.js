@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div style=\"width:100%; display:block; float:left;\">\n\n    <div class=\"wrap\">\n        <div style=\" display:block; float:left;\">\n            <angular-datepicker2 [days]=\"days\" [nowDate]=\"date\" [(selectedDates)]=\"selectedDates\"\n                [selectMode]=\"selectMode\" [weekends]=\"[6]\" [suggest]=\"suggest\" [weekStart]=\"0\" [viewMode]=\"viewMode\"\n                [vertical]=\"vertical\" (onDayClick)=\"onDayClick($event)\" [disabledDates]=\"disabledDates\">\n\n                <div *ad2day=\"let date from days[0].date\" [attr.title]=\"'Custom day'\" class=\"customDay\">\n                    {{date.getDate()}}\n                    <div class=\"points\">\n                        <div class=\"point\"></div>\n                        <div class=\"point red\"></div>\n                    </div>\n                </div>\n\n                <div *ad2day=\"let date from days[1].date\" [attr.title]=\"'Custom day'\" class=\"customDay\">\n                    {{date.getDate()}}\n                    <div class=\"points\">\n                        <div class=\"point blue\"></div>\n                        <div class=\"point red\"></div>\n                    </div>\n                </div>\n\n                <div *ad2day=\"let date from days[2].date\" [attr.title]=\"'Custom day'\" class=\"customDay\">\n                    {{date.getDate()}}\n                    <div class=\"points\">\n                        <div class=\"point blue\"></div>\n                        <div class=\"point green\"></div>\n                    </div>\n                </div>\n\n                <div *ad2day=\"let date from days[3].date\" [attr.title]=\"'Custom day'\" class=\"customDay\">\n                    {{date.getDate()}}\n                    <div class=\"points\">\n                        <div class=\"point blue\"></div>\n                        <div class=\"point red\"></div>\n                        <div class=\"point green\"></div>\n                    </div>\n                </div>\n\n            </angular-datepicker2>\n        </div>\n    </div>\n\n    <div style=\" width:50%; display: block; float: left; padding: 16px; box-sizing: border-box\">\n        <h3>Props</h3>\n        <table border=1 style=\"width:100%; background: #fff; border-collapse: collapse;\">\n            <tr>\n                <td>viewMode</td>\n                <td>ViewMode | int</td>\n                <td>Template for render months. If quater start month woul be January, April or August. If 3 - end by\n                    shownDate else last date in selectedDates</td>\n                <td>\n                    <select (change)=\"_viewMode($event)\" value=\"quarter\">\n                        <option *ngFor=\"let i of _viewModeVal\" [value]=\"i\">\n                            {{i}}\n                        </option>\n                    </select>\n                </td>\n            </tr>\n\n            <tr>\n                <td>vertical</td>\n                <td>boolean</td>\n                <td>Alignment of days in a week. Default horizontal.</td>\n                <td>\n                    <select (change)=\"_vertical($event)\" value=\"quarter\">\n                        <option *ngFor=\"let i of _verticalVal\" [value]=\"i\">\n                            {{i}}\n                        </option>\n                    </select>\n                </td>\n            </tr>\n\n            <!-- <tr>\n                <td>shownDate</td>\n                <td>Date</td>\n                <td>Date whould be render for default calendar. Calendar ends by month of this date</td>\n                <td>\n                    <angular-datepicker2 [shownDate]=\"_shownDateVal\" selectMode=\"single\" [weekends]=\"[0,1]\"\n                        [(selectedDates)]=\"_shownDateVal\" [weekStart]=\"1\" [viewMode]=\"1\" [vertical]=\"vertical\">\n                    </angular-datepicker2>\n                </td>\n            </tr> -->\n\n            <tr>\n                <td>selectMode</td>\n                <td>SelectMode</td>\n                <td>Single, multiple or period</td>\n                <td>\n                    <select (change)=\"_selectMode($event)\" value=\"period\">\n                        <option *ngFor=\"let i of _selectModeVal\" [value]=\"i\">\n                            {{i}}\n                        </option>\n                    </select>\n                </td>\n            </tr>\n\n            <tr>\n                <td>selectedDates</td>\n                <td>[Date]</td>\n                <td>Array of selected date. Support [(selectedDates)]</td>\n                <td>\n                    <p *ngFor=\"let date of selectedDates\">{{date | date:'yyyy.MM.dd'}}</p>\n                </td>\n            </tr>\n\n\n\n\n        </table>\n\n\n\n\n    </div>\n\n\n    <div style=\" width:50%; display: block; float: left; padding: 16px;  box-sizing: border-box\">\n        <h3>Events</h3>\n        <table border=1 style=\"width:100%; background: #fff; border-collapse: collapse;\">\n\n            <tr>\n                <td>onDayClick</td>\n                <td>Event</td>\n                <td>Callback event when click on day. Its returns a Day object before change self state by click</td>\n                <td>\n                    <div *ngFor=\"let item of _stackOnDayClick\">\n                        <pre>{{item | json}}</pre>\n                    </div>\n                </td>\n            </tr>\n\n\n\n        </table>\n\n\n\n\n    </div>\n\n\n</div>\n\n\n<!-- \n<datepicker2 [shownDate]=\"date\" [selectedDates]=\"selectedDates\" [selectMode]=\"'multiple'\" [vertical]=\"false\"\n    [viewMode]=\"3\"></datepicker2>\n<datepicker2 [shownDate]=\"date\" [selectedDates]=\"selectedDates\" [selectMode]=\"'single'\">\n</datepicker2>\n<datepicker2 [viewMode]=\"1\" [selectedDates]=\"selectedDates\" [vertical]=\"false\" [shownDate]=\"date\"></datepicker2>\n<datepicker2 [viewMode]=\"1\" [selectedDates]=\"selectedDates\" [vertical]=\"true\" [shownDate]=\"date\"></datepicker2>\n<datepicker2 [viewMode]=\"4\" [selectedDates]=\"selectedDates\" [vertical]=\"true\" [shownDate]=\"date\"></datepicker2> -->");
+/* harmony default export */ __webpack_exports__["default"] = ("<div style=\"width:100%; display:block; float:left;\">\n\n    <div class=\"wrap\">\n        <div style=\" display:block; float:left;\">\n            <angular-datepicker2 [days]=\"days\" [nowDate]=\"date\" [(selectedDates)]=\"selectedDates\"\n                [selectMode]=\"selectMode\" [weekends]=\"[6]\" [suggest]=\"suggest\" [weekStart]=\"0\" [viewMode]=\"viewMode\"\n                [vertical]=\"vertical\" (onDayClick)=\"onDayClick($event)\" [disabledDates]=\"disabledDates\">\n\n\n                <div *ngFor=\"let dd of days\">\n\n                    <div *ad2day=\"let date from dd.date\">hh</div>\n\n                </div>\n\n\n                <!-- <div *ad2day=\"let date from days[0].date\" [attr.title]=\"'Custom day'\" class=\"customDay\">\n                    {{date.getDate()}}\n                    <div class=\"points\">\n                        <div class=\"point\"></div>\n                        <div class=\"point red\"></div>\n                    </div>\n                </div>\n\n                <div *ad2day=\"let date from days[1].date\" [attr.title]=\"'Custom day'\" class=\"customDay\">\n                    {{date.getDate()}}\n                    <div class=\"points\">\n                        <div class=\"point blue\"></div>\n                        <div class=\"point red\"></div>\n                    </div>\n                </div>\n\n                <div *ad2day=\"let date from days[2].date\" [attr.title]=\"'Custom day'\" class=\"customDay\">\n                    {{date.getDate()}}\n                    <div class=\"points\">\n                        <div class=\"point blue\"></div>\n                        <div class=\"point green\"></div>\n                    </div>\n                </div>\n\n                <div *ad2day=\"let date from days[3].date\" [attr.title]=\"'Custom day'\" class=\"customDay\">\n                    {{date.getDate()}}\n                    <div class=\"points\">\n                        <div class=\"point blue\"></div>\n                        <div class=\"point red\"></div>\n                        <div class=\"point green\"></div>\n                    </div>\n                </div> -->\n\n            </angular-datepicker2>\n        </div>\n    </div>\n\n    <div style=\" width:50%; display: block; float: left; padding: 16px; box-sizing: border-box\">\n        <h3>Props</h3>\n        <table border=1 style=\"width:100%; background: #fff; border-collapse: collapse;\">\n            <tr>\n                <td>viewMode</td>\n                <td>ViewMode | int</td>\n                <td>Template for render months. If quater start month woul be January, April or August. If 3 - end by\n                    shownDate else last date in selectedDates</td>\n                <td>\n                    <select (change)=\"_viewMode($event)\" value=\"quarter\">\n                        <option *ngFor=\"let i of _viewModeVal\" [value]=\"i\">\n                            {{i}}\n                        </option>\n                    </select>\n                </td>\n            </tr>\n\n            <tr>\n                <td>vertical</td>\n                <td>boolean</td>\n                <td>Alignment of days in a week. Default horizontal.</td>\n                <td>\n                    <select (change)=\"_vertical($event)\" value=\"quarter\">\n                        <option *ngFor=\"let i of _verticalVal\" [value]=\"i\">\n                            {{i}}\n                        </option>\n                    </select>\n                </td>\n            </tr>\n\n            <!-- <tr>\n                <td>shownDate</td>\n                <td>Date</td>\n                <td>Date whould be render for default calendar. Calendar ends by month of this date</td>\n                <td>\n                    <angular-datepicker2 [shownDate]=\"_shownDateVal\" selectMode=\"single\" [weekends]=\"[0,1]\"\n                        [(selectedDates)]=\"_shownDateVal\" [weekStart]=\"1\" [viewMode]=\"1\" [vertical]=\"vertical\">\n                    </angular-datepicker2>\n                </td>\n            </tr> -->\n\n            <tr>\n                <td>selectMode</td>\n                <td>SelectMode</td>\n                <td>Single, multiple or period</td>\n                <td>\n                    <select (change)=\"_selectMode($event)\" value=\"period\">\n                        <option *ngFor=\"let i of _selectModeVal\" [value]=\"i\">\n                            {{i}}\n                        </option>\n                    </select>\n                </td>\n            </tr>\n\n            <tr>\n                <td>selectedDates</td>\n                <td>[Date]</td>\n                <td>Array of selected date. Support [(selectedDates)]</td>\n                <td>\n                    <p *ngFor=\"let date of selectedDates\">{{date | date:'yyyy.MM.dd'}}</p>\n                </td>\n            </tr>\n\n\n\n\n        </table>\n\n\n\n\n    </div>\n\n\n    <div style=\" width:50%; display: block; float: left; padding: 16px;  box-sizing: border-box\">\n        <h3>Events</h3>\n        <table border=1 style=\"width:100%; background: #fff; border-collapse: collapse;\">\n\n            <tr>\n                <td>onDayClick</td>\n                <td>Event</td>\n                <td>Callback event when click on day. Its returns a Day object before change self state by click</td>\n                <td>\n                    <div *ngFor=\"let item of _stackOnDayClick\">\n                        <pre>{{item | json}}</pre>\n                    </div>\n                </td>\n            </tr>\n\n\n\n        </table>\n\n\n\n\n    </div>\n\n\n</div>\n\n\n<!-- \n<datepicker2 [shownDate]=\"date\" [selectedDates]=\"selectedDates\" [selectMode]=\"'multiple'\" [vertical]=\"false\"\n    [viewMode]=\"3\"></datepicker2>\n<datepicker2 [shownDate]=\"date\" [selectedDates]=\"selectedDates\" [selectMode]=\"'single'\">\n</datepicker2>\n<datepicker2 [viewMode]=\"1\" [selectedDates]=\"selectedDates\" [vertical]=\"false\" [shownDate]=\"date\"></datepicker2>\n<datepicker2 [viewMode]=\"1\" [selectedDates]=\"selectedDates\" [vertical]=\"true\" [shownDate]=\"date\"></datepicker2>\n<datepicker2 [viewMode]=\"4\" [selectedDates]=\"selectedDates\" [vertical]=\"true\" [shownDate]=\"date\"></datepicker2> -->");
 
 /***/ }),
 
@@ -877,8 +877,7 @@ let AngularDatepicker2 = class AngularDatepicker2 {
         this.dayDirectives = [];
     }
     ngAfterViewInit() {
-        this.dayDirectives = this.dayDirectivesQueryList.toArray();
-        console.log("calendar ngAfterViewInit this.dayDirectives", this.dayDirectives);
+        this.dayDirectivesQueryList.changes.subscribe((data) => (this.dayDirectives = data.toArray()));
     }
     getMonthDayDirectives(date) {
         return this.dayDirectives.filter((directive) => directive.date.getMonth() === date.getMonth() &&
@@ -1134,8 +1133,7 @@ let DayViewComponent = class DayViewComponent {
         });
     }
     detectChanges() { }
-    ngOnChanges(changes) {
-        // console.log(changes);
+    ngOnChanges() {
         if (this.dayDirective && this.template) {
             this.createChildComponent();
         }
@@ -1373,13 +1371,7 @@ let MonthViewComponent = class MonthViewComponent {
     showYears() {
         this.calendarService.getShownYears(this.date);
     }
-    ngOnChanges(changes) {
-        if (this.dayDirectives) {
-            console.log("onchange month this.dayDirectives, changes", this.dayDirectives, changes);
-        }
-    }
     ngOnInit() {
-        console.log("onInit monthView this.dayDirectives", this.dayDirectives);
         this.sub.add(this.calendarService.animationStep.subscribe((data) => {
             this.animationStep = data;
         }));
@@ -1473,7 +1465,6 @@ let WeekViewComponent = class WeekViewComponent {
     }
     ngOnInit() {
         this.dates = this.weekService.getWeek(this.date);
-        console.log("onInit weekView this.dayDirectives", this.dayDirectives);
     }
     getDayDirective(date) {
         let day = this.dayDirectives.find((directive) => directive.date.getTime() === date.getTime());
@@ -1686,36 +1677,38 @@ let AppComponent = class AppComponent {
             new Date(new Date().getFullYear(), new Date().getMonth(), 11),
         ];
         this.date = new Date(new Date().getFullYear(), new Date().getMonth(), 7);
-        this.days = [
-            {
-                isDisabled: true,
-                isHovered: false,
-                isSelected: false,
-                isWeekEnd: true,
-                date: new Date(new Date().getFullYear(), new Date().getMonth(), 2),
-            },
-            {
-                isDisabled: false,
-                isHovered: false,
-                isSelected: false,
-                isWeekEnd: true,
-                date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 30),
-            },
-            {
-                isDisabled: false,
-                isHovered: false,
-                isSelected: false,
-                isWeekEnd: true,
-                date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 5),
-            },
-            {
-                isDisabled: false,
-                isHovered: false,
-                isSelected: false,
-                isWeekEnd: true,
-                date: new Date(new Date().getFullYear(), new Date().getMonth(), 6),
-            },
-        ];
+        setTimeout(() => {
+            this.days = [
+                {
+                    isDisabled: true,
+                    isHovered: false,
+                    isSelected: false,
+                    isWeekEnd: true,
+                    date: new Date(new Date().getFullYear(), new Date().getMonth(), 2),
+                },
+                {
+                    isDisabled: false,
+                    isHovered: false,
+                    isSelected: false,
+                    isWeekEnd: true,
+                    date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 30),
+                },
+                {
+                    isDisabled: false,
+                    isHovered: false,
+                    isSelected: false,
+                    isWeekEnd: true,
+                    date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 5),
+                },
+                {
+                    isDisabled: false,
+                    isHovered: false,
+                    isSelected: false,
+                    isWeekEnd: true,
+                    date: new Date(new Date().getFullYear(), new Date().getMonth(), 6),
+                },
+            ];
+        }, 4000);
     }
 };
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
