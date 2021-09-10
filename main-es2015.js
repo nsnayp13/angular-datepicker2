@@ -877,6 +877,7 @@ let AngularDatepicker2 = class AngularDatepicker2 {
         this.dayDirectives = [];
     }
     __getDirectives() {
+        this.retrunThis.emit(this);
         if (this.dayDirectivesQueryList) {
             this.dayDirectives = this.dayDirectivesQueryList.toArray();
             console.log(this.dayDirectivesQueryList);
@@ -1054,6 +1055,9 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChildren"])("column")
 ], AngularDatepicker2.prototype, "columns", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+], AngularDatepicker2.prototype, "retrunThis", void 0);
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ContentChildren"])(_day_directive__WEBPACK_IMPORTED_MODULE_3__["DayDirective"])
 ], AngularDatepicker2.prototype, "dayDirectivesQueryList", void 0);

@@ -1416,6 +1416,8 @@
       }
 
       __getDirectives() {
+        this.retrunThis.emit(this);
+
         if (this.dayDirectivesQueryList) {
           this.dayDirectives = this.dayDirectivesQueryList.toArray();
           console.log(this.dayDirectivesQueryList);
@@ -1580,6 +1582,7 @@
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AngularDatepicker2.prototype, "nowDate", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], AngularDatepicker2.prototype, "disabledDates", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChildren"])("column")], AngularDatepicker2.prototype, "columns", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()], AngularDatepicker2.prototype, "retrunThis", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ContentChildren"])(_day_directive__WEBPACK_IMPORTED_MODULE_3__["DayDirective"])], AngularDatepicker2.prototype, "dayDirectivesQueryList", void 0);
     AngularDatepicker2 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: "angular-datepicker2",
