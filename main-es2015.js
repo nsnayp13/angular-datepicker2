@@ -1373,6 +1373,11 @@ let MonthViewComponent = class MonthViewComponent {
     showYears() {
         this.calendarService.getShownYears(this.date);
     }
+    ngOnChanges(changes) {
+        if (this.dayDirectives) {
+            console.log("onchange month this.dayDirectives, changes", this.dayDirectives, changes);
+        }
+    }
     ngOnInit() {
         console.log("onInit monthView this.dayDirectives", this.dayDirectives);
         this.sub.add(this.calendarService.animationStep.subscribe((data) => {
