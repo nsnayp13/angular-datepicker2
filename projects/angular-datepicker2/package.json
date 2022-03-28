@@ -1,14 +1,14 @@
 {
-  "name": "angular-datepicker2",
-  "version": "3.4.3",
-  "description": "Angular datepicker, best calendar. Select Period, single, or multiple dates. Template your own day in calendar. Two way databinding and others",
+  "name": "ngx-datepicker-clean",
+  "version": "1.0.0",
+  "description": "Fork of https://github.com/nsnayp13/angular-datepicker2 to make it compatible with latest Angular version",
   "peerDependencies": {
-    "@angular/common": "^8.2.14",
-    "@angular/core": "^8.2.14"
+    "@angular/common": "~13.3.0",
+    "@angular/core": "~13.3.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nsnayp13/angular-calendar"
+    "url": "git+https://github.com/javissimo/angular-datepicker2"
   },
   "keywords": [
     "angular",
@@ -19,9 +19,11 @@
     "material",
     "component",
     "ui",
-    "input",
-    "angularjs"
+    "input"
   ],
-  "author": "Ivanov.N <nikaglichev@gmail.com>",
+  "author": "Javissimo <javierperalta@duck.com>",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "license": "MIT"
 }

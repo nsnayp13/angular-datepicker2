@@ -11,11 +11,9 @@ import { AngularDatepicker2Module } from "projects/angular-datepicker2/src/publi
 registerLocaleData(localeEn, "en");
 
 @NgModule({
-  declarations: [AppComponent],
-
-  entryComponents: [],
-  imports: [BrowserModule, FormsModule, AngularDatepicker2Module],
-  providers: [{ provide: LOCALE_ID, useValue: "en" }],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [BrowserModule, FormsModule, AngularDatepicker2Module],
+    providers: [{ provide: LOCALE_ID, useValue: "en" }],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
