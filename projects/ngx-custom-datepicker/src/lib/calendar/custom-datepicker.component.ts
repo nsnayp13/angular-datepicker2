@@ -26,19 +26,20 @@ import {
 import { DayDirective } from "../day.directive";
 
 @Component({
-  selector: "angular-datepicker2",
-  templateUrl: "./angular-datepicker2.component.html",
-  styleUrls: ["./angular-datepicker2.component.scss"],
+  selector: "ngx-custom-datepicker",
+  templateUrl: "./custom-datepicker.component.html",
+  styleUrls: ["./custom-datepicker.component.scss"],
   providers: [CalendarService],
   encapsulation: ViewEncapsulation.None,
 })
-export class AngularDatepicker2
+export class CustomDatepicker
   implements
     OnInit,
     OnChanges,
     AfterViewChecked,
     AfterViewInit,
-    AfterContentInit {
+    AfterContentInit
+{
   /**
    * @description
    *  Array of selected dates.
@@ -284,9 +285,8 @@ export class AngularDatepicker2
   setDays() {}
 
   goNext() {
-    let lastDate = this.calendarService.calendar[
-      this.calendarService.calendar.length - 1
-    ];
+    let lastDate =
+      this.calendarService.calendar[this.calendarService.calendar.length - 1];
     this.calendarService.goNext(lastDate);
   }
   goPrev() {

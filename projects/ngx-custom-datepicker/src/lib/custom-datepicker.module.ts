@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from "@angular/core";
-import { AngularDatepicker2 } from "./calendar/angular-datepicker2.component";
+import { CustomDatepicker } from "./calendar/custom-datepicker.component";
 import { MonthViewComponent } from "./month-view/month-view.component";
 import { DayViewComponent } from "./day-view/day-view.component";
 import { MonthSelectComponent } from "./month-select/month-select.component";
@@ -10,7 +10,7 @@ import { DayDirective } from "./day.directive";
 
 @NgModule({
   declarations: [
-    AngularDatepicker2,
+    CustomDatepicker,
     MonthViewComponent,
     DayViewComponent,
     MonthSelectComponent,
@@ -19,12 +19,12 @@ import { DayDirective } from "./day.directive";
     DayDirective,
   ],
   imports: [CommonModule],
-  exports: [AngularDatepicker2, DayDirective],
+  exports: [CustomDatepicker, DayDirective],
 })
-export class AngularDatepicker2Module {
-  static forRoot(): ModuleWithProviders<AngularDatepicker2Module> {
+export class CustomDatepickerModule {
+  static forRoot(): ModuleWithProviders<CustomDatepickerModule> {
     return {
-      ngModule: AngularDatepicker2Module,
+      ngModule: CustomDatepickerModule,
     };
   }
 }

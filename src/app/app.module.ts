@@ -7,13 +7,13 @@ import { registerLocaleData } from "@angular/common";
 import localeEn from "@angular/common/locales/en";
 
 import { FormsModule } from "@angular/forms";
-import { AngularDatepicker2Module } from "projects/angular-datepicker2/src/public-api";
+import { CustomDatepickerModule } from "projects/ngx-custom-datepicker/src/public-api";
 registerLocaleData(localeEn, "en");
 
 @NgModule({
-    declarations: [AppComponent],
-    imports: [BrowserModule, FormsModule, AngularDatepicker2Module],
-    providers: [{ provide: LOCALE_ID, useValue: "en" }],
-    bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [BrowserModule, FormsModule, CustomDatepickerModule],
+  providers: [{ provide: LOCALE_ID, useValue: "en" }],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

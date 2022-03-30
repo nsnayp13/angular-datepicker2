@@ -24,9 +24,9 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: npm install
-      - run: npm run build angular-datepicker2 --prod
+      - run: npm run build ngx-custom-datepicker --prod
       - name: publish
-        run: cd dist/angular-datepicker2 && npm publish
+        run: cd dist/ngx-custom-datepicker && npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm}}
 
@@ -40,5 +40,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           branch: gh-pages
-          folder: dist/angular-datepicker
+          folder: dist/ngx-custom-datepicker
           token: ${{ secrets.GP_PAT_TOKEN }}

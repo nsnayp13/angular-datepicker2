@@ -1,14 +1,14 @@
 {
   "name": "ngx-datepicker-clean",
   "version": "1.0.0",
-  "description": "Fork of https://github.com/nsnayp13/angular-datepicker2 to make it compatible with latest Angular version",
+  "description": "Fork of https://github.com/nsnayp13/ngx-custom-datepicker to make it compatible with latest Angular version",
   "peerDependencies": {
     "@angular/common": "~13.3.0",
     "@angular/core": "~13.3.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/javissimo/angular-datepicker2"
+    "url": "git+https://github.com/javissimo/ngx-custom-datepicker"
   },
   "keywords": [
     "angular",

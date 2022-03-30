@@ -2,19 +2,19 @@
 
 v3.x.x
 
-![Node.js CI](https://github.com/nsnayp13/angular-datepicker2/workflows/Node.js%20CI/badge.svg)
+![Node.js CI](https://github.com/nsnayp13/ngx-custom-datepicker/workflows/Node.js%20CI/badge.svg)
 
-`npm i angular-datepicker2`
+`npm i ngx-custom-datepicker`
 
 now @angular/core: ^8.2.14
 
 ## DEMO
 
-[https://nsnayp13.github.io/angular-datepicker2/](https://nsnayp13.github.io/angular-datepicker2/)
+[https://nsnayp13.github.io/ngx-custom-datepicker/](https://nsnayp13.github.io/ngx-custom-datepicker/)
 
 ## Getting started
 
-Set to imports app.module.ts `import { AngularDatepicker2Module } from 'angular-datepicker2'`. Then you can use it by tag `<angular-datepicker2></angular-datepicker2>`.
+Set to imports app.module.ts `import { AngularDatepicker2Module } from 'ngx-custom-datepicker'`. Then you can use it by tag `<ngx-custom-datepicker></ngx-custom-datepicker>`.
 
 ## Options
 
@@ -120,7 +120,7 @@ this.days = [
 ```
 
 ```html
-<angular-datepicker2
+<ngx-custom-datepicker
   [shownDate]="shownDate"
   [suggest]="suggest"
   [days]="days"
@@ -151,5 +151,5 @@ this.days = [
     </div>
     <!--app -my-custom-component-->
   </div>
-</angular-datepicker2>
+</ngx-custom-datepicker>
 ```

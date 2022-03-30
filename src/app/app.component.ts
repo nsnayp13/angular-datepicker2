@@ -6,7 +6,7 @@ import {
   ViewMode,
   Suggest,
   DisabledDates,
-} from "projects/angular-datepicker2/src/public-api";
+} from "projects/ngx-custom-datepicker/src/public-api";
 
 @Component({
   selector: "app-root",
@@ -14,7 +14,7 @@ import {
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  title = "angular-datepicker";
+  title = "ngx-custom-datepicker";
   date: Date;
   selectedDates: Date[];
 

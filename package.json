@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "test-once": "ng test angular-datepicker2 --watch false --code-coverage",
-    "ngh": "ng build --configuration production --base-href https://nsnayp13.github.io/angular-datepicker2/",
+    "test-once": "ng test ngx-custom-datepicker --watch false --code-coverage",
+    "ngh": "ng build --configuration production --base-href https://nsnayp13.github.io/ngx-custom-datepicker/",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -21,7 +21,7 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
-    "angular-datepicker2": "0.0.3",
+    "ngx-custom-datepicker": "file:dist/ngx-custom-datepicker",
     "rxjs": "~6.6.7",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"

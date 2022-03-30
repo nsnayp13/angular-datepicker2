@@ -2,7 +2,7 @@
 
     <div class="wrap">
         <div style=" display:block; float:left;">
-            <angular-datepicker2 [days]="days" [nowDate]="date" [(selectedDates)]="selectedDates"
+            <ngx-custom-datepicker [days]="days" [nowDate]="date" [(selectedDates)]="selectedDates"
                 [selectMode]="selectMode" [weekends]="[6]" [suggest]="suggest" [weekStart]="0" [viewMode]="viewMode"
                 [vertical]="vertical" (onDayClick)="onDayClick($event)" [disabledDates]="disabledDates">
 
@@ -40,7 +40,7 @@
                     </div>
                 </div>
 
-            </angular-datepicker2>
+            </ngx-custom-datepicker>
         </div>
     </div>
 
@@ -79,9 +79,9 @@
                 <td>Date</td>
                 <td>Date whould be render for default calendar. Calendar ends by month of this date</td>
                 <td>
-                    <angular-datepicker2 [shownDate]="_shownDateVal" selectMode="single" [weekends]="[0,1]"
+                    <ngx-custom-datepicker [shownDate]="_shownDateVal" selectMode="single" [weekends]="[0,1]"
                         [(selectedDates)]="_shownDateVal" [weekStart]="1" [viewMode]="1" [vertical]="vertical">
-                    </angular-datepicker2>
+                    </ngx-custom-datepicker>
                 </td>
             </tr> -->
 
@@ -146,7 +146,7 @@
 </div>
 
 
-<!-- 
+<!--
 <datepicker2 [shownDate]="date" [selectedDates]="selectedDates" [selectMode]="'multiple'" [vertical]="false"
     [viewMode]="3"></datepicker2>
 <datepicker2 [shownDate]="date" [selectedDates]="selectedDates" [selectMode]="'single'">
