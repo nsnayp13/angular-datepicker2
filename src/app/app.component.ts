@@ -1,19 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import {
-  Calendar,
-  Day,
-  SelectMode,
-  ViewMode,
-  DisabledDates,
-} from "projects/ngx-custom-datepicker/src/public-api";
+import { Component, OnInit } from '@angular/core';
+import { Calendar, Day, SelectMode, ViewMode, DisabledDates } from 'projects/ngx-custom-datepicker/src/public-api';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = "ngx-custom-datepicker";
+  title = 'ngx-custom-datepicker';
   date: Date;
   selectedDates: Date[];
 
@@ -22,7 +16,6 @@ export class AppComponent implements OnInit {
 
   dates: Date[] = [];
 
-  vertical = false;
   selectMode: SelectMode = SelectMode.Period;
   viewMode: ViewMode | number = ViewMode.Quarter;
 
@@ -45,15 +38,10 @@ export class AppComponent implements OnInit {
 
   _viewMode(e) {
     let val = e.target.value;
-    if (typeof val === "string" && val.length <= 2) {
+    if (typeof val === 'string' && val.length <= 2) {
       val = parseInt(val);
     }
     this.viewMode = val;
-  }
-
-  _vertical(e) {
-    const val = e.target.value;
-    this.vertical = val === "true" ? true : false;
   }
 
   onDayClick(day) {
@@ -73,13 +61,13 @@ export class AppComponent implements OnInit {
     disabledAfter.setDate(disabledAfter.getDate() + 15);
 
     this.disabledDates = {
-      before: disabledBefore,
+      before: disabledBefore
       //after: disabledAfter,
     };
 
     this.selectedDates = [
       new Date(new Date().getFullYear(), new Date().getMonth(), 2),
-      new Date(new Date().getFullYear(), new Date().getMonth(), 11),
+      new Date(new Date().getFullYear(), new Date().getMonth(), 11)
     ];
     this.date = new Date(new Date().getFullYear(), new Date().getMonth(), 7);
 
@@ -90,29 +78,29 @@ export class AppComponent implements OnInit {
         isHovered: false,
         isSelected: false,
         isWeekEnd: true,
-        date: new Date(new Date().getFullYear(), new Date().getMonth(), 2),
+        date: new Date(new Date().getFullYear(), new Date().getMonth(), 2)
       },
       {
         isDisabled: false,
         isHovered: false,
         isSelected: false,
         isWeekEnd: true,
-        date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 30),
+        date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 30)
       },
       {
         isDisabled: false,
         isHovered: false,
         isSelected: false,
         isWeekEnd: true,
-        date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 5),
+        date: new Date(new Date().getFullYear(), new Date().getMonth() - 1, 5)
       },
       {
         isDisabled: false,
         isHovered: false,
         isSelected: false,
         isWeekEnd: true,
-        date: new Date(new Date().getFullYear(), new Date().getMonth(), 6),
-      },
+        date: new Date(new Date().getFullYear(), new Date().getMonth(), 6)
+      }
     ];
     //}, 2000);
   }

@@ -13,27 +13,20 @@ import {
   ContentChildren,
   AfterContentInit,
   QueryList,
-  ViewContainerRef,
-} from "@angular/core";
-import { CalendarService } from "../_service/calendar.service";
-import { Day, SelectMode, ViewMode, DisabledDates } from "../interfaces";
-import { DayDirective } from "../day.directive";
+  ViewContainerRef
+} from '@angular/core';
+import { CalendarService } from '../_service/calendar.service';
+import { Day, SelectMode, ViewMode, DisabledDates } from '../interfaces';
+import { DayDirective } from '../day.directive';
 
 @Component({
-  selector: "ngx-custom-datepicker",
-  templateUrl: "./custom-datepicker.component.html",
-  styleUrls: ["./custom-datepicker.component.scss"],
+  selector: 'ngx-custom-datepicker',
+  templateUrl: './custom-datepicker.component.html',
+  styleUrls: ['./custom-datepicker.component.scss'],
   providers: [CalendarService],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
-export class CustomDatepicker
-  implements
-    OnInit,
-    OnChanges,
-    AfterViewChecked,
-    AfterViewInit,
-    AfterContentInit
-{
+export class CustomDatepicker implements OnInit, OnChanges, AfterViewChecked, AfterViewInit, AfterContentInit {
   /**
    * @description
    *  Array of selected dates.
@@ -62,12 +55,6 @@ export class CustomDatepicker
 
   /**
    * @description
-   *  Alignment of days in a week. Default horizontal.
-   * */
-  @Input() vertical: boolean;
-
-  /**
-   * @description
    * Present mode of calendar. Year, quarter, semester or qty months. Default 1.
    * */
   @Input() viewMode: ViewMode | number;
@@ -93,19 +80,12 @@ export class CustomDatepicker
 
   /**
    * @description
-   * Date
-   * @See `SelectMode`
-   */
-  @Input() nowDate: Date;
-
-  /**
-   * @description
    * Disable select dates. Before after date or array
    * @See `DisabledDates`
    */
   @Input() disabledDates: DisabledDates;
 
-  @ViewChildren("column") columns;
+  @ViewChildren('column') columns;
 
   width: number | null;
 
@@ -113,10 +93,7 @@ export class CustomDatepicker
   dayDirectivesQueryList: QueryList<DayDirective>;
   dayDirectives: DayDirective[] = [];
 
-  constructor(
-    private calendarService: CalendarService,
-    private cdr: ChangeDetectorRef
-  ) {}
+  constructor(private calendarService: CalendarService, private cdr: ChangeDetectorRef) {}
 
   private __getDirectives() {
     if (this.dayDirectivesQueryList) {
@@ -138,20 +115,14 @@ export class CustomDatepicker
   getMonthDayDirectives(date: Date): DayDirective[] {
     return this.dayDirectives.filter(
       (directive: DayDirective) =>
-        directive.date.getMonth() === date.getMonth() &&
-        directive.date.getFullYear() === date.getFullYear()
+        directive.date.getMonth() === date.getMonth() && directive.date.getFullYear() === date.getFullYear()
     );
   }
 
   recountWidth() {
     let width = 0;
-    this.columns
-      ? this.columns
-          .toArray()
-          .map((item) => (width += item.elementView.nativeElement.clientWidth))
-      : null;
-    this.calendarService.animationStep.value === "stop" &&
-    this.calendarService.viewSelectorMode === "days"
+    this.columns ? this.columns.toArray().map((item) => (width += item.elementView.nativeElement.clientWidth)) : null;
+    this.calendarService.animationStep.value === 'stop' && this.calendarService.viewSelectorMode === 'days'
       ? (this.width = width)
       : null;
 
@@ -168,7 +139,7 @@ export class CustomDatepicker
     }
 
     this.calendarService.animationStep.subscribe((data) => {
-      if (data === "stop") {
+      if (data === 'stop') {
         setTimeout(() => this.recountWidth(), 10);
       }
     });
@@ -185,7 +156,7 @@ export class CustomDatepicker
     this.calendarService.weekStart = this.weekStart;
     this.calendarService.weekends = this.weekends;
     this.calendarService.viewMode = this.viewMode;
-    this.calendarService.viewSelectorMode = "days";
+    this.calendarService.viewSelectorMode = 'days';
     this.calendarService.selectMode = this.selectMode;
     this.calendarService.shownDate = this.shownDate;
     this.calendarService.setSelectedDates(this.selectedDates);
@@ -223,9 +194,7 @@ export class CustomDatepicker
   }
 
   private _viewMode(simpleChange) {
-    if (
-      simpleChange.viewMode.currentValue !== simpleChange.viewMode.previousValue
-    ) {
+    if (simpleChange.viewMode.currentValue !== simpleChange.viewMode.previousValue) {
       this.calendarService.viewMode = simpleChange.viewMode.currentValue;
       this.calendarService.getShownMonths(this.shownDate);
       setTimeout(() => this.recountWidth(), 10);
@@ -233,10 +202,7 @@ export class CustomDatepicker
   }
 
   private _selectMode(simpleChange) {
-    if (
-      simpleChange.selectMode.currentValue !==
-      simpleChange.selectMode.previousValue
-    ) {
+    if (simpleChange.selectMode.currentValue !== simpleChange.selectMode.previousValue) {
       this.calendarService.selectMode = simpleChange.selectMode.currentValue;
       this.calendarService.getShownMonths(this.shownDate);
       setTimeout(() => this.recountWidth(), 10);
@@ -244,10 +210,7 @@ export class CustomDatepicker
   }
 
   private _shownDate(simpleChange) {
-    if (
-      simpleChange.shownDate.currentValue !==
-      simpleChange.shownDate.previousValue
-    ) {
+    if (simpleChange.shownDate.currentValue !== simpleChange.shownDate.previousValue) {
       this.calendarService.shownDate = simpleChange.shownDate.currentValue;
       this.calendarService.getShownMonths(this.shownDate);
       setTimeout(() => this.recountWidth(), 10);
@@ -259,16 +222,14 @@ export class CustomDatepicker
     simpleChange.selectMode && this._selectMode(simpleChange);
     simpleChange.shownDate && this._shownDate(simpleChange);
     simpleChange.days && this.calendarService.days.next(this.days);
-    simpleChange.selectedDates &&
-      this.calendarService.setSelectedDates(this.selectedDates);
+    simpleChange.selectedDates && this.calendarService.setSelectedDates(this.selectedDates);
   }
 
   /** Set custom Day[] */
   setDays() {}
 
   goNext() {
-    const lastDate =
-      this.calendarService.calendar[this.calendarService.calendar.length - 1];
+    const lastDate = this.calendarService.calendar[this.calendarService.calendar.length - 1];
     this.calendarService.goNext(lastDate);
   }
   goPrev() {

@@ -1,42 +1,29 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  HostBinding,
-  Output,
-  ViewChild,
-  ElementRef,
-  OnDestroy,
-} from "@angular/core";
-import { CalendarService } from "../_service/calendar.service";
-import { MonthService } from "../_service/month.service";
-import { Subscription } from "rxjs";
-import { DayDirective } from "../day.directive";
+import { Component, OnInit, Input, HostBinding, Output, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { CalendarService } from '../_service/calendar.service';
+import { MonthService } from '../_service/month.service';
+import { Subscription } from 'rxjs';
+import { DayDirective } from '../day.directive';
 
 @Component({
-  selector: "app-month-view",
-  templateUrl: "./month-view.component.html",
-  styleUrls: ["./month-view.component.scss"],
-  providers: [MonthService],
+  selector: 'app-month-view',
+  templateUrl: './month-view.component.html',
+  styleUrls: ['./month-view.component.scss'],
+  providers: [MonthService]
 })
 export class MonthViewComponent implements OnInit, OnDestroy {
   @Input() date: Date;
   @Input() updateDate;
-  @Input() vertical: boolean;
   @Input() dayDirectives: DayDirective[];
 
-  @Output() @HostBinding("style") elWidth: number;
-  @ViewChild("wrap", { static: true }) elementView: ElementRef;
+  @Output() @HostBinding('style') elWidth: number;
+  @ViewChild('wrap', { static: true }) elementView: ElementRef;
 
   weeks: Date[] | null[];
   animationStep;
   weekDays: Date[];
   sub: Subscription = new Subscription();
 
-  constructor(
-    private monthService: MonthService,
-    private calendarService: CalendarService
-  ) {}
+  constructor(private monthService: MonthService, private calendarService: CalendarService) {}
 
   showYears() {
     this.calendarService.getShownYears(this.date);
@@ -68,8 +55,7 @@ export class MonthViewComponent implements OnInit, OnDestroy {
     weekEndDate.setHours(0, 0, 0, 0);
     const directives = this.dayDirectives.filter(
       (directive) =>
-        directive.date.getTime() >= weekStartDate.getTime() &&
-        directive.date.getTime() < weekEndDate.getTime()
+        directive.date.getTime() >= weekStartDate.getTime() && directive.date.getTime() < weekEndDate.getTime()
     );
     return directives;
   }
