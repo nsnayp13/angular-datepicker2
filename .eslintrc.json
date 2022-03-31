@@ -1,0 +1,64 @@
+{
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prefer-arrow", "promise", "import"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:eslint-plugin-rxjs/recommended",
+    "plugin:@angular-eslint/recommended",
+    "plugin:@angular-eslint/template/process-inline-templates",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:promise/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module",
+    "project": "tsconfig.json",
+    "tsconfigRootDir": "./"
+  },
+  "rules": {
+    "@angular-eslint/directive-selector": [
+      "warn",
+      {
+        "type": "attribute",
+        "prefix": "atwork",
+        "style": "camelCase"
+      }
+    ],
+    "@angular-eslint/component-selector": [
+      "warn",
+      {
+        "type": "element",
+        "prefix": "atwork",
+        "style": "kebab-case"
+      }
+    ],
+    "prefer-arrow/prefer-arrow-functions": [
+      "warn",
+      {
+        "disallowPrototype": true,
+        "singleReturnOnly": false,
+        "classPropertiesAllowed": false
+      }
+    ],
+    "@angular-eslint/no-empty-lifecycle-method": "error",
+    "@typescript-eslint/no-empty-function": "error",
+    "@typescript-eslint/explicit-function-return-type": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-unused-vars": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.steps.ts"],
+      "rules": {
+        "promise/catch-or-return": "off",
+        "promise/always-return": "off"
+      }
+    }
+  ]
+}

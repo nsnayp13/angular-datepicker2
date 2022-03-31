@@ -85,19 +85,19 @@ export class DayService {
       }
     } else if (this.calendarService.selectMode === "multiple") {
       if (this.day.isSelected) {
-        let selectedDates = this.calendarService.selectedDates.value.filter(
+        const selectedDates = this.calendarService.selectedDates.value.filter(
           (elem) => elem.getYmd() !== this.day.date.getYmd()
         );
         selectedDates.sort(this.sortByDate);
         this.calendarService.selectedDates.next(selectedDates);
       } else {
-        let selectedDates = this.calendarService.selectedDates.value;
+        const selectedDates = this.calendarService.selectedDates.value;
         selectedDates.push(this.day.date);
         this.calendarService.selectedDates.next(selectedDates);
       }
     } else if (this.calendarService.selectMode === "period") {
       if (this.day.isSelected) {
-        let selectedDates = this.calendarService.selectedDates.value.filter(
+        const selectedDates = this.calendarService.selectedDates.value.filter(
           (elem) => elem.getYmd() !== this.day.date.getYmd()
         );
         this.calendarService.selectedDates.next(selectedDates);
@@ -105,7 +105,7 @@ export class DayService {
         if (this.calendarService.selectedDates.value.length == 2) {
           this.calendarService.selectedDates.next([this.day.date]);
         } else if (this.calendarService.selectedDates.value.length < 2) {
-          let selectedDates = this.calendarService.selectedDates.value;
+          const selectedDates = this.calendarService.selectedDates.value;
           selectedDates.push(this.day.date);
 
           selectedDates.sort(this.sortByDate);

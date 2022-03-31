@@ -9,12 +9,6 @@ export interface Day {
   date?: Date;
 }
 
-export interface Suggest {
-  selectMode: SelectMode;
-  selectedDates: Date[];
-  title: string;
-}
-
 export interface Week {
   id: number;
   days: Day[] | null;

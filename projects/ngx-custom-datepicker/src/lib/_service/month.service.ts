@@ -16,7 +16,7 @@ export class MonthService {
       0
     ).getDate();
 
-    let weekStart = this.calendarService.weekStart;
+    const weekStart = this.calendarService.weekStart;
 
     const countWeek = Math.ceil(
       (daysInMonth + date.getFirstDateDay(weekStart)) / 7

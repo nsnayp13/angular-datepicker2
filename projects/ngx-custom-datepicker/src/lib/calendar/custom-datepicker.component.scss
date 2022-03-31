@@ -1,26 +1,6 @@
 $animSpeed: 0.2s;
 $cyan: #26b1b1;
 
-.suggest {
-  background: #e0f5f5;
-  width: auto;
-  display: block;
-  float: left;
-  color: #26b1b1;
-  border-radius: 2px;
-  padding: 4px 8px;
-  margin-right: 2px;
-  margin-bottom: 2px;
-  font-size: 13px;
-  transition: all 0.2s;
-  cursor: pointer;
-}
-
-.suggest:hover {
-  background: #82dcdc;
-  color: #148a8a;
-}
-
 app-calendar {
   display: block;
   float: left;
@@ -161,14 +141,6 @@ app-month-view {
   to {
     transform: translateX(-100%);
   }
-}
-
-.suggests {
-  padding: 8px 8px 0 8px;
-  display: block;
-  float: left;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .monthSelectBtn {

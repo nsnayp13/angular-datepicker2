@@ -16,13 +16,7 @@ import {
   ViewContainerRef,
 } from "@angular/core";
 import { CalendarService } from "../_service/calendar.service";
-import {
-  Day,
-  SelectMode,
-  ViewMode,
-  Suggest,
-  DisabledDates,
-} from "../interfaces";
+import { Day, SelectMode, ViewMode, DisabledDates } from "../interfaces";
 import { DayDirective } from "../day.directive";
 
 @Component({
@@ -55,13 +49,6 @@ export class CustomDatepicker
 
   /**
    * @description
-   *  Array custom definitions of suggestions
-   * @see `Suggest`
-   * */
-  @Input() suggest: Suggest[];
-
-  /**
-   * @description
    *  Array custom definitions of days. Subscribable
    * @see `Day`
    * */
@@ -89,7 +76,7 @@ export class CustomDatepicker
    * @description
    * Start week day, default 0
    */
-  @Input() weekStart: number = 0;
+  @Input() weekStart = 0;
 
   /**
    * @description
@@ -156,11 +143,6 @@ export class CustomDatepicker
     );
   }
 
-  clickSuggest(suggest: Suggest) {
-    this.calendarService.selectMode = this.selectMode = suggest.selectMode;
-    this.calendarService.selectedDates.next(suggest.selectedDates);
-  }
-
   recountWidth() {
     let width = 0;
     this.columns
@@ -221,7 +203,7 @@ export class CustomDatepicker
   }
 
   calculate() {
-    let date = this.shownDate;
+    const date = this.shownDate;
     let countMonths = 0;
     const months = [];
     let lastDate: Date;
@@ -236,7 +218,7 @@ export class CustomDatepicker
 
   isEqual(array, array1) {
     console.log(array, array1);
-    let a = array.filter((item) => array1.includes(item));
+    const a = array.filter((item) => array1.includes(item));
     return a.length === 0 && array.length === array1.length;
   }
 
@@ -285,12 +267,12 @@ export class CustomDatepicker
   setDays() {}
 
   goNext() {
-    let lastDate =
+    const lastDate =
       this.calendarService.calendar[this.calendarService.calendar.length - 1];
     this.calendarService.goNext(lastDate);
   }
   goPrev() {
-    let firstDate = this.calendarService.calendar[0];
+    const firstDate = this.calendarService.calendar[0];
     this.calendarService.goPrev(firstDate);
   }
 }

@@ -16,7 +16,7 @@ export class MonthSelectComponent implements OnInit {
 
   ngOnInit() {
     for (let i = 0; i < 12; i++) {
-      let date = new Date(this.date);
+      const date = new Date(this.date);
       date.setMonth(0);
       date.adjustMonth(i);
       this.months.push(date);

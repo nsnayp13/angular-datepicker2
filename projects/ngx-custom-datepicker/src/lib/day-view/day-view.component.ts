@@ -33,7 +33,7 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
   ) {}
 
   createChildComponent() {
-    let viewContainerRef = this.template;
+    const viewContainerRef = this.template;
     viewContainerRef.clear();
     viewContainerRef.createEmbeddedView(
       (this.dayDirective as any).template,

@@ -50,7 +50,7 @@ export class MonthViewComponent implements OnInit, OnDestroy {
     );
     this.weeks = this.monthService.getMonth(this.date);
 
-    let weekDays = [];
+    const weekDays = [];
     for (let i = 0; i < 7; i++) {
       weekDays.push(this.weeks[0].adjustDate(i));
     }
@@ -66,7 +66,7 @@ export class MonthViewComponent implements OnInit, OnDestroy {
     const weekEndDate = new Date(weekStartDate);
     weekEndDate.setDate(weekStartDate.getDate() + 7);
     weekEndDate.setHours(0, 0, 0, 0);
-    let directives = this.dayDirectives.filter(
+    const directives = this.dayDirectives.filter(
       (directive) =>
         directive.date.getTime() >= weekStartDate.getTime() &&
         directive.date.getTime() < weekEndDate.getTime()

@@ -4,7 +4,6 @@ import {
   Day,
   SelectMode,
   ViewMode,
-  Suggest,
   DisabledDates,
 } from "projects/ngx-custom-datepicker/src/public-api";
 
@@ -29,42 +28,6 @@ export class AppComponent implements OnInit {
 
   disabledDates: DisabledDates;
 
-  suggest = [
-    {
-      title: "Last two weeks",
-      selectMode: SelectMode.Period,
-      selectedDates: [
-        new Date(
-          new Date().getFullYear(),
-          new Date().getMonth(),
-          new Date().getDate() - 14
-        ),
-        new Date(),
-      ],
-    },
-    {
-      title: "Last month",
-      selectMode: SelectMode.Period,
-      selectedDates: [
-        new Date(
-          new Date().getFullYear(),
-          new Date().getMonth() - 1,
-          new Date().getDate()
-        ),
-        new Date(),
-      ],
-    },
-    {
-      title: "1, 4 and 30",
-      selectMode: SelectMode.Multiple,
-      selectedDates: [
-        new Date(new Date().getFullYear(), new Date().getMonth(), 1),
-        new Date(new Date().getFullYear(), new Date().getMonth(), 4),
-        new Date(new Date().getFullYear(), new Date().getMonth(), 30),
-      ],
-    },
-  ];
-
   _stackOnDayClick = [];
 
   _viewModeVal = [ViewMode.Quarter, 1, 3, 4, ViewMode.Semester, 6];
@@ -76,7 +39,7 @@ export class AppComponent implements OnInit {
   _shownDateVal = [new Date()];
 
   _selectMode(e) {
-    let val = e.target.value;
+    const val = e.target.value;
     this.selectMode = val;
   }
 
@@ -89,7 +52,7 @@ export class AppComponent implements OnInit {
   }
 
   _vertical(e) {
-    let val = e.target.value;
+    const val = e.target.value;
     this.vertical = val === "true" ? true : false;
   }
 

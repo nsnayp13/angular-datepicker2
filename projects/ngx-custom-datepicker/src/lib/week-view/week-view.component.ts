@@ -20,7 +20,7 @@ export class WeekViewComponent implements OnInit {
   }
 
   getDayDirective(date: Date): DayDirective {
-    let day = this.dayDirectives.find(
+    const day = this.dayDirectives.find(
       (directive: DayDirective) => directive.date.getTime() === date.getTime()
     );
     return day;

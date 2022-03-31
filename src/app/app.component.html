@@ -1,80 +1,67 @@
-<div style="width:100%; display:block; float:left;">
-
-    <div class="wrap">
-        <div style=" display:block; float:left;">
-            <ngx-custom-datepicker [days]="days" [nowDate]="date" [(selectedDates)]="selectedDates"
-                [selectMode]="selectMode" [weekends]="[6]" [suggest]="suggest" [weekStart]="0" [viewMode]="viewMode"
-                [vertical]="vertical" (onDayClick)="onDayClick($event)" [disabledDates]="disabledDates">
-
-
-                <div *ad2day="let date from days[0].date" [attr.title]="'Custom day'" class="customDay">
-                    {{date.getDate()}}
-                    <div class="points">
-                        <div class="point"></div>
-                        <div class="point red"></div>
-                    </div>
-                </div>
-
-                <div *ad2day="let date from days[1].date" [attr.title]="'Custom day'" class="customDay">
-                    {{date.getDate()}}
-                    <div class="points">
-                        <div class="point blue"></div>
-                        <div class="point red"></div>
-                    </div>
-                </div>
-
-                <div *ad2day="let date from days[2].date" [attr.title]="'Custom day'" class="customDay">
-                    {{date.getDate()}}
-                    <div class="points">
-                        <div class="point blue"></div>
-                        <div class="point green"></div>
-                    </div>
-                </div>
-
-                <div *ad2day="let date from days[3].date" [attr.title]="'Custom day'" class="customDay">
-                    {{date.getDate()}}
-                    <div class="points">
-                        <div class="point blue"></div>
-                        <div class="point red"></div>
-                        <div class="point green"></div>
-                    </div>
-                </div>
-
-            </ngx-custom-datepicker>
-        </div>
+<div style="width: 100%; display: block; float: left">
+  <div class="wrap">
+    <div style="display: block; float: left">
+      <ngx-custom-datepicker
+        [days]="days"
+        [nowDate]="date"
+        [(selectedDates)]="selectedDates"
+        [selectMode]="selectMode"
+        [weekends]="[6]"
+        [weekStart]="1"
+        [viewMode]="'single'"
+        [vertical]="vertical"
+        (onDayClick)="onDayClick($event)"
+        [disabledDates]="disabledDates"
+      >
+      </ngx-custom-datepicker>
     </div>
+  </div>
 
-    <div style=" width:50%; display: block; float: left; padding: 16px; box-sizing: border-box">
-        <h3>Props</h3>
-        <table border=1 style="width:100%; background: #fff; border-collapse: collapse;">
-            <tr>
-                <td>viewMode</td>
-                <td>ViewMode | int</td>
-                <td>Template for render months. If quater start month woul be January, April or August. If 3 - end by
-                    shownDate else last date in selectedDates</td>
-                <td>
-                    <select (change)="_viewMode($event)" value="quarter">
-                        <option *ngFor="let i of _viewModeVal" [value]="i">
-                            {{i}}
-                        </option>
-                    </select>
-                </td>
-            </tr>
+  <div
+    style="
+      width: 50%;
+      display: block;
+      float: left;
+      padding: 16px;
+      box-sizing: border-box;
+    "
+  >
+    <h3>Props</h3>
+    <table
+      border="1"
+      style="width: 100%; background: #fff; border-collapse: collapse"
+    >
+      <tr>
+        <td>viewMode</td>
+        <td>ViewMode | int</td>
+        <td>
+          Template for render months. If quater start month woul be January,
+          April or August. If 3 - end by shownDate else last date in
+          selectedDates
+        </td>
+        <td>
+          <select (change)="_viewMode($event)" value="quarter">
+            <option *ngFor="let i of _viewModeVal" [value]="i">
+              {{ i }}
+            </option>
+          </select>
+        </td>
+      </tr>
 
-            <tr>
-                <td>vertical</td>
-                <td>boolean</td>
-                <td>Alignment of days in a week. Default horizontal.</td>
-                <td>
-                    <select (change)="_vertical($event)" value="quarter">
-                        <option *ngFor="let i of _verticalVal" [value]="i">
-                            {{i}}
-                        </option>
-                    </select>
-                </td>
-            </tr>
+      <tr>
+        <td>vertical</td>
+        <td>boolean</td>
+        <td>Alignment of days in a week. Default horizontal.</td>
+        <td>
+          <select (change)="_vertical($event)" value="quarter">
+            <option *ngFor="let i of _verticalVal" [value]="i">
+              {{ i }}
+            </option>
+          </select>
+        </td>
+      </tr>
 
-            <!-- <tr>
+      <!-- <tr>
                 <td>shownDate</td>
                 <td>Date</td>
                 <td>Date whould be render for default calendar. Calendar ends by month of this date</td>
@@ -85,66 +72,62 @@
                 </td>
             </tr> -->
 
-            <tr>
-                <td>selectMode</td>
-                <td>SelectMode</td>
-                <td>Single, multiple or period</td>
-                <td>
-                    <select (change)="_selectMode($event)" value="period">
-                        <option *ngFor="let i of _selectModeVal" [value]="i">
-                            {{i}}
-                        </option>
-                    </select>
-                </td>
-            </tr>
+      <tr>
+        <td>selectMode</td>
+        <td>SelectMode</td>
+        <td>Single, multiple or period</td>
+        <td>
+          <select (change)="_selectMode($event)" value="period">
+            <option *ngFor="let i of _selectModeVal" [value]="i">
+              {{ i }}
+            </option>
+          </select>
+        </td>
+      </tr>
 
-            <tr>
-                <td>selectedDates</td>
-                <td>[Date]</td>
-                <td>Array of selected date. Support [(selectedDates)]</td>
-                <td>
-                    <p *ngFor="let date of selectedDates">{{date | date:'yyyy.MM.dd'}}</p>
-                </td>
-            </tr>
+      <tr>
+        <td>selectedDates</td>
+        <td>[Date]</td>
+        <td>Array of selected date. Support [(selectedDates)]</td>
+        <td>
+          <p *ngFor="let date of selectedDates">
+            {{ date | date: "yyyy.MM.dd" }}
+          </p>
+        </td>
+      </tr>
+    </table>
+  </div>
 
-
-
-
-        </table>
-
-
-
-
-    </div>
-
-
-    <div style=" width:50%; display: block; float: left; padding: 16px;  box-sizing: border-box">
-        <h3>Events</h3>
-        <table border=1 style="width:100%; background: #fff; border-collapse: collapse;">
-
-            <tr>
-                <td>onDayClick</td>
-                <td>Event</td>
-                <td>Callback event when click on day. Its returns a Day object before change self state by click</td>
-                <td>
-                    <div *ngFor="let item of _stackOnDayClick">
-                        <pre>{{item | json}}</pre>
-                    </div>
-                </td>
-            </tr>
-
-
-
-        </table>
-
-
-
-
-    </div>
-
-
+  <div
+    style="
+      width: 50%;
+      display: block;
+      float: left;
+      padding: 16px;
+      box-sizing: border-box;
+    "
+  >
+    <h3>Events</h3>
+    <table
+      border="1"
+      style="width: 100%; background: #fff; border-collapse: collapse"
+    >
+      <tr>
+        <td>onDayClick</td>
+        <td>Event</td>
+        <td>
+          Callback event when click on day. Its returns a Day object before
+          change self state by click
+        </td>
+        <td>
+          <div *ngFor="let item of _stackOnDayClick">
+            <pre>{{ item | json }}</pre>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
-
 
 <!--
 <datepicker2 [shownDate]="date" [selectedDates]="selectedDates" [selectMode]="'multiple'" [vertical]="false"

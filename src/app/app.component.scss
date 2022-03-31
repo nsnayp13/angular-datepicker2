@@ -30,37 +30,3 @@ table td {
   align-items: center;
   justify-content: center;
 }
-
-.customDay {
-  position: relative;
-  font-size: 0.8em;
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  flex: 1;
-  align-items: center;
-  height: 100%;
-  background: #f0f4f5;
-
-  .points {
-    position: absolute;
-    top: 1px;
-    right: 1px;
-    .point {
-      width: 4px;
-      height: 4px;
-      background: #999;
-      border-radius: 5px;
-      margin: 1px 0;
-    }
-    .point.red {
-      background: #ff4444;
-    }
-    .point.blue {
-      background: #5a81b3;
-    }
-    .point.green {
-      background: #319e36;
-    }
-  }
-}

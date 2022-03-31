@@ -14,7 +14,7 @@ declare global {
 }
 
 Date.prototype.adjustDate = function (num = 0): Date {
-  let date = new Date(this);
+  const date = new Date(this);
   date.setDate(date.getDate() + num);
   return date;
 };
@@ -110,13 +110,13 @@ export class CalendarService {
   }
 
   addSelected(date: Date) {
-    let selectedDates = this.selectedDates.value;
+    const selectedDates = this.selectedDates.value;
     selectedDates.push(date);
     this.selectedDates.next(selectedDates);
   }
 
   public getCountMonths(): number {
-    let viewMode = this.viewMode;
+    const viewMode = this.viewMode;
     if (typeof viewMode === "number") {
       return viewMode;
     } else {
@@ -131,7 +131,7 @@ export class CalendarService {
 
   public getLastDate(date?: Date): Date {
     //console.log(date, 'date getlasr')
-    let viewMode = this.viewMode;
+    const viewMode = this.viewMode;
     let lastDate = this.shownDate
       ? new Date(this.shownDate)
       : this.selectedDates.value
@@ -195,7 +195,7 @@ export class CalendarService {
   }
 
   goPrev(firstDate: Date) {
-    let prevDate = new Date(firstDate);
+    const prevDate = new Date(firstDate);
 
     if (this.viewSelectorMode === "days") {
       prevDate.adjustMonth(-1);
@@ -217,7 +217,7 @@ export class CalendarService {
   }
 
   goNext(lastDate: Date) {
-    let nextDate = new Date(lastDate);
+    const nextDate = new Date(lastDate);
 
     if (this.viewSelectorMode === "days") {
       nextDate.adjustMonth(1);
