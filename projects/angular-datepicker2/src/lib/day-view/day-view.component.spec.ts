@@ -2,63 +2,45 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { DayViewComponent } from './day-view.component';
 import { DayService } from '../_service/day.service';
 import { CalendarService } from '../_service/calendar.service';
-import { of, BehaviorSubject } from 'rxjs';
+import { DateUtils } from '../_utils/date.utils';
+import { BehaviorSubject } from 'rxjs';
+
 describe("DayViewComponent", () => {
     let component: DayViewComponent;
     let fixture: ComponentFixture<DayViewComponent>;
-    let dayService;
-    let calendarService;
-
+    let dayService: DayService;
+    let calendarService: CalendarService;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                DayViewComponent,
-            ],
-            providers: []
+            imports: [DayViewComponent],
+            providers: [DayService, CalendarService]
         }).compileComponents();
     });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DayViewComponent);
         component = fixture.componentInstance;
-        dayService = fixture.debugElement.injector.get(DayService);
-        calendarService = fixture.debugElement.injector.get(CalendarService);
+        dayService = TestBed.inject(DayService);
+        calendarService = TestBed.inject(CalendarService);
 
-        // spyOnAllFunctions(calendarService);
-        spyOn(calendarService.selectedDates, 'subscribe').and.returnValue([new Date()]);
-
-
-        spyOn(dayService, 'createDay').and.returnValue({
-            isDisabled: false,
-            isHovered: false,
-            isSelected: false,
-            isWeekEnd: false,
-            date: new Date(),
-            title: '',
-            template: ''
-        });
-
-
-
-
-        component.date = new Date();
+        component.date = new Date(2024, 3, 15);
         component.thisMonth = true;
-        calendarService.selectedDates.next([new Date()])
-
-
+        
         fixture.detectChanges();
     });
 
-    it("should have a defined component", () => {
-
-
-
-
-        fixture.detectChanges();
-
-
-        expect(true).toBeTruthy();
+    it("should create component", () => {
+        expect(component).toBeTruthy();
     });
 
+    it("should initialize with correct date", () => {
+        expect(component.date).toEqual(new Date(2024, 3, 15));
+    });
+
+    it("should work with DateUtils", () => {
+        const testDate = new Date(2024, 3, 15);
+        const ymd = DateUtils.getYmd(testDate);
+        expect(ymd).toBe('202403015'); // Note: month is 0-indexed
+    });
 });

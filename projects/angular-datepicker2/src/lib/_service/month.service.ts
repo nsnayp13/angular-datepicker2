@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+import { DateUtils } from "../_utils/date.utils";
 import { CalendarService } from "./calendar.service";
 
 @Injectable({
@@ -19,14 +20,14 @@ export class MonthService {
     let weekStart = this.calendarService.weekStart;
 
     const countWeek = Math.ceil(
-      (daysInMonth + date.getFirstDateDay(weekStart)) / 7
+      (daysInMonth + DateUtils.getFirstDateDay(date, weekStart)) / 7
     );
 
     const weeks = [];
     for (let i = 0; i < countWeek; i++) {
       const startWeekDate = new Date(date);
       startWeekDate.setDate(
-        date.getDate() + i * 7 - date.getDayWithStart(weekStart)
+        date.getDate() + i * 7 - DateUtils.getDayWithStart(date, weekStart)
       );
       weeks.push(startWeekDate);
     }

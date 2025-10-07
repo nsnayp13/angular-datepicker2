@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { CalendarService } from "../_service/calendar.service";
+import { DateUtils } from "../_utils/date.utils";
 
 @Component({
   selector: "app-month-select",
@@ -21,7 +22,7 @@ export class MonthSelectComponent implements OnInit {
     for (let i = 0; i < 12; i++) {
       let date = new Date(this.date);
       date.setMonth(0);
-      date.adjustMonth(i);
+      date = DateUtils.adjustMonth(date, i);
       this.months.push(date);
     }
 

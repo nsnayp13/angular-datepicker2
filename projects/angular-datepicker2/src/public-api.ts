@@ -14,3 +14,4 @@ export * from "./lib/_service/calendar.service";
 export * from "./lib/_service/day.service";
 export * from "./lib/_service/month.service";
 export * from "./lib/_service/week.service";
+export * from "./lib/_utils/date.utils";

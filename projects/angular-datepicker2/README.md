@@ -1,155 +1,213 @@
-# Angular Datepicker 2
+# Angular Datepicker2
 
-v3.x.x
+Modern Angular datepicker component with standalone support. Compatible with Angular 16+.
 
 ![Node.js CI](https://github.com/nsnayp13/angular-datepicker2/workflows/Node.js%20CI/badge.svg)
 
-`npm i angular-datepicker2`
+## Features
 
-now @angular/core: ^8.2.14
+- ✅ **Standalone Components** - Works with Angular 16+ standalone components
+- ✅ **Multiple Selection Modes** - Single, multiple dates, or date ranges
+- ✅ **Fully Customizable** - Template support for custom day rendering
+- ✅ **Modern Angular** - Built with latest Angular features
+- ✅ **TypeScript** - Full TypeScript support
+- ✅ **No Dependencies** - Only requires @angular/core and @angular/common
 
-## DEMO
+## Installation
+
+```bash
+npm install angular-datepicker2
+```
+
+## Demo
 
 [https://nsnayp13.github.io/angular-datepicker2/](https://nsnayp13.github.io/angular-datepicker2/)
 
-## Getting started
+## Usage
 
-Set to imports app.module.ts `import { AngularDatepicker2Module } from 'angular-datepicker2'`. Then you can use it by tag `<angular-datepicker2></angular-datepicker2>`.
+### Standalone Component (Angular 16+)
 
-## Options
+```typescript
+import { Component } from '@angular/core';
+import { AngularDatepicker2 } from 'angular-datepicker2';
 
-Props of `AngularDatepicker2`:
-
-```javascript
-
-// Array of selected dates.
-[(selectedDates)]: Date[]
-
-// Array custom definitions of days. Subscribable. See Day interface
-[days]: Day[]
-
-// Array custom definitions of suggestions. Suggestions for select dates
-[suggest]: Suggest[]
-
-// Date whould be render for default calendar .
-shownDate: Date
-
-// Disabed dates to select by click on a day. See DisabledDates interface. Suggest select work
-disabledDates: DisabledDates
-
-// Alignment of days in a week. Default horizontal.
-vertical: boolean
-
-// Present mode of calendar. Quarter, semester or number of months. Default 1. Import from public-api or interfaces. Its enum
-viewMode: ViewMode | number
-
-// Start week day, default 0
-weekStart: number
-
-// Weekends, default [0,6], set Day.isWeekend true
-weekends: number[] = [0, 6]
-
-// Single, Multiple, Period. Import from public-api or interfaces. Its enum
-selectMode: SelectMode
-
-// Callback event when click on day
-// its returns a Day object before change self state by click
-(onDayClick):Day
-
-// Callback event when selectedDatesChange changed
-// its returns a Date[]
-(selectedDatesChange):Date[]
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [AngularDatepicker2],
+  template: `
+    <angular-datepicker2 
+      [(selectedDates)]="selectedDates"
+      [selectMode]="'single'"
+      (onDayClick)="onDayClick($event)">
+    </angular-datepicker2>
+  `
+})
+export class ExampleComponent {
+  selectedDates: Date[] = [];
+  
+  onDayClick(day: any) {
+    console.log('Day clicked:', day);
+  }
+}
 ```
 
-## i18n
+### Module-based (Angular 16+)
 
-set `registerLocaleData(locale, "locale")` in your `app.module.ts`. See [https://angular.io/api/common/registerLocaleData](https://angular.io/api/common/registerLocaleData)
+```typescript
+import { NgModule } from '@angular/core';
+import { AngularDatepicker2 } from 'angular-datepicker2';
 
-## Example
-
-```javascript
-this.selectedDates = [new Date(2020, 3, 7), new Date(2020, 3, 9)];
-
-this.shownDate = new Date(2020, 3, 7);
-
-this.disabledDates = {
-  dates?:[], // :Date[]
-  after?: new Date(2020, 3, 7), // :Date
-  before?:null // : Date
-};
-
-this.suggest = [
-  {
-    title: "Last two weeks",
-    selectMode: SelectMode.Period,
-    selectedDates: [new Date(2020, 3, 1), new Date(2020, 3, 12)],
-  },
-  {
-    title: "Last month",
-    selectMode: SelectMode.Period,
-    selectedDates: [new Date(2020, 3, 1), new Date(2020, 3, 30)],
-  },
-  {
-    title: "1, 4 and 30",
-    selectMode: SelectMode.Multiple,
-    selectedDates: [
-      new Date(2020, 3, 1),
-      new Date(2020, 3, 4),
-      new Date(2020, 3, 30),
-    ],
-  },
-];
-
-
-this.days = [
-  {
-    isDisabled: false,
-    isHovered: false,
-    isSelected: false,
-    isWeekEnd: true,
-    date: new Date(2020, 3, 21),
-  },
-  {
-    isDisabled: true,
-    isHovered: false,
-    isSelected: false,
-    isWeekEnd: true,
-    date: new Date(2020, 3, 26),
-  },
-];
+@NgModule({
+  imports: [AngularDatepicker2],
+  // ...
+})
+export class YourModule { }
 ```
+
+## API
+
+### Inputs
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `selectedDates` | `Date[]` | `[]` | Array of selected dates |
+| `selectMode` | `'single' \| 'multiple' \| 'period'` | `'single'` | Selection mode |
+| `shownDate` | `Date` | `new Date()` | Date to display initially |
+| `viewMode` | `ViewMode \| number` | `1` | Number of months to show |
+| `weekStart` | `number` | `0` | First day of week (0 = Sunday) |
+| `weekends` | `number[]` | `[0, 6]` | Weekend days |
+| `disabledDates` | `DisabledDates` | - | Disabled dates configuration |
+| `suggest` | `Suggest[]` | - | Predefined date suggestions |
+| `days` | `Day[]` | - | Custom day definitions |
+| `vertical` | `boolean` | `false` | Vertical alignment of days |
+
+### Outputs
+
+| Event | Type | Description |
+|-------|------|-------------|
+| `selectedDatesChange` | `Date[]` | Emitted when selection changes |
+| `onDayClick` | `Day` | Emitted when a day is clicked |
+
+## Examples
+
+### Date Range Selection
+
+```typescript
+@Component({
+  template: `
+    <angular-datepicker2 
+      [(selectedDates)]="dateRange"
+      [selectMode]="'period'">
+    </angular-datepicker2>
+  `
+})
+export class DateRangeExample {
+  dateRange: Date[] = [];
+}
+```
+
+### Multiple Date Selection
+
+```typescript
+@Component({
+  template: `
+    <angular-datepicker2 
+      [(selectedDates)]="multipleDates"
+      [selectMode]="'multiple'">
+    </angular-datepicker2>
+  `
+})
+export class MultipleDatesExample {
+  multipleDates: Date[] = [];
+}
+```
+
+### Custom Day Templates
 
 ```html
-<angular-datepicker2
-  [shownDate]="shownDate"
-  [suggest]="suggest"
-  [days]="days"
-  [(selectedDates)]="selectedDates"
-  [selectMode]="'period'"
-  [weekends]="[0,1]"
-  [weekStart]="1"
-  [viewMode]="'quarter'"
-  [disabledDates]="disabledDates"
->
-  <!--  Here special directive *day="let date from new Date()"
-        Wrap or html or component by *day
-  -->
-
-  <!--  If you are use *ngFor set it to ng-container. 
-        <ng-container *ngFor="let dateItem of datesArray">
-          <yourComponentOrDiv *ad2day="let date from dateItem">
-              day is {{date.getDate()}}
-          </yourComponentOrDiv>
-        </ng-container>
-  -->
-
-  <div *day="let date from days[0].date" [attr.title]="'Custom day'">
+<angular-datepicker2 [(selectedDates)]="selectedDates">
+  <div *day="let date from customDate" [attr.title]="'Custom day'">
     {{date.getDate()}}
     <div class="points">
       <div class="point blue"></div>
       <div class="point green"></div>
     </div>
-    <!--app -my-custom-component-->
   </div>
 </angular-datepicker2>
 ```
+
+### With Suggestions
+
+```typescript
+export class SuggestionsExample {
+  selectedDates: Date[] = [];
+  
+  suggest = [
+    {
+      title: "Last two weeks",
+      selectMode: SelectMode.Period,
+      selectedDates: [new Date(2024, 3, 1), new Date(2024, 3, 14)],
+    },
+    {
+      title: "Last month",
+      selectMode: SelectMode.Period,
+      selectedDates: [new Date(2024, 3, 1), new Date(2024, 3, 30)],
+    }
+  ];
+}
+```
+
+## Interfaces
+
+### SelectMode
+```typescript
+enum SelectMode {
+  Single = 'single',
+  Multiple = 'multiple', 
+  Period = 'period'
+}
+```
+
+### ViewMode
+```typescript
+enum ViewMode {
+  Quarter = 'quarter',
+  Semester = 'semester'
+}
+```
+
+### DisabledDates
+```typescript
+interface DisabledDates {
+  dates?: Date[];
+  after?: Date;
+  before?: Date;
+}
+```
+
+## i18n
+
+Set `registerLocaleData(locale, "locale")` in your app. See [Angular i18n guide](https://angular.io/api/common/registerLocaleData)
+
+## Compatibility
+
+- Angular 16+
+- TypeScript 4.9+
+- Modern browsers (ES2022+)
+
+## Migration from v3.x
+
+The library now uses standalone components by default. For module-based apps, simply import the component directly:
+
+```typescript
+// Before (v3.x)
+import { AngularDatepicker2Module } from 'angular-datepicker2';
+
+// After (v4.x)
+import { AngularDatepicker2 } from 'angular-datepicker2';
+```
+
+## License
+
+MIT

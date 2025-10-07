@@ -1,64 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subject } from "rxjs";
 import { Day, DisabledDates, ViewMode } from "../interfaces";
-
-declare global {
-  interface Date {
-    adjustMonth(number: number): Date;
-    adjustDate(number: number): Date;
-    adjustYear(number: number): Date;
-    getFirstDateDay(start): number;
-    getDayWithStart(start): number;
-    getYmd(): string;
-  }
-}
-
-Date.prototype.adjustDate = function (num = 0): Date {
-  let date = new Date(this);
-  date.setDate(date.getDate() + num);
-  return date;
-};
-
-/** Adjust & setDate = 1 */
-Date.prototype.adjustMonth = function (num = 0): Date {
-  this.setDate(1);
-  this.setMonth(this.getMonth() + num);
-  return this;
-};
-
-/** Adjust & setDate = 1 */
-Date.prototype.adjustYear = function (num = 0): Date {
-  this.setDate(1);
-  this.setMonth(0);
-  this.setYear(this.getFullYear() + num);
-  return this;
-};
-
-Date.prototype.getDayWithStart = function (start): number {
-  const date = new Date(this.getTime());
-  let day = date.getDay();
-
-  day = day - start;
-
-  if (day < 0) {
-    day = 7 + day;
-  }
-  return day;
-};
-
-Date.prototype.getFirstDateDay = function (start): number {
-  const date = new Date(this.getTime());
-  date.setDate(1);
-  return date.getDayWithStart(start);
-};
-
-Date.prototype.getYmd = function (): string {
-  return (
-    this.getFullYear().toString() +
-    String(this.getMonth().toString()).padStart(2, "0") +
-    String(this.getDate().toString()).padStart(2, "0")
-  );
-};
+import { DateUtils } from "../_utils/date.utils";
 
 @Injectable({
   providedIn: "root",
@@ -171,7 +114,7 @@ export class CalendarService {
     this.countMonths = countMonths;
 
     for (let i = countMonths - 1; i >= 0; i--) {
-      months.push(new Date(lastDateShown).adjustYear(-i));
+      months.push(DateUtils.adjustYear(new Date(lastDateShown), -i));
     }
     this.calendar = months;
     this.viewSelectorMode = "months";
@@ -187,7 +130,7 @@ export class CalendarService {
     this.countMonths = countMonths;
 
     for (let i = countMonths - 1; i >= 0; i--) {
-      months.push(new Date(lastDate).adjustMonth(-i));
+      months.push(DateUtils.adjustMonth(new Date(lastDate), -i));
     }
 
     this.calendar = months;
@@ -198,9 +141,9 @@ export class CalendarService {
     let prevDate = new Date(firstDate);
 
     if (this.viewSelectorMode === "days") {
-      prevDate.adjustMonth(-1);
+      prevDate = DateUtils.adjustMonth(prevDate, -1);
     } else if (this.viewSelectorMode === "months") {
-      prevDate.adjustYear(-1);
+      prevDate = DateUtils.adjustYear(prevDate, -1);
     }
 
     let dates = [...this.calendar];
@@ -220,9 +163,9 @@ export class CalendarService {
     let nextDate = new Date(lastDate);
 
     if (this.viewSelectorMode === "days") {
-      nextDate.adjustMonth(1);
+      nextDate = DateUtils.adjustMonth(nextDate, 1);
     } else if (this.viewSelectorMode === "months") {
-      nextDate.adjustYear(1);
+      nextDate = DateUtils.adjustYear(nextDate, 1);
     }
 
     let dates = [...this.calendar];

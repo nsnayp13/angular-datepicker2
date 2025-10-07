@@ -17,6 +17,7 @@ import {
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { CalendarService } from "../_service/calendar.service";
+import { DateUtils } from "../_utils/date.utils";
 import {
   Day,
   SelectMode,
@@ -240,7 +241,7 @@ export class AngularDatepicker2
     countMonths = this.calendarService.getCountMonths();
 
     for (let i = countMonths - 1; i >= 0; i--) {
-      months.push(new Date(lastDate).adjustMonth(-i));
+      months.push(DateUtils.adjustMonth(new Date(lastDate), -i));
     }
     return months;
   }
