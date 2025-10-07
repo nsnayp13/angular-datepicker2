@@ -1,0 +1,85 @@
+name: Release and Publish
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Install semantic-release
+      run: npm install -g semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github
+
+    - name: Run tests
+      run: npm run test-once
+
+    - name: Build library
+      run: npm run build:lib
+
+    - name: Configure Git
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+
+    - name: Release with semantic-release
+      run: |
+        cd projects/angular-datepicker2
+        npx semantic-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    - name: Check if new version was released
+      id: check-release
+      run: |
+        NEW_VERSION=$(node -p "require('./projects/angular-datepicker2/package.json').version")
+        echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+        
+        # Проверяем, был ли создан новый тег
+        if git tag -l "v$NEW_VERSION" | grep -q "v$NEW_VERSION"; then
+          echo "version_released=true" >> $GITHUB_OUTPUT
+          echo "New version $NEW_VERSION was released"
+        else
+          echo "version_released=false" >> $GITHUB_OUTPUT
+          echo "No new version was released"
+        fi
+
+    - name: Rebuild and publish to NPM
+      if: steps.check-release.outputs.version_released == 'true'
+      run: |
+        echo "Publishing version ${{ steps.check-release.outputs.new_version }} to NPM"
+        
+        # Пересобираем библиотеку с новой версией
+        npm run build:lib
+        
+        # Публикуем в NPM
+        cd dist/angular-datepicker2
+        npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

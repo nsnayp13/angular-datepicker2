@@ -2,6 +2,21 @@
   "name": "angular-datepicker2",
   "version": "3.4.3",
   "description": "Angular datepicker, best calendar. Select Period, single, or multiple dates. Template your own day in calendar. Two way databinding and others",
+  "main": "bundles/angular-datepicker2.umd.js",
+  "module": "fesm2022/angular-datepicker2.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2022": "./esm2022/angular-datepicker2.mjs",
+      "esm": "./esm2022/angular-datepicker2.mjs",
+      "default": "./fesm2022/angular-datepicker2.mjs"
+    }
+  },
+  "sideEffects": false,
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"
@@ -23,5 +38,25 @@
     "angularjs"
   ],
   "author": "Ivanov.N <nikaglichev@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "release": {
+    "branches": ["main", "master"],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": ["package.json", "CHANGELOG.md"],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  }
 }
