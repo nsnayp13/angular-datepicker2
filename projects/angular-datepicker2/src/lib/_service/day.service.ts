@@ -23,20 +23,12 @@ export class DayService {
       return true;
     }
     
-    // Normalize dates for comparison (ignore time)
-    const normalizedDate = DateUtils.normalizeToDay(date);
-    
-    if (disabledDates.after) {
-      const normalizedAfter = DateUtils.normalizeToDay(disabledDates.after);
-      if (normalizedAfter.getTime() < normalizedDate.getTime()) {
-        return true;
-      }
+    // Use timezone-safe comparison methods
+    if (disabledDates.after && DateUtils.isDayAfter(date, disabledDates.after)) {
+      return true;
     }
-    if (disabledDates.before) {
-      const normalizedBefore = DateUtils.normalizeToDay(disabledDates.before);
-      if (normalizedBefore.getTime() > normalizedDate.getTime()) {
-        return true;
-      }
+    if (disabledDates.before && DateUtils.isDayBefore(date, disabledDates.before)) {
+      return true;
     }
     return false;
   }
@@ -59,14 +51,11 @@ export class DayService {
       this.calendarService.selectMode === "period" &&
       this.calendarService.selectedDates.value.length == 2
     ) {
-      // Normalize all dates for comparison (ignore time)
-      const normalizedDate = DateUtils.normalizeToDay(date);
-      const normalizedStart = DateUtils.normalizeToDay(this.calendarService.selectedDates.value[0]);
-      const normalizedEnd = DateUtils.normalizeToDay(this.calendarService.selectedDates.value[1]);
-      
-      return (
-        normalizedDate.getTime() >= normalizedStart.getTime() &&
-        normalizedDate.getTime() <= normalizedEnd.getTime()
+      // Use timezone-safe comparison method
+      return DateUtils.isDayBetween(
+        date,
+        this.calendarService.selectedDates.value[0],
+        this.calendarService.selectedDates.value[1]
       );
     }
     return false;

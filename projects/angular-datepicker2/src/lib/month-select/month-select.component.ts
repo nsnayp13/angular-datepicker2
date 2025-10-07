@@ -20,9 +20,8 @@ export class MonthSelectComponent implements OnInit {
 
   ngOnInit() {
     for (let i = 0; i < 12; i++) {
-      let date = new Date(this.date);
-      date.setMonth(0);
-      date = DateUtils.adjustMonth(date, i);
+      // Use timezone-safe date creation
+      const date = new Date(this.date.getFullYear(), i, 1);
       this.months.push(date);
     }
 

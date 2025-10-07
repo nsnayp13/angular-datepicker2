@@ -67,16 +67,15 @@ export class MonthViewComponent implements OnInit, OnDestroy {
   }
 
   getWeekDayDirectives(weekStartDate: Date): DayDirective[] {
-    const normalizedWeekStart = DateUtils.normalizeToDay(weekStartDate);
-    const weekEndDate = new Date(normalizedWeekStart);
-    weekEndDate.setDate(normalizedWeekStart.getDate() + 7);
+    // Create end date using timezone-safe method
+    const weekEndDate = DateUtils.adjustDate(weekStartDate, 7);
     
     let directives = this.dayDirectives.filter(
       (directive) => {
-        const normalizedDirectiveDate = DateUtils.normalizeToDay(directive.date);
+        // Use timezone-safe comparison: date >= start AND date < end
         return (
-          normalizedDirectiveDate.getTime() >= normalizedWeekStart.getTime() &&
-          normalizedDirectiveDate.getTime() < weekEndDate.getTime()
+          DateUtils.compareDays(directive.date, weekStartDate) >= 0 &&
+          DateUtils.compareDays(directive.date, weekEndDate) < 0
         );
       }
     );

@@ -28,7 +28,7 @@ describe('DateUtils', () => {
     expect(DateUtils.isSameYear(date1, date3)).toBe(false);
   });
 
-  it('should normalize date to start of day', () => {
+  it('should normalize date to start of day (timezone-safe)', () => {
     const date = new Date(2024, 3, 15, 14, 30, 45, 123);
     const normalized = DateUtils.normalizeToDay(date);
     
@@ -39,6 +39,30 @@ describe('DateUtils', () => {
     expect(normalized.getMinutes()).toBe(0);
     expect(normalized.getSeconds()).toBe(0);
     expect(normalized.getMilliseconds()).toBe(0);
+  });
+
+  it('should compare days correctly across timezones', () => {
+    const date1 = new Date(2024, 3, 15, 23, 59); // Late evening
+    const date2 = new Date(2024, 3, 16, 0, 1);   // Early morning next day
+    const date3 = new Date(2024, 3, 15, 12, 0);  // Same day as date1
+    
+    expect(DateUtils.compareDays(date1, date2)).toBe(-1); // date1 < date2
+    expect(DateUtils.compareDays(date1, date3)).toBe(0);  // same day
+    expect(DateUtils.compareDays(date2, date1)).toBe(1);  // date2 > date1
+  });
+
+  it('should check if date is between dates correctly', () => {
+    const startDate = new Date(2024, 3, 10);
+    const endDate = new Date(2024, 3, 20);
+    const testDate1 = new Date(2024, 3, 15, 14, 30); // Between
+    const testDate2 = new Date(2024, 3, 5);          // Before
+    const testDate3 = new Date(2024, 3, 25);         // After
+    const testDate4 = new Date(2024, 3, 10, 23, 59); // Start date (different time)
+    
+    expect(DateUtils.isDayBetween(testDate1, startDate, endDate)).toBe(true);
+    expect(DateUtils.isDayBetween(testDate2, startDate, endDate)).toBe(false);
+    expect(DateUtils.isDayBetween(testDate3, startDate, endDate)).toBe(false);
+    expect(DateUtils.isDayBetween(testDate4, startDate, endDate)).toBe(true);
   });
 
   it('should check if date is in array', () => {

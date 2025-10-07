@@ -86,19 +86,19 @@ export class CalendarService {
     //if (typeof viewMode === "ViewMode") {
     if (viewMode === ViewMode.Quarter) {
       if (lastDate.getMonth() >= 0 && lastDate.getMonth() <= 2) {
-        lastDate.setMonth(2);
+        lastDate = new Date(lastDate.getFullYear(), 2, lastDate.getDate());
       } else if (lastDate.getMonth() >= 3 && lastDate.getMonth() <= 5) {
-        lastDate.setMonth(5);
+        lastDate = new Date(lastDate.getFullYear(), 5, lastDate.getDate());
       } else if (lastDate.getMonth() >= 6 && lastDate.getMonth() <= 8) {
-        lastDate.setMonth(8);
+        lastDate = new Date(lastDate.getFullYear(), 8, lastDate.getDate());
       } else if (lastDate.getMonth() >= 9 && lastDate.getMonth() <= 11) {
-        lastDate.setMonth(11);
+        lastDate = new Date(lastDate.getFullYear(), 11, lastDate.getDate());
       }
     } else if (viewMode === ViewMode.Semester) {
       if (lastDate.getMonth() >= 0 && lastDate.getMonth() <= 5) {
-        lastDate.setMonth(5);
+        lastDate = new Date(lastDate.getFullYear(), 5, lastDate.getDate());
       } else if (lastDate.getMonth() >= 6 && lastDate.getMonth() <= 11) {
-        lastDate.setMonth(11);
+        lastDate = new Date(lastDate.getFullYear(), 11, lastDate.getDate());
       }
     }
     //}
