@@ -11,6 +11,7 @@ import {
   Suggest,
   DisabledDates,
   AngularDatepicker2,
+  DayDirective,
 } from "projects/angular-datepicker2/src/public-api";
 
 registerLocaleData(localeEn, "en");
@@ -18,7 +19,7 @@ registerLocaleData(localeEn, "en");
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [CommonModule, FormsModule, AngularDatepicker2],
+  imports: [CommonModule, FormsModule, AngularDatepicker2, DayDirective],
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
