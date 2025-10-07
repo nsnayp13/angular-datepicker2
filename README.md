@@ -1,6 +1,6 @@
 # Angular Datepicker2
 
-Modern Angular datepicker component with standalone support. Compatible with Angular 16+.
+Modern Angular calendar datepicker component with standalone support. Compatible with Angular 16+.
 
 ## Features
 
