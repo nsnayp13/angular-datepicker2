@@ -70,17 +70,46 @@ jobs:
           CURRENT_VERSION=$(node -p "require('./projects/angular-datepicker2/package.json').version")
           echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
           
-          # Get the last published tag
-          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          LAST_VERSION=${LAST_TAG#v}
-          echo "last_version=$LAST_VERSION" >> $GITHUB_OUTPUT
+          # Check against npm registry to get the actual published version
+          NPM_VERSION=$(npm view angular-datepicker2 version 2>/dev/null || echo "0.0.0")
+          echo "npm_version=$NPM_VERSION" >> $GITHUB_OUTPUT
           
-          if [ "$CURRENT_VERSION" != "$LAST_VERSION" ]; then
-            echo "version_changed=true" >> $GITHUB_OUTPUT
-            echo "Version changed from $LAST_VERSION to $CURRENT_VERSION"
+          # Also check the latest published version (not just the 'latest' tag)
+          LATEST_PUBLISHED=$(npm view angular-datepicker2 versions --json 2>/dev/null | jq -r '.[-1]' || echo "0.0.0")
+          echo "latest_published=$LATEST_PUBLISHED" >> $GITHUB_OUTPUT
+          
+          # Compare with the highest version available
+          if [ "$CURRENT_VERSION" != "$NPM_VERSION" ] && [ "$CURRENT_VERSION" != "$LATEST_PUBLISHED" ]; then
+            # Use node to compare versions properly (simple version comparison)
+            VERSION_IS_NEWER=$(node -e "
+              function compareVersions(a, b) {
+                const aParts = a.split('.').map(Number);
+                const bParts = b.split('.').map(Number);
+                for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+                  const aPart = aParts[i] || 0;
+                  const bPart = bParts[i] || 0;
+                  if (aPart > bPart) return 1;
+                  if (aPart < bPart) return -1;
+                }
+                return 0;
+              }
+              const current = '$CURRENT_VERSION';
+              const npmVer = '$NPM_VERSION';
+              const latestPub = '$LATEST_PUBLISHED';
+              const highest = compareVersions(npmVer, latestPub) > 0 ? npmVer : latestPub;
+              console.log(compareVersions(current, highest) > 0 ? 'true' : 'false');
+            ")
+            
+            if [ "$VERSION_IS_NEWER" = "true" ]; then
+              echo "version_changed=true" >> $GITHUB_OUTPUT
+              echo "Version will be published: $CURRENT_VERSION (current npm: $NPM_VERSION, latest published: $LATEST_PUBLISHED)"
+            else
+              echo "version_changed=false" >> $GITHUB_OUTPUT
+              echo "Version $CURRENT_VERSION is not newer than published versions"
+            fi
           else
             echo "version_changed=false" >> $GITHUB_OUTPUT
-            echo "Version unchanged: $CURRENT_VERSION"
+            echo "Version unchanged or already published: $CURRENT_VERSION"
           fi
 
       - name: Create Git tag
@@ -95,7 +124,7 @@ jobs:
         if: steps.version-check.outputs.version_changed == 'true'
         run: |
           cd dist/angular-datepicker2
-          npm publish
+          npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
