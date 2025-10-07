@@ -1,44 +1,65 @@
-name: Node.js CI
+name: Build and Deploy to GitHub Pages
 
-on: [push]
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
 
 jobs:
-  #   test:
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #       - uses: actions/checkout@v1
-  #       - uses: actions/setup-node@v1
-  #         with:
-  #           node-version: 12
-  #       - run: npm install
-  #       - run: npm run test-once
-
-  publish: # Опубликовать
+  build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-    #     needs: [test]
+    
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
-      - run: npm install
-      - run: npm run build angular-datepicker2 --prod
-      - name: publish
-        run: cd dist/angular-datepicker2 && npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm}}
-
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm install && npm run build --prod
-
-      - name: Deploy GP
-        uses: JamesIves/github-pages-deploy-action@4.1.5
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Build library
+        run: npm run build angular-datepicker2
+        
+      - name: Build demo app for GitHub Pages
+        run: npm run build:gh-pages
+        
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:
           branch: gh-pages
           folder: dist/angular-datepicker
-          token: ${{ secrets.GP_PAT_TOKEN }}
+          clean: true
+          
+  publish-npm:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+    needs: build-and-deploy
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: https://registry.npmjs.org/
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Build library
+        run: npm run build angular-datepicker2
+        
+      - name: Publish to NPM
+        run: cd dist/angular-datepicker2 && npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
