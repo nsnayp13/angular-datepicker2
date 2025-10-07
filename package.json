@@ -5,11 +5,16 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:lib": "ng build angular-datepicker2",
     "test": "ng test",
     "test-once": "ng test angular-datepicker2 --watch false --code-coverage",
     "build:gh-pages": "ng build --configuration production --base-href https://nsnayp13.github.io/angular-datepicker2/",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "publish:lib": "npm run build:lib && cd dist/angular-datepicker2 && npm publish",
+    "version:patch": "cd projects/angular-datepicker2 && npm version patch",
+    "version:minor": "cd projects/angular-datepicker2 && npm version minor",
+    "version:major": "cd projects/angular-datepicker2 && npm version major"
   },
   "private": true,
   "dependencies": {
@@ -47,7 +52,11 @@
     "protractor": "~7.0.0",
     "ts-node": "^10.9.0",
     "tslint": "^6.1.0",
-    "typescript": "~5.8.3"
+    "typescript": "~5.8.3",
+    "semantic-release": "^22.0.0",
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/git": "^10.0.0",
+    "@semantic-release/github": "^9.0.0"
   },
   "config": {
     "commitizen": {
