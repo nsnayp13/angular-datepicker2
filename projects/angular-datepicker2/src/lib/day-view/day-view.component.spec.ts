@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { DayViewComponent } from './day-view.component';
 import { DayService } from '../_service/day.service';
 import { CalendarService } from '../_service/calendar.service';
@@ -10,15 +10,12 @@ describe("DayViewComponent", () => {
     let calendarService;
 
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                DayViewComponent,
-            ],
-            imports: [],
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [DayViewComponent],
             providers: []
         }).compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DayViewComponent);

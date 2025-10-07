@@ -11,12 +11,15 @@ import { CalendarService } from "../_service/calendar.service";
 import { DayService } from "../_service/day.service";
 import { Subscription } from "rxjs";
 import { DayDirective } from "../day.directive";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-day-view",
   templateUrl: "./day-view.component.html",
   styleUrls: ["./day-view.component.scss"],
   providers: [DayService],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
   @Input() date: Date;
