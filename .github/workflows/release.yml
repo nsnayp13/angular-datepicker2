@@ -2,84 +2,96 @@ name: Release and Publish
 
 on:
   push:
-    branches: [ main, master ]
-  workflow_dispatch:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
 
 jobs:
-  release:
+  test:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        registry-url: 'https://registry.npmjs.org'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-    - name: Cache dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Lint
+        run: npm run lint
+        continue-on-error: true
 
-    - name: Install semantic-release
-      run: npm install -g semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github
+      - name: Test
+        run: npm run test-once
 
-    - name: Run tests
-      run: npm run test-once
+      - name: Build library
+        run: npm run build:lib
 
-    - name: Build library
-      run: npm run build:lib
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Configure Git
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-    - name: Release with semantic-release
-      run: |
-        cd projects/angular-datepicker2
-        npx semantic-release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Check if new version was released
-      id: check-release
-      run: |
-        NEW_VERSION=$(node -p "require('./projects/angular-datepicker2/package.json').version")
-        echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
-        
-        # Проверяем, был ли создан новый тег
-        if git tag -l "v$NEW_VERSION" | grep -q "v$NEW_VERSION"; then
-          echo "version_released=true" >> $GITHUB_OUTPUT
-          echo "New version $NEW_VERSION was released"
-        else
-          echo "version_released=false" >> $GITHUB_OUTPUT
-          echo "No new version was released"
-        fi
+      - name: Build library
+        run: npm run build:lib
 
-    - name: Rebuild and publish to NPM
-      if: steps.check-release.outputs.version_released == 'true'
-      run: |
-        echo "Publishing version ${{ steps.check-release.outputs.new_version }} to NPM"
-        
-        # Пересобираем библиотеку с новой версией
-        npm run build:lib
-        
-        # Публикуем в NPM
-        cd dist/angular-datepicker2
-        npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd dist/angular-datepicker2
+          npx semantic-release
+        working-directory: ${{ github.workspace }}
+
+  deploy-gh-pages:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for GitHub Pages
+        run: npm run build:gh-pages
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/angular-datepicker
