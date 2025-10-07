@@ -1,7 +1,7 @@
 {
   "name": "angular-datepicker2",
   "version": "3.4.3",
-  "description": "Angular datepicker, best calendar. Select Period, single, or multiple dates. Template your own day in calendar. Two way databinding and others",
+  "description": "Modern Angular datepicker component with standalone support. Compatible with Angular 16+. Select single, multiple dates or periods. Fully customizable with template support.",
   "main": "bundles/angular-datepicker2.umd.js",
   "module": "fesm2022/angular-datepicker2.mjs",
   "typings": "index.d.ts",
@@ -13,8 +13,8 @@
   },
   "sideEffects": false,
   "peerDependencies": {
-    "@angular/common": ">=8.2.14",
-    "@angular/core": ">=8.2.14"
+    "@angular/common": ">=16.0.0",
+    "@angular/core": ">=16.0.0"
   },
   "repository": {
     "type": "git",
@@ -26,11 +26,16 @@
     "calendar",
     "date",
     "picker",
-    "material",
     "component",
     "ui",
-    "input",
-    "angularjs"
+    "standalone",
+    "angular16",
+    "angular17",
+    "angular18",
+    "angular19",
+    "date-range",
+    "period-picker",
+    "multiple-dates"
   ],
   "author": "Ivanov.N <nikaglichev@gmail.com>",
   "license": "MIT",

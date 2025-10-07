@@ -13,6 +13,7 @@ import { CalendarService } from "../_service/calendar.service";
 import { DayService } from "../_service/day.service";
 import { Subscription } from "rxjs";
 import { DayDirective } from "../day.directive";
+import { DateUtils } from "../_utils/date.utils";
 
 @Component({
   selector: "app-day-view",
@@ -48,9 +49,9 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy, AfterView
   isStartOrEndDatePeriod() {
     if (this.getSelectMode() === "period") {
       if (this.getSelectedDates().length == 2) {
-        if (this.date.getYmd() === this.getSelectedDates()[0].getYmd()) {
+        if (DateUtils.getYmd(this.date) === DateUtils.getYmd(this.getSelectedDates()[0])) {
           return "start";
-        } else if (this.date.getYmd() === this.getSelectedDates()[1].getYmd()) {
+        } else if (DateUtils.getYmd(this.date) === DateUtils.getYmd(this.getSelectedDates()[1])) {
           return "end";
         }
       }
@@ -76,9 +77,9 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy, AfterView
   ngOnInit() {
     this.dayService.createDay(this.date);
     this.sub = this.calendarService.selectedDates.subscribe((data) => {
-      const days = data.map((item) => item.getYmd());
+      const days = data.map((item) => DateUtils.getYmd(item));
       this.dayService.day.isSelected = days.includes(
-        this.dayService.day.date.getYmd()
+        DateUtils.getYmd(this.dayService.day.date)
       );
       this.dayService.day.isInPeriod = this.dayService.getIsInPeriod(
         this.dayService.day.date

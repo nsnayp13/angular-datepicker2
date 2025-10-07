@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { CalendarService } from "./calendar.service";
 import { Day } from "../interfaces";
-import { VirtualTimeScheduler } from "rxjs";
+import { DateUtils } from "../_utils/date.utils";
 
 @Injectable({
   providedIn: "root",
@@ -75,7 +75,7 @@ export class DayService {
     console.log("clicked in service");
 
     this.calendarService.clickDayKey.next({
-      key: new Date().getYmd() + "" + Math.random(),
+      key: DateUtils.getYmd(new Date()) + "" + Math.random(),
       day: this.day,
     });
 
@@ -86,7 +86,7 @@ export class DayService {
     } else if (this.calendarService.selectMode === "multiple") {
       if (this.day.isSelected) {
         let selectedDates = this.calendarService.selectedDates.value.filter(
-          (elem) => elem.getYmd() !== this.day.date.getYmd()
+          (elem) => DateUtils.getYmd(elem) !== DateUtils.getYmd(this.day.date)
         );
         selectedDates.sort(this.sortByDate);
         this.calendarService.selectedDates.next(selectedDates);
@@ -98,7 +98,7 @@ export class DayService {
     } else if (this.calendarService.selectMode === "period") {
       if (this.day.isSelected) {
         let selectedDates = this.calendarService.selectedDates.value.filter(
-          (elem) => elem.getYmd() !== this.day.date.getYmd()
+          (elem) => DateUtils.getYmd(elem) !== DateUtils.getYmd(this.day.date)
         );
         this.calendarService.selectedDates.next(selectedDates);
       } else {

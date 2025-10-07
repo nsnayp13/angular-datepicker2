@@ -14,6 +14,7 @@ import { MonthService } from "../_service/month.service";
 import { Subscription } from "rxjs";
 import { DayDirective } from "../day.directive";
 import { WeekViewComponent } from "../week-view/week-view.component";
+import { DateUtils } from "../_utils/date.utils";
 
 @Component({
   selector: "app-month-view",
@@ -56,7 +57,7 @@ export class MonthViewComponent implements OnInit, OnDestroy {
 
     let weekDays = [];
     for (let i = 0; i < 7; i++) {
-      weekDays.push(this.weeks[0].adjustDate(i));
+      weekDays.push(DateUtils.adjustDate(this.weeks[0] as Date, i));
     }
     this.weekDays = weekDays;
   }
