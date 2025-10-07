@@ -39,8 +39,11 @@ describe("DayViewComponent", () => {
     });
 
     it("should work with DateUtils", () => {
-        const testDate = new Date(2024, 3, 15);
-        const ymd = DateUtils.getYmd(testDate);
-        expect(ymd).toBe('202403015'); // Note: month is 0-indexed
+        const testDate1 = new Date(2024, 3, 15);
+        const testDate2 = new Date(2024, 3, 15, 10, 30);
+        const testDate3 = new Date(2024, 3, 16);
+        
+        expect(DateUtils.isSameDay(testDate1, testDate2)).toBe(true);
+        expect(DateUtils.isSameDay(testDate1, testDate3)).toBe(false);
     });
 });

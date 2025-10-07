@@ -67,14 +67,18 @@ export class MonthViewComponent implements OnInit, OnDestroy {
   }
 
   getWeekDayDirectives(weekStartDate: Date): DayDirective[] {
-    weekStartDate.setHours(0, 0, 0, 0);
-    const weekEndDate = new Date(weekStartDate);
-    weekEndDate.setDate(weekStartDate.getDate() + 7);
-    weekEndDate.setHours(0, 0, 0, 0);
+    const normalizedWeekStart = DateUtils.normalizeToDay(weekStartDate);
+    const weekEndDate = new Date(normalizedWeekStart);
+    weekEndDate.setDate(normalizedWeekStart.getDate() + 7);
+    
     let directives = this.dayDirectives.filter(
-      (directive) =>
-        directive.date.getTime() >= weekStartDate.getTime() &&
-        directive.date.getTime() < weekEndDate.getTime()
+      (directive) => {
+        const normalizedDirectiveDate = DateUtils.normalizeToDay(directive.date);
+        return (
+          normalizedDirectiveDate.getTime() >= normalizedWeekStart.getTime() &&
+          normalizedDirectiveDate.getTime() < weekEndDate.getTime()
+        );
+      }
     );
     return directives;
   }

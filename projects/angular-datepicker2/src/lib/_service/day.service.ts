@@ -18,20 +18,25 @@ export class DayService {
     if (
       disabledDates.dates &&
       disabledDates.dates.length > 0 &&
-      disabledDates.dates.find(
-        (disableDate) => disableDate.getTime() === date.getTime()
-      )
+      DateUtils.isDateInArray(date, disabledDates.dates)
     ) {
       return true;
     }
-    if (disabledDates.after && disabledDates.after.getTime() < date.getTime()) {
-      return true;
+    
+    // Normalize dates for comparison (ignore time)
+    const normalizedDate = DateUtils.normalizeToDay(date);
+    
+    if (disabledDates.after) {
+      const normalizedAfter = DateUtils.normalizeToDay(disabledDates.after);
+      if (normalizedAfter.getTime() < normalizedDate.getTime()) {
+        return true;
+      }
     }
-    if (
-      disabledDates.before &&
-      disabledDates.before.getTime() > date.getTime()
-    ) {
-      return true;
+    if (disabledDates.before) {
+      const normalizedBefore = DateUtils.normalizeToDay(disabledDates.before);
+      if (normalizedBefore.getTime() > normalizedDate.getTime()) {
+        return true;
+      }
     }
     return false;
   }
@@ -52,11 +57,17 @@ export class DayService {
   getIsInPeriod(date: Date): boolean {
     if (
       this.calendarService.selectMode === "period" &&
-      this.calendarService.selectedDates.value.length == 2 &&
-      date.getTime() >= this.calendarService.selectedDates.value[0].getTime() &&
-      date.getTime() <= this.calendarService.selectedDates.value[1].getTime()
+      this.calendarService.selectedDates.value.length == 2
     ) {
-      return true;
+      // Normalize all dates for comparison (ignore time)
+      const normalizedDate = DateUtils.normalizeToDay(date);
+      const normalizedStart = DateUtils.normalizeToDay(this.calendarService.selectedDates.value[0]);
+      const normalizedEnd = DateUtils.normalizeToDay(this.calendarService.selectedDates.value[1]);
+      
+      return (
+        normalizedDate.getTime() >= normalizedStart.getTime() &&
+        normalizedDate.getTime() <= normalizedEnd.getTime()
+      );
     }
     return false;
   }
@@ -75,7 +86,7 @@ export class DayService {
     console.log("clicked in service");
 
     this.calendarService.clickDayKey.next({
-      key: DateUtils.getYmd(new Date()) + "" + Math.random(),
+      key: new Date().getTime() + "" + Math.random(),
       day: this.day,
     });
 
@@ -86,7 +97,7 @@ export class DayService {
     } else if (this.calendarService.selectMode === "multiple") {
       if (this.day.isSelected) {
         let selectedDates = this.calendarService.selectedDates.value.filter(
-          (elem) => DateUtils.getYmd(elem) !== DateUtils.getYmd(this.day.date)
+          (elem) => !DateUtils.isSameDay(elem, this.day.date)
         );
         selectedDates.sort(this.sortByDate);
         this.calendarService.selectedDates.next(selectedDates);
@@ -98,7 +109,7 @@ export class DayService {
     } else if (this.calendarService.selectMode === "period") {
       if (this.day.isSelected) {
         let selectedDates = this.calendarService.selectedDates.value.filter(
-          (elem) => DateUtils.getYmd(elem) !== DateUtils.getYmd(this.day.date)
+          (elem) => !DateUtils.isSameDay(elem, this.day.date)
         );
         this.calendarService.selectedDates.next(selectedDates);
       } else {

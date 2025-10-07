@@ -49,9 +49,9 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy, AfterView
   isStartOrEndDatePeriod() {
     if (this.getSelectMode() === "period") {
       if (this.getSelectedDates().length == 2) {
-        if (DateUtils.getYmd(this.date) === DateUtils.getYmd(this.getSelectedDates()[0])) {
+        if (DateUtils.isSameDay(this.date, this.getSelectedDates()[0])) {
           return "start";
-        } else if (DateUtils.getYmd(this.date) === DateUtils.getYmd(this.getSelectedDates()[1])) {
+        } else if (DateUtils.isSameDay(this.date, this.getSelectedDates()[1])) {
           return "end";
         }
       }
@@ -77,9 +77,9 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy, AfterView
   ngOnInit() {
     this.dayService.createDay(this.date);
     this.sub = this.calendarService.selectedDates.subscribe((data) => {
-      const days = data.map((item) => DateUtils.getYmd(item));
-      this.dayService.day.isSelected = days.includes(
-        DateUtils.getYmd(this.dayService.day.date)
+      this.dayService.day.isSelected = DateUtils.isDateInArray(
+        this.dayService.day.date,
+        data
       );
       this.dayService.day.isInPeriod = this.dayService.getIsInPeriod(
         this.dayService.day.date

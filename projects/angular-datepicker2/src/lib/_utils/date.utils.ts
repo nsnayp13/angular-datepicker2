@@ -43,11 +43,51 @@ export class DateUtils {
     return DateUtils.getDayWithStart(newDate, start);
   }
 
-  static getYmd(date: Date): string {
+  /**
+   * Compare two dates ignoring time (only year, month, day)
+   */
+  static isSameDay(date1: Date, date2: Date): boolean {
+    if (!date1 || !date2) return false;
     return (
-      date.getFullYear().toString() +
-      String(date.getMonth().toString()).padStart(2, "0") +
-      String(date.getDate().toString()).padStart(2, "0")
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
     );
+  }
+
+  /**
+   * Compare two dates ignoring time and day (only year, month)
+   */
+  static isSameMonth(date1: Date, date2: Date): boolean {
+    if (!date1 || !date2) return false;
+    return (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth()
+    );
+  }
+
+  /**
+   * Compare two dates ignoring time, day and month (only year)
+   */
+  static isSameYear(date1: Date, date2: Date): boolean {
+    if (!date1 || !date2) return false;
+    return date1.getFullYear() === date2.getFullYear();
+  }
+
+  /**
+   * Normalize date to start of day (00:00:00.000)
+   */
+  static normalizeToDay(date: Date): Date {
+    const normalized = new Date(date);
+    normalized.setHours(0, 0, 0, 0);
+    return normalized;
+  }
+
+  /**
+   * Check if date is in array of dates (comparing only day, month, year)
+   */
+  static isDateInArray(date: Date, dates: Date[]): boolean {
+    if (!date || !dates || dates.length === 0) return false;
+    return dates.some(d => DateUtils.isSameDay(date, d));
   }
 }

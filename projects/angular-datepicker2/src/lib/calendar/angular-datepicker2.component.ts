@@ -162,9 +162,7 @@ export class AngularDatepicker2
 
   getMonthDayDirectives(date: Date): DayDirective[] {
     return this.dayDirectives.filter(
-      (directive: DayDirective) =>
-        directive.date.getMonth() === date.getMonth() &&
-        directive.date.getFullYear() === date.getFullYear()
+      (directive: DayDirective) => DateUtils.isSameMonth(directive.date, date)
     );
   }
 

@@ -1,10 +1,56 @@
 import { DateUtils } from './date.utils';
 
 describe('DateUtils', () => {
-  it('should format date correctly with getYmd', () => {
-    const date = new Date(2024, 3, 15); // April 15, 2024
-    const result = DateUtils.getYmd(date);
-    expect(result).toBe('20240315'); // Month is 0-indexed, so April = 3
+  it('should compare dates correctly with isSameDay', () => {
+    const date1 = new Date(2024, 3, 15); // April 15, 2024
+    const date2 = new Date(2024, 3, 15, 10, 30); // Same day, different time
+    const date3 = new Date(2024, 3, 16); // Different day
+    
+    expect(DateUtils.isSameDay(date1, date2)).toBe(true);
+    expect(DateUtils.isSameDay(date1, date3)).toBe(false);
+  });
+
+  it('should compare months correctly with isSameMonth', () => {
+    const date1 = new Date(2024, 3, 15); // April 15, 2024
+    const date2 = new Date(2024, 3, 20); // April 20, 2024
+    const date3 = new Date(2024, 4, 15); // May 15, 2024
+    
+    expect(DateUtils.isSameMonth(date1, date2)).toBe(true);
+    expect(DateUtils.isSameMonth(date1, date3)).toBe(false);
+  });
+
+  it('should compare years correctly with isSameYear', () => {
+    const date1 = new Date(2024, 3, 15); // April 15, 2024
+    const date2 = new Date(2024, 8, 20); // September 20, 2024
+    const date3 = new Date(2025, 3, 15); // April 15, 2025
+    
+    expect(DateUtils.isSameYear(date1, date2)).toBe(true);
+    expect(DateUtils.isSameYear(date1, date3)).toBe(false);
+  });
+
+  it('should normalize date to start of day', () => {
+    const date = new Date(2024, 3, 15, 14, 30, 45, 123);
+    const normalized = DateUtils.normalizeToDay(date);
+    
+    expect(normalized.getFullYear()).toBe(2024);
+    expect(normalized.getMonth()).toBe(3);
+    expect(normalized.getDate()).toBe(15);
+    expect(normalized.getHours()).toBe(0);
+    expect(normalized.getMinutes()).toBe(0);
+    expect(normalized.getSeconds()).toBe(0);
+    expect(normalized.getMilliseconds()).toBe(0);
+  });
+
+  it('should check if date is in array', () => {
+    const targetDate = new Date(2024, 3, 15);
+    const dates = [
+      new Date(2024, 3, 14),
+      new Date(2024, 3, 15, 10, 30), // Same day, different time
+      new Date(2024, 3, 16)
+    ];
+    
+    expect(DateUtils.isDateInArray(targetDate, dates)).toBe(true);
+    expect(DateUtils.isDateInArray(new Date(2024, 3, 17), dates)).toBe(false);
   });
 
   it('should adjust date correctly', () => {
