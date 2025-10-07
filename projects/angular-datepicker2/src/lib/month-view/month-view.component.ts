@@ -8,13 +8,17 @@ import {
   ElementRef,
   OnDestroy,
 } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { CalendarService } from "../_service/calendar.service";
 import { MonthService } from "../_service/month.service";
 import { Subscription } from "rxjs";
 import { DayDirective } from "../day.directive";
+import { WeekViewComponent } from "../week-view/week-view.component";
 
 @Component({
   selector: "app-month-view",
+  standalone: true,
+  imports: [CommonModule, WeekViewComponent],
   templateUrl: "./month-view.component.html",
   styleUrls: ["./month-view.component.scss"],
   providers: [MonthService],

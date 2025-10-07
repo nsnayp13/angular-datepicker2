@@ -6,7 +6,9 @@ import {
   OnDestroy,
   ViewChild,
   ViewContainerRef,
+  AfterViewInit,
 } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { CalendarService } from "../_service/calendar.service";
 import { DayService } from "../_service/day.service";
 import { Subscription } from "rxjs";
@@ -14,11 +16,13 @@ import { DayDirective } from "../day.directive";
 
 @Component({
   selector: "app-day-view",
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: "./day-view.component.html",
   styleUrls: ["./day-view.component.scss"],
   providers: [DayService],
 })
-export class DayViewComponent implements OnInit, OnChanges, OnDestroy {
+export class DayViewComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
   @Input() date: Date;
   @Input() thisMonth: boolean;
   @Input() dayDirective: DayDirective;

@@ -15,6 +15,7 @@ import {
   QueryList,
   ViewContainerRef,
 } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { CalendarService } from "../_service/calendar.service";
 import {
   Day,
@@ -24,9 +25,20 @@ import {
   DisabledDates,
 } from "../interfaces";
 import { DayDirective } from "../day.directive";
+import { MonthViewComponent } from "../month-view/month-view.component";
+import { MonthSelectComponent } from "../month-select/month-select.component";
+import { YearSelectComponent } from "../year-select/year-select.component";
 
 @Component({
   selector: "angular-datepicker2",
+  standalone: true,
+  imports: [
+    CommonModule,
+    MonthViewComponent,
+    MonthSelectComponent,
+    YearSelectComponent,
+    DayDirective,
+  ],
   templateUrl: "./angular-datepicker2.component.html",
   styleUrls: ["./angular-datepicker2.component.scss"],
   providers: [CalendarService],

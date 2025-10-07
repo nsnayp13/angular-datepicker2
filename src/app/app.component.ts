@@ -1,4 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { registerLocaleData } from "@angular/common";
+import localeEn from "@angular/common/locales/en";
 import {
   Calendar,
   Day,
@@ -6,10 +10,15 @@ import {
   ViewMode,
   Suggest,
   DisabledDates,
+  AngularDatepicker2,
 } from "projects/angular-datepicker2/src/public-api";
+
+registerLocaleData(localeEn, "en");
 
 @Component({
   selector: "app-root",
+  standalone: true,
+  imports: [CommonModule, FormsModule, AngularDatepicker2],
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
