@@ -25,9 +25,16 @@ export class MonthService {
 
     const weeks = [];
     for (let i = 0; i < countWeek; i++) {
-      const startWeekDate = new Date(date);
-      startWeekDate.setDate(
-        date.getDate() + i * 7 - DateUtils.getDayWithStart(date, weekStart)
+      // Use timezone-safe date creation
+      const dayOffset = date.getDate() + i * 7 - DateUtils.getDayWithStart(date, weekStart);
+      const startWeekDate = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        dayOffset,
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds(),
+        date.getMilliseconds()
       );
       weeks.push(startWeekDate);
     }

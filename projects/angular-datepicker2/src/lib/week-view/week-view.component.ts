@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { DayDirective } from "../day.directive";
 import { WeekService } from "../_service/week.service";
 import { DayViewComponent } from "../day-view/day-view.component";
+import { DateUtils } from "../_utils/date.utils";
 
 @Component({
   selector: "app-week-view",
@@ -25,7 +26,7 @@ export class WeekViewComponent implements OnInit {
 
   getDayDirective(date: Date): DayDirective {
     let day = this.dayDirectives.find(
-      (directive: DayDirective) => directive.date.getTime() === date.getTime()
+      (directive: DayDirective) => DateUtils.isSameDay(directive.date, date)
     );
     return day;
   }

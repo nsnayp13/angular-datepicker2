@@ -13,8 +13,16 @@ export class WeekService {
     const days = [];
 
     for (let i = 0; i < dayInWeek; i++) {
-      const curDate = new Date(date);
-      curDate.setDate(curDate.getDate() + i);
+      // Use timezone-safe date creation
+      const curDate = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate() + i,
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds(),
+        date.getMilliseconds()
+      );
       days.push(curDate);
     }
 

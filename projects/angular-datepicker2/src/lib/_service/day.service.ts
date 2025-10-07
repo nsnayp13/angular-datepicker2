@@ -18,19 +18,16 @@ export class DayService {
     if (
       disabledDates.dates &&
       disabledDates.dates.length > 0 &&
-      disabledDates.dates.find(
-        (disableDate) => disableDate.getTime() === date.getTime()
-      )
+      DateUtils.isDateInArray(date, disabledDates.dates)
     ) {
       return true;
     }
-    if (disabledDates.after && disabledDates.after.getTime() < date.getTime()) {
+    
+    // Use timezone-safe comparison methods
+    if (disabledDates.after && DateUtils.isDayAfter(date, disabledDates.after)) {
       return true;
     }
-    if (
-      disabledDates.before &&
-      disabledDates.before.getTime() > date.getTime()
-    ) {
+    if (disabledDates.before && DateUtils.isDayBefore(date, disabledDates.before)) {
       return true;
     }
     return false;
@@ -52,11 +49,14 @@ export class DayService {
   getIsInPeriod(date: Date): boolean {
     if (
       this.calendarService.selectMode === "period" &&
-      this.calendarService.selectedDates.value.length == 2 &&
-      date.getTime() >= this.calendarService.selectedDates.value[0].getTime() &&
-      date.getTime() <= this.calendarService.selectedDates.value[1].getTime()
+      this.calendarService.selectedDates.value.length == 2
     ) {
-      return true;
+      // Use timezone-safe comparison method
+      return DateUtils.isDayBetween(
+        date,
+        this.calendarService.selectedDates.value[0],
+        this.calendarService.selectedDates.value[1]
+      );
     }
     return false;
   }
@@ -75,7 +75,7 @@ export class DayService {
     console.log("clicked in service");
 
     this.calendarService.clickDayKey.next({
-      key: DateUtils.getYmd(new Date()) + "" + Math.random(),
+      key: new Date().getTime() + "" + Math.random(),
       day: this.day,
     });
 
@@ -86,7 +86,7 @@ export class DayService {
     } else if (this.calendarService.selectMode === "multiple") {
       if (this.day.isSelected) {
         let selectedDates = this.calendarService.selectedDates.value.filter(
-          (elem) => DateUtils.getYmd(elem) !== DateUtils.getYmd(this.day.date)
+          (elem) => !DateUtils.isSameDay(elem, this.day.date)
         );
         selectedDates.sort(this.sortByDate);
         this.calendarService.selectedDates.next(selectedDates);
@@ -98,7 +98,7 @@ export class DayService {
     } else if (this.calendarService.selectMode === "period") {
       if (this.day.isSelected) {
         let selectedDates = this.calendarService.selectedDates.value.filter(
-          (elem) => DateUtils.getYmd(elem) !== DateUtils.getYmd(this.day.date)
+          (elem) => !DateUtils.isSameDay(elem, this.day.date)
         );
         this.calendarService.selectedDates.next(selectedDates);
       } else {
