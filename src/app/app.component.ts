@@ -6,12 +6,18 @@ import {
   ViewMode,
   Suggest,
   DisabledDates,
+  AngularDatepicker2,
+  DayDirective,
 } from "projects/angular-datepicker2/src/public-api";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
+  standalone: true,
+  imports: [CommonModule, FormsModule, AngularDatepicker2, DayDirective],
 })
 export class AppComponent implements OnInit {
   title = "angular-datepicker";

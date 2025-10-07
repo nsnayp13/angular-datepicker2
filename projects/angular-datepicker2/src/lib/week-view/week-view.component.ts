@@ -1,12 +1,16 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { DayDirective } from "../day.directive";
 import { WeekService } from "../_service/week.service";
+import { DayViewComponent } from "../day-view/day-view.component";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-week-view",
   templateUrl: "./week-view.component.html",
   styleUrls: ["./week-view.component.scss"],
   providers: [WeekService],
+  standalone: true,
+  imports: [CommonModule, DayViewComponent],
 })
 export class WeekViewComponent implements OnInit {
   @Input() date: Date;

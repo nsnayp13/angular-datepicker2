@@ -12,12 +12,16 @@ import { CalendarService } from "../_service/calendar.service";
 import { MonthService } from "../_service/month.service";
 import { Subscription } from "rxjs";
 import { DayDirective } from "../day.directive";
+import { WeekViewComponent } from "../week-view/week-view.component";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-month-view",
   templateUrl: "./month-view.component.html",
   styleUrls: ["./month-view.component.scss"],
   providers: [MonthService],
+  standalone: true,
+  imports: [CommonModule, WeekViewComponent],
 })
 export class MonthViewComponent implements OnInit, OnDestroy {
   @Input() date: Date;

@@ -24,6 +24,9 @@ import {
   DisabledDates,
 } from "../interfaces";
 import { DayDirective } from "../day.directive";
+import { MonthViewComponent } from "../month-view/month-view.component";
+import { YearSelectComponent } from "../year-select/year-select.component";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "angular-datepicker2",
@@ -31,6 +34,8 @@ import { DayDirective } from "../day.directive";
   styleUrls: ["./angular-datepicker2.component.scss"],
   providers: [CalendarService],
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [CommonModule, MonthViewComponent, YearSelectComponent, DayDirective],
 })
 export class AngularDatepicker2
   implements

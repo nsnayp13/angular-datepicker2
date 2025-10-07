@@ -2,7 +2,7 @@ import { ViewContainerRef, Directive, Input, TemplateRef } from "@angular/core";
 
 @Directive({
   selector: "[ad2day]",
-  //providers: [TemplateRef],
+  standalone: true,
 })
 export class DayDirective {
   context: any | null = null;
