@@ -1,0 +1,79 @@
+{
+  "name": "angular-datepicker2",
+  "version": "1.0.0",
+  "description": "Modern Angular datepicker component with standalone support. Compatible with Angular 16+. Select single, multiple dates or periods. Fully customizable with template support.",
+  "main": "bundles/angular-datepicker2.umd.js",
+  "module": "fesm2022/angular-datepicker2.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    ".": {
+      "esm2022": "./esm2022/angular-datepicker2.mjs",
+      "esm": "./esm2022/angular-datepicker2.mjs",
+      "types": "./index.d.ts",
+      "default": "./fesm2022/angular-datepicker2.mjs"
+    },
+    "./package.json": {
+      "default": "./package.json"
+    }
+  },
+  "sideEffects": false,
+  "peerDependencies": {
+    "@angular/common": ">=16.0.0",
+    "@angular/core": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nsnayp13/angular-calendar"
+  },
+  "keywords": [
+    "angular",
+    "datepicker",
+    "calendar",
+    "date",
+    "picker",
+    "component",
+    "ui",
+    "standalone",
+    "angular16",
+    "angular17",
+    "angular18",
+    "angular19",
+    "date-range",
+    "period-picker",
+    "multiple-dates"
+  ],
+  "author": "Ivanov.N <nikaglichev@gmail.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "release": {
+    "branches": [
+      "main",
+      "master"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy in full compilation mode. This is not allowed.\\nPlease delete and rebuild the package with Ivy partial compilation mode, before attempting to publish.\\n')\" && exit 1"
+  }
+}
