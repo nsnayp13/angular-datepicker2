@@ -44,7 +44,8 @@
 
 ### 1. Установка зависимостей
 ```bash
-npm install --legacy-peer-deps
+npm install
+# Файл .npmrc автоматически применит legacy-peer-deps=true
 ```
 
 ### 2. Сборка библиотеки
@@ -96,10 +97,8 @@ import 'zone.js';  // Не 'zone.js/dist/zone'
 ```
 
 ### Проблема с peer dependencies
-Используйте флаг `--legacy-peer-deps` при установке:
-```bash
-npm install --legacy-peer-deps
-```
+Проект настроен с файлом `.npmrc` который автоматически использует `legacy-peer-deps=true`. 
+Если возникают проблемы, убедитесь что файл `.npmrc` существует в корне проекта.
 
 ## URL демо
 

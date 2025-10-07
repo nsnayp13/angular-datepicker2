@@ -21,7 +21,7 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm ci
+        run: npm install
         
       - name: Build library
         run: npm run build angular-datepicker2
@@ -54,7 +54,7 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm ci
+        run: npm install
         
       - name: Build library
         run: npm run build angular-datepicker2
