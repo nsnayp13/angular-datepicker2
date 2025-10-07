@@ -1,8 +1,11 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { CalendarService } from "../_service/calendar.service";
 
 @Component({
   selector: "app-month-select",
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: "./month-select.component.html",
   styleUrls: ["./month-select.component.scss"]
 })

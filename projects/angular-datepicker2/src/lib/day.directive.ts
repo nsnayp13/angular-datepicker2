@@ -1,10 +1,11 @@
-import { ViewContainerRef, Directive, Input, TemplateRef } from "@angular/core";
+import { ViewContainerRef, Directive, Input, TemplateRef, OnInit } from "@angular/core";
 
 @Directive({
   selector: "[ad2day]",
+  standalone: true,
   //providers: [TemplateRef],
 })
-export class DayDirective {
+export class DayDirective implements OnInit {
   context: any | null = null;
   __created = false;
 
