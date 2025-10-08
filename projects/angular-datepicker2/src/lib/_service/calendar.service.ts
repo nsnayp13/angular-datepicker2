@@ -80,6 +80,8 @@ export class CalendarService {
       this.showPrevNextDaysInOneMonth = showPrevNextDaysInOneMonth;
       // Trigger calendar recalculation
       this.getShownMonths(this.shownDate);
+      // Notify components about the change
+      this.updateDate.next(new Date());
     }
   }
 
@@ -173,6 +175,8 @@ export class CalendarService {
 
     this.calendar = months;
     this.viewSelectorMode = "days";
+    // Notify components about the change
+    this.updateDate.next(new Date());
   }
 
   goPrev(firstDate: Date) {

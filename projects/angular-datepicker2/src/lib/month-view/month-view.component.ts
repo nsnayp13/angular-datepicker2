@@ -61,6 +61,13 @@ export class MonthViewComponent implements OnInit, OnDestroy {
       })
     );
 
+    // Subscribe to calendar updates to recalculate weeks when showPrevNextDaysInOneMonth changes
+    this.sub.add(
+      this.calendarService.updateDate.subscribe(() => {
+        this.recalculateWeeks();
+      })
+    );
+
     this.recalculateWeeks();
   }
 
