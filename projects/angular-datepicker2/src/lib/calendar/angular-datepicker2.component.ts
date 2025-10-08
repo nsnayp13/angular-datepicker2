@@ -210,8 +210,8 @@ export class AngularDatepicker2
     });
 
     this.calendarService.days.next(this.days);
-    this.calendarService.weekStart = this.weekStart;
-    this.calendarService.weekends = this.weekends;
+    this.calendarService.setWeekStart(this.weekStart);
+    this.calendarService.setWeekends(this.weekends);
     this.calendarService.viewMode = this.viewMode;
     this.calendarService.viewSelectorMode = "days";
     this.calendarService.selectMode = this.selectMode;
@@ -282,10 +282,44 @@ export class AngularDatepicker2
     }
   }
 
-  ngOnChanges(simpleChange: any) {
+  private _weekStart(simpleChange) {
+    if (
+      simpleChange.weekStart.currentValue !==
+      simpleChange.weekStart.previousValue
+    ) {
+      this.calendarService.setWeekStart(simpleChange.weekStart.currentValue);
+      setTimeout(() => this.recountWidth(), 10);
+    }
+  }
+
+  private _weekends(simpleChange) {
+    if (
+      simpleChange.weekends.currentValue !==
+      simpleChange.weekends.previousValue
+    ) {
+      this.calendarService.setWeekends(simpleChange.weekends.currentValue);
+      setTimeout(() => this.recountWidth(), 10);
+    }
+  }
+
+  private _disabledDates(simpleChange) {
+    if (
+      simpleChange.disabledDates.currentValue !==
+      simpleChange.disabledDates.previousValue
+    ) {
+      this.calendarService.setDisabledDates(simpleChange.disabledDates.currentValue);
+      this.calendarService.getShownMonths(this.shownDate);
+      setTimeout(() => this.recountWidth(), 10);
+    }
+  }
+
+  ngOnChanges(simpleChange:any) {
     simpleChange.viewMode && this._viewMode(simpleChange);
     simpleChange.selectMode && this._selectMode(simpleChange);
     simpleChange.shownDate && this._shownDate(simpleChange);
+    simpleChange.weekStart && this._weekStart(simpleChange);
+    simpleChange.weekends && this._weekends(simpleChange);
+    simpleChange.disabledDates && this._disabledDates(simpleChange);
     simpleChange.days && this.calendarService.days.next(this.days);
     simpleChange.selectedDates &&
       this.calendarService.setSelectedDates(this.selectedDates);

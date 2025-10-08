@@ -1,3 +1,16 @@
+## [3.9.0](https://github.com/nsnayp13/angular-datepicker2/compare/v3.8.0...v3.9.0) (2025-10-08)
+
+
+### Features
+
+* Improve calendar reactivity for weekStart and weekends ([bed77ea](https://github.com/nsnayp13/angular-datepicker2/commit/bed77ea56def60e1758a090e92b5cf23229412b8))
+
+
+### Code Refactoring
+
+* Add controls for weekStart, weekends, suggest, and disabledDates ([191ebe7](https://github.com/nsnayp13/angular-datepicker2/commit/191ebe71506dc299c8bf8c1c3997d88fa32a4071))
+* Use helper for JSON stringify in template ([13bed4f](https://github.com/nsnayp13/angular-datepicker2/commit/13bed4f652187536f83653e41ba6abae778231b0))
+
 ## [3.8.0](https://github.com/nsnayp13/angular-datepicker2/compare/v3.7.0...v3.8.0) (2025-10-08)
 
 

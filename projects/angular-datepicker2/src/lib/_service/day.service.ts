@@ -2,13 +2,32 @@ import { Injectable } from "@angular/core";
 import { CalendarService } from "./calendar.service";
 import { Day } from "../interfaces";
 import { DateUtils } from "../_utils/date.utils";
+import { Subscription } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class DayService {
   day!: Day;
-  constructor(private calendarService: CalendarService) {}
+  private subscriptions = new Subscription();
+  
+  constructor(private calendarService: CalendarService) {
+    // Subscribe to weekends changes to update weekend status
+    this.subscriptions.add(
+      this.calendarService.weekendsSubject.subscribe(() => {
+        // Trigger calendar recalculation when weekends change
+        if (this.day && this.day.date) {
+          this.updateWeekendStatus(this.day.date);
+        }
+      })
+    );
+  }
+
+  private updateWeekendStatus(date: Date) {
+    if (this.day) {
+      this.day.isWeekEnd = this.calendarService.weekends.includes(date.getDay());
+    }
+  }
 
   private getIsDisabled(date: Date): boolean {
     const disabledDates = this.calendarService.disabledDates.value;
@@ -63,6 +82,11 @@ export class DayService {
 
   getDay() {
     return this.day;
+  }
+
+  
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   sortByDate(a: Date, b: Date): number {
