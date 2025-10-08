@@ -36,11 +36,12 @@ export class AppComponent implements OnInit {
 
   vertical = false;
   selectMode: SelectMode = SelectMode.Period;
-  viewMode: ViewMode | number = ViewMode.Quarter;
+  viewMode: ViewMode | number = 1;
   weekStart = 0;
   weekends = [6];
   showSuggest = true;
   showDisabledDates = true;
+  showPrevNextDaysInOneMonth = true;
 
   disabledDates: DisabledDates = {};
 
@@ -102,6 +103,8 @@ export class AppComponent implements OnInit {
 
   _showDisabledDatesVal = [true, false];
 
+  _showPrevNextDaysInOneMonthVal = [true, false];
+
   _shownDateVal = [new Date()];
 
   _selectMode(e: any) {
@@ -152,6 +155,11 @@ export class AppComponent implements OnInit {
         before: disabledBefore,
       };
     }
+  }
+
+  _showPrevNextDaysInOneMonth(e: any) {
+    let val = e.target.value;
+    this.showPrevNextDaysInOneMonth = val === "true" ? true : false;
   }
 
   onDayClick(day: any) {

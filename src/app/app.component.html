@@ -5,7 +5,8 @@
         <div style=" display:block; float:left;">
             <angular-datepicker2 [days]="days" [nowDate]="date" [(selectedDates)]="selectedDates"
                 [selectMode]="selectMode" [weekends]="weekends" [suggest]="showSuggest ? suggest : []" [weekStart]="weekStart" [viewMode]="viewMode"
-                [vertical]="vertical" (onDayClick)="onDayClick($event)" [disabledDates]="showDisabledDates ? disabledDates : {}">
+                [vertical]="vertical" (onDayClick)="onDayClick($event)" [disabledDates]="showDisabledDates ? disabledDates : {}"
+                [showPrevNextDaysInOneMonth]="showPrevNextDaysInOneMonth">
 
 
                 <div *ad2day="let date from days[0]?.date" [attr.title]="'Custom day'" class="customDay">
@@ -175,6 +176,19 @@
                 <td>Custom day definitions with special styling</td>
                 <td>
                     {{days?.length || 0}} custom days
+                </td>
+            </tr>
+
+            <tr>
+                <td>showPrevNextDaysInOneMonth</td>
+                <td>boolean</td>
+                <td>Show previous and next month days in single month mode to fill calendar grid (only works when viewMode is 1)</td>
+                <td>
+                    <select (change)="_showPrevNextDaysInOneMonth($event)" [value]="showPrevNextDaysInOneMonth">
+                        <option *ngFor="let i of _showPrevNextDaysInOneMonthVal" [value]="i">
+                            {{i ? 'Show prev/next month days' : 'Hide prev/next month days'}}
+                        </option>
+                    </select>
                 </td>
             </tr>
 

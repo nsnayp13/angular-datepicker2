@@ -26,6 +26,7 @@ import { DateUtils } from "../_utils/date.utils";
 export class DayViewComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
   @Input() date!: Date;
   @Input() thisMonth!: boolean;
+  @Input() isPrevNextMonth!: boolean;
   @Input() dayDirective!: DayDirective;
   @ViewChild("tpl", { static: false, read: ViewContainerRef })
   template!: ViewContainerRef;

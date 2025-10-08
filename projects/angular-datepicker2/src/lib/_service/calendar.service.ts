@@ -21,6 +21,7 @@ export class CalendarService {
   countMonths: number = 1;
   weekStart: number = 0;
   weekends: number[] = [0, 6];
+  showPrevNextDaysInOneMonth: boolean = false;
 
   // Add reactive subjects for weekStart and weekends
   weekStartSubject = new BehaviorSubject<number>(0);
@@ -69,6 +70,14 @@ export class CalendarService {
     if (!this.arraysEqual(this.weekends, weekends)) {
       this.weekends = weekends;
       this.weekendsSubject.next(weekends);
+      // Trigger calendar recalculation
+      this.getShownMonths(this.shownDate);
+    }
+  }
+
+  setShowPrevNextDaysInOneMonth(showPrevNextDaysInOneMonth: boolean) {
+    if (this.showPrevNextDaysInOneMonth !== showPrevNextDaysInOneMonth) {
+      this.showPrevNextDaysInOneMonth = showPrevNextDaysInOneMonth;
       // Trigger calendar recalculation
       this.getShownMonths(this.shownDate);
     }

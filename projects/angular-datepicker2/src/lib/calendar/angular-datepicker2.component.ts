@@ -130,6 +130,13 @@ export class AngularDatepicker2
    */
   @Input() disabledDates!: DisabledDates;
 
+  /**
+   * @description
+   * Show previous and next month days in single month mode to fill calendar grid
+   * Only works when viewMode is 1 (single month)
+   */
+  @Input() showPrevNextDaysInOneMonth: boolean = false;
+
   @ViewChildren("column") columns: any;
 
   width: number | null = null;
@@ -218,6 +225,7 @@ export class AngularDatepicker2
     this.calendarService.shownDate = this.shownDate;
     this.calendarService.setSelectedDates(this.selectedDates);
     this.calendarService.setDays(this.days);
+    this.calendarService.setShowPrevNextDaysInOneMonth(this.showPrevNextDaysInOneMonth);
     this.calendarService.getShownMonths(this.shownDate);
     this.calendarService.setDisabledDates(this.disabledDates);
   }
@@ -313,6 +321,17 @@ export class AngularDatepicker2
     }
   }
 
+  private _showPrevNextDaysInOneMonth(simpleChange: any) {
+    if (
+      simpleChange.showPrevNextDaysInOneMonth.currentValue !==
+      simpleChange.showPrevNextDaysInOneMonth.previousValue
+    ) {
+      this.calendarService.setShowPrevNextDaysInOneMonth(simpleChange.showPrevNextDaysInOneMonth.currentValue);
+      this.calendarService.getShownMonths(this.shownDate);
+      setTimeout(() => this.recountWidth(), 10);
+    }
+  }
+
   ngOnChanges(simpleChange:any) {
     simpleChange.viewMode && this._viewMode(simpleChange);
     simpleChange.selectMode && this._selectMode(simpleChange);
@@ -320,6 +339,7 @@ export class AngularDatepicker2
     simpleChange.weekStart && this._weekStart(simpleChange);
     simpleChange.weekends && this._weekends(simpleChange);
     simpleChange.disabledDates && this._disabledDates(simpleChange);
+    simpleChange.showPrevNextDaysInOneMonth && this._showPrevNextDaysInOneMonth(simpleChange);
     simpleChange.days && this.calendarService.days.next(this.days);
     simpleChange.selectedDates &&
       this.calendarService.setSelectedDates(this.selectedDates);
