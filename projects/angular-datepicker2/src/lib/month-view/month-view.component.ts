@@ -53,6 +53,18 @@ export class MonthViewComponent implements OnInit, OnDestroy {
         this.animationStep = data;
       })
     );
+
+    // Subscribe to weekStart changes to recalculate weeks
+    this.sub.add(
+      this.calendarService.weekStartSubject.subscribe(() => {
+        this.recalculateWeeks();
+      })
+    );
+
+    this.recalculateWeeks();
+  }
+
+  private recalculateWeeks() {
     this.weeks = this.monthService.getMonth(this.date);
 
     let weekDays = [];
