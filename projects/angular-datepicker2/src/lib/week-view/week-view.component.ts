@@ -4,6 +4,7 @@ import { DayDirective } from "../day.directive";
 import { WeekService } from "../_service/week.service";
 import { DayViewComponent } from "../day-view/day-view.component";
 import { DateUtils } from "../_utils/date.utils";
+import { CalendarService } from "../_service/calendar.service";
 
 @Component({
   selector: "app-week-view",
@@ -18,7 +19,7 @@ export class WeekViewComponent implements OnInit {
   @Input() firstMonthDate!: Date;
   @Input() dayDirectives!: DayDirective[];
   dates: (Date | null)[] = [];
-  constructor(private weekService: WeekService) {}
+  constructor(private weekService: WeekService, private calendarService: CalendarService) {}
 
   ngOnInit() {
     this.dates = this.weekService.getWeek(this.date);
@@ -30,5 +31,10 @@ export class WeekViewComponent implements OnInit {
       (directive: DayDirective) => directive.date && DateUtils.isSameDay(directive.date, date)
     );
     return day;
+  }
+
+  shouldShowPrevNextDays(): boolean {
+    return this.calendarService.showPrevNextDaysInOneMonth && 
+           this.calendarService.getCountMonths() === 1;
   }
 }
