@@ -70,32 +70,32 @@ export class AngularDatepicker2
    *  Array custom definitions of suggestions
    * @see `Suggest`
    * */
-  @Input() suggest: Suggest[];
+  @Input() suggest!: Suggest[];
 
   /**
    * @description
    *  Array custom definitions of days. Subscribable
    * @see `Day`
    * */
-  @Input() days: Day[];
+  @Input() days!: Day[];
 
   /**
    * @description
    *  Date whould be render for default calendar .
    * */
-  @Input() shownDate: Date;
+  @Input() shownDate!: Date;
 
   /**
    * @description
    *  Alignment of days in a week. Default horizontal.
    * */
-  @Input() vertical: boolean;
+  @Input() vertical!: boolean;
 
   /**
    * @description
    * Present mode of calendar. Year, quarter, semester or qty months. Default 1.
    * */
-  @Input() viewMode: ViewMode | number;
+  @Input() viewMode!: ViewMode | number;
 
   /**
    * @description
@@ -114,28 +114,28 @@ export class AngularDatepicker2
    * Single, Multiple, Period
    * @See `SelectMode`
    */
-  @Input() selectMode: SelectMode;
+  @Input() selectMode!: SelectMode;
 
   /**
    * @description
    * Date
    * @See `SelectMode`
    */
-  @Input() nowDate: Date;
+  @Input() nowDate!: Date;
 
   /**
    * @description
    * Disable select dates. Before after date or array
    * @See `DisabledDates`
    */
-  @Input() disabledDates: DisabledDates;
+  @Input() disabledDates!: DisabledDates;
 
-  @ViewChildren("column") columns;
+  @ViewChildren("column") columns: any;
 
-  width: number | null;
+  width: number | null = null;
 
   @ContentChildren(DayDirective)
-  dayDirectivesQueryList: QueryList<DayDirective>;
+  dayDirectivesQueryList!: QueryList<DayDirective>;
   dayDirectives: DayDirective[] = [];
 
   constructor(
@@ -162,7 +162,7 @@ export class AngularDatepicker2
 
   getMonthDayDirectives(date: Date): DayDirective[] {
     return this.dayDirectives.filter(
-      (directive: DayDirective) => DateUtils.isSameMonth(directive.date, date)
+      (directive: DayDirective) => directive.date && DateUtils.isSameMonth(directive.date, date)
     );
   }
 
@@ -176,7 +176,7 @@ export class AngularDatepicker2
     this.columns
       ? this.columns
           .toArray()
-          .map((item) => (width += item.elementView.nativeElement.clientWidth))
+          .map((item: any) => (width += item.elementView.nativeElement.clientWidth))
       : null;
     this.calendarService.animationStep.value === "stop" &&
     this.calendarService.viewSelectorMode === "days"
@@ -244,13 +244,13 @@ export class AngularDatepicker2
     return months;
   }
 
-  isEqual(array, array1) {
+  isEqual(array: any[], array1: any[]): boolean {
     console.log(array, array1);
-    let a = array.filter((item) => array1.includes(item));
+    let a = array.filter((item: any) => array1.includes(item));
     return a.length === 0 && array.length === array1.length;
   }
 
-  private _viewMode(simpleChange) {
+  private _viewMode(simpleChange: any) {
     if (
       simpleChange.viewMode.currentValue !== simpleChange.viewMode.previousValue
     ) {
@@ -260,7 +260,7 @@ export class AngularDatepicker2
     }
   }
 
-  private _selectMode(simpleChange) {
+  private _selectMode(simpleChange: any) {
     if (
       simpleChange.selectMode.currentValue !==
       simpleChange.selectMode.previousValue
@@ -271,7 +271,7 @@ export class AngularDatepicker2
     }
   }
 
-  private _shownDate(simpleChange) {
+  private _shownDate(simpleChange: any) {
     if (
       simpleChange.shownDate.currentValue !==
       simpleChange.shownDate.previousValue
@@ -282,7 +282,7 @@ export class AngularDatepicker2
     }
   }
 
-  private _weekStart(simpleChange) {
+  private _weekStart(simpleChange: any) {
     if (
       simpleChange.weekStart.currentValue !==
       simpleChange.weekStart.previousValue
@@ -292,7 +292,7 @@ export class AngularDatepicker2
     }
   }
 
-  private _weekends(simpleChange) {
+  private _weekends(simpleChange: any) {
     if (
       simpleChange.weekends.currentValue !==
       simpleChange.weekends.previousValue
@@ -302,7 +302,7 @@ export class AngularDatepicker2
     }
   }
 
-  private _disabledDates(simpleChange) {
+  private _disabledDates(simpleChange: any) {
     if (
       simpleChange.disabledDates.currentValue !==
       simpleChange.disabledDates.previousValue
@@ -313,7 +313,7 @@ export class AngularDatepicker2
     }
   }
 
-  ngOnChanges(simpleChange) {
+  ngOnChanges(simpleChange:any) {
     simpleChange.viewMode && this._viewMode(simpleChange);
     simpleChange.selectMode && this._selectMode(simpleChange);
     simpleChange.shownDate && this._shownDate(simpleChange);

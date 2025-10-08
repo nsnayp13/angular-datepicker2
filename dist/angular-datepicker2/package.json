@@ -1,16 +1,21 @@
 {
-  "name": "angular-datepicker2",
+  "name": "@nsnayp/angular-datepicker2",
   "version": "3.5.0",
   "description": "Modern Angular datepicker component with standalone support. Compatible with Angular 16+. Select single, multiple dates or periods. Fully customizable with template support.",
+  "type": "module",
   "main": "bundles/angular-datepicker2.umd.js",
-  "module": "fesm2022/angular-datepicker2.mjs",
+  "module": "fesm2022/nsnayp-angular-datepicker2.mjs",
+  "es2022": "fesm2022/angular-datepicker2.mjs",
+  "esm2022": "esm2022/angular-datepicker2.mjs",
   "typings": "index.d.ts",
   "exports": {
     ".": {
-      "esm2022": "./esm2022/angular-datepicker2.mjs",
-      "esm": "./esm2022/angular-datepicker2.mjs",
+      "import": "./fesm2022/angular-datepicker2.mjs",
+      "require": "./bundles/angular-datepicker2.umd.js",
       "types": "./index.d.ts",
-      "default": "./fesm2022/angular-datepicker2.mjs"
+      "esm2022": "./esm2022/nsnayp-angular-datepicker2.mjs",
+      "esm": "./esm2022/nsnayp-angular-datepicker2.mjs",
+      "default": "./fesm2022/nsnayp-angular-datepicker2.mjs"
     },
     "./package.json": {
       "default": "./package.json"
@@ -23,7 +28,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nsnayp13/angular-calendar.git"
+    "url": "git+https://github.com/nsnayp13/angular-datepicker2.git"
+  },
+  "homepage": "https://github.com/nsnayp13/angular-datepicker2#readme",
+  "bugs": {
+    "url": "https://github.com/nsnayp13/angular-datepicker2/issues"
   },
   "keywords": [
     "angular",

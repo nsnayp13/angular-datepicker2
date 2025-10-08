@@ -26,11 +26,11 @@ registerLocaleData(localeEn, "en");
 })
 export class AppComponent implements OnInit {
   title = "angular-datepicker";
-  date: Date;
-  selectedDates: Date[];
+  date: Date = new Date();
+  selectedDates: Date[] = [];
 
-  lol: Calendar;
-  days: DayArray;
+  lol!: Calendar;
+  days: DayArray = [];
 
   dates: Date[] = [];
 
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
   showSuggest = true;
   showDisabledDates = true;
 
-  disabledDates: DisabledDates;
+  disabledDates: DisabledDates = {};
 
   suggest = [
     {
@@ -80,7 +80,7 @@ export class AppComponent implements OnInit {
     },
   ];
 
-  _stackOnDayClick = [];
+  _stackOnDayClick: any[] = [];
 
   _viewModeVal = [ViewMode.Quarter, 1, 3, 4, ViewMode.Semester, 6];
 
@@ -104,12 +104,12 @@ export class AppComponent implements OnInit {
 
   _shownDateVal = [new Date()];
 
-  _selectMode(e) {
+  _selectMode(e: any) {
     let val = e.target.value;
     this.selectMode = val;
   }
 
-  _viewMode(e) {
+  _viewMode(e: any) {
     let val = e.target.value;
     if (typeof val === "string" && val.length <= 2) {
       val = parseInt(val);
@@ -117,27 +117,27 @@ export class AppComponent implements OnInit {
     this.viewMode = val;
   }
 
-  _vertical(e) {
+  _vertical(e: any) {
     let val = e.target.value;
     this.vertical = val === "true" ? true : false;
   }
 
-  _weekStart(e) {
+  _weekStart(e: any) {
     let val = parseInt(e.target.value);
     this.weekStart = val;
   }
 
-  _weekends(e) {
+  _weekends(e: any) {
     let val = JSON.parse(e.target.value);
     this.weekends = val;
   }
 
-  _showSuggest(e) {
+  _showSuggest(e: any) {
     let val = e.target.value;
     this.showSuggest = val === "true" ? true : false;
   }
 
-  _showDisabledDates(e) {
+  _showDisabledDates(e: any) {
     let val = e.target.value;
     this.showDisabledDates = val === "true" ? true : false;
     if (!this.showDisabledDates) {
@@ -154,7 +154,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  onDayClick(day) {
+  onDayClick(day: any) {
     this._stackOnDayClick.push({ ...day });
   }
 

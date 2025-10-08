@@ -2,13 +2,16 @@
   "name": "@nsnayp/angular-datepicker2",
   "version": "3.5.0",
   "description": "Modern Angular datepicker component with standalone support. Compatible with Angular 16+. Select single, multiple dates or periods. Fully customizable with template support.",
+  "type": "module",
   "main": "bundles/angular-datepicker2.umd.js",
   "module": "fesm2022/angular-datepicker2.mjs",
+  "es2022": "fesm2022/angular-datepicker2.mjs",
+  "esm2022": "esm2022/angular-datepicker2.mjs",
   "typings": "index.d.ts",
   "exports": {
     ".": {
-      "esm2022": "./esm2022/angular-datepicker2.mjs",
-      "esm": "./esm2022/angular-datepicker2.mjs"
+      "import": "./fesm2022/angular-datepicker2.mjs",
+      "require": "./bundles/angular-datepicker2.umd.js"
     }
   },
   "sideEffects": false,

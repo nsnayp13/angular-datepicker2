@@ -6,8 +6,8 @@
         <div [ngStyle]="{flexDirection: ((vertical)?'column':'row')}" style="display: flex;">
             <div *ngFor="let d of weekDays" class="dayWeekTitle">{{ d | date: 'EEEEEE' }}</div>
         </div>
-        <app-week-view *ngFor="let weekStartDate of weeks" [date]="weekStartDate"
-            [dayDirectives]="getWeekDayDirectives(weekStartDate)" [firstMonthDate]="date"
+        <app-week-view *ngFor="let weekStartDate of weeks" [date]="weekStartDate!"
+            [dayDirectives]="getWeekDayDirectives(weekStartDate!)" [firstMonthDate]="date"
             [ngStyle]="{flexDirection: (vertical)?'column':'row'}">
         </app-week-view>
     </div>

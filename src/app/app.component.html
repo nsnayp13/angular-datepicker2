@@ -4,11 +4,11 @@
     <div class="wrap">
         <div style=" display:block; float:left;">
             <angular-datepicker2 [days]="days" [nowDate]="date" [(selectedDates)]="selectedDates"
-                [selectMode]="selectMode" [weekends]="weekends" [suggest]="showSuggest ? suggest : null" [weekStart]="weekStart" [viewMode]="viewMode"
-                [vertical]="vertical" (onDayClick)="onDayClick($event)" [disabledDates]="showDisabledDates ? disabledDates : null">
+                [selectMode]="selectMode" [weekends]="weekends" [suggest]="showSuggest ? suggest : []" [weekStart]="weekStart" [viewMode]="viewMode"
+                [vertical]="vertical" (onDayClick)="onDayClick($event)" [disabledDates]="showDisabledDates ? disabledDates : {}">
 
 
-                <div *ad2day="let date from days[0].date" [attr.title]="'Custom day'" class="customDay">
+                <div *ad2day="let date from days[0]?.date" [attr.title]="'Custom day'" class="customDay">
                     {{date.getDate()}}
                     <div class="points">
                         <div class="point"></div>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
 
-                <div *ad2day="let date from days[1].date" [attr.title]="'Custom day'" class="customDay">
+                <div *ad2day="let date from days[1]?.date" [attr.title]="'Custom day'" class="customDay">
                     {{date.getDate()}}
                     <div class="points">
                         <div class="point blue"></div>
@@ -24,7 +24,7 @@
                     </div>
                 </div>
 
-                <div *ad2day="let date from days[2].date" [attr.title]="'Custom day'" class="customDay">
+                <div *ad2day="let date from days[2]?.date" [attr.title]="'Custom day'" class="customDay">
                     {{date.getDate()}}
                     <div class="points">
                         <div class="point blue"></div>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                <div *ad2day="let date from days[3].date" [attr.title]="'Custom day'" class="customDay">
+                <div *ad2day="let date from days[3]?.date" [attr.title]="'Custom day'" class="customDay">
                     {{date.getDate()}}
                     <div class="points">
                         <div class="point blue"></div>
