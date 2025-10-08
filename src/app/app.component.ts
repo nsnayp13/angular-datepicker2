@@ -6,6 +6,7 @@ import localeEn from "@angular/common/locales/en";
 import {
   Calendar,
   Day,
+  DayArray,
   SelectMode,
   ViewMode,
   Suggest,
@@ -29,13 +30,17 @@ export class AppComponent implements OnInit {
   selectedDates: Date[];
 
   lol: Calendar;
-  days: Day[];
+  days: DayArray;
 
   dates: Date[] = [];
 
   vertical = false;
   selectMode: SelectMode = SelectMode.Period;
   viewMode: ViewMode | number = ViewMode.Quarter;
+  weekStart = 0;
+  weekends = [6];
+  showSuggest = true;
+  showDisabledDates = true;
 
   disabledDates: DisabledDates;
 
@@ -83,6 +88,20 @@ export class AppComponent implements OnInit {
 
   _verticalVal = [false, true];
 
+  _weekStartVal = [0, 1, 2, 3, 4, 5, 6];
+
+  _weekendsVal = [
+    { label: 'Saturday & Sunday', value: [0, 6] },
+    { label: 'Only Saturday', value: [6] },
+    { label: 'Only Sunday', value: [0] },
+    { label: 'Friday & Saturday', value: [5, 6] },
+    { label: 'No weekends', value: [] }
+  ];
+
+  _showSuggestVal = [true, false];
+
+  _showDisabledDatesVal = [true, false];
+
   _shownDateVal = [new Date()];
 
   _selectMode(e) {
@@ -103,8 +122,45 @@ export class AppComponent implements OnInit {
     this.vertical = val === "true" ? true : false;
   }
 
+  _weekStart(e) {
+    let val = parseInt(e.target.value);
+    this.weekStart = val;
+  }
+
+  _weekends(e) {
+    let val = JSON.parse(e.target.value);
+    this.weekends = val;
+  }
+
+  _showSuggest(e) {
+    let val = e.target.value;
+    this.showSuggest = val === "true" ? true : false;
+  }
+
+  _showDisabledDates(e) {
+    let val = e.target.value;
+    this.showDisabledDates = val === "true" ? true : false;
+    if (!this.showDisabledDates) {
+      this.disabledDates = {};
+    } else {
+      // Restore disabled dates
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const disabledBefore = new Date(today);
+      disabledBefore.setDate(disabledBefore.getDate() - 50);
+      this.disabledDates = {
+        before: disabledBefore,
+      };
+    }
+  }
+
   onDayClick(day) {
     this._stackOnDayClick.push({ ...day });
+  }
+
+  // Helper method for JSON operations in template
+  jsonStringify(obj: any): string {
+    return JSON.stringify(obj);
   }
 
   constructor() {}
