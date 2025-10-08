@@ -1,0 +1,267 @@
+﻿2025-10-08T17:28:13.8481240Z Current runner version: '2.328.0'
+2025-10-08T17:28:13.8505023Z ##[group]Runner Image Provisioner
+2025-10-08T17:28:13.8505792Z Hosted Compute Agent
+2025-10-08T17:28:13.8506328Z Version: 20250912.392
+2025-10-08T17:28:13.8507167Z Commit: d921fda672a98b64f4f82364647e2f10b2267d0b
+2025-10-08T17:28:13.8507943Z Build Date: 2025-09-12T15:23:14Z
+2025-10-08T17:28:13.8508565Z ##[endgroup]
+2025-10-08T17:28:13.8509097Z ##[group]Operating System
+2025-10-08T17:28:13.8509668Z Ubuntu
+2025-10-08T17:28:13.8510103Z 24.04.3
+2025-10-08T17:28:13.8510589Z LTS
+2025-10-08T17:28:13.8511014Z ##[endgroup]
+2025-10-08T17:28:13.8511491Z ##[group]Runner Image
+2025-10-08T17:28:13.8512008Z Image: ubuntu-24.04
+2025-10-08T17:28:13.8512572Z Version: 20250929.60.1
+2025-10-08T17:28:13.8513572Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250929.60/images/ubuntu/Ubuntu2404-Readme.md
+2025-10-08T17:28:13.8515142Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250929.60
+2025-10-08T17:28:13.8516109Z ##[endgroup]
+2025-10-08T17:28:13.8518894Z ##[group]GITHUB_TOKEN Permissions
+2025-10-08T17:28:13.8520804Z Actions: write
+2025-10-08T17:28:13.8521340Z Attestations: write
+2025-10-08T17:28:13.8521915Z Checks: write
+2025-10-08T17:28:13.8522402Z Contents: write
+2025-10-08T17:28:13.8522894Z Deployments: write
+2025-10-08T17:28:13.8523455Z Discussions: write
+2025-10-08T17:28:13.8523943Z Issues: write
+2025-10-08T17:28:13.8524375Z Metadata: read
+2025-10-08T17:28:13.8524891Z Models: read
+2025-10-08T17:28:13.8525337Z Packages: write
+2025-10-08T17:28:13.8525853Z Pages: write
+2025-10-08T17:28:13.8526326Z PullRequests: write
+2025-10-08T17:28:13.8527043Z RepositoryProjects: write
+2025-10-08T17:28:13.8527578Z SecurityEvents: write
+2025-10-08T17:28:13.8528249Z Statuses: write
+2025-10-08T17:28:13.8528761Z ##[endgroup]
+2025-10-08T17:28:13.8530736Z Secret source: Actions
+2025-10-08T17:28:13.8531742Z Prepare workflow directory
+2025-10-08T17:28:13.8923696Z Prepare all required actions
+2025-10-08T17:28:13.8969455Z Getting action download info
+2025-10-08T17:28:14.2923060Z Download action repository 'actions/checkout@v4' (SHA:08eba0b27e820071cde6df949e0beb9ba4906955)
+2025-10-08T17:28:14.4876028Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2025-10-08T17:28:14.6996387Z Complete job name: build
+2025-10-08T17:28:14.7675631Z ##[group]Run actions/checkout@v4
+2025-10-08T17:28:14.7676438Z with:
+2025-10-08T17:28:14.7676978Z   fetch-depth: 0
+2025-10-08T17:28:14.7677419Z   repository: nsnayp13/angular-datepicker2
+2025-10-08T17:28:14.7678112Z   token: ***
+2025-10-08T17:28:14.7678482Z   ssh-strict: true
+2025-10-08T17:28:14.7678866Z   ssh-user: git
+2025-10-08T17:28:14.7679262Z   persist-credentials: true
+2025-10-08T17:28:14.7679728Z   clean: true
+2025-10-08T17:28:14.7680117Z   sparse-checkout-cone-mode: true
+2025-10-08T17:28:14.7680575Z   fetch-tags: false
+2025-10-08T17:28:14.7680967Z   show-progress: true
+2025-10-08T17:28:14.7681365Z   lfs: false
+2025-10-08T17:28:14.7681726Z   submodules: false
+2025-10-08T17:28:14.7682145Z   set-safe-directory: true
+2025-10-08T17:28:14.7682816Z ##[endgroup]
+2025-10-08T17:28:14.8740494Z Syncing repository: nsnayp13/angular-datepicker2
+2025-10-08T17:28:14.8742218Z ##[group]Getting Git version info
+2025-10-08T17:28:14.8743086Z Working directory is '/home/runner/work/angular-datepicker2/angular-datepicker2'
+2025-10-08T17:28:14.8744144Z [command]/usr/bin/git version
+2025-10-08T17:28:14.8821843Z git version 2.51.0
+2025-10-08T17:28:14.8847529Z ##[endgroup]
+2025-10-08T17:28:14.8863115Z Temporarily overriding HOME='/home/runner/work/_temp/c996f51b-50e0-4d75-b229-6625e99ddb50' before making global git config changes
+2025-10-08T17:28:14.8865504Z Adding repository directory to the temporary git global config as a safe directory
+2025-10-08T17:28:14.8870214Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/angular-datepicker2/angular-datepicker2
+2025-10-08T17:28:14.8907177Z Deleting the contents of '/home/runner/work/angular-datepicker2/angular-datepicker2'
+2025-10-08T17:28:14.8910575Z ##[group]Initializing the repository
+2025-10-08T17:28:14.8914357Z [command]/usr/bin/git init /home/runner/work/angular-datepicker2/angular-datepicker2
+2025-10-08T17:28:14.9030180Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-10-08T17:28:14.9031588Z hint: is subject to change. To configure the initial branch name to use in all
+2025-10-08T17:28:14.9032531Z hint: of your new repositories, which will suppress this warning, call:
+2025-10-08T17:28:14.9033788Z hint:
+2025-10-08T17:28:14.9034533Z hint: 	git config --global init.defaultBranch <name>
+2025-10-08T17:28:14.9035197Z hint:
+2025-10-08T17:28:14.9036171Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-10-08T17:28:14.9038064Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-10-08T17:28:14.9039397Z hint:
+2025-10-08T17:28:14.9040112Z hint: 	git branch -m <name>
+2025-10-08T17:28:14.9040921Z hint:
+2025-10-08T17:28:14.9041997Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2025-10-08T17:28:14.9043929Z Initialized empty Git repository in /home/runner/work/angular-datepicker2/angular-datepicker2/.git/
+2025-10-08T17:28:14.9049049Z [command]/usr/bin/git remote add origin https://github.com/nsnayp13/angular-datepicker2
+2025-10-08T17:28:14.9129429Z ##[endgroup]
+2025-10-08T17:28:14.9130603Z ##[group]Disabling automatic garbage collection
+2025-10-08T17:28:14.9134331Z [command]/usr/bin/git config --local gc.auto 0
+2025-10-08T17:28:14.9165795Z ##[endgroup]
+2025-10-08T17:28:14.9167223Z ##[group]Setting up auth
+2025-10-08T17:28:14.9173304Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-10-08T17:28:14.9205926Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-10-08T17:28:14.9542418Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-10-08T17:28:14.9573097Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-10-08T17:28:14.9792082Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-10-08T17:28:14.9824949Z ##[endgroup]
+2025-10-08T17:28:14.9825758Z ##[group]Fetching the repository
+2025-10-08T17:28:14.9834505Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +2930591248c174f329536a7d097974151c8d1da6:refs/remotes/pull/71/merge
+2025-10-08T17:28:16.6956155Z From https://github.com/nsnayp13/angular-datepicker2
+2025-10-08T17:28:16.6958941Z  * [new branch]      add-license-1                            -> origin/add-license-1
+2025-10-08T17:28:16.6966107Z  * [new branch]      angular19                                -> origin/angular19
+2025-10-08T17:28:16.6968358Z  * [new branch]      cursor/add-h1-heading-to-demons-page-a1f4 -> origin/cursor/add-h1-heading-to-demons-page-a1f4
+2025-10-08T17:28:16.6971120Z  * [new branch]      cursor/bc-a290504a-effc-48cd-b82b-bc97553ee2e7-69b4 -> origin/cursor/bc-a290504a-effc-48cd-b82b-bc97553ee2e7-69b4
+2025-10-08T17:28:16.6973904Z  * [new branch]      cursor/check-npm-version-publishing-logic-36f4 -> origin/cursor/check-npm-version-publishing-logic-36f4
+2025-10-08T17:28:16.6977323Z  * [new branch]      cursor/configure-project-for-automatic-npm-publishing-5ced -> origin/cursor/configure-project-for-automatic-npm-publishing-5ced
+2025-10-08T17:28:16.6980457Z  * [new branch]      cursor/debug-release-and-npm-publishing-a48d -> origin/cursor/debug-release-and-npm-publishing-a48d
+2025-10-08T17:28:16.6983731Z  * [new branch]      cursor/ensure-calendar-uses-only-date-objects-fd8a -> origin/cursor/ensure-calendar-uses-only-date-objects-fd8a
+2025-10-08T17:28:16.6987757Z  * [new branch]      cursor/fix-npm-publish-and-exclude-tests-23ab -> origin/cursor/fix-npm-publish-and-exclude-tests-23ab
+2025-10-08T17:28:16.6991077Z  * [new branch]      cursor/fix-npm-publish-error-for-angular-16-4f18 -> origin/cursor/fix-npm-publish-error-for-angular-16-4f18
+2025-10-08T17:28:16.6994790Z  * [new branch]      cursor/fix-npm-publishing-after-angular-upgrade-6984 -> origin/cursor/fix-npm-publishing-after-angular-upgrade-6984
+2025-10-08T17:28:16.6998634Z  * [new branch]      cursor/generate-comprehensive-api-documentation-f77b -> origin/cursor/generate-comprehensive-api-documentation-f77b
+2025-10-08T17:28:16.7002405Z  * [new branch]      cursor/manage-project-versioning-and-github-actions-7061 -> origin/cursor/manage-project-versioning-and-github-actions-7061
+2025-10-08T17:28:16.7006198Z  * [new branch]      cursor/migrate-source-to-angular-19-standalone-19ad -> origin/cursor/migrate-source-to-angular-19-standalone-19ad
+2025-10-08T17:28:16.7009963Z  * [new branch]      cursor/migrate-source-to-angular-19-standalone-c8fa -> origin/cursor/migrate-source-to-angular-19-standalone-c8fa
+2025-10-08T17:28:16.7013731Z  * [new branch]      cursor/remove-karma-and-implement-build-verification-6b68 -> origin/cursor/remove-karma-and-implement-build-verification-6b68
+2025-10-08T17:28:16.7017761Z  * [new branch]      cursor/update-calendar-state-on-parameter-change-a690 -> origin/cursor/update-calendar-state-on-parameter-change-a690
+2025-10-08T17:28:16.7021246Z  * [new branch]      cursor/update-github-pages-demo-to-angular-19-291c -> origin/cursor/update-github-pages-demo-to-angular-19-291c
+2025-10-08T17:28:16.7024519Z  * [new branch]      cursor/update-package-publishing-and-readme-25cb -> origin/cursor/update-package-publishing-and-readme-25cb
+2025-10-08T17:28:16.7028133Z  * [new branch]      cursor/update-project-to-angular-16-esm-standards-9fc7 -> origin/cursor/update-project-to-angular-16-esm-standards-9fc7
+2025-10-08T17:28:16.7031321Z  * [new branch]      dependabot/npm_and_yarn/angular/core-11.0.5 -> origin/dependabot/npm_and_yarn/angular/core-11.0.5
+2025-10-08T17:28:16.7034097Z  * [new branch]      dependabot/npm_and_yarn/decode-uri-component-0.2.2 -> origin/dependabot/npm_and_yarn/decode-uri-component-0.2.2
+2025-10-08T17:28:16.7037149Z  * [new branch]      dependabot/npm_and_yarn/json5-1.0.2      -> origin/dependabot/npm_and_yarn/json5-1.0.2
+2025-10-08T17:28:16.7039430Z  * [new branch]      dependabot/npm_and_yarn/jszip-3.10.1     -> origin/dependabot/npm_and_yarn/jszip-3.10.1
+2025-10-08T17:28:16.7043278Z  * [new branch]      dependabot/npm_and_yarn/minimist-and-mkdirp-and-commitizen-and-karma-and-protractor-1.2.7 -> origin/dependabot/npm_and_yarn/minimist-and-mkdirp-and-commitizen-and-karma-and-protractor-1.2.7
+2025-10-08T17:28:16.7046597Z  * [new branch]      dev                                      -> origin/dev
+2025-10-08T17:28:16.7048213Z  * [new branch]      gh-pages                                 -> origin/gh-pages
+2025-10-08T17:28:16.7049667Z  * [new branch]      master                                   -> origin/master
+2025-10-08T17:28:16.7051214Z  * [new branch]      styles                                   -> origin/styles
+2025-10-08T17:28:16.7052869Z  * [new branch]      v3                                       -> origin/v3
+2025-10-08T17:28:16.7054210Z  * [new tag]         v1.0.0                                   -> v1.0.0
+2025-10-08T17:28:16.7055408Z  * [new tag]         v2.2                                     -> v2.2
+2025-10-08T17:28:16.7056546Z  * [new tag]         v3                                       -> v3
+2025-10-08T17:28:16.7057910Z  * [new tag]         v3.4                                     -> v3.4
+2025-10-08T17:28:16.7059089Z  * [new tag]         v3.4.3                                   -> v3.4.3
+2025-10-08T17:28:16.7060336Z  * [new tag]         v3.5.0                                   -> v3.5.0
+2025-10-08T17:28:16.7061512Z  * [new tag]         v3.6.0                                   -> v3.6.0
+2025-10-08T17:28:16.7062701Z  * [new tag]         v3.7.0                                   -> v3.7.0
+2025-10-08T17:28:16.7064179Z  * [new tag]         v3.8.0                                   -> v3.8.0
+2025-10-08T17:28:16.7065361Z  * [new tag]         v3.9.0                                   -> v3.9.0
+2025-10-08T17:28:16.7066659Z  * [new ref]         2930591248c174f329536a7d097974151c8d1da6 -> pull/71/merge
+2025-10-08T17:28:16.7078851Z ##[endgroup]
+2025-10-08T17:28:16.7080245Z ##[group]Determining the checkout info
+2025-10-08T17:28:16.7081712Z ##[endgroup]
+2025-10-08T17:28:16.7086392Z [command]/usr/bin/git sparse-checkout disable
+2025-10-08T17:28:16.7166328Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2025-10-08T17:28:16.7194537Z ##[group]Checking out the ref
+2025-10-08T17:28:16.7198321Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/71/merge
+2025-10-08T17:28:16.7295256Z Note: switching to 'refs/remotes/pull/71/merge'.
+2025-10-08T17:28:16.7295853Z 
+2025-10-08T17:28:16.7296287Z You are in 'detached HEAD' state. You can look around, make experimental
+2025-10-08T17:28:16.7297582Z changes and commit them, and you can discard any commits you make in this
+2025-10-08T17:28:16.7298633Z state without impacting any branches by switching back to a branch.
+2025-10-08T17:28:16.7299757Z 
+2025-10-08T17:28:16.7300523Z If you want to create a new branch to retain commits you create, you may
+2025-10-08T17:28:16.7302436Z do so (now or later) by using -c with the switch command. Example:
+2025-10-08T17:28:16.7303591Z 
+2025-10-08T17:28:16.7303978Z   git switch -c <new-branch-name>
+2025-10-08T17:28:16.7304706Z 
+2025-10-08T17:28:16.7305076Z Or undo this operation with:
+2025-10-08T17:28:16.7305725Z 
+2025-10-08T17:28:16.7306039Z   git switch -
+2025-10-08T17:28:16.7306528Z 
+2025-10-08T17:28:16.7307616Z Turn off this advice by setting config variable advice.detachedHead to false
+2025-10-08T17:28:16.7309082Z 
+2025-10-08T17:28:16.7310696Z HEAD is now at 2930591 Merge 721547f42cf89a4902d395f3e19decda0ffc2848 into 63058c11d9b63257d6f11afbd5cd9b1b9d7cbaaf
+2025-10-08T17:28:16.7314561Z ##[endgroup]
+2025-10-08T17:28:16.7340983Z [command]/usr/bin/git log -1 --format=%H
+2025-10-08T17:28:16.7362722Z 2930591248c174f329536a7d097974151c8d1da6
+2025-10-08T17:28:16.7638236Z ##[group]Run actions/setup-node@v4
+2025-10-08T17:28:16.7639159Z with:
+2025-10-08T17:28:16.7639732Z   node-version: 20
+2025-10-08T17:28:16.7640420Z   registry-url: https://registry.npmjs.org/
+2025-10-08T17:28:16.7641309Z   cache: npm
+2025-10-08T17:28:16.7641827Z   always-auth: false
+2025-10-08T17:28:16.7642444Z   check-latest: false
+2025-10-08T17:28:16.7643314Z   token: ***
+2025-10-08T17:28:16.7643835Z ##[endgroup]
+2025-10-08T17:28:16.9787471Z Found in cache @ /opt/hostedtoolcache/node/20.19.5/x64
+2025-10-08T17:28:16.9791664Z ##[group]Environment details
+2025-10-08T17:28:19.4727552Z node: v20.19.5
+2025-10-08T17:28:19.4728355Z npm: 10.8.2
+2025-10-08T17:28:19.4728701Z yarn: 1.22.22
+2025-10-08T17:28:19.4729677Z ##[endgroup]
+2025-10-08T17:28:19.4765029Z [command]/opt/hostedtoolcache/node/20.19.5/x64/bin/npm config get cache
+2025-10-08T17:28:19.7687429Z /home/runner/.npm
+2025-10-08T17:28:20.0670460Z npm cache is not found
+2025-10-08T17:28:20.0800786Z ##[group]Run npm ci
+2025-10-08T17:28:20.0801071Z [36;1mnpm ci[0m
+2025-10-08T17:28:20.0907938Z shell: /usr/bin/bash -e {0}
+2025-10-08T17:28:20.0908199Z env:
+2025-10-08T17:28:20.0908438Z   NPM_CONFIG_USERCONFIG: /home/runner/work/_temp/.npmrc
+2025-10-08T17:28:20.0908775Z   NODE_AUTH_TOKEN: XXXXX-XXXXX-XXXXX-XXXXX
+2025-10-08T17:28:20.0909041Z ##[endgroup]
+2025-10-08T17:28:27.3007613Z npm warn deprecated w3c-hr-time@1.0.2: Use your platform's native performance.now() and performance.timeOrigin.
+2025-10-08T17:28:27.8494227Z npm warn deprecated sntp@0.2.4: This module moved to @hapi/sntp. Please make sure to switch over as this distribution is no longer supported and may contain bugs and critical security issues.
+2025-10-08T17:28:27.9421601Z npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+2025-10-08T17:28:28.0578591Z npm warn deprecated read-pkg-up@11.0.0: Renamed to read-package-up
+2025-10-08T17:28:28.1029502Z npm warn deprecated read-package-json@6.0.4: This package is no longer supported. Please use @npmcli/package-json instead.
+2025-10-08T17:28:28.1698732Z npm warn deprecated request@2.42.0: request has been deprecated, see https://github.com/request/request/issues/3142
+2025-10-08T17:28:28.3622714Z npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+2025-10-08T17:28:28.5065795Z npm warn deprecated node-uuid@1.4.8: Use uuid module instead
+2025-10-08T17:28:29.0174927Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2025-10-08T17:28:29.2440121Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2025-10-08T17:28:29.2754257Z npm warn deprecated hoek@0.9.1: This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).
+2025-10-08T17:28:29.3928630Z npm warn deprecated gauge@4.0.4: This package is no longer supported.
+2025-10-08T17:28:29.4467625Z npm warn deprecated hawk@1.1.1: This module moved to @hapi/hawk. Please make sure to switch over as this distribution is no longer supported and may contain bugs and critical security issues.
+2025-10-08T17:28:29.7194691Z npm warn deprecated domexception@2.0.1: Use your platform's native DOMException instead
+2025-10-08T17:28:29.8592417Z npm warn deprecated cryptiles@0.2.2: This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).
+2025-10-08T17:28:30.1688159Z npm warn deprecated boom@0.4.2: This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).
+2025-10-08T17:28:30.2734984Z npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+2025-10-08T17:28:30.3403064Z npm warn deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+2025-10-08T17:28:30.6152726Z npm warn deprecated @wessberg/ts-evaluator@0.0.27: this package has been renamed to ts-evaluator. Please install ts-evaluator instead
+2025-10-08T17:28:30.8960440Z npm warn deprecated @npmcli/move-file@2.0.1: This functionality has been moved to @npmcli/fs
+2025-10-08T17:28:31.4965287Z npm warn deprecated @babel/plugin-proposal-unicode-property-regex@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-unicode-property-regex instead.
+2025-10-08T17:28:31.5263383Z npm warn deprecated @babel/plugin-proposal-async-generator-functions@7.20.7: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-async-generator-functions instead.
+2025-10-08T17:28:33.0471842Z npm warn deprecated glob@8.1.0: Glob versions prior to v9 are no longer supported
+2025-10-08T17:28:37.2965980Z 
+2025-10-08T17:28:37.2966583Z added 1436 packages in 17s
+2025-10-08T17:28:37.3328044Z ##[group]Run npm run build:lib
+2025-10-08T17:28:37.3328330Z [36;1mnpm run build:lib[0m
+2025-10-08T17:28:37.3362355Z shell: /usr/bin/bash -e {0}
+2025-10-08T17:28:37.3362581Z env:
+2025-10-08T17:28:37.3362801Z   NPM_CONFIG_USERCONFIG: /home/runner/work/_temp/.npmrc
+2025-10-08T17:28:37.3363117Z   NODE_AUTH_TOKEN: XXXXX-XXXXX-XXXXX-XXXXX
+2025-10-08T17:28:37.3363537Z ##[endgroup]
+2025-10-08T17:28:37.4507570Z 
+2025-10-08T17:28:37.4508006Z > angular-datepicker@0.0.0 prebuild:lib
+2025-10-08T17:28:37.4508637Z > node scripts/prep-lib-docs.cjs
+2025-10-08T17:28:37.4508944Z 
+2025-10-08T17:28:37.4762213Z Copied README.md and LICENSE into library directory
+2025-10-08T17:28:37.4798316Z 
+2025-10-08T17:28:37.4798687Z > angular-datepicker@0.0.0 build:lib
+2025-10-08T17:28:37.4799252Z > ng build angular-datepicker2
+2025-10-08T17:28:37.4799523Z 
+2025-10-08T17:28:38.3449021Z Building Angular Package
+2025-10-08T17:28:38.8139979Z 
+2025-10-08T17:28:38.8141084Z ------------------------------------------------------------------------------
+2025-10-08T17:28:38.8141998Z Building entry point '@nsnayp/angular-datepicker2'
+2025-10-08T17:28:38.8142810Z ------------------------------------------------------------------------------
+2025-10-08T17:28:38.8163179Z - Compiling with Angular sources in Ivy partial compilation mode.
+2025-10-08T17:28:42.4934364Z ✖ Compiling with Angular sources in Ivy partial compilation mode.
+2025-10-08T17:28:42.5118181Z ##[error]projects/angular-datepicker2/src/lib/calendar/angular-datepicker2.component.ts:285:22 - error TS7006: Parameter 'simpleChange' implicitly has an 'any' type.
+2025-10-08T17:28:42.5124897Z 
+2025-10-08T17:28:42.5125158Z 285   private _weekStart(simpleChange) {
+2025-10-08T17:28:42.5125545Z                          ~~~~~~~~~~~~
+2025-10-08T17:28:42.5127033Z ##[error]projects/angular-datepicker2/src/lib/calendar/angular-datepicker2.component.ts:295:21 - error TS7006: Parameter 'simpleChange' implicitly has an 'any' type.
+2025-10-08T17:28:42.5128107Z 
+2025-10-08T17:28:42.5128299Z 295   private _weekends(simpleChange) {
+2025-10-08T17:28:42.5128605Z                         ~~~~~~~~~~~~
+2025-10-08T17:28:42.5129681Z ##[error]projects/angular-datepicker2/src/lib/calendar/angular-datepicker2.component.ts:305:26 - error TS7006: Parameter 'simpleChange' implicitly has an 'any' type.
+2025-10-08T17:28:42.5130650Z 
+2025-10-08T17:28:42.5130829Z 305   private _disabledDates(simpleChange) {
+2025-10-08T17:28:42.5131146Z                              ~~~~~~~~~~~~
+2025-10-08T17:28:42.5131303Z 
+2025-10-08T17:28:42.7902581Z ##[error]Process completed with exit code 1.
+2025-10-08T17:28:42.8003686Z Post job cleanup.
+2025-10-08T17:28:42.8930765Z [command]/usr/bin/git version
+2025-10-08T17:28:42.8965699Z git version 2.51.0
+2025-10-08T17:28:42.9007010Z Temporarily overriding HOME='/home/runner/work/_temp/8aab9880-2dac-4e71-a57d-1cdab6ebc9c6' before making global git config changes
+2025-10-08T17:28:42.9008525Z Adding repository directory to the temporary git global config as a safe directory
+2025-10-08T17:28:42.9020382Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/angular-datepicker2/angular-datepicker2
+2025-10-08T17:28:42.9052813Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-10-08T17:28:42.9085084Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-10-08T17:28:42.9310539Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-10-08T17:28:42.9331012Z http.https://github.com/.extraheader
+2025-10-08T17:28:42.9343175Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-10-08T17:28:42.9373955Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-10-08T17:28:42.9694922Z Cleaning up orphan processes
