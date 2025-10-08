@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:lib": "ng build angular-datepicker2",
+    "prebuild:lib": "node scripts/prep-lib-docs.cjs",
     "build:gh-pages": "ng build --configuration production --base-href https://nsnayp13.github.io/angular-datepicker2/",
     "lint": "ng lint",
     "e2e": "ng e2e",
