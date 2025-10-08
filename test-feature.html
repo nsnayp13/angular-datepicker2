@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test showPrevNextDaysInOneMonth Feature</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        .calendar-container { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Test showPrevNextDaysInOneMonth Feature</h1>
+    
+    <div class="test-section">
+        <h2>Feature Requirements Verification</h2>
+        <ul>
+            <li>✅ Added showPrevNextDaysInOneMonth input property to main calendar component</li>
+            <li>✅ Updated Day interface to include isPrevNextMonth property for styling</li>
+            <li>✅ Modified month service to generate prev/next month days when in single month mode</li>
+            <li>✅ Updated day view template to show prev/next month days with opacity 0.85</li>
+            <li>✅ Added CSS styles for prev/next month days with opacity 0.85</li>
+            <li>✅ Added showPrevNextDaysInOneMonth setting to GitHub pages example</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>How to Test</h2>
+        <ol>
+            <li>Open the development server at <a href="http://localhost:4200" target="_blank">http://localhost:4200</a></li>
+            <li>Set viewMode to "1" (single month mode)</li>
+            <li>Find the "showPrevNextDaysInOneMonth" setting in the props table</li>
+            <li>Toggle it to "Show prev/next month days"</li>
+            <li>Observe that the calendar now fills empty cells with previous/next month days</li>
+            <li>Verify that these days have reduced opacity (0.85)</li>
+            <li>Switch to multi-month mode (viewMode > 1) and verify the feature doesn't apply</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>Expected Behavior</h2>
+        <ul>
+            <li><strong>Single Month Mode (viewMode = 1) with feature enabled:</strong> Calendar shows prev/next month days to fill the grid, with opacity 0.85</li>
+            <li><strong>Single Month Mode (viewMode = 1) with feature disabled:</strong> Calendar shows only current month days (original behavior)</li>
+            <li><strong>Multi-Month Mode (viewMode > 1):</strong> Feature has no effect, shows original behavior regardless of setting</li>
+        </ul>
+    </div>
+</body>
+</html>

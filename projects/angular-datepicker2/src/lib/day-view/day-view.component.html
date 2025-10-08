@@ -1,9 +1,10 @@
 <div class="dayWrap">
-    <div class="styledDay" *ngIf="thisMonth" (click)="onClick()" [ngClass]="{
+    <div class="styledDay" *ngIf="thisMonth || isPrevNextMonth" (click)="onClick()" [ngClass]="{
         isDisabled : dayService.day.isDisabled,
         isSelected: dayService.day.isSelected,
         isWeekEnd: dayService.day.isWeekEnd,
         isInPeriod: dayService.day.isInPeriod,
+        isPrevNextMonth: isPrevNextMonth,
         period: getSelectMode()==='period',
         end: isStartOrEndDatePeriod()==='end',
         start: isStartOrEndDatePeriod()==='start'

@@ -6,6 +6,7 @@ export interface Day {
   isSelected: boolean;
   isHovered: boolean;
   isInPeriod?: boolean;
+  isPrevNextMonth?: boolean;
   date?: Date;
 }
 
