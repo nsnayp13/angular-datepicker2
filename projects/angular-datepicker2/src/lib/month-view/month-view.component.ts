@@ -25,17 +25,17 @@ import { DateUtils } from "../_utils/date.utils";
   providers: [MonthService],
 })
 export class MonthViewComponent implements OnInit, OnDestroy {
-  @Input() date: Date;
-  @Input() updateDate;
-  @Input() vertical: boolean;
-  @Input() dayDirectives: DayDirective[];
+  @Input() date!: Date;
+  @Input() updateDate: any;
+  @Input() vertical!: boolean;
+  @Input() dayDirectives!: DayDirective[];
 
-  @Output() @HostBinding("style") elWidth: number;
-  @ViewChild("wrap", { static: true }) elementView: ElementRef;
+  @Output() @HostBinding("style") elWidth!: number;
+  @ViewChild("wrap", { static: true }) elementView!: ElementRef;
 
-  weeks: Date[] | null[];
-  animationStep;
-  weekDays: Date[];
+  weeks: (Date | null)[] = [];
+  animationStep: any;
+  weekDays: Date[] = [];
   sub: Subscription = new Subscription();
 
   constructor(
@@ -73,7 +73,7 @@ export class MonthViewComponent implements OnInit, OnDestroy {
     let directives = this.dayDirectives.filter(
       (directive) => {
         // Use timezone-safe comparison: date >= start AND date < end
-        return (
+        return directive.date && (
           DateUtils.compareDays(directive.date, weekStartDate) >= 0 &&
           DateUtils.compareDays(directive.date, weekEndDate) < 0
         );

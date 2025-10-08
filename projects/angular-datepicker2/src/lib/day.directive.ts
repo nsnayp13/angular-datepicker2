@@ -14,7 +14,7 @@ export class DayDirective implements OnInit {
     private container: ViewContainerRef
   ) {}
 
-  @Input("ad2dayFrom") date: Date;
+  @Input("ad2dayFrom") date: Date | undefined;
 
   @Input() set day(date: Date) {
     this.context = {
@@ -23,9 +23,11 @@ export class DayDirective implements OnInit {
   }
 
   ngOnInit() {
-    this.context = {
-      $implicit: this.date,
-      date: this.date,
-    };
+    if (this.date) {
+      this.context = {
+        $implicit: this.date,
+        date: this.date,
+      };
+    }
   }
 }

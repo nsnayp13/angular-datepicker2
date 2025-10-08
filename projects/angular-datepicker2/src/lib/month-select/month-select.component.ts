@@ -13,10 +13,10 @@ import { DateUtils } from "../_utils/date.utils";
 export class MonthSelectComponent implements OnInit {
   constructor(private calendarService: CalendarService) { }
 
-  @Input() date: Date;
-  @ViewChild("wrap", { static: true }) elementView: ElementRef;
-  months = [];
-  animationStep;
+  @Input() date!: Date;
+  @ViewChild("wrap", { static: true }) elementView!: ElementRef;
+  months: Date[] = [];
+  animationStep: any;
 
   ngOnInit() {
     for (let i = 0; i < 12; i++) {

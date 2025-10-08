@@ -8,19 +8,19 @@ import { DateUtils } from "../_utils/date.utils";
 })
 export class CalendarService {
   //calendar: BehaviorSubject<any[]> = new BehaviorSubject([]);
-  calendar: Date[];
-  shownDate: Date;
-  viewMode;
-  viewSelectorMode;
-  selectMode;
+  calendar: Date[] = [];
+  shownDate!: Date;
+  viewMode: ViewMode | number = ViewMode.Month;
+  viewSelectorMode: string = "days";
+  selectMode: any;
 
-  selectedDates: BehaviorSubject<Date[]> = new BehaviorSubject([]);
-  disabledDates: BehaviorSubject<DisabledDates> = new BehaviorSubject(null);
-  days: BehaviorSubject<Day[]> = new BehaviorSubject([]);
+  selectedDates: BehaviorSubject<Date[]> = new BehaviorSubject<Date[]>([]);
+  disabledDates: BehaviorSubject<DisabledDates> = new BehaviorSubject<DisabledDates>(null as any);
+  days: BehaviorSubject<Day[]> = new BehaviorSubject<Day[]>([]);
 
-  countMonths: number;
-  weekStart: number;
-  weekends: number[];
+  countMonths: number = 1;
+  weekStart: number = 0;
+  weekends: number[] = [0, 6];
 
   animationStep = new BehaviorSubject("stop");
 
@@ -30,7 +30,7 @@ export class CalendarService {
   clickDayKey: BehaviorSubject<{
     day: Day;
     key: string;
-  } | null> = new BehaviorSubject(null);
+  } | null> = new BehaviorSubject<{day: Day; key: string} | null>(null);
 
   updateDate = new BehaviorSubject(new Date());
 
@@ -77,8 +77,8 @@ export class CalendarService {
     let viewMode = this.viewMode;
     let lastDate = this.shownDate
       ? new Date(this.shownDate)
-      : this.selectedDates.value
-      ? new Date(this.selectedDates[this.selectedDates.value.length - 1])
+      : this.selectedDates.value.length > 0
+      ? new Date(this.selectedDates.value[this.selectedDates.value.length - 1])
       : new Date();
 
     lastDate = date ? new Date(date) : lastDate;

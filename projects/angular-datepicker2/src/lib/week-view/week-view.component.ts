@@ -14,19 +14,20 @@ import { DateUtils } from "../_utils/date.utils";
   providers: [WeekService],
 })
 export class WeekViewComponent implements OnInit {
-  @Input() date: Date;
-  @Input() firstMonthDate: Date;
-  @Input() dayDirectives: DayDirective[];
-  dates: Date[] | null[];
+  @Input() date!: Date;
+  @Input() firstMonthDate!: Date;
+  @Input() dayDirectives!: DayDirective[];
+  dates: (Date | null)[] = [];
   constructor(private weekService: WeekService) {}
 
   ngOnInit() {
     this.dates = this.weekService.getWeek(this.date);
   }
 
-  getDayDirective(date: Date): DayDirective {
+  getDayDirective(date: Date | null): DayDirective | undefined {
+    if (!date) return undefined;
     let day = this.dayDirectives.find(
-      (directive: DayDirective) => DateUtils.isSameDay(directive.date, date)
+      (directive: DayDirective) => directive.date && DateUtils.isSameDay(directive.date, date)
     );
     return day;
   }

@@ -1,5 +1,5 @@
 <div *ngFor="let date of dates" class="f1">
-    <app-day-view [dayDirective]="getDayDirective(date)" [date]="date"
+    <app-day-view *ngIf="date" [dayDirective]="getDayDirective(date)!" [date]="date"
         [thisMonth]="date.getMonth()===firstMonthDate.getMonth()&&date.getFullYear()===firstMonthDate.getFullYear()">
     </app-day-view>
 </div>

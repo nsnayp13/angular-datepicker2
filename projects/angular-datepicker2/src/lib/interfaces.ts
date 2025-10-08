@@ -53,6 +53,7 @@ export enum SelectMode {
 }
 
 export enum ViewMode {
+  Month = "month",
   Year = "year",
   Quarter = "quarter",
   Semester = "semester",

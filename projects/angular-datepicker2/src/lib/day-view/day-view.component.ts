@@ -24,13 +24,13 @@ import { DateUtils } from "../_utils/date.utils";
   providers: [DayService],
 })
 export class DayViewComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
-  @Input() date: Date;
-  @Input() thisMonth: boolean;
-  @Input() dayDirective: DayDirective;
+  @Input() date!: Date;
+  @Input() thisMonth!: boolean;
+  @Input() dayDirective!: DayDirective;
   @ViewChild("tpl", { static: false, read: ViewContainerRef })
-  template: ViewContainerRef;
-  sub: Subscription;
-  sub1: Subscription;
+  template!: ViewContainerRef;
+  sub!: Subscription;
+  sub1!: Subscription;
 
   constructor(
     public dayService: DayService,
@@ -78,11 +78,11 @@ export class DayViewComponent implements OnInit, OnChanges, OnDestroy, AfterView
     this.dayService.createDay(this.date);
     this.sub = this.calendarService.selectedDates.subscribe((data) => {
       this.dayService.day.isSelected = DateUtils.isDateInArray(
-        this.dayService.day.date,
+        this.dayService.day.date!,
         data
       );
       this.dayService.day.isInPeriod = this.dayService.getIsInPeriod(
-        this.dayService.day.date
+        this.dayService.day.date!
       );
     });
   }

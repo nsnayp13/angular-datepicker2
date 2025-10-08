@@ -7,7 +7,7 @@ import { DateUtils } from "../_utils/date.utils";
   providedIn: "root",
 })
 export class DayService {
-  day: Day;
+  day!: Day;
   constructor(private calendarService: CalendarService) {}
 
   private getIsDisabled(date: Date): boolean {
@@ -65,10 +65,11 @@ export class DayService {
     return this.day;
   }
 
-  sortByDate(a, b) {
+  sortByDate(a: Date, b: Date): number {
     if (a.getTime() > b.getTime()) return 1;
     if (a.getTime() == b.getTime()) return 0;
     if (a.getTime() < b.getTime()) return -1;
+    return 0;
   }
 
   toggleDate() {
@@ -79,6 +80,8 @@ export class DayService {
       day: this.day,
     });
 
+    if (!this.day.date) return;
+    
     if (this.calendarService.selectMode === "single") {
       if (this.calendarService.selectedDates.value.length > 0) {
         this.calendarService.selectedDates.next([this.day.date]);
@@ -86,7 +89,7 @@ export class DayService {
     } else if (this.calendarService.selectMode === "multiple") {
       if (this.day.isSelected) {
         let selectedDates = this.calendarService.selectedDates.value.filter(
-          (elem) => !DateUtils.isSameDay(elem, this.day.date)
+          (elem) => !DateUtils.isSameDay(elem, this.day.date!)
         );
         selectedDates.sort(this.sortByDate);
         this.calendarService.selectedDates.next(selectedDates);
@@ -98,7 +101,7 @@ export class DayService {
     } else if (this.calendarService.selectMode === "period") {
       if (this.day.isSelected) {
         let selectedDates = this.calendarService.selectedDates.value.filter(
-          (elem) => !DateUtils.isSameDay(elem, this.day.date)
+          (elem) => !DateUtils.isSameDay(elem, this.day.date!)
         );
         this.calendarService.selectedDates.next(selectedDates);
       } else {
