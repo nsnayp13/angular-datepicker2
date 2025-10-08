@@ -126,8 +126,8 @@
                 <td>number[]</td>
                 <td>Array of weekend days (0=Sunday, 6=Saturday)</td>
                 <td>
-                    <select (change)="_weekends($event)" [value]="JSON.stringify(weekends)">
-                        <option *ngFor="let item of _weekendsVal" [value]="JSON.stringify(item.value)">
+                    <select (change)="_weekends($event)" [value]="jsonStringify(weekends)">
+                        <option *ngFor="let item of _weekendsVal" [value]="jsonStringify(item.value)">
                             {{item.label}}
                         </option>
                     </select>

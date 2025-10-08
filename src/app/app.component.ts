@@ -158,6 +158,11 @@ export class AppComponent implements OnInit {
     this._stackOnDayClick.push({ ...day });
   }
 
+  // Helper method for JSON operations in template
+  jsonStringify(obj: any): string {
+    return JSON.stringify(obj);
+  }
+
   constructor() {}
 
   ngOnInit(): void {
