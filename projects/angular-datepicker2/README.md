@@ -1,35 +1,35 @@
 # Angular Datepicker2
 
-Modern Angular datepicker component with standalone support. Compatible with Angular 16+.
+Modern Angular datepicker component with standalone support. Compatible with Angular 16+. Date range picker, multiple dates, customizable templates. Lightweight, no extra dependencies.
 
 ![Node.js CI](https://github.com/nsnayp13/angular-datepicker2/workflows/Node.js%20CI/badge.svg)
 
 ## Features
 
-- ✅ **Standalone Components** - Works with Angular 16+ standalone components
-- ✅ **Multiple Selection Modes** - Single, multiple dates, or date ranges
-- ✅ **Fully Customizable** - Template support for custom day rendering
-- ✅ **Modern Angular** - Built with latest Angular features
-- ✅ **TypeScript** - Full TypeScript support
-- ✅ **No Dependencies** - Only requires @angular/core and @angular/common
+- ✅ **Standalone Components** – Angular 16+ standalone ready
+- ✅ **Selection Modes** – Single, multiple dates, or date ranges
+- ✅ **Customizable** – Template support for custom day rendering
+- ✅ **Modern Angular** – Signals-friendly, OnPush, ES2022 builds
+- ✅ **TypeScript** – Strict typings for all APIs
+- ✅ **No Extra Deps** – Only peer deps: `@angular/core` and `@angular/common`
 
 ## Installation
 
 ```bash
-npm install angular-datepicker2
+npm install @nsnayp/angular-datepicker2
 ```
 
 ## Demo
 
 [https://nsnayp13.github.io/angular-datepicker2/](https://nsnayp13.github.io/angular-datepicker2/)
 
-## Usage
+## Quick Start
 
 ### Standalone Component (Angular 16+)
 
 ```typescript
 import { Component } from '@angular/core';
-import { AngularDatepicker2 } from 'angular-datepicker2';
+import { AngularDatepicker2 } from '@nsnayp/angular-datepicker2';
 
 @Component({
   selector: 'app-example',
@@ -56,16 +56,15 @@ export class ExampleComponent {
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { AngularDatepicker2 } from 'angular-datepicker2';
+import { AngularDatepicker2 } from '@nsnayp/angular-datepicker2';
 
 @NgModule({
   imports: [AngularDatepicker2],
-  // ...
 })
 export class YourModule { }
 ```
 
-## API
+## API Reference
 
 ### Inputs
 
@@ -107,52 +106,65 @@ export class DateRangeExample {
 }
 ```
 
-### Multiple Date Selection
+### Custom Day Templates
 
 ```typescript
+import { DayDirective } from '@nsnayp/angular-datepicker2';
+
 @Component({
+  standalone: true,
+  imports: [AngularDatepicker2, DayDirective],
   template: `
-    <angular-datepicker2 
-      [(selectedDates)]="multipleDates"
-      [selectMode]="'multiple'">
+    <angular-datepicker2 [(selectedDates)]="selectedDates">
+      <div *ad2day="let date from customDate" [attr.title]="'Custom day'">
+        {{date.getDate()}}
+        <div class="points">
+          <div class="point blue"></div>
+          <div class="point green"></div>
+        </div>
+      </div>
     </angular-datepicker2>
   `
 })
-export class MultipleDatesExample {
-  multipleDates: Date[] = [];
+export class CustomTemplateExample {
+  selectedDates: Date[] = [];
+  customDate = new Date(2024, 3, 15);
 }
-```
-
-### Custom Day Templates
-
-```html
-<angular-datepicker2 [(selectedDates)]="selectedDates">
-  <div *day="let date from customDate" [attr.title]="'Custom day'">
-    {{date.getDate()}}
-    <div class="points">
-      <div class="point blue"></div>
-      <div class="point green"></div>
-    </div>
-  </div>
-</angular-datepicker2>
 ```
 
 ### With Suggestions
 
 ```typescript
+import { SelectMode } from '@nsnayp/angular-datepicker2';
+
+@Component({
+  template: `
+    <angular-datepicker2 
+      [(selectedDates)]="selectedDates"
+      [suggest]="suggestions">
+    </angular-datepicker2>
+  `
+})
 export class SuggestionsExample {
   selectedDates: Date[] = [];
   
-  suggest = [
+  suggestions = [
     {
-      title: "Last two weeks",
+      title: 'Last two weeks',
       selectMode: SelectMode.Period,
-      selectedDates: [new Date(2024, 3, 1), new Date(2024, 3, 14)],
+      selectedDates: [
+        new Date(2024, 3, 1), 
+        new Date(2024, 3, 14)
+      ],
     },
     {
-      title: "Last month",
-      selectMode: SelectMode.Period,
-      selectedDates: [new Date(2024, 3, 1), new Date(2024, 3, 30)],
+      title: 'Specific dates',
+      selectMode: SelectMode.Multiple,
+      selectedDates: [
+        new Date(2024, 3, 1),
+        new Date(2024, 3, 15),
+        new Date(2024, 3, 30),
+      ],
     }
   ];
 }
@@ -186,27 +198,52 @@ interface DisabledDates {
 }
 ```
 
+## Utilities
+
+The library exports `DateUtils` class with helpful date manipulation methods:
+
+```typescript
+import { DateUtils } from '@nsnayp/angular-datepicker2';
+
+// Add/subtract days
+const tomorrow = DateUtils.adjustDate(new Date(), 1);
+
+// Add/subtract months
+const nextMonth = DateUtils.adjustMonth(new Date(), 1);
+
+// Get formatted date string
+const dateString = DateUtils.getYmd(new Date());
+```
+
 ## i18n
 
-Set `registerLocaleData(locale, "locale")` in your app. See [Angular i18n guide](https://angular.io/api/common/registerLocaleData)
+Set `registerLocaleData(locale, 'locale')` in your app. See [Angular i18n guide](https://angular.io/api/common/registerLocaleData)
 
-## Compatibility
+## Supported versions
 
-- Angular 16+
-- TypeScript 4.9+
-- Modern browsers (ES2022+)
+- Angular: 16–19 (peer deps `@angular/common` and `@angular/core` >= 16)
+- TypeScript: 5.x
+- Targets: ES2022 modules, modern browsers
+
+> Built and tested with Angular 19.2. Backwards compatible to Angular 16 via peer ranges.
 
 ## Migration from v3.x
 
-The library now uses standalone components by default. For module-based apps, simply import the component directly:
+The library now uses standalone components by default:
 
 ```typescript
 // Before (v3.x)
-import { AngularDatepicker2Module } from 'angular-datepicker2';
+import { AngularDatepicker2Module } from '@nsnayp/angular-datepicker2';
 
 // After (v4.x)
-import { AngularDatepicker2 } from 'angular-datepicker2';
+import { AngularDatepicker2 } from '@nsnayp/angular-datepicker2';
 ```
+
+## SEO
+
+**Description:** Modern Angular datepicker/calendar with date range, multiple selection, and customizable templates. Standalone-ready for Angular 16+.
+
+**Keywords:** angular datepicker, angular calendar, angular 16 datepicker, angular 17, angular 18, angular 19, date range picker, standalone components, multiple dates, period picker, ui component
 
 ## License
 

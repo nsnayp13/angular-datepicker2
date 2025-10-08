@@ -1,20 +1,22 @@
 # Angular Datepicker2
 
-Modern Angular calendar datepicker component with standalone support. Compatible with Angular 16+.
+Modern Angular datepicker component with standalone support. Compatible with Angular 16+. Date range picker, multiple dates, customizable templates. Lightweight, no extra dependencies.
+
+![Node.js CI](https://github.com/nsnayp13/angular-datepicker2/workflows/Node.js%20CI/badge.svg)
 
 ## Features
 
-- ✅ **Standalone Components** - Works with Angular 16+ standalone components
-- ✅ **Multiple Selection Modes** - Single, multiple dates, or date ranges
-- ✅ **Fully Customizable** - Template support for custom day rendering
-- ✅ **Modern Angular** - Built with latest Angular features
-- ✅ **TypeScript** - Full TypeScript support
-- ✅ **No Dependencies** - Only requires @angular/core and @angular/common
+- ✅ **Standalone Components** – Angular 16+ standalone ready
+- ✅ **Selection Modes** – Single, multiple dates, or date ranges
+- ✅ **Customizable** – Template support for custom day rendering
+- ✅ **Modern Angular** – Signals-friendly, OnPush, ES2022 builds
+- ✅ **TypeScript** – Strict typings for all APIs
+- ✅ **No Extra Deps** – Only peer deps: `@angular/core` and `@angular/common`
 
 ## Installation
 
 ```bash
-npm install angular-datepicker2
+npm install @nsnayp/angular-datepicker2
 ```
 
 ## Demo
@@ -27,7 +29,7 @@ npm install angular-datepicker2
 
 ```typescript
 import { Component } from '@angular/core';
-import { AngularDatepicker2 } from 'angular-datepicker2';
+import { AngularDatepicker2 } from '@nsnayp/angular-datepicker2';
 
 @Component({
   selector: 'app-example',
@@ -54,11 +56,10 @@ export class ExampleComponent {
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { AngularDatepicker2 } from 'angular-datepicker2';
+import { AngularDatepicker2 } from '@nsnayp/angular-datepicker2';
 
 @NgModule({
   imports: [AngularDatepicker2],
-  // ...
 })
 export class YourModule { }
 ```
@@ -108,7 +109,7 @@ export class DateRangeExample {
 ### Custom Day Templates
 
 ```typescript
-import { DayDirective } from 'angular-datepicker2';
+import { DayDirective } from '@nsnayp/angular-datepicker2';
 
 @Component({
   standalone: true,
@@ -134,7 +135,7 @@ export class CustomTemplateExample {
 ### With Suggestions
 
 ```typescript
-import { SelectMode } from 'angular-datepicker2';
+import { SelectMode } from '@nsnayp/angular-datepicker2';
 
 @Component({
   template: `
@@ -149,7 +150,7 @@ export class SuggestionsExample {
   
   suggestions = [
     {
-      title: "Last two weeks",
+      title: 'Last two weeks',
       selectMode: SelectMode.Period,
       selectedDates: [
         new Date(2024, 3, 1), 
@@ -157,7 +158,7 @@ export class SuggestionsExample {
       ],
     },
     {
-      title: "Specific dates",
+      title: 'Specific dates',
       selectMode: SelectMode.Multiple,
       selectedDates: [
         new Date(2024, 3, 1),
@@ -202,7 +203,7 @@ interface DisabledDates {
 The library exports `DateUtils` class with helpful date manipulation methods:
 
 ```typescript
-import { DateUtils } from 'angular-datepicker2';
+import { DateUtils } from '@nsnayp/angular-datepicker2';
 
 // Add/subtract days
 const tomorrow = DateUtils.adjustDate(new Date(), 1);
@@ -211,12 +212,20 @@ const tomorrow = DateUtils.adjustDate(new Date(), 1);
 const nextMonth = DateUtils.adjustMonth(new Date(), 1);
 
 // Get formatted date string
-const dateString = DateUtils.getYmd(new Date()); // "20241007"
+const dateString = DateUtils.getYmd(new Date());
 ```
 
 ## i18n
 
-Set `registerLocaleData(locale, "locale")` in your app. See [Angular i18n guide](https://angular.io/api/common/registerLocaleData)
+Set `registerLocaleData(locale, 'locale')` in your app. See [Angular i18n guide](https://angular.io/api/common/registerLocaleData)
+
+## Supported versions
+
+- Angular: 16–19 (peer deps `@angular/common` and `@angular/core` >= 16)
+- TypeScript: 5.x
+- Targets: ES2022 modules, modern browsers
+
+> Built and tested with Angular 19.2. Backwards compatible to Angular 16 via peer ranges.
 
 ## Migration from v3.x
 
@@ -224,42 +233,17 @@ The library now uses standalone components by default:
 
 ```typescript
 // Before (v3.x)
-import { AngularDatepicker2Module } from 'angular-datepicker2';
-
-@NgModule({
-  imports: [AngularDatepicker2Module]
-})
+import { AngularDatepicker2Module } from '@nsnayp/angular-datepicker2';
 
 // After (v4.x)
-import { AngularDatepicker2 } from 'angular-datepicker2';
-
-@Component({
-  standalone: true,
-  imports: [AngularDatepicker2]
-})
+import { AngularDatepicker2 } from '@nsnayp/angular-datepicker2';
 ```
 
-## Compatibility
+## SEO
 
-- Angular 16+
-- TypeScript 4.9+
-- Modern browsers (ES2022+)
+**Description:** Modern Angular datepicker/calendar with date range, multiple selection, and customizable templates. Standalone-ready for Angular 16+.
 
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Build library
-npm run build:lib
-
-# Build demo
-npm run build:gh-pages
-
-# Run tests
-npm run test-once
-```
+**Keywords:** angular datepicker, angular calendar, angular 16 datepicker, angular 17, angular 18, angular 19, date range picker, standalone components, multiple dates, period picker, ui component
 
 ## License
 
