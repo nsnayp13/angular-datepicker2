@@ -1,3 +1,11 @@
+## [3.11.0](https://github.com/nsnayp13/angular-datepicker2/compare/v3.10.0...v3.11.0) (2025-10-08)
+
+
+### Features
+
+* Conditionally show prev/next days in week view ([85a36b2](https://github.com/nsnayp13/angular-datepicker2/commit/85a36b25ab5fc9cc994e794e05c3f0c0e6714a98))
+* Notify components on calendar updates ([ac70a86](https://github.com/nsnayp13/angular-datepicker2/commit/ac70a86de5355e3e48e94f293b1f2a22a630bded))
+
 ## [3.10.0](https://github.com/nsnayp13/angular-datepicker2/compare/v3.9.0...v3.10.0) (2025-10-08)
 
 
