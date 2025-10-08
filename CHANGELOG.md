@@ -1,3 +1,11 @@
+## [3.10.0](https://github.com/nsnayp13/angular-datepicker2/compare/v3.9.0...v3.10.0) (2025-10-08)
+
+
+### Features
+
+* Add showPrevNextDaysInOneMonth option to calendar ([7a427ee](https://github.com/nsnayp13/angular-datepicker2/commit/7a427eec512289fbe9f41c67c2b6820cbe69cbcf))
+* Add type annotations to private methods ([08caee5](https://github.com/nsnayp13/angular-datepicker2/commit/08caee543f1176a8ea86b5aa1ea52464b510360a))
+
 ## [3.9.0](https://github.com/nsnayp13/angular-datepicker2/compare/v3.8.0...v3.9.0) (2025-10-08)
 
 
