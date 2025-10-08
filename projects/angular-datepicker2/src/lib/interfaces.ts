@@ -9,6 +9,12 @@ export interface Day {
   date?: Date;
 }
 
+/**
+ * Type for array of Day objects
+ * @publicApi
+ */
+export type DayArray = Day[];
+
 export interface Suggest {
   selectMode: SelectMode;
   selectedDates: Date[];

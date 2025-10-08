@@ -4,8 +4,8 @@
     <div class="wrap">
         <div style=" display:block; float:left;">
             <angular-datepicker2 [days]="days" [nowDate]="date" [(selectedDates)]="selectedDates"
-                [selectMode]="selectMode" [weekends]="[6]" [suggest]="suggest" [weekStart]="0" [viewMode]="viewMode"
-                [vertical]="vertical" (onDayClick)="onDayClick($event)" [disabledDates]="disabledDates">
+                [selectMode]="selectMode" [weekends]="weekends" [suggest]="showSuggest ? suggest : null" [weekStart]="weekStart" [viewMode]="viewMode"
+                [vertical]="vertical" (onDayClick)="onDayClick($event)" [disabledDates]="showDisabledDates ? disabledDates : null">
 
 
                 <div *ad2day="let date from days[0].date" [attr.title]="'Custom day'" class="customDay">
@@ -108,8 +108,75 @@
                 </td>
             </tr>
 
+            <tr>
+                <td>weekStart</td>
+                <td>number</td>
+                <td>Start week day (0=Sunday, 1=Monday, etc.)</td>
+                <td>
+                    <select (change)="_weekStart($event)" [value]="weekStart">
+                        <option *ngFor="let i of _weekStartVal" [value]="i">
+                            {{i}} ({{['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][i]}})
+                        </option>
+                    </select>
+                </td>
+            </tr>
 
+            <tr>
+                <td>weekends</td>
+                <td>number[]</td>
+                <td>Array of weekend days (0=Sunday, 6=Saturday)</td>
+                <td>
+                    <select (change)="_weekends($event)" [value]="JSON.stringify(weekends)">
+                        <option *ngFor="let item of _weekendsVal" [value]="JSON.stringify(item.value)">
+                            {{item.label}}
+                        </option>
+                    </select>
+                </td>
+            </tr>
 
+            <tr>
+                <td>suggest</td>
+                <td>Suggest[]</td>
+                <td>Array of suggested date ranges</td>
+                <td>
+                    <select (change)="_showSuggest($event)" [value]="showSuggest">
+                        <option *ngFor="let i of _showSuggestVal" [value]="i">
+                            {{i ? 'Show suggestions' : 'Hide suggestions'}}
+                        </option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>disabledDates</td>
+                <td>DisabledDates</td>
+                <td>Object to disable dates before/after specific dates</td>
+                <td>
+                    <select (change)="_showDisabledDates($event)" [value]="showDisabledDates">
+                        <option *ngFor="let i of _showDisabledDatesVal" [value]="i">
+                            {{i ? 'Enable disabled dates' : 'Disable disabled dates'}}
+                        </option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>nowDate</td>
+                <td>Date</td>
+                <td>Current date for highlighting</td>
+                <td>
+                    {{date | date:'yyyy.MM.dd'}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>days</td>
+                <td>DayArray</td>
+                <td>Custom day definitions with special styling</td>
+                <td>
+                    {{days?.length || 0}} custom days
+                </td>
+            </tr>
 
         </table>
 
