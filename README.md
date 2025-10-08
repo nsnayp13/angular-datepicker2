@@ -2,8 +2,6 @@
 
 Modern Angular datepicker component with standalone support. Compatible with Angular 16+. Date range picker, multiple dates, customizable templates. Lightweight, no extra dependencies.
 
-![Node.js CI](https://github.com/nsnayp13/angular-datepicker2/workflows/Node.js%20CI/badge.svg)
-
 ## Features
 
 - ✅ **Standalone Components** – Angular 16+ standalone ready
