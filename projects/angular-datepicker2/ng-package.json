@@ -3,5 +3,9 @@
   "dest": "../../dist/angular-datepicker2",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [
+    "README.md",
+    "../../LICENSE"
+  ]
 }

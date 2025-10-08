@@ -9,7 +9,7 @@
     "build:gh-pages": "ng build --configuration production --base-href https://nsnayp13.github.io/angular-datepicker2/",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "publish:lib": "npm run build:lib && cd dist/angular-datepicker2 && npm publish",
+    "publish:lib": "npm run build:lib && cd dist/angular-datepicker2 && npm publish --access public",
     "version:patch": "cd projects/angular-datepicker2 && npm version patch",
     "version:minor": "cd projects/angular-datepicker2 && npm version minor",
     "version:major": "cd projects/angular-datepicker2 && npm version major"
