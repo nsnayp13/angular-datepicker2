@@ -282,7 +282,7 @@ export class AngularDatepicker2
     }
   }
 
-  private _weekStart(simpleChange) {
+  private _weekStart(simpleChange: any) {
     if (
       simpleChange.weekStart.currentValue !==
       simpleChange.weekStart.previousValue
@@ -292,7 +292,7 @@ export class AngularDatepicker2
     }
   }
 
-  private _weekends(simpleChange) {
+  private _weekends(simpleChange: any) {
     if (
       simpleChange.weekends.currentValue !==
       simpleChange.weekends.previousValue
@@ -302,7 +302,7 @@ export class AngularDatepicker2
     }
   }
 
-  private _disabledDates(simpleChange) {
+  private _disabledDates(simpleChange: any) {
     if (
       simpleChange.disabledDates.currentValue !==
       simpleChange.disabledDates.previousValue
