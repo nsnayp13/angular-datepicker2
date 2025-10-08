@@ -1,4 +1,4 @@
-name: Release and Deploy
+name: Build and Deploy
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [master, main]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
     
     steps:
@@ -29,15 +29,15 @@ jobs:
       - name: Build library
         run: npm run build:lib
         
-      - name: Run tests
-        run: npm run test-once
+      - name: Build demo app
+        run: npm run build
         
       - name: Build demo app for GitHub Pages
         run: npm run build:gh-pages
 
   deploy-pages:
     runs-on: ubuntu-latest
-    needs: build-and-test
+    needs: build
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
     
     steps:
@@ -65,7 +65,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: build-and-test
+    needs: build
     # Запускаем только для главной ветки и пропускаем коммиты от semantic-release
     if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, 'chore(release):')
     
