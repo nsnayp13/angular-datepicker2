@@ -22,6 +22,10 @@ export class CalendarService {
   weekStart: number;
   weekends: number[];
 
+  // Add reactive subjects for weekStart and weekends
+  weekStartSubject = new BehaviorSubject<number>(0);
+  weekendsSubject = new BehaviorSubject<number[]>([0, 6]);
+
   animationStep = new BehaviorSubject("stop");
 
   recountWidth = new BehaviorSubject(1);
@@ -50,6 +54,31 @@ export class CalendarService {
 
   setShownDate(date: Date) {
     this.shownDate = date;
+  }
+
+  setWeekStart(weekStart: number) {
+    if (this.weekStart !== weekStart) {
+      this.weekStart = weekStart;
+      this.weekStartSubject.next(weekStart);
+      // Trigger calendar recalculation
+      this.getShownMonths(this.shownDate);
+    }
+  }
+
+  setWeekends(weekends: number[]) {
+    if (!this.arraysEqual(this.weekends, weekends)) {
+      this.weekends = weekends;
+      this.weekendsSubject.next(weekends);
+      // Trigger calendar recalculation
+      this.getShownMonths(this.shownDate);
+    }
+  }
+
+  private arraysEqual(a: number[], b: number[]): boolean {
+    if (!a && !b) return true;
+    if (!a || !b) return false;
+    if (a.length !== b.length) return false;
+    return a.every((val, index) => val === b[index]);
   }
 
   addSelected(date: Date) {

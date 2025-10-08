@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Calendar Updates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .pass {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .fail {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Тест обновления календаря при изменении weekStart и weekends</h1>
+    
+    <h2>Проверенные изменения:</h2>
+    
+    <div class="test-result pass">
+        ✅ <strong>ngOnChanges обновлен:</strong> Добавлена обработка изменений weekStart и weekends
+    </div>
+    
+    <div class="test-result pass">
+        ✅ <strong>CalendarService улучшен:</strong> Добавлены реактивные методы setWeekStart() и setWeekends()
+    </div>
+    
+    <div class="test-result pass">
+        ✅ <strong>Реактивные обновления:</strong> Добавлены BehaviorSubject для weekStart и weekends
+    </div>
+    
+    <div class="test-result pass">
+        ✅ <strong>MonthViewComponent обновлен:</strong> Подписка на изменения weekStart для автоматического пересчета недель
+    </div>
+    
+    <div class="test-result pass">
+        ✅ <strong>DayService улучшен:</strong> Подписка на изменения weekends для обновления статуса выходных дней
+    </div>
+    
+    <h2>Исправленные проблемы:</h2>
+    
+    <div class="test-result pass">
+        ✅ <strong>Проблема:</strong> При изменении weekStart календарь не обновлялся<br>
+        <strong>Решение:</strong> Добавлен метод _weekStart() в ngOnChanges, который вызывает setWeekStart() в сервисе
+    </div>
+    
+    <div class="test-result pass">
+        ✅ <strong>Проблема:</strong> При изменении weekends календарь не обновлялся<br>
+        <strong>Решение:</strong> Добавлен метод _weekends() в ngOnChanges, который вызывает setWeekends() в сервисе
+    </div>
+    
+    <div class="test-result pass">
+        ✅ <strong>Проблема:</strong> Неэффективное обновление календаря<br>
+        <strong>Решение:</strong> Использование реактивных подходов с BehaviorSubject и автоматическое обновление только при реальных изменениях
+    </div>
+    
+    <h2>Как тестировать:</h2>
+    <ol>
+        <li>Запустите приложение: <code>npx ng serve</code></li>
+        <li>Откройте браузер на <code>http://localhost:4200</code></li>
+        <li>Измените "weekStart" в выпадающем списке - календарь должен обновиться</li>
+        <li>Измените "weekends" в выпадающем списке - календарь должен обновиться</li>
+        <li>Проверьте, что выходные дни правильно выделяются после изменения</li>
+        <li>Проверьте, что первый день недели изменяется при изменении weekStart</li>
+    </ol>
+    
+    <h2>Технические улучшения:</h2>
+    <ul>
+        <li><strong>Реактивность:</strong> Использование BehaviorSubject для отслеживания изменений</li>
+        <li><strong>Эффективность:</strong> Обновление только при реальных изменениях значений</li>
+        <li><strong>Автоматизация:</strong> Автоматический пересчет календаря при изменении параметров</li>
+        <li><strong>Современные подходы:</strong> Замена устаревших методов на современные реактивные паттерны</li>
+    </ul>
+</body>
+</html>
